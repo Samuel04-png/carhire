@@ -46,7 +46,14 @@ export default function Step4Review() {
 
   const handlePaymentConfirmed = async (method: string) => {
     if (method === "MTN Mobile Money") {
-      const phoneNumber = `${draft.customer.countryCode}${draft.customer.phone}`.replace(/\s+/g, "");
+      const rawPhone = draft.customer.phone.trim();
+      const phoneNumber =
+        rawPhone.startsWith("+") ||
+        rawPhone.startsWith("0") ||
+        rawPhone.startsWith("260") ||
+        rawPhone.startsWith("467")
+          ? rawPhone
+          : `${draft.customer.countryCode}${rawPhone}`.replace(/\s+/g, "");
       const response = await fetch(getApiUrl("/api/payments/momo"), {
         method: "POST",
         headers: {
