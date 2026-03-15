@@ -4,9 +4,19 @@ import path from 'path';
 import {defineConfig} from 'vite';
 
 const hmrDisabled = process.env.DISABLE_HMR === 'true';
+const pagesBase = '/carhire/';
 
-export default defineConfig({
+export default defineConfig(({command}) => ({
+  base: command === 'build' ? pagesBase : '/',
   plugins: [react(), tailwindcss()],
+  build: {
+    rollupOptions: {
+      input: {
+        main: path.resolve(__dirname, 'index.html'),
+        404: path.resolve(__dirname, '404.html'),
+      },
+    },
+  },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
@@ -29,4 +39,4 @@ export default defineConfig({
           port: 3000,
         },
   },
-});
+}));

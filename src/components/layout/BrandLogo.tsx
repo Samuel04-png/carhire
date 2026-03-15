@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { cn } from "@/lib/utils";
+import { cn, withBase } from "@/lib/utils";
 
 type BrandLogoProps = {
   className?: string;
@@ -10,8 +10,8 @@ type BrandLogoProps = {
 };
 
 const logoSources = {
-  transparent: "/brand/shark-logo-transparent.png",
-  boxed: "/brand/shark-logo-on-white.png",
+  transparent: withBase("/brand/shark-logo-transparent.png"),
+  boxed: withBase("/brand/shark-logo-on-white.png"),
 };
 
 export function BrandLogo({

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Building2, FileText, ArrowRight } from "lucide-react";
+import { Building2, Phone, ArrowRight } from "lucide-react";
 import { motion } from "motion/react";
 
 export function CorporateBanner() {
@@ -43,9 +43,9 @@ export function CorporateBanner() {
                 <Link to="/services#corporate">Open a Corporate Account <ArrowRight className="ml-2 w-5 h-5" /></Link>
               </Button>
               <Button size="lg" variant="outline" className="rounded-full h-14 px-8 text-base bg-white/5 border-white/20 text-white hover:bg-white/10 hover:text-white backdrop-blur-sm" asChild>
-                <a href="/brochure.pdf" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
-                  <FileText size={18} /> Download Brochure
-                </a>
+                <Link to="/contact" className="flex items-center gap-2">
+                  <Phone size={18} /> Speak to Corporate Team
+                </Link>
               </Button>
             </div>
           </motion.div>

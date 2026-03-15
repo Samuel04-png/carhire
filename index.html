@@ -9,13 +9,28 @@
       name="description"
       content="Premium car hire in Lusaka, Kitwe, and Ndola with self-drive, chauffeur, airport transfer, corporate, and event mobility services."
     />
-    <meta property="og:image" content="/brand/shark-logo-on-white.png" />
-    <meta name="twitter:image" content="/brand/shark-logo-on-white.png" />
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <link rel="manifest" href="/site.webmanifest" />
+    <meta property="og:image" content="%BASE_URL%brand/shark-logo-on-white.png" />
+    <meta name="twitter:image" content="%BASE_URL%brand/shark-logo-on-white.png" />
+    <link rel="icon" type="image/x-icon" href="%BASE_URL%favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="%BASE_URL%favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="%BASE_URL%favicon-16x16.png" />
+    <link rel="apple-touch-icon" href="%BASE_URL%apple-touch-icon.png" />
+    <link rel="manifest" href="%BASE_URL%site.webmanifest" />
+    <script>
+      (function () {
+        const { search, pathname, hash } = window.location;
+
+        if (search.length > 1 && search[1] === "/") {
+          const decoded = search
+            .slice(1)
+            .split("&")
+            .map((segment) => segment.replace(/~and~/g, "&"))
+            .join("?");
+
+          window.history.replaceState(null, "", pathname.slice(0, -1) + decoded + hash);
+        }
+      })();
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
