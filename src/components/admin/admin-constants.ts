@@ -51,6 +51,7 @@ export const bookingSourceOptions: BookingSource[] = [
 export const paymentMethodOptions: PaymentMethod[] = [
   "MTN Mobile Money",
   "Airtel Money",
+  "Zamtel Money",
   "Bank Transfer",
   "Credit / Debit Card",
   "Pay on Pickup",

@@ -142,6 +142,20 @@ function createClientRecord(input: AdminBookingInput) {
   } satisfies Client;
 }
 
+function getCheckoutStatuses(paymentMethod: PaymentMethod) {
+  if (paymentMethod === "Pay on Pickup") {
+    return {
+      status: "Confirmed" as BookingStatus,
+      paymentStatus: "Pending Payment" as PaymentStatus,
+    };
+  }
+
+  return {
+    status: "Pending" as BookingStatus,
+    paymentStatus: "Pending Payment" as PaymentStatus,
+  };
+}
+
 type Store = {
   vehicles: Vehicle[];
   clients: Client[];
@@ -158,7 +172,7 @@ type Store = {
   resetDraft: () => void;
   setCustomerSession: (clientId: string | null) => void;
   setAdminRole: (role: AdminRole | null) => void;
-  submitBooking: () => { ref: string; total: number };
+  submitBooking: (referenceOverride?: string) => { ref: string; total: number };
   createAdminBooking: (input: AdminBookingInput) => { ref: string; total: number };
   addVehicle: (input: AdminVehicleInput) => Vehicle;
   updateBookingStatus: (ref: string, status: BookingStatus) => void;
@@ -221,7 +235,7 @@ export const useAppStore = create<Store>()(
       setCustomerSession: (clientId) => set({ customerSessionId: clientId }),
       setAdminRole: (role) => set({ adminRole: role }),
 
-      submitBooking: () => {
+      submitBooking: (referenceOverride) => {
         const state = get();
         const vehicle = state.vehicles.find(
           (item) => item.id === state.bookingDraft.vehicleId,
@@ -275,7 +289,8 @@ export const useAppStore = create<Store>()(
         }
 
         const total = calculateBookingTotal(state.bookingDraft, vehicle);
-        const ref = createRef();
+        const ref = referenceOverride || createRef();
+        const checkoutStatuses = getCheckoutStatuses(state.bookingDraft.paymentMethod);
         const booking: Booking = {
           ref,
           vehicleId: vehicle.id,
@@ -289,14 +304,8 @@ export const useAppStore = create<Store>()(
           extras: state.bookingDraft.extras,
           flightNumber: state.bookingDraft.flightNumber || undefined,
           tripType: state.bookingDraft.tripType,
-          status:
-            state.bookingDraft.paymentMethod === "Bank Transfer"
-              ? "Pending"
-              : "Confirmed",
-          paymentStatus:
-            state.bookingDraft.paymentMethod === "Bank Transfer"
-              ? "Pending Payment"
-              : "Paid",
+          status: checkoutStatuses.status,
+          paymentStatus: checkoutStatuses.paymentStatus,
           paymentMethod: state.bookingDraft.paymentMethod,
           source: "Online",
           amount: total,

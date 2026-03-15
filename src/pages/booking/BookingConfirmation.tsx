@@ -13,6 +13,8 @@ export default function BookingConfirmation() {
   const booking = bookings.find((item) => item.ref === ref);
   const vehicle = booking ? vehicles.find((item) => item.id === booking.vehicleId) : null;
   const client = booking ? clients.find((item) => item.id === booking.clientId) : null;
+  const requiresVerification =
+    booking?.paymentStatus === "Pending Payment" || booking?.status === "Pending";
 
   const handlePrint = () => window.print();
 
@@ -36,14 +38,15 @@ export default function BookingConfirmation() {
           <CheckCircle2 className="h-14 w-14" />
         </div>
         <div className="mt-8 text-xs uppercase tracking-[0.26em] text-[var(--color-accent)]">
-          Booking confirmed
+          {requiresVerification ? "Booking received" : "Booking confirmed"}
         </div>
         <h1 className="mt-4 font-display text-5xl font-bold tracking-[-0.06em] text-[var(--color-primary)]">
           {booking.ref}
         </h1>
         <p className="mx-auto mt-6 max-w-2xl text-[var(--color-gray-600)]">
-          Your booking has been saved under this reference. Keep it close if you need
-          to change dates, confirm details, or speak with our team before pickup.
+          {requiresVerification
+            ? "Your booking is now waiting for payment verification. Keep this reference close while our team confirms receipt and shares the final WhatsApp update."
+            : "Your booking has been saved under this reference. Keep it close if you need to change dates, confirm details, or speak with our team before pickup."}
         </p>
 
         <div className="mt-10 grid gap-4 rounded-[30px] bg-[var(--color-gray-100)] p-6 md:grid-cols-2">
@@ -68,7 +71,7 @@ export default function BookingConfirmation() {
           </div>
           <div className="rounded-[24px] bg-white p-5 text-left">
             <div className="text-xs uppercase tracking-[0.24em] text-[var(--color-gray-500)]">
-              Total paid
+              {requiresVerification ? "Amount pending verification" : "Total paid"}
             </div>
             <div className="mt-3 font-semibold text-[var(--color-primary)]">
               {formatCurrency(booking.amount)}
@@ -89,9 +92,19 @@ export default function BookingConfirmation() {
             What happens next
           </div>
           <div className="mt-5 space-y-4 text-sm text-white/72">
-            <div>1. Keep your booking reference for any updates or questions.</div>
-            <div>2. Our team confirms the final trip details before pickup.</div>
-            <div>3. If a chauffeur is included, driver details are shared ahead of the journey.</div>
+            {requiresVerification ? (
+              <>
+                <div>1. Keep your booking reference for any updates or questions.</div>
+                <div>2. Our team verifies the payment or corporate billing instruction manually.</div>
+                <div>3. You receive a WhatsApp confirmation once the booking is cleared.</div>
+              </>
+            ) : (
+              <>
+                <div>1. Keep your booking reference for any updates or questions.</div>
+                <div>2. Our team confirms the final trip details before pickup.</div>
+                <div>3. If a chauffeur is included, driver details are shared ahead of the journey.</div>
+              </>
+            )}
           </div>
         </div>
 

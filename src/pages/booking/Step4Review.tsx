@@ -1,6 +1,7 @@
-import { FormEvent, useMemo, useState } from "react";
-import { ArrowLeft, Building2, CreditCard, Smartphone } from "lucide-react";
+import { useMemo } from "react";
+import { ArrowLeft } from "lucide-react";
 import { Navigate, useNavigate } from "react-router-dom";
+import ManualPaymentSection from "@/components/booking/ManualPaymentSection";
 import { Button } from "@/components/ui/button";
 import { bookingExtras } from "@/data/mock";
 import { calculateBookingTotal, calculateDays, getVehicleById } from "@/lib/booking";
@@ -9,38 +10,6 @@ import { CompactBookingMeta } from "@/pages/booking/BookingSummaryCard";
 import { useAppStore } from "@/store/use-app-store";
 import type { PaymentMethod } from "@/types";
 
-const paymentOptions: Array<{
-  method: PaymentMethod;
-  icon: typeof Smartphone;
-  note: string;
-}> = [
-  {
-    method: "MTN Mobile Money",
-    icon: Smartphone,
-    note: "Primary mobile payment route for most local bookings.",
-  },
-  {
-    method: "Airtel Money",
-    icon: Smartphone,
-    note: "Secondary mobile money option for fast client checkout.",
-  },
-  {
-    method: "Bank Transfer",
-    icon: Building2,
-    note: "Marks the booking as pending payment until finance confirms receipt.",
-  },
-  {
-    method: "Credit / Debit Card",
-    icon: CreditCard,
-    note: "Use when card payment is preferred for remote or international clients.",
-  },
-  {
-    method: "Pay on Pickup",
-    icon: Building2,
-    note: "Reserved for verified corporate accounts.",
-  },
-];
-
 export default function Step4Review() {
   const navigate = useNavigate();
   const draft = useAppStore((state) => state.bookingDraft);
@@ -48,8 +17,6 @@ export default function Step4Review() {
   const submitBooking = useAppStore((state) => state.submitBooking);
   const customers = useAppStore((state) => state.clients);
   const customerSessionId = useAppStore((state) => state.customerSessionId);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [agreed, setAgreed] = useState(false);
 
   const vehicle = getVehicleById(draft.vehicleId);
   const activeCustomer = customers.find((item) => item.id === customerSessionId);
@@ -65,19 +32,22 @@ export default function Step4Review() {
   );
   const taxes = total - base - chauffeur - extraTotal;
 
-  const isValidPaymentMethod = useMemo(() => {
-    if (draft.paymentMethod === "Pay on Pickup") return isCorporate;
-    return true;
-  }, [draft.paymentMethod, isCorporate]);
+  const customerName = useMemo(() => {
+    const fullName = `${draft.customer.firstName} ${draft.customer.lastName}`.trim();
+    return fullName || activeCustomer?.firstName || "Shark Car Hire client";
+  }, [activeCustomer?.firstName, draft.customer.firstName, draft.customer.lastName]);
 
-  const handleSubmit = (event: FormEvent) => {
-    event.preventDefault();
-    if (!agreed || !isValidPaymentMethod || !vehicle) return;
-    setIsSubmitting(true);
+  const bookingRefPreview = useMemo(() => {
+    const stamp = new Date().toISOString().slice(0, 10).replace(/-/g, "");
+    const suffix = Math.floor(1000 + Math.random() * 8999);
+    return `SCH-${stamp}-${suffix}`;
+  }, []);
+
+  const handlePaymentConfirmed = () => {
     window.setTimeout(() => {
-      const { ref } = submitBooking();
+      const { ref } = submitBooking(bookingRefPreview);
       navigate(`/booking/confirmation/${ref}`);
-    }, 700);
+    }, 1100);
   };
 
   if (!vehicle) {
@@ -92,7 +62,7 @@ export default function Step4Review() {
           Review & Confirm
         </h1>
         <p className="mt-3 text-[var(--color-gray-600)]">
-          Check the journey, payment method, and total before you confirm your booking.
+          Check the journey, review the total, and follow the manual payment instructions below.
         </p>
       </div>
 
@@ -113,7 +83,7 @@ export default function Step4Review() {
               />
               <SummaryBlock
                 label="Customer"
-                value={`${draft.customer.firstName} ${draft.customer.lastName}`}
+                value={customerName}
                 sub={`${draft.customer.countryCode} ${draft.customer.phone}`}
               />
               <SummaryBlock
@@ -126,65 +96,47 @@ export default function Step4Review() {
 
           <div className="rounded-[28px] bg-[var(--color-gray-100)] p-6">
             <div className="text-xs uppercase tracking-[0.24em] text-[var(--color-gray-500)]">
-              Payment method
+              Manual payment
             </div>
-            <div className="mt-5 grid gap-4 md:grid-cols-2">
-              {paymentOptions.map((option) => {
-                const selected = draft.paymentMethod === option.method;
-                const disabled = option.method === "Pay on Pickup" && !isCorporate;
-                return (
-                  <button
-                    key={option.method}
-                    type="button"
-                    disabled={disabled}
-                    onClick={() =>
-                      updateDraft({
-                        paymentMethod: option.method,
-                      })
-                    }
-                    className={`rounded-[26px] border p-5 text-left transition ${
-                      selected
-                        ? "border-[var(--color-accent)] bg-[var(--color-accent)]/8"
-                        : "border-[var(--color-gray-200)] bg-white"
-                    } ${disabled ? "cursor-not-allowed opacity-45" : ""}`}
-                  >
-                    <div className="flex items-center gap-3">
-                      <div className="grid h-12 w-12 place-items-center rounded-2xl bg-[var(--color-gray-100)] text-[var(--color-accent)]">
-                        <option.icon className="h-5 w-5" />
-                      </div>
-                      <div>
-                        <div className="font-semibold text-[var(--color-primary)]">
-                          {option.method}
-                        </div>
-                        <div className="mt-1 text-sm text-[var(--color-gray-600)]">
-                          {option.note}
-                        </div>
-                      </div>
-                    </div>
-                  </button>
-                );
-              })}
+            <div className="mt-3 text-sm leading-7 text-[var(--color-gray-600)]">
+              Choose one payment route, follow the instructions exactly, and use <span className="font-semibold text-[var(--color-primary)]">{bookingRefPreview}</span> as the payment reference.
             </div>
-            {!isCorporate && draft.paymentMethod === "Pay on Pickup" && (
-              <div className="mt-4 text-sm text-[var(--color-error)]">
-                Pay on Pickup is reserved for verified corporate accounts.
+            {!isCorporate && (
+              <div className="mt-4 rounded-[22px] border border-amber-200 bg-amber-50 px-4 py-3 text-sm leading-6 text-amber-900">
+                Pay on Pickup is intended for verified corporate accounts. If you choose it, our team will still confirm account eligibility manually before release.
               </div>
             )}
+            <div className="mt-6">
+              <ManualPaymentSection
+                amount={total}
+                bookingRef={bookingRefPreview}
+                customerName={customerName}
+                onPaymentMethodSelected={(method) => {
+                  const paymentMethod = method as PaymentMethod;
+                  const mobileMoneyNetwork =
+                    paymentMethod === "MTN Mobile Money"
+                      ? "MTN"
+                      : paymentMethod === "Airtel Money"
+                        ? "Airtel"
+                        : paymentMethod === "Zamtel Money"
+                          ? "Zamtel"
+                          : draft.mobileMoneyNetwork;
+
+                  updateDraft({ paymentMethod, mobileMoneyNetwork });
+                }}
+                onPaymentConfirmed={handlePaymentConfirmed}
+              />
+            </div>
           </div>
         </div>
 
-        <form
-          onSubmit={handleSubmit}
-          className="rounded-[30px] bg-[var(--color-primary)] p-6 text-white shadow-[0_20px_70px_rgba(10,22,40,0.18)]"
-        >
+        <div className="rounded-[30px] bg-[var(--color-primary)] p-6 text-white shadow-[0_20px_70px_rgba(10,22,40,0.18)]">
           <div className="text-xs uppercase tracking-[0.26em] text-[var(--color-accent)]">
             Price breakdown
           </div>
           <div className="mt-6 space-y-4 text-sm">
             <Row label={`Base hire (${days} days)`} value={formatCurrency(base)} />
-            {draft.withDriver && (
-              <Row label="Chauffeur service" value={formatCurrency(chauffeur)} />
-            )}
+            {draft.withDriver && <Row label="Chauffeur service" value={formatCurrency(chauffeur)} />}
             {extras.map((extra) => (
               <div key={extra.id}>
                 <Row
@@ -207,41 +159,23 @@ export default function Step4Review() {
           </div>
 
           <div className="mt-6 rounded-[24px] bg-white/6 p-4 text-sm leading-7 text-white/72">
-            Free cancellation up to 48 hours before pickup. Later cancellations may
-            attract a service charge depending on preparation already completed.
+            Your booking will remain in a pending review state until our team verifies payment or confirms your corporate account billing terms.
           </div>
 
-          <label className="mt-6 flex items-start gap-4 rounded-[24px] border border-white/10 bg-white/6 p-4">
-            <input
-              type="checkbox"
-              checked={agreed}
-              onChange={(event) => setAgreed(event.target.checked)}
-              className="mt-1 h-5 w-5 rounded border-white/20 text-[var(--color-accent)]"
-            />
-            <span className="text-sm text-white/72">
-              I agree to the booking terms, cancellation policy, and payment handling
-              rules for this reservation.
-            </span>
-          </label>
-
-          <Button
-            type="submit"
-            className="mt-6 h-14 w-full rounded-full"
-            disabled={!agreed || !isValidPaymentMethod || isSubmitting}
-          >
-            {isSubmitting ? "Confirming..." : "Confirm My Booking"}
-          </Button>
+          <div className="mt-4 rounded-[24px] bg-white/6 p-4 text-sm leading-7 text-white/72">
+            Free cancellation up to 48 hours before pickup. Later cancellations may attract a service charge depending on preparation already completed.
+          </div>
 
           <Button
             type="button"
             variant="ghost"
-            className="mt-3 h-14 w-full rounded-full"
+            className="mt-6 h-14 w-full rounded-full"
             onClick={() => navigate("/book/step-3")}
           >
             <ArrowLeft className="mr-2 h-4 w-4" />
             Go Back
           </Button>
-        </form>
+        </div>
       </div>
     </div>
   );

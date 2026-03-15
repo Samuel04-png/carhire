@@ -14,7 +14,13 @@ export type BookingSource = "Online" | "Phone" | "Walk-in" | "WhatsApp" | "Corpo
 export type LoyaltyTier = "Standard" | "Silver" | "Gold" | "Platinum";
 export type DriverStatus = "Available" | "On Trip" | "Off Duty" | "Suspended";
 export type AdminRole = "Super Admin" | "Operations Manager" | "Booking Agent" | "Driver" | "Accountant";
-export type PaymentMethod = "MTN Mobile Money" | "Airtel Money" | "Bank Transfer" | "Credit / Debit Card" | "Pay on Pickup";
+export type PaymentMethod =
+  | "MTN Mobile Money"
+  | "Airtel Money"
+  | "Zamtel Money"
+  | "Bank Transfer"
+  | "Credit / Debit Card"
+  | "Pay on Pickup";
 
 export interface AdminSettings {
   companyProfile: {
@@ -307,7 +313,7 @@ export interface BookingDraft {
     privacyAccepted: boolean;
   };
   paymentMethod: PaymentMethod;
-  mobileMoneyNetwork: "MTN" | "Airtel";
+  mobileMoneyNetwork: "MTN" | "Airtel" | "Zamtel";
 }
 
 export interface FleetFilters {
