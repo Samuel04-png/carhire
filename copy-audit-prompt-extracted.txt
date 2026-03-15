@@ -1,0 +1,459 @@
+
+--- PAGE 1 ---
+B Y T E  &  B E R R Y
+Software & AI Automation · Lusaka, Zambia
+S H A R K  C A R  H I R E
+Website Copy Audit &
+AI Rewrite Prompt
+This document contains the master AI prompt for auditing and rewriting every piece of copy on 
+the Shark Car Hire website. It defines what bad copy looks like, what good copy sounds like, the 
+rules the AI must follow, the brand voice, and page-by-page rewrite instructions. Use this with 
+Claude, ChatGPT, or any AI writing tool.
+Document Version Prepared By Date
+Shark Car Hire — Copy 
+Audit & Rewrite Prompt
+1.0 Byte & Berry March 2026
+
+--- PAGE 2 ---
+S E C T I O N  1
+The Problem With AI-Generated Copy
+When AI tools build websites without proper copy direction, they produce text that sounds like it 
+is describing the website rather than speaking to the client. It explains what the design does 
+instead of what the business offers. It references the interface instead of the outcome. It uses 
+meta-language — words that only make sense if you know a website is being built.
+This is not copy. This is scaffolding. It has to be removed and replaced before the site goes live.
+1.1  Examples of Broken AI Copy (The Before)
+Real examples found on this site that must be removed or replaced:
+  'Why this rebuild focuses on both image and operations.'❌
+Problem: 'Rebuild' is internal language. Clients don't know or care this is a redesign. This sentence 
+belongs in a developer brief, not on a live website.
+  'The original project had the right intent but not enough connected logic.'❌
+Problem: 'The original project' is visible to clients on the About page. This exposes internal thinking, 
+sounds unprofessional, and destroys trust.
+  'Vehicle details, booking totals, account history, and admin status views now relate to each ❌
+other through the same state model.'
+Problem: 'State model' is developer jargon. A client booking a car for their wedding does not need to 
+know how the database is structured.
+  'These value cards are intentionally more substantial than generic marketing copy because ❌
+the page needs to build trust for high-value bookings.'
+Problem: This is the AI explaining its own design decisions to itself, on a live public page. It should 
+never be visible to any client.
+  '1 Shared source of truth for public and admin views'❌
+Problem: This is a technical architecture note presented as a client-facing brand stat. Clients care 
+about their experience, not the codebase.
+1.2  Why This Happens
+AI tools generate copy based on the context they are given. When the context is a build 
+specification or a design brief, the AI writes copy that sounds like it is narrating the spec. It says 
+things like 'this section is designed to build trust' instead of actually building trust through the 
+words it uses.
+The fix is not to ask the AI to 'be more professional.' The fix is to give the AI a clear brand voice, 
+a clear audience, a list of banned phrases, and concrete examples of what good copy sounds 
+like in this sector. That is exactly what this document provides.
+
+--- PAGE 3 ---
+S E C T I O N  2
+The Shark Car Hire Brand Voice
+Before any copy is written or rewritten, the AI must internalise the brand voice. Every sentence 
+on the website must sound like it comes from the same person — a confident, knowledgeable, 
+trustworthy professional who runs a premium mobility business in Zambia.
+2.1  Voice Pillars
+Voice Pillar What It Means What It Sounds Like
+Confident Shark Car Hire knows its 
+market. It does not hedge, 
+qualify unnecessarily, or 
+apologise for its prices. It states 
+what it offers and trusts the 
+client to decide.
+'Our fleet is fully serviced, comprehensively 
+insured, and ready for your journey.' — not 
+'We try to ensure our vehicles are well-
+maintained.'
+Premium The language reflects the quality 
+of the service. Every word earns 
+its place. No filler, no fluff, no 
+clichés.
+'From airport arrival to boardroom arrival, 
+we handle the journey in between.' — not 
+'We provide professional car hire services 
+for all your needs.'
+Human Behind the platform is a real 
+team. The copy acknowledges 
+the client as a person with a 
+specific need, not a generic 
+user.
+'Whether you need a quiet saloon for an 
+early morning flight or a fleet of vehicles for 
+your company's annual conference — we 
+are ready.' — not 'We offer various vehicle 
+options for different requirements.'
+Local & Proud Shark Car Hire is a Zambian 
+business that knows Zambia. 
+The copy reflects local reality 
+without apologising for it or over-
+explaining it.
+'Serving Lusaka, Kitwe, and Ndola with the 
+same standard of service across all three 
+cities.' — not 'We operate in multiple 
+locations across Zambia.'
+Precise No vague claims. Every 
+statement is specific. Numbers, 
+services, and outcomes are 
+named, not implied.
+'24-hour support. On-time guaranteed. 
+Driver assigned and confirmed the evening 
+before your booking.' — not 'We offer 
+excellent customer support and reliable 
+service.'
+2.2  Tone by Page Type
+Page / Context Tone Energy 
+Level
+Example Opening
+
+--- PAGE 4 ---
+Homepage Hero Bold, arresting, 
+immediate
+High 'Zambia's Preferred Executive Car Hire. 
+Book in minutes. Travel in confidence.'
+Fleet Page Informative, 
+precise, 
+enthusiastic
+Medium-
+High
+'Explore our full fleet — from efficient 
+saloons to executive SUVs, every vehicle 
+is service-ready and waiting.'
+Service Pages Specific, 
+reassuring, 
+expert
+Medium 'Corporate travel demands more than a 
+vehicle. It demands punctuality, 
+presentation, and a team that 
+understands the stakes.'
+About Page Warm, proud, 
+grounded
+Medium 'Shark Car Hire was built on one 
+principle: that Zambian businesses and 
+travellers deserve a world-class mobility 
+experience at home.'
+Booking Flow Clear, calm, 
+reassuring
+Low-
+Medium
+'You are in good hands. Complete your 
+booking in four simple steps and receive 
+instant confirmation.'
+Admin Dashboard Direct, 
+functional, 
+efficient
+Low 'All bookings. All vehicles. All clients. One 
+view.' — no marketing language in admin
+Error Pages Human, helpful, 
+unjudging
+Low 'This page is not where you were 
+heading. Let us point you in the right 
+direction.'
+Confirmation Page Warm, 
+celebratory, 
+reassuring
+Medium-
+High
+'Your booking is confirmed. Here is 
+everything you need to know before your 
+journey.'
+2.3  Banned Words & Phrases
+The following words and phrases must never appear in client-facing copy on the Shark Car Hire 
+website. They are either too generic, too technical, too vague, or too AI-typical to belong on a 
+premium brand's website.
+Never use these words or phrases in client-facing copy:
+Technical / Build Language (belongs in specs, not on the site):
+• rebuild, redesign, original project, previous version, state model, data model, 
+connected logic, frontend, backend, component, module, integrated system
+Generic Marketing Filler (says nothing, trusted by no one):
+• world-class, best-in-class, cutting-edge, next-level, seamless, comprehensive, 
+holistic, leverage, synergy, innovative, solutions, empower, transform
+Hedge Words (undermine confidence):
+• we try to, we aim to, we hope to, we strive to, we endeavour to, we believe, we think, 
+we feel, arguably, potentially, in some cases
+
+--- PAGE 5 ---
+AI Meta-Language (the AI narrating itself):
+• this section, this page, this card, this component, intentionally, designed to, built to 
+build trust, the user, the visitor, the interface, the experience is designed
+Vague Claims (unverifiable, unconvincing):
+• all your needs, various options, excellent service, high quality, top-notch, premier, 
+superior, outstanding, exceptional
+Preferred words and phrases for this brand:
+• punctual, confirmed, serviced, insured, assigned, professional, trusted, verified, 
+ready, direct, clear
+• journey, arrival, departure, transfer, route, collection, handover, fleet, vehicle, 
+booking, itinerary
+• executive, corporate, premium, reliable, consistent, precise, on-time, prepared
+• Lusaka, Kitwe, Ndola, Zambia, airport, city centre, hotel, office — always name the 
+place specifically
+• your driver, your vehicle, your booking, your journey — personal and specific
+• instantly confirmed, same-day, 24-hour, morning of your trip, the evening before — 
+time-specific language
+
+--- PAGE 6 ---
+S E C T I O N  3
+The Master AI Rewrite Prompt
+Copy this entire prompt and paste it into Claude, ChatGPT-4o, or any capable AI writing tool. 
+Then follow it with the copy you want audited and rewritten. The AI will follow these instructions 
+to produce client-ready copy.
+You can use this prompt in two modes: AUDIT mode (the AI tells you what is wrong) or 
+REWRITE mode (the AI rewrites the copy directly). Both modes are included below.
+3.1  Full Prompt — Paste This Into Any AI Tool
+── SYSTEM INSTRUCTIONS ──
+You are a senior brand copywriter specialising in premium automotive and
+executive mobility services. You have written copy for car hire companies,
+chauffeur services, airport transfer businesses, and corporate transport
+operators across Africa and internationally.
+The client is Shark Car Hire Limited — a premium car hire company operating
+across Lusaka, Kitwe, and Ndola, Zambia. Services include airport transfers,
+corporate hire, wedding cars, event vehicles, self-drive hire, and long-term
+lease. Their clients include corporate executives, NGO professionals, government
+officials, event planners, and individual travellers who value reliability.
+── BRAND VOICE ──
+Tone: Confident, premium, human, locally proud, precise.
+Voice: A knowledgeable professional who runs a serious business and respects
+their clients' time and intelligence.
+── WHAT YOU MUST NEVER WRITE ──
+1. Never use technical or build language: rebuild, redesign, state model,
+   data model, connected logic, frontend, backend, component, module.
+2. Never narrate the interface: 'this section', 'this page', 'this card',
+   'designed to build trust', 'intentionally more substantial'.
+3. Never use generic filler: world-class, cutting-edge, seamless,
+   innovative, holistic, leverage, synergy, comprehensive.
+4. Never hedge: 'we try to', 'we aim to', 'we hope to', 'we strive to'.
+5. Never make vague claims: 'excellent service', 'all your needs',
+   'high quality', 'various options', 'superior experience'.
+── WHAT YOU MUST ALWAYS DO ──
+1. Speak directly to the client — use 'you' and 'your' naturally.
+2. Be specific — name the city, the service, the outcome, the timeframe.
+3. State facts confidently — 'Your driver is confirmed the evening before
+   your booking.' Not 'We will try to inform you of your driver details.'
+4. Match the energy to the context — high for headlines, calm for process
+   steps, warm for confirmation pages.
+
+--- PAGE 7 ---
+5. Keep sentences short. One idea per sentence. Active voice always.
+6. Write for a client who is time-poor, discerning, and has options.
+7. Every paragraph should make the client want to take the next step.
+── YOUR TASK ──
+I will give you the current copy from a specific page of the Shark Car Hire
+website. You will:
+STEP 1 — AUDIT: List every sentence or phrase that violates the rules
+above. For each violation, state which rule it breaks and why.
+STEP 2 — REWRITE: Rewrite every piece of copy on this page from scratch.
+Use the brand voice, the preferred language, and the context for this
+specific page type. Match the structure of the original (same headings,
+same sections, same stat blocks) but replace all the words.
+STEP 3 — STATS CHECK: Flag any placeholder stats (28+, 1 shared source
+of truth, etc.) and suggest what the real, client-meaningful stat
+should be once confirmed with the client.
+Do not explain what you are doing. Do not add commentary. Just deliver
+the audit findings and the rewritten copy, clearly separated.
+Here is the copy to audit and rewrite: [PASTE PAGE COPY HERE]
+
+--- PAGE 8 ---
+S E C T I O N  4
+Page-by-Page Rewrite Guide
+Use this section as a reference when running the AI prompt above on each specific page. It tells 
+the AI the exact context, goal, and any special instructions for each page type. Add this 
+guidance after the main prompt when rewriting a specific page.
+4.1  Homepage
+Add to prompt when rewriting the Homepage:
+This is the homepage. The client lands here from a Google search, a social media post, or a 
+referral. They decide within 5 seconds whether this business is worth their time. The headline 
+must arrest them. The subheadline must confirm they are in the right place. The CTA must be 
+unmissable. Do not try to say everything — say the most important thing perfectly. The hero 
+copy is the most valuable real estate on the site. Every word must earn its position.
+Stats section: Replace placeholder stats with these — confirm actual numbers with client 
+first:
+• [X] Vehicles — ask Shark Car Hire for actual fleet count
+• [X] Years in Operation — ask for founding year
+• [X]+ Completed Bookings — ask for cumulative bookings
+• 3 Cities — Lusaka · Kitwe · Ndola (this one is confirmed)
+4.2  About Us Page
+Add to prompt when rewriting the About Us Page:
+This is the About page. The client is here because they want to know who is behind the 
+business before they trust them with their executive travel or their wedding. The copy must tell a 
+real story about Shark Car Hire — why it was founded, what drives it, and what it stands for. 
+Avoid generic mission statements. Every statement must be specific enough to be true only of 
+Shark Car Hire, not any other car hire company. Remove every trace of design commentary, 
+build language, or placeholder copy. The values section must read like convictions, not 
+marketing claims.
+Specific instructions for the Values section:
+• Each value must be named with one strong noun or short phrase — not a sentence
+• The description must be 1-2 sentences maximum — precise, not elaborate
+• Values must be specific to this business, not generic to all businesses
+• Remove all commentary about 'why these values were written this way'
+Suggested replacement values to consider (confirm with client):
+
+--- PAGE 9 ---
+• On Time, Every Time — Punctuality is not a goal. It is our standard.
+• Prepared Before You Ask — Your driver knows your flight number. Your vehicle is 
+clean before you see it.
+• Zambian Roads, Global Standards — We know every route. We hold ourselves to 
+every standard.
+• People Behind the Platform — Our technology makes booking easy. Our team makes 
+the journey exceptional.
+4.3  Fleet Page
+Add to prompt when rewriting the Fleet Page:
+This is the fleet page. The client is actively looking for a vehicle. The copy must help them find 
+what they need quickly and give them confidence in what they are choosing. Vehicle 
+descriptions must be specific — not 'comfortable and spacious' but 'seats 7, full climate control, 
+ideal for family airport transfers or group corporate travel.' Every vehicle description should tell 
+the client exactly who this vehicle is for and why they should choose it. Avoid repeating the 
+same adjectives across vehicles.
+Vehicle description formula to follow:
+• Line 1: What the vehicle is (make, model, category)
+• Line 2: Who it is best suited for (corporate solo travel, family groups, wedding parties)
+• Line 3: What makes it stand out (specific feature, comfort level, capacity)
+• Line 4: What service types it is available for (self-drive, chauffeur, or both)
+4.4  Service Pages
+Add to prompt when rewriting any Service Page:
+This is a service page. The client has clicked because they have a specific need — an airport 
+transfer, a corporate account, a wedding car. They are not browsing. They are deciding. The 
+copy must speak directly to that specific need. Open with the client's situation, not the 
+company's offering. Show that Shark Car Hire understands exactly what this service involves 
+and what can go wrong if they choose the wrong provider. Then show why Shark Car Hire is 
+the right choice — specifically, not generally.
+Service page opening formulas by service type:
+• Airport Transfers: Open with the stress of missing a flight or waiting for a driver who 
+doesn't show.
+• Corporate Hire: Open with the stakes — an executive's time is not replaceable.
+• Weddings: Open with the emotional weight — this day happens once.
+• Events: Open with the logistics challenge — moving multiple people, on time, without 
+
+--- PAGE 10 ---
+confusion.
+• Self-Drive: Open with the freedom — your route, your schedule, your pace.
+• Long Term: Open with the cost and hassle of ownership versus the simplicity of a 
+lease.
+4.5  Booking Flow Copy
+Add to prompt when rewriting Booking Flow copy:
+This is the booking flow. The client has decided to book. Do not let copy get in the way. Every 
+instruction must be one sentence. Every label must be self-explanatory. Every error message 
+must tell the client exactly what to fix, not just that something is wrong. Step titles must be 
+action-oriented. Confirmation messages must be warm and specific. The client should feel 
+guided, not processed.
+Booking flow copy rules:
+• Step titles: 'Your Trip Details' not 'Step 1'. 'Your Extras' not 'Add-Ons'. 'Your Details' 
+not 'Customer Information'. 'Review & Confirm' not 'Step 4'.
+• Button copy: 'Continue to Extras' not 'Next'. 'Confirm My Booking' not 'Submit'. 'Go 
+Back' not 'Previous'.
+• Error messages: 'Return date must be after your pickup date.' not 'Invalid date range.'
+• Empty states: 'No vehicles available on these dates in Ndola. Call us — we may have 
+options.' not 'No results found.'
+• Confirmation: 'Your booking is confirmed. Reference: SCH-[REF]. Your driver will 
+contact you the evening before your pickup.' not 'Booking successful.'
+4.6  Admin Dashboard Copy
+Add to prompt when rewriting Admin Dashboard copy:
+This is the admin dashboard. The audience is Shark Car Hire's internal team — booking 
+agents, operations managers, drivers, and directors. The copy here is functional, not 
+persuasive. It should be direct, scannable, and unambiguous. No marketing language. No 
+flowery descriptions. Labels should be as short as possible while remaining clear. Status 
+messages should tell the user exactly what action is required. Empty states should guide the 
+user toward the correct next step.
+Admin copy rules:
+• Dashboard section headers: 'Today's Bookings' not 'Booking Overview'. 'Vehicles On 
+Road' not 'Active Fleet Status'.
+• Alert messages: 'Payment overdue — 3 bookings' not 'There are some bookings that 
+may require attention.'
+• Empty states: 'No bookings today. Check tomorrow's schedule.' not 'No data to 
+
+--- PAGE 11 ---
+display.'
+• Confirmation dialogs: 'Cancel this booking? The client will be notified and the vehicle 
+released.' not 'Are you sure you want to proceed?'
+• Status labels: Confirmed | Pending | Active | Completed | Cancelled — never 'In 
+Progress', 'Under Review', or 'Processing'
+
+--- PAGE 12 ---
+S E C T I O N  5
+Placeholder Stats Replacement Guide
+The current site contains placeholder or AI-generated stats that are either wrong, meaningless, 
+or internally facing. These must all be replaced with real, client-meaningful numbers confirmed 
+with Shark Car Hire before the site goes live.
+Placeholder Found Problem Replace With (Confirm 
+With Client)
+Where It 
+Appears
+28+ Vehicles planned 
+across categories
+'Planned' signals 
+the fleet doesn't 
+exist yet. Never 
+say planned on a 
+live site.
+[X] Vehicles across [Y] 
+categories — use actual 
+fleet size
+Homepage 
+stats, About 
+page
+1 Shared source of truth for 
+public and admin views
+Technical 
+architecture note. 
+Meaningless to a 
+client.
+Remove entirely or replace 
+with a client-relevant stat
+Homepage stats
+'Values cards are 
+intentionally substantial'
+AI narrating its own 
+decisions on a 
+public page.
+Remove entirely — never 
+publish AI self-commentary
+About page 
+values section
+'The original project had the 
+right intent'
+Reveals internal 
+build history to 
+clients.
+Remove entirely About page
+'Not enough connected 
+logic'
+Developer critique 
+visible to public.
+Remove entirely About page
+24/7 Support-oriented 
+service mindset
+'Mindset' weakens 
+the claim. Either 
+you offer 24/7 
+support or you 
+don't.
+'24/7 Client Support' if true, 
+or '6AM–10PM Support' 
+with actual hours
+Homepage stats
+'Why this rebuild focuses on 
+image and operations'
+'Rebuild' is internal 
+language. Clients 
+see this.
+Remove entirely or rewrite 
+as a genuine brand 
+statement
+About page 
+subheading
+Stats That Would Actually Build Trust (Confirm Numbers With Client):
+• Years in operation — founding year to today
+• Total vehicles in fleet — exact number
+• Cities covered — 3 (Lusaka, Kitwe, Ndola) — already confirmed
+• Completed bookings to date — cumulative number
+• Corporate clients served — number of companies on account
+
+--- PAGE 13 ---
+• Average client rating — if reviews are collected
+• Support hours — exact hours, not 'support-oriented mindset'
+• Fleet age — 'Fleet renewed every [X] years' or 'All vehicles [year] and newer'
+BYTE & BERRY  ·  Software & AI Automation  ·  Lusaka, Zambia
+byteandberry.com  ·  hello@byteandberry.com
+Prepared for Shark Car Hire Limited · Confidential

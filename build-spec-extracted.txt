@@ -1,0 +1,956 @@
+pages 31
+
+--- PAGE 1 ---
+
+B Y T E  &  B E R R Y
+Software & AI Automation · Lusaka, Zambia
+S H A R K  C A R  H I R E
+Full Digital Platform
+Master Build Specification — Frontend
+This document is the complete master specification for the Shark Car Hire digital platform. It 
+covers every screen, every component, every user flow, the design system, and the full feature 
+set for both the public-facing website and the internal admin/operations dashboard. Developers 
+should treat this as the single source of truth. Nothing is built outside this specification without a 
+written change order.
+Document Version Status Prepared By
+Shark Car Hire — 
+Master Frontend Spec
+1.0 Ready for Development Byte & Berry
+Platform Phase Target Delivery Last Updated
+Web (React / Next.js) Frontend Only — 
+Backend Separate
+8 Weeks from Kickoff March 2026
+
+--- PAGE 2 ---
+
+S E C T I O N  1
+Design System
+Every visual decision in this system follows the design system defined here. No component is 
+built with ad-hoc styles. All colors, typography, spacing, and motion rules are defined as design 
+tokens and referenced consistently across the entire platform.
+1.1  Brand Identity & Visual Direction
+The Shark Car Hire brand communicates power, reliability, and premium quality. The visual 
+language is clean, bold, and professional — dark backgrounds with sharp white type and 
+electric blue accents. Think premium automotive meets corporate confidence. Inspired by 
+brands like Hertz Gold, Enterprise Business, and BMW Digital — not generic template car hire 
+sites.
+Design Personality
+• Bold but not aggressive — confident, not flashy
+• Premium but accessible — high-end feel, not intimidating
+• Trust-first — every design decision reinforces reliability and professionalism
+• African pride — subtle Zambian/African identity woven in without clichés
+• Mobile-first always — designed for a phone, enhanced for desktop
+1.2  Color Palette
+Token Name Hex Value Usage
+--color-primary #0A1628 Primary backgrounds, hero sections, navbar
+--color-secondary #0E4D8C Section backgrounds, card fills, secondary UI
+--color-accent #1A7FD4 CTAs, links, highlights, icons, active states
+--color-accent-hover #1565B0 Hover state for all accent-colored elements
+--color-white #FFFFFF Primary text on dark backgrounds, card 
+backgrounds
+--color-gray-100 #F8FAFC Light section backgrounds, input fields
+--color-gray-300 #CBD5E1 Borders, dividers, placeholder text
+--color-gray-600 #475569 Secondary body text, captions
+--color-gray-900 #0F172A Primary text on light backgrounds
+
+--- PAGE 3 ---
+
+--color-success #22C55E Available badges, confirmation states, success 
+toasts
+--color-warning #F59E0B Pending states, maintenance badges, warnings
+--color-error #EF4444 Unavailable badges, error states, validation 
+messages
+--color-gold #F59E0B Premium/VIP tier highlights, loyalty badges
+All colors must meet WCAG AA contrast ratios minimum. Use --color-accent on dark backgrounds, --
+color-accent-hover on light backgrounds.
+1.3  Typography
+Role Font Family Weight Size (Desktop) Size 
+(Mobile)
+Display Headline Sora 800 
+(ExtraBold)
+64px / 72px 40px / 
+48px
+Section Title Sora 700 (Bold) 40px / 48px 28px / 
+36px
+Card Title Sora 600 
+(SemiBold)
+24px 20px
+Body Text Inter 400 (Regular) 16px / 24px 
+line
+15px / 
+22px line
+Body Emphasis Inter 600 
+(SemiBold)
+16px 15px
+Caption / Label Inter 500 (Medium) 13px 12px
+Button Text Inter 700 (Bold) 15px 14px
+Monospace / Code JetBrains Mono 400 14px 13px
+Load Sora and Inter from Google Fonts. Subset to Latin + Latin-Extended. Preload critical fonts in 
+<head>. Never use system fonts for headings.
+1.4  Spacing System
+All spacing uses an 8px base grid. Every margin, padding, and gap value must be a multiple of 
+8px. This creates visual rhythm and prevents inconsistent spacing across components.
+Token Value Typical Usage
+
+--- PAGE 4 ---
+
+--space-1 8px Icon padding, tight internal spacing
+--space-2 16px Button padding horizontal, small gaps
+--space-3 24px Card internal padding, section gaps
+--space-4 32px Component separation
+--space-6 48px Section padding top/bottom (mobile)
+--space-8 64px Section padding top/bottom (desktop)
+--space-12 96px Major section separation
+--space-16 128px Hero padding, full-bleed section spacing
+1.5  Component Library — Buttons
+Variant Background Text Border Use Case
+Primary --color-accent White None Main CTAs: Book Now, 
+Get Quote, Submit
+Primary Dark --color-primary White None CTAs on light 
+backgrounds
+Secondary Transparent --color-
+accent
+2px --color-
+accent
+Secondary actions: Learn 
+More, View Fleet
+Ghost Transparent White 2px White 40% 
+opacity
+CTAs on dark/image 
+backgrounds
+Danger #EF4444 White None Delete, Cancel, 
+Destructive actions
+Disabled --color-gray-300 --color-gray-
+600
+None Unavailable states
+Button Rules
+• All buttons: border-radius 8px, min-height 48px (touch target), font-weight 700
+• Primary buttons: box-shadow 0 4px 14px rgba(26,127,212,0.4) — gives the electric 
+glow effect
+• Hover state: translateY(-2px) + deepened shadow — subtle lift on hover
+• Loading state: spinner replaces text, button stays same width (no layout shift)
+• Mobile: full-width buttons in forms, fixed-width in navigation contexts
+
+--- PAGE 5 ---
+
+1.6  Motion & Animation
+Animation is purposeful — it communicates state change, guides attention, and rewards 
+interaction. It is never decorative. All transitions respect prefers-reduced-motion.
+Animation Type Duration Easing Usage
+Page transition 300ms ease-in-out Route changes, modal open/close
+Hover micro 150ms ease-out Button hover, card hover, icon 
+hover
+Scroll reveal 600ms cubic-
+bezier(0.16,1,0.3,1)
+Elements entering viewport
+Toast/notification 400ms in, 
+300ms 
+out
+spring System notifications
+Skeleton loading 1.5s loop ease-in-out Content loading placeholders
+Counter animation 1000ms ease-out Stats counting up on scroll
+Booking step transition 400ms ease-in-out Moving between booking wizard 
+steps
+
+--- PAGE 6 ---
+
+S E C T I O N  2
+Public Website — Customer Facing
+The public website is the first impression for every potential client. It must communicate 
+premium quality, build trust instantly, and make booking a vehicle as frictionless as possible. 
+Every page has a single primary goal — moving the visitor closer to a booking.
+Tech Stack: Next.js 14 (App Router), TypeScript, Tailwind CSS, Framer Motion, React Hook Form, 
+Zustand for state. All pages are server-side rendered for SEO.
+2.1  Global Navigation
+Desktop Navigation (sticky, transforms on scroll)
+• Transparent over hero image on load → solid --color-primary background after 80px 
+scroll
+• Left: Shark Car Hire logo (SVG, links to homepage)
+• Centre: Nav links — Home | Our Fleet | Services | About | Locations | Contact
+• Right: Phone number (clickable tel: link) + 'Book Now' primary button (accent color)
+• Active page link: --color-accent color + 2px bottom border underline
+• Dropdown on 'Services': Airport Transfers | Corporate | Weddings | Events | Self-
+Drive | Long Term
+• Dropdown on 'Locations': Lusaka | Kitwe | Ndola
+Mobile Navigation (hamburger menu)
+• Hamburger icon top-right → full-screen slide-in menu from right (400ms)
+• Menu background: --color-primary (dark navy)
+• Links stacked vertically, 56px touch targets, 24px font
+• Phone number prominently displayed below links
+• 'Book Now' full-width accent button at bottom of menu
+• Close button (X) top-right, also closes on overlay tap
+• Body scroll locked when menu open
+2.2  Homepage
+S C R E E N  1   Homepage — Hero Section  [ Public / All Visitors ]
+
+--- PAGE 7 ---
+
+• Full-viewport hero (100vh) with high-quality video background — moving footage of fleet 
+vehicles on Zambian roads (can use stock initially)
+• Dark overlay (gradient: navy 60% opacity bottom-to-top) for text readability
+• Headline: 'Zambia's Most Trusted Car Hire' — Sora ExtraBold, 72px desktop, 40px 
+mobile, white
+• Subheadline: 'Premium vehicles. Professional service. Kitwe · Lusaka · Ndola.' — Inter 
+Regular, 20px, white 80% opacity
+• Two CTA buttons side by side: 'Book a Vehicle' (Primary) + 'View Our Fleet' (Ghost)
+• Scroll indicator arrow at bottom center, animated bounce
+• Video plays autoplay, muted, loop, preload=metadata. Falls back to high-quality static 
+image if video fails
+S C R E E N  2   Homepage — Quick Booking Widget  [ Public / All 
+Visitors ]
+• Sticky booking bar that appears immediately below the hero section
+• Background: white card with strong drop shadow
+• Fields in a horizontal row (desktop) or stacked (mobile):
+•   → Pickup Location: dropdown (Lusaka Airport | Lusaka CBD | Kitwe | Ndola | Custom 
+Address)
+•   → Pickup Date: date picker (blocks past dates, highlights today)
+•   → Return Date: date picker (must be after pickup date, auto-sets +1 day if before 
+pickup)
+•   → Vehicle Type: dropdown (Economy | Saloon | SUV | Minibus | Luxury | All)
+•   → With Driver toggle: Yes / No (defaults to No for self-drive)
+• 'Search Available Vehicles' — full-width accent button
+• On submit: smooth scroll to fleet grid filtered by criteria OR navigate to /fleet?params
+• If no vehicles match: show friendly empty state with 'Call Us' WhatsApp CTA
+S C R E E N  3   Homepage — Fleet Preview  [ Public / All Visitors ]
+• Section title: 'Our Fleet' with accent underline decoration
+• Horizontal scroll carousel on mobile, 3-column grid on desktop
+• Show 6 featured vehicles (marked as 'featured' in admin CMS)
+• Each vehicle card: high-quality photo, vehicle name, category badge, price-from tag, key 
+specs row (seats, transmission, AC icon), 'View Details' button
+• Card hover: subtle lift (translateY -4px) + deepened shadow
+• 'View Full Fleet' CTA button below grid
+S C R E E N  4   Homepage — Services Section  [ Public / All Visitors ]
+• Dark background section (--color-primary)
+
+--- PAGE 8 ---
+
+• 6 service cards in 3x2 grid (desktop) / 2x3 (tablet) / 1 column (mobile)
+• Each card: icon (custom SVG), service name, 1-sentence description, 'Learn More' link
+• Services: Airport Transfers | Corporate Hire | Wedding Cars | Event Hire | Self-Drive | 
+Long Term Lease
+• Cards have subtle border and hover background shift to --color-secondary
+S C R E E N  5   Homepage — Why Choose Us  [ Public / All Visitors ]
+• Light gray background section
+• 4 stat counters animating on scroll: [X] Vehicles in Fleet | [X] Years Experience | [X] 
+Happy Clients | 3 Cities Covered
+• 4 trust pillars below stats: Professional Drivers | 24/7 Support | Clean & Serviced Fleet | 
+Instant Confirmation
+• Each pillar: icon, title, 2-sentence description
+S C R E E N  6   Homepage — Testimonials  [ Public / All Visitors ]
+• Auto-playing carousel (5s interval, pause on hover)
+• Each testimonial: star rating (5 stars), quote text, client name, client role/company
+• Minimum 6 testimonials loaded initially
+• Navigation: prev/next arrows + dot indicators
+• Background: white with subtle pattern texture
+S C R E E N  7   Homepage — Corporate CTA Banner  [ Public / All 
+Visitors ]
+• Full-width dark section with city skyline background image
+• Headline: 'Corporate & Business Accounts'
+• Sub: 'Dedicated fleet. Monthly invoicing. Priority service for Zambia's leading businesses.'
+• Two buttons: 'Open a Corporate Account' + 'Download Corporate Brochure'
+S C R E E N  8   Homepage — Footer  [ Public / All Visitors ]
+• Dark navy background (--color-primary)
+• 4-column layout: Logo + tagline | Quick Links | Services | Contact Info
+• Contact: phone, email, WhatsApp link, physical addresses per city
+• Social icons: Facebook, Instagram, LinkedIn, Twitter/X
+• Bottom bar: Copyright © [Year] Shark Car Hire Limited | Privacy Policy | Terms & 
+Conditions
+• WhatsApp floating button: fixed bottom-right, green WhatsApp icon, always visible
+
+--- PAGE 9 ---
+
+2.3  Fleet Page
+S C R E E N  9   Fleet Page — Vehicle Listing  [ /fleet — Public ]
+• Page hero: dark blue background, headline 'Our Fleet', breadcrumb navigation
+• Filter sidebar (desktop) / filter drawer (mobile):
+•   → Category: All | Economy | Saloon | SUV | Minibus | Luxury | Pickup
+•   → Transmission: Any | Manual | Automatic
+•   → Seats: Any | 2-4 | 5 | 6-7 | 8+
+•   → With Driver: Any | Self-Drive | Chauffeur
+•   → Location availability: Lusaka | Kitwe | Ndola
+•   → Price range: slider (min/max per day)
+• Results count shown: 'Showing X vehicles'
+• Sort by: Price Low-High | Price High-Low | Most Popular | Newest
+• Vehicle cards in 3-column grid (desktop), 2-column (tablet), 1-column (mobile)
+• URL updates with filter params for shareable/bookmarkable filtered views
+• Skeleton loading cards while fetching
+S C R E E N  1 0   Vehicle Detail Page  [ /fleet/[vehicle-slug] — Public ]
+• Photo gallery: main large image + 4 thumbnail strip below. Click thumbnail → swap main. 
+Lightbox on main image click
+• Vehicle name as H1, category badge, availability badge (Available / Unavailable / On 
+Request)
+• Price display: 'From K[X] / day' prominently displayed
+• Specs grid: Make/Model | Year | Seats | Doors | Transmission | Fuel | AC | Mileage Policy 
+| Insurance Included
+• Features list: icons for AC, Bluetooth, USB Charging, GPS, Child Seat Available, etc.
+• Description: rich text from CMS
+• Booking widget (sticky on desktop right column, below content on mobile):
+•   → Pickup location dropdown
+•   → Pickup date + time picker
+•   → Return date + time picker
+•   → Duration auto-calculated and displayed ('3 days')
+•   → With driver toggle
+•   → Price breakdown: Daily rate × days + extras = total
+•   → 'Book This Vehicle' primary button → goes to booking flow
+• Similar vehicles section below — 3 vehicles in same category
+
+--- PAGE 10 ---
+
+2.4  Booking Flow
+The booking flow is a multi-step wizard. Each step is a separate view but no page reload — 
+smooth animated transitions between steps. Progress bar at top shows Step 1 of 4. User can go 
+back to previous steps. Form state persisted in Zustand so refreshing doesn't lose data.
+S C R E E N  1 1   Booking Step 1 — Trip Details  [ /book/step-1 ]
+• Selected vehicle summary card at top (photo, name, price/day) — always visible
+• Fields: Pickup Location (dropdown + 'Enter custom address' option), Pickup Date, Pickup 
+Time, Return Date, Return Time
+• With Driver toggle: Self-Drive / With Chauffeur
+• If airport transfer: show 'Flight Number' field + 'Arrival/Departure' toggle
+• Duration + total price auto-calculated and displayed live as user selects dates
+• Validation: pickup must be 2+ hours from now, return must be after pickup
+• 'Continue' button disabled until all required fields valid
+S C R E E N  1 2   Booking Step 2 — Extras & Add-Ons  [ /book/step-
+2 ]
+• Optional add-ons presented as toggle cards:
+•   → Additional Driver (+ daily rate)
+•   → Child Seat (+ flat rate)
+•   → GPS Device (+ daily rate) — if not already standard in vehicle
+•   → Roadside Assistance Package (+ flat rate)
+•   → Full Insurance Upgrade (+ daily rate)
+•   → Airport Meet & Greet (+ flat rate, only shown for airport pickups)
+•   → Fuel Pre-Purchase (option to pay for full tank upfront)
+• Each add-on card: icon, name, description, price, toggle switch
+• Running total at bottom updates live as add-ons toggled
+• 'Continue' and 'Back' buttons
+S C R E E N  1 3   Booking Step 3 — Customer Details  [ /book/step-3 
+]
+• Account check: 'Already have an account? Sign In to autofill your details'
+• Fields: First Name, Last Name, Email, Phone Number (with Zambia +260 prefix default, 
+other countries selectable), ID/Passport Number
+• Driver's License: Number field + Expiry Date + Upload photo (JPEG/PNG/PDF, max 5MB)
+• If with chauffeur: remove license fields
+• Special requests: free text area
+• Create account checkbox (optional): 'Save my details for future bookings' — shows
+
+--- PAGE 11 ---
+
+password field if checked
+• Privacy policy consent checkbox (required)
+S C R E E N  1 4   Booking Step 4 — Review & Payment  [ 
+/book/step-4 ]
+• Full booking summary: vehicle, dates, location, extras, customer details
+• Price breakdown table: Base hire + each add-on + any fees = Grand Total
+• Payment options (rendered as visual cards):
+•   → MTN Mobile Money (primary — most common in Zambia)
+•   → Airtel Money
+•   → Bank Transfer (shows account details, marks booking as 'Pending Payment')
+•   → Credit/Debit Card (Stripe or Flutterwave integration)
+•   → Pay on Pickup (for verified corporate accounts only)
+• Cancellation policy clearly stated before payment
+• 'Confirm Booking' button — triggers payment flow
+• On success: redirect to /booking/confirmation/[booking-ref]
+S C R E E N  1 5   Booking Confirmation Page  [ 
+/booking/confirmation/[ref] ]
+• Large success checkmark animation (Lottie)
+• Booking reference number prominently displayed (e.g. SCH-20260314-0047)
+• Summary: vehicle, pickup details, total paid
+• Confirmation sent to: [email] and [phone] via SMS
+• What happens next: clear 3-step explanation (1. Confirmation email sent 2. Driver 
+assigned 24hrs before 3. Driver contacts you morning of pickup)
+• Buttons: 'Download Booking PDF' | 'Manage My Booking' | 'Book Another Vehicle'
+• WhatsApp button: 'Questions? Chat With Us'
+2.5  Services Pages
+Each service has its own dedicated landing page optimised for SEO and conversion. All follow 
+the same template structure but with unique content, photography, and CTAs.
+Service Page URL Primary CTA Key Unique 
+Element
+Airport Transfers /services/airport-transfers Book Airport Transfer Flight tracker 
+explainer, real-
+time monitoring 
+mention
+
+--- PAGE 12 ---
+
+Corporate Hire /services/corporate Open Corporate 
+Account
+Corporate benefits 
+list, monthly 
+invoicing, account 
+manager
+Wedding Cars /services/weddings Check Wedding 
+Availability
+Photo gallery of 
+decorated 
+vehicles, 
+packages
+Event Hire /services/events Request Event Quote Multi-vehicle 
+booking, event day 
+coordination
+Self-Drive /services/self-drive Browse Self-Drive 
+Fleet
+License 
+requirements, fuel 
+policy, damage 
+waiver
+Long Term Lease /services/long-term Get Lease Quote Monthly rates, 
+contract terms, 
+fleet management
+Service Page Template Structure (all 6 pages follow this)
+• Hero: Service name, tagline, background image, Book/Enquire CTA
+• What's included: icon grid of what the service covers
+• How it works: 3-4 step visual process
+• Pricing: starting from / contact for quote (no full pricing tables)
+• Vehicle options: filtered fleet cards showing vehicles available for this service
+• FAQ: 4-6 collapsible questions specific to the service
+• Testimonials: 2-3 testimonials specifically from this service type
+• CTA banner: final push to book or enquire
+2.6  Additional Public Pages
+Page URL Purpose Key Components
+About Us /about Build trust, tell the 
+Shark story
+Founding story, team, 
+values, fleet size stats, 
+certifications
+Locations /locations Multi-city presence Map embed, per-city 
+address/hours/phone, 
+directions
+Contact /contact Direct 
+communication
+Contact form, WhatsApp 
+link, phone, email, office
+
+--- PAGE 13 ---
+
+addresses
+Blog / News /blog SEO + authority Article grid, categories, 
+search, share buttons
+FAQ /faq Reduce support load Categorised questions with 
+accordion, search bar
+Privacy Policy /privacy Legal compliance Standard privacy policy, 
+GDPR-lite
+Terms & Conditions /terms Legal compliance Rental terms, damage 
+policy, cancellation policy
+404 Error /404 Recover lost users Friendly message, search 
+bar, popular links
+Booking Lookup /booking/lookup Post-booking support Enter booking ref + email 
+→ show booking status
+
+--- PAGE 14 ---
+
+S E C T I O N  3
+Customer Account Portal
+Registered customers have access to a personal portal where they can manage bookings, view 
+history, update personal details, and access their loyalty status. Authentication uses 
+email/password + optional WhatsApp OTP.
+S C R E E N  1 6   Customer Login / Register  [ /account/login ]
+• Two tabs: 'Sign In' and 'Create Account'
+• Sign In: Email + Password fields, 'Remember Me' checkbox, 'Forgot Password' link
+• Create Account: Full Name, Email, Phone, Password, Confirm Password
+• Social login option: 'Continue with Google'
+• After login: redirect to /account/dashboard or to booking step they left
+• Password reset: email with 6-digit OTP code, 15-minute expiry
+S C R E E N  1 7   Customer Dashboard  [ /account/dashboard ]
+• Welcome message: 'Welcome back, [First Name]'
+• Active bookings card: shows upcoming bookings with status badge and quick action 
+buttons
+• Recent bookings list: last 5 bookings with date, vehicle, status, amount
+• Loyalty points widget: current points balance, tier (Standard/Silver/Gold/Platinum), points 
+needed for next tier
+• Quick actions: 'Book a Vehicle' | 'View All Bookings' | 'Update Profile'
+• Promotional banner: personalised offer based on booking history
+S C R E E N  1 8   My Bookings  [ /account/bookings ]
+• Tab filter: All | Upcoming | Active | Completed | Cancelled
+• Each booking row: reference number, vehicle name + photo thumbnail, pickup date, 
+return date, status badge, total amount, action button
+• Status badges: Confirmed (green) | Pending Payment (yellow) | Active (blue) | Completed 
+(gray) | Cancelled (red)
+• Click booking → booking detail view: full summary, driver details (when assigned), receipt 
+download
+• Cancel button (only shows for bookings 24+ hours before pickup, cancellation policy 
+shown in modal)
+• Pagination or infinite scroll for history
+
+--- PAGE 15 ---
+
+S C R E E N  1 9   My Profile  [ /account/profile ]
+• Personal details: Name, Email, Phone (editable, phone requires OTP re-verification)
+• Driver's License: stored document preview, expiry date, replace option
+• Saved addresses: add/edit/delete pickup locations for fast booking
+• Notification preferences: Email confirmations | SMS reminders | WhatsApp updates | 
+Promotional offers (each toggleable)
+• Change password section
+• Delete account option (with confirmation modal and data retention notice)
+
+--- PAGE 16 ---
+
+S E C T I O N  4
+Admin & Operations Dashboard
+The admin dashboard is a separate authenticated application accessible only to Shark Car Hire 
+staff. It is the operational nerve centre — every booking, vehicle, client, driver, and revenue 
+figure is visible and manageable from here. It runs at admin.sharkcarhire.org or /admin with 
+role-based access control.
+Admin dashboard shares the design system tokens but uses a lighter theme: white backgrounds, 
+navy/blue accents. More data-dense than the public site. Built for desktop-first but fully functional on 
+tablet.
+4.1  Admin Roles & Permissions
+Role Who Has It Access Level
+Super Admin Owners / Directors Full access — all features, settings, financial 
+data, user management
+Operations Manager Fleet/Ops team Bookings, fleet, drivers, maintenance — no 
+financial settings
+Booking Agent Front desk / call centre Bookings management, client lookup — read-
+only fleet
+Driver Assigned drivers Own schedule only — assigned bookings, trip 
+status updates
+Accountant Finance team Revenue reports, invoices, payments — no 
+booking editing
+4.2  Admin Dashboard — Overview
+S C R E E N  2 0   Admin Home — Command Centre  [ 
+/admin/dashboard ]
+• Top metric cards (live, auto-refresh every 60s):
+•   → Today's Bookings (count) | Active Vehicles on Road | Revenue Today | Pending 
+Confirmations
+• Second row: Fleet Utilisation % gauge chart | Revenue This Month vs Last Month bar 
+chart
+• Booking activity feed: last 10 booking events (new bookings, cancellations, payments) in 
+real-time
+
+--- PAGE 17 ---
+
+• Alerts panel: vehicles due for service | bookings with pending payment (24h+) | driver 
+assignments needed
+• Quick actions: + New Booking | + New Vehicle | View Today's Schedule | Generate 
+Report
+• City filter tabs: All | Lusaka | Kitwe | Ndola — all stats filter by city
+4.3  Bookings Management
+S C R E E N  2 1   All Bookings  [ /admin/bookings ]
+• Master bookings table with columns: Ref # | Client Name | Vehicle | Pickup Date | Return 
+Date | City | Status | Payment Status | Amount | Actions
+• Filter bar: Date range | Status | City | Vehicle | Payment Status | Booking source 
+(online/phone/walk-in)
+• Status filter badges: All | Pending | Confirmed | Active | Completed | Cancelled
+• Bulk actions: Confirm selected | Mark as Paid | Export to CSV
+• Search: by booking ref, client name, phone, or vehicle
+• Each row: click to expand inline details OR open full booking modal
+• Colour-coded status badges matching the customer portal
+• Export: CSV / Excel / PDF of filtered results
+S C R E E N  2 2   Booking Detail / Edit  [ /admin/bookings/[ref] ]
+• Full booking summary at top (read-only view)
+• Status management: dropdown to change status with reason field for cancellations
+• Driver assignment: searchable dropdown of available drivers for the booking dates/city
+• Payment management: mark as paid, record payment method, add partial payment
+• Notes: internal staff notes (not visible to customer)
+• Activity log: full audit trail of every change made to this booking (who, what, when)
+• Communication: 'Send WhatsApp to Client' button + 'Send Email' button with template 
+selector
+• Booking modification: edit dates, vehicle, add-ons (creates new version in audit trail)
+• Refund/cancellation: partial or full refund with confirmation modal
+S C R E E N  2 3   New Booking (Admin-Created)  [ /admin/bookings/new 
+]
+• Used for phone-in and walk-in bookings
+• Client lookup: search existing clients by name/phone. If found, autofill. If new, inline create 
+form
+
+--- PAGE 18 ---
+
+• Same fields as online booking flow but all on one page (admins are trained, don't need 
+wizard)
+• Vehicle availability check: live as dates are entered
+• Payment: can mark as 'Pay on Pickup' or record immediate payment
+• Source field: Phone | Walk-in | WhatsApp | Corporate Account | Referral
+• 'Save Draft' + 'Confirm Booking' buttons
+4.4  Fleet Management
+S C R E E N  2 4   Fleet Overview  [ /admin/fleet ]
+• Fleet status summary cards: Total Vehicles | Available Now | On Hire | In Maintenance | 
+Retired
+• Vehicle grid/list toggle view
+• Each vehicle card: photo, name, reg plate, category, current status badge, current 
+location, next booking date
+• Filter: by category, status, city, transmission
+• Click vehicle → vehicle detail page
+• 'Add New Vehicle' button (Super Admin / Operations Manager only)
+S C R E E N  2 5   Vehicle Detail & Edit  [ /admin/fleet/[vehicle-id] ]
+• Photo management: upload up to 10 photos, drag-to-reorder, set featured image, delete
+• Vehicle details form: Make, Model, Year, Registration Plate, VIN/Chassis Number, Color, 
+Category, Transmission, Fuel Type, Seats, Doors
+• Pricing: Base daily rate, weekly rate, monthly rate, chauffeur surcharge, per-city pricing 
+override
+• Availability: status toggle (Available / Maintenance / Retired), blackout date ranges
+• Features checklist: AC, Bluetooth, USB, GPS, Child Seat, Sunroof, etc.
+• Maintenance log: service history table (date, type, mileage, cost, next service due)
+• Booking history: all past and upcoming bookings for this vehicle
+• Documents: insurance certificate upload, road fitness certificate, log book — with expiry 
+date alerts
+• GPS tracker link: if vehicle has tracking, link to live map (future integration)
+4.5  Client Management (CRM)
+S C R E E N  2 6   Client Directory  [ /admin/clients ]
+
+--- PAGE 19 ---
+
+• Searchable client database: name, phone, email, ID number
+• Filter: by tier (Standard/Silver/Gold/Platinum), by city, by last booking date, by account 
+type (individual/corporate)
+• Client cards: name, contact, booking count, total spend, tier badge, last booking date
+• Export: full client list to CSV/Excel
+• 'Add Client' manual entry for walk-in/phone clients
+S C R E E N  2 7   Client Profile (CRM View)  [ /admin/clients/[client-id] ]
+• Header: name, photo (if uploaded), contact details, account tier badge, member since 
+date
+• Stats row: Total Bookings | Total Spend | Average Booking Value | Loyalty Points
+• Booking history: full list with status and amounts
+• Communication log: all WhatsApp, email, and SMS communications logged here
+• Notes: staff notes about the client (preferences, issues, VIP notes)
+• Documents: stored license, ID, corporate documentation
+• Corporate account section (if applicable): company name, VAT number, credit limit, 
+outstanding balance
+• Action buttons: 'Create Booking for Client' | 'Send Message' | 'Flag Account'
+S C R E E N  2 8   Corporate Accounts  [ /admin/clients/corporate ]
+• Separate view for all corporate/business accounts
+• Company name, contact person, phone, email, credit limit, current outstanding balance
+• Monthly invoice generation: one invoice covering all bookings in the month
+• Invoice status: Draft | Sent | Paid | Overdue
+• Send invoice button: generates PDF and emails to account contact
+• Payment recording: mark invoices as paid with payment reference
+• Account credit control: flag accounts over credit limit
+4.6  Driver Management
+S C R E E N  2 9   Driver Directory  [ /admin/drivers ]
+• Driver list: name, phone, city, status (Available / On Trip / Off Duty / Suspended), current 
+assignment
+• Filter by city, status, availability on a specific date
+• Add/edit driver: name, phone, email, license number, license expiry, photo, city base, 
+vehicle preferences
+
+--- PAGE 20 ---
+
+• Driver documents: upload license copy, medical certificate, police clearance — with expiry 
+alerts
+• Driver schedule: calendar view showing all assigned bookings
+• Driver ratings: average rating from client reviews
+4.7  Revenue & Reports
+S C R E E N  3 0   Revenue Dashboard  [ /admin/reports/revenue ]
+• Date range selector: Today | This Week | This Month | Last Month | Custom
+• Revenue metrics: Total Revenue | Revenue by City | Revenue by Service Type | Revenue 
+by Vehicle Category
+• Charts: Line chart (revenue over time) | Pie chart (service breakdown) | Bar chart (city 
+comparison)
+• Booking metrics: Total Bookings | Average Booking Value | Occupancy Rate per Vehicle
+• Top performers: Top 5 vehicles by revenue | Top 5 clients by spend
+• Export: PDF report with charts + CSV of raw data
+S C R E E N  3 1   Reports Library  [ /admin/reports ]
+• Pre-built reports available for one-click generation:
+•   → Daily Operations Report (bookings, drivers, vehicles for a specific date)
+•   → Monthly Revenue Report (full financial breakdown)
+•   → Fleet Utilisation Report (% utilisation per vehicle)
+•   → Client Activity Report (bookings per client, churn analysis)
+•   → Maintenance Schedule Report (upcoming service due dates)
+•   → Driver Performance Report (trips, ratings, utilisation)
+• All reports: view in browser OR download as PDF or Excel
+• Scheduled reports: set any report to email automatically (daily/weekly/monthly)
+4.8  Settings & Configuration
+Settings Section What It Controls
+Company Settings Business name, logo, contact details, office addresses per city, 
+business hours
+Pricing Rules Base rates per vehicle category, seasonal pricing, discount rules, 
+corporate rates
+
+--- PAGE 21 ---
+
+Booking Rules Minimum advance notice, maximum booking duration, cancellation 
+windows, deposit requirements
+Notification Templates Email/SMS/WhatsApp templates for confirmation, reminder, 
+cancellation, payment receipt
+Payment Settings Mobile money numbers, bank details, payment gateway keys, pay-on-
+pickup permissions
+User Management Create/edit/delete admin users, assign roles, reset passwords, activity 
+logs
+CMS — Fleet Content Add/edit vehicle listings (also accessible via Fleet Management)
+CMS — Website Content Edit homepage text, service page content, FAQs, testimonials, blog 
+posts
+Loyalty Programme Points earn rate, tier thresholds, points expiry, redemption value
+Integrations WhatsApp API key, SMS gateway, email SMTP, payment gateway, 
+Google Maps API
+
+--- PAGE 22 ---
+
+S E C T I O N  5
+Notifications & Communications
+Every communication with clients and internal staff is automated, templated, and logged. No 
+booking confirmation is sent manually. All templates are editable from the admin Settings panel.
+5.1  Customer Notification Triggers
+Trigger Channel Recipient Content
+Booking Created Email + SMS Customer Booking ref, vehicle, dates, pickup 
+details, total amount
+Payment Received Email Customer Receipt with breakdown, booking 
+confirmed status
+Driver Assigned WhatsApp + 
+SMS
+Customer Driver name, phone number, vehicle 
+reg plate
+24hr Reminder WhatsApp + 
+SMS
+Customer Pickup time, location, driver contact, 
+what to bring
+Booking Started (key 
+handover)
+SMS Customer Trip started confirmation, emergency 
+contact number
+Booking Completed Email Customer Thank you, receipt, review request link, 
+loyalty points earned
+Cancellation Email + SMS Customer Cancellation confirmed, refund details 
+if applicable
+Pending Payment 
+Reminder
+WhatsApp Customer Payment overdue reminder, payment 
+options
+Loyalty Tier Upgrade Email Customer Congratulations, new tier benefits 
+explained
+5.2  Internal Notification Triggers
+Trigger Channel Recipient Content
+New Booking WhatsApp + 
+Email
+Operations 
+Manager
+Booking summary, vehicle, client, 
+requires driver assignment
+New Corporate Enquiry Email Sales Manager Company details, requirements, 
+contact info
+
+--- PAGE 23 ---
+
+Pending Payment 24h+ WhatsApp Booking Agent Client name, booking ref, amount 
+outstanding
+Vehicle Service Due Email + 
+Dashboard alert
+Operations 
+Manager
+Vehicle reg, service type, days 
+until due
+License/Document 
+Expiry
+Dashboard alert Super Admin Driver or vehicle document 
+expiring within 30 days
+Cancellation WhatsApp Operations 
+Manager
+Booking ref, vehicle now available, 
+revenue lost
+New Review/Rating Email Admin Customer name, rating, review 
+text
+
+--- PAGE 24 ---
+
+S E C T I O N  6
+Technical Specification
+6.1  Frontend Tech Stack
+Layer Technology Version Purpose
+Framework Next.js 14 (App 
+Router)
+SSR, routing, image optimisation, API 
+routes
+Language TypeScript 5.x Type safety across entire codebase
+Styling Tailwind CSS 3.x Utility-first CSS with design token 
+variables
+Animation Framer Motion 10.x Page transitions, scroll reveals, micro-
+interactions
+State Management Zustand 4.x Booking flow state, cart, user session
+Forms React Hook Form 
++ Zod
+Latest Form handling with schema validation
+Date Handling date-fns 3.x Date calculations, formatting, timezone 
+handling
+Charts (Admin) Recharts 2.x Revenue charts, fleet utilisation graphs
+Icons Lucide React Latest Consistent icon library throughout
+Notifications React Hot Toast Latest Non-intrusive toast notifications
+Image Optimisation Next.js Image Built-in WebP conversion, lazy loading, blur 
+placeholder
+Lottie Animations lottie-react Latest Confirmation animations, loading 
+states
+6.2  Performance Requirements
+Core Web Vitals Targets
+• Largest Contentful Paint (LCP): under 2.5 seconds on 4G mobile
+• First Input Delay (FID): under 100ms
+• Cumulative Layout Shift (CLS): under 0.1
+
+--- PAGE 25 ---
+
+• Time to Interactive: under 3.5 seconds on 4G mobile
+• Google PageSpeed Score: 90+ mobile, 95+ desktop
+• All images: WebP format, max 200KB for vehicle photos, lazy loaded below fold
+• Fonts: preloaded, font-display: swap, subset to used characters only
+• Bundle size: under 200KB initial JavaScript (gzipped)
+Test performance on Zambian mobile conditions — simulate 4G (10Mbps) and 3G (1.5Mbps) using 
+Chrome DevTools. The site must be usable on 3G.
+6.3  SEO Requirements
+SEO Element Requirement
+Meta titles Unique per page, 50-60 chars, include primary keyword + 'Zambia'
+Meta descriptions Unique per page, 150-160 chars, include CTA
+H1 tags One per page, includes primary keyword
+Structured data LocalBusiness schema on homepage, Vehicle schema on fleet pages, 
+FAQPage schema
+Sitemap Auto-generated XML sitemap at /sitemap.xml, submitted to Google 
+Search Console
+Robots.txt Admin routes blocked, public routes crawlable
+Open Graph og:title, og:description, og:image on all pages (for social sharing)
+Image alt text Descriptive alt text on all images, never empty
+Page speed Critical for SEO ranking — see performance requirements above
+Mobile-first indexing All pages fully functional and fast on mobile
+6.4  Accessibility Requirements
+Requirement Standard
+Colour contrast All text minimum 4.5:1 contrast ratio (WCAG AA)
+Keyboard navigation All interactive elements reachable and operable via keyboard
+Focus indicators Visible focus rings on all interactive elements (never outline: none 
+without replacement)
+Screen reader Semantic HTML, ARIA labels on icons and interactive elements, role
+
+--- PAGE 26 ---
+
+attributes
+Form labels All inputs have associated <label> elements, never placeholder-only
+Error messages Errors announced via aria-live regions, not color alone
+Motion All animations respect prefers-reduced-motion media query
+Images Meaningful images have descriptive alt text, decorative images have 
+empty alt
+
+--- PAGE 27 ---
+
+S E C T I O N  7
+Complete Pages & Routes Index
+7.1  Public Website Routes
+Route Page Name Prior
+ity
+Notes
+/ Homepage P0 Core conversion page
+/fleet Fleet Listing P0 Filterable vehicle grid
+/fleet/[slug] Vehicle Detail P0 Individual vehicle page + booking 
+widget
+/book/step-1 Booking — Trip Details P0 Step 1 of booking wizard
+/book/step-2 Booking — Extras P0 Step 2 of booking wizard
+/book/step-3 Booking — Customer 
+Details
+P0 Step 3 of booking wizard
+/book/step-4 Booking — Payment P0 Step 4 of booking wizard
+/booking/confirmation/[ref] Booking Confirmation P0 Post-booking success page
+/services/airport-transfers Airport Transfers P1 Service landing page
+/services/corporate Corporate Hire P1 Service landing page
+/services/weddings Wedding Cars P1 Service landing page
+/services/events Event Hire P1 Service landing page
+/services/self-drive Self-Drive P1 Service landing page
+/services/long-term Long Term Lease P1 Service landing page
+/about About Us P1 Brand trust page
+/locations Locations P1 Multi-city page
+/contact Contact P1 Contact form + details
+/blog Blog / News P2 SEO content hub
+/blog/[slug] Blog Post P2 Individual article
+/faq FAQ P2 Accordion FAQ
+/account/login Login / Register P1 Auth page
+
+--- PAGE 28 ---
+
+/account/dashboard Customer Dashboard P1 Logged-in home
+/account/bookings My Bookings P1 Booking history
+/account/profile My Profile P1 Account settings
+/booking/lookup Booking Lookup P2 No-login booking check
+/privacy Privacy Policy P2 Legal page
+/terms Terms & Conditions P2 Legal page
+/404 Not Found P1 Error recovery
+7.2  Admin Dashboard Routes
+Route Page Name Role Access
+/admin Admin Login Public (unauthenticated)
+/admin/dashboard Command Centre Overview All Roles
+/admin/bookings All Bookings All Roles (view), Agent+ (edit)
+/admin/bookings/new Create Booking Agent+
+/admin/bookings/[ref] Booking Detail All Roles
+/admin/fleet Fleet Overview Ops Manager+
+/admin/fleet/[id] Vehicle Detail/Edit Ops Manager+
+/admin/fleet/new Add Vehicle Ops Manager+
+/admin/clients Client Directory All Roles
+/admin/clients/[id] Client Profile All Roles
+/admin/clients/corporate Corporate Accounts Ops Manager+, Accountant
+/admin/drivers Driver Directory Ops Manager+
+/admin/drivers/[id] Driver Profile/Edit Ops Manager+
+/admin/reports/revenue Revenue Dashboard Accountant, Super Admin
+/admin/reports Reports Library Accountant, Super Admin
+/admin/settings Settings Super Admin only
+/admin/settings/users User Management Super Admin only
+/admin/settings/cms Website CMS Super Admin, Ops Manager
+
+--- PAGE 29 ---
+
+S E C T I O N  8
+Developer Notes & Rules
+8.1  Code Quality Standards
+Non-Negotiable Rules for Every Developer on This Project
+• TypeScript strict mode. No any types. Every prop, function, and state is typed.
+• Component-first architecture. Every UI element is a reusable component in 
+/components. No one-off inline JSX blocks.
+• Design tokens only. No hardcoded hex colors in component files. Always use CSS 
+variables or Tailwind config tokens.
+• Mobile-first CSS. Write mobile styles first, add desktop overrides with md: and lg: 
+breakpoints.
+• No inline styles. All styling through Tailwind classes or CSS modules.
+• Form validation with Zod schemas. Every form has a schema. Validation happens on 
+client AND server.
+• Error boundaries on every major section. The page never white-screens on a 
+component error.
+• Loading states everywhere. Every async operation has a loading state. No 'hanging' 
+UI.
+• Accessibility first. Run axe-core in development. Fix all critical violations before any 
+PR merge.
+• Performance budget. Bundle size checked on every build. No new dependency 
+without justification.
+• Comments in English. Complex logic must have inline comments. Component 
+purpose in JSDoc.
+• Git commits follow Conventional Commits format: feat:, fix:, chore:, docs:, style:
+8.2  File Structure
+shark-car-hire/
+├── app/                    # Next.js App Router pages
+│   ├── (public)/          # Public website routes
+│   ├── (auth)/            # Login, register, password reset
+│   ├── account/           # Customer portal (protected)
+│   ├── admin/             # Admin dashboard (role-protected)
+│   └── api/               # API routes (frontend BFF layer)
+├── components/            # Reusable UI components
+
+--- PAGE 30 ---
+
+│   ├── ui/               # Base components (Button, Input, Card, Modal)
+│   ├── booking/          # Booking wizard components
+│   ├── fleet/            # Vehicle cards, filters, gallery
+│   ├── admin/            # Admin dashboard components
+│   └── layout/           # Navbar, Footer, Sidebar
+├── lib/                   # Utility functions, hooks, types
+├── store/                 # Zustand state stores
+├── styles/                # Global CSS, design token variables
+├── public/                # Static assets (images, icons, fonts)
+└── types/                 # Shared TypeScript type definitions
+8.3  Backend Integration Notes (For When Backend Is Ready)
+This frontend is built with backend-agnostic API patterns. All data fetching goes through 
+/app/api/ route handlers (Next.js BFF layer). When the backend is connected, only the BFF 
+layer changes — no frontend component changes needed.
+Frontend API Route Expected Backend 
+Endpoint
+Data Shape
+/api/fleet GET /vehicles Vehicle[] with availability, pricing, 
+photos
+/api/fleet/[slug] GET /vehicles/:slug Single vehicle with full details
+/api/bookings POST /bookings Create booking, returns booking ref
+/api/bookings/[ref] GET /bookings/:ref Booking detail for confirmation/lookup
+/api/availability GET /availability?
+vehicle=&from=&to=
+Boolean available + price for dates
+/api/auth/login POST /auth/login JWT token + user profile
+/api/auth/register POST /auth/register Create account, returns token
+/api/account/bookings GET /customer/bookings Customer's booking history
+/api/admin/bookings GET/POST 
+/admin/bookings
+Admin booking CRUD
+/api/admin/fleet GET/POST /admin/vehicles Admin fleet CRUD
+/api/admin/clients GET /admin/clients CRM client list + search
+/api/admin/reports GET /admin/reports/:type Revenue and operational reports
+All API routes use consistent response envelopes: { success: boolean, data: T | null, error: string | null, 
+pagination?: {...} }. Frontend components always check success before rendering data.
+
+--- PAGE 31 ---
+
+BYTE & BERRY  ·  Software & AI Automation  ·  Lusaka, Zambia
+byteandberry.com  ·  hello@byteandberry.com
+This document is confidential and prepared exclusively for Shark Car Hire Limited.
