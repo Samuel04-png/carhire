@@ -1,22 +1,115 @@
-import { CheckCircle2, Download, MessageCircle } from "lucide-react";
+import { useEffect, useState } from "react";
+import { CheckCircle2, Download, LoaderCircle, MessageCircle } from "lucide-react";
 import { Link, useParams } from "react-router-dom";
+import { getApiUrl } from "@/lib/api";
 import { Button } from "@/components/ui/button";
 import { formatCurrency, formatDateOnly } from "@/lib/format";
 import { useAppStore } from "@/store/use-app-store";
+
+type PaymentStatusPayload = {
+  status?: "PENDING" | "SUCCESSFUL" | "FAILED" | string;
+  reason?: string;
+};
 
 export default function BookingConfirmation() {
   const { ref } = useParams();
   const bookings = useAppStore((state) => state.bookings);
   const vehicles = useAppStore((state) => state.vehicles);
   const clients = useAppStore((state) => state.clients);
+  const updateBookingStatus = useAppStore((state) => state.updateBookingStatus);
+  const updatePaymentStatus = useAppStore((state) => state.updatePaymentStatus);
+  const [momoStatusMessage, setMomoStatusMessage] = useState<string | null>(null);
 
   const booking = bookings.find((item) => item.ref === ref);
   const vehicle = booking ? vehicles.find((item) => item.id === booking.vehicleId) : null;
   const client = booking ? clients.find((item) => item.id === booking.clientId) : null;
   const requiresVerification =
     booking?.paymentStatus === "Pending Payment" || booking?.status === "Pending";
+  const shouldPollMtn =
+    booking?.paymentMethod === "MTN Mobile Money" &&
+    booking.paymentStatus === "Pending Payment" &&
+    Boolean(booking.paymentReferenceId);
 
   const handlePrint = () => window.print();
+
+  useEffect(() => {
+    if (!booking?.paymentReferenceId || !shouldPollMtn) {
+      return;
+    }
+
+    let cancelled = false;
+    let timeoutId: number | null = null;
+    let attempts = 0;
+    const maxAttempts = 24;
+
+    const pollPaymentStatus = async () => {
+      try {
+        setMomoStatusMessage("Waiting for MTN MoMo approval on your phone.");
+        const response = await fetch(
+          getApiUrl(`/api/payments/momo/status/${booking.paymentReferenceId}`),
+        );
+        const payload = (await response.json()) as PaymentStatusPayload;
+
+        if (cancelled) {
+          return;
+        }
+
+        if (!response.ok) {
+          throw new Error("Unable to check payment status right now.");
+        }
+
+        if (payload.status === "SUCCESSFUL") {
+          updatePaymentStatus(booking.ref, "Paid", "MTN Mobile Money");
+          updateBookingStatus(booking.ref, "Confirmed");
+          setMomoStatusMessage("MTN MoMo payment confirmed. Your booking is now fully confirmed.");
+          return;
+        }
+
+        if (payload.status === "FAILED") {
+          setMomoStatusMessage(
+            payload.reason ||
+              "The MTN MoMo request was not completed. You can try again or contact our team.",
+          );
+          return;
+        }
+
+        attempts += 1;
+        if (attempts >= maxAttempts) {
+          setMomoStatusMessage(
+            "The MTN prompt is still pending. Keep your booking reference and contact our team if you need help.",
+          );
+          return;
+        }
+
+        timeoutId = window.setTimeout(pollPaymentStatus, 5000);
+      } catch (error) {
+        console.error("[booking][BookingConfirmation] MTN status polling failed", error);
+        attempts += 1;
+        if (attempts >= maxAttempts) {
+          setMomoStatusMessage(
+            "We could not confirm the MTN payment automatically. Keep the booking reference and contact our team.",
+          );
+          return;
+        }
+        timeoutId = window.setTimeout(pollPaymentStatus, 5000);
+      }
+    };
+
+    timeoutId = window.setTimeout(pollPaymentStatus, 1500);
+
+    return () => {
+      cancelled = true;
+      if (timeoutId) {
+        window.clearTimeout(timeoutId);
+      }
+    };
+  }, [
+    booking?.paymentReferenceId,
+    booking?.ref,
+    shouldPollMtn,
+    updateBookingStatus,
+    updatePaymentStatus,
+  ]);
 
   if (!booking || !vehicle || !client) {
     return (
@@ -86,6 +179,18 @@ export default function BookingConfirmation() {
             </div>
           </div>
         </div>
+
+        {momoStatusMessage && (
+          <div className="mt-6 rounded-[24px] border border-[var(--color-accent)]/20 bg-[var(--color-accent)]/8 p-5 text-left text-sm leading-7 text-[var(--color-primary)]">
+            <div className="flex items-start gap-3">
+              {shouldPollMtn ? <LoaderCircle className="mt-1 h-5 w-5 animate-spin text-[var(--color-accent)]" /> : <CheckCircle2 className="mt-1 h-5 w-5 text-[var(--color-success)]" />}
+              <div>
+                <div className="font-semibold">MTN MoMo status</div>
+                <div className="mt-1">{momoStatusMessage}</div>
+              </div>
+            </div>
+          </div>
+        )}
 
         <div className="mt-10 rounded-[30px] bg-[var(--color-primary)] p-6 text-left text-white">
           <div className="font-display text-2xl font-bold tracking-[-0.04em]">

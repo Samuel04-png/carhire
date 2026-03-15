@@ -223,6 +223,7 @@ export interface Booking {
   paymentMethod: PaymentMethod;
   source: BookingSource;
   amount: number;
+  paymentReferenceId?: string;
   assignedDriverId?: string;
   notes?: string;
   createdAt: string;

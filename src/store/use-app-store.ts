@@ -156,6 +156,11 @@ function getCheckoutStatuses(paymentMethod: PaymentMethod) {
   };
 }
 
+type SubmitBookingOptions = {
+  referenceOverride?: string;
+  paymentReferenceId?: string;
+};
+
 type Store = {
   vehicles: Vehicle[];
   clients: Client[];
@@ -172,7 +177,7 @@ type Store = {
   resetDraft: () => void;
   setCustomerSession: (clientId: string | null) => void;
   setAdminRole: (role: AdminRole | null) => void;
-  submitBooking: (referenceOverride?: string) => { ref: string; total: number };
+  submitBooking: (options?: SubmitBookingOptions) => { ref: string; total: number };
   createAdminBooking: (input: AdminBookingInput) => { ref: string; total: number };
   addVehicle: (input: AdminVehicleInput) => Vehicle;
   updateBookingStatus: (ref: string, status: BookingStatus) => void;
@@ -235,7 +240,7 @@ export const useAppStore = create<Store>()(
       setCustomerSession: (clientId) => set({ customerSessionId: clientId }),
       setAdminRole: (role) => set({ adminRole: role }),
 
-      submitBooking: (referenceOverride) => {
+      submitBooking: (options) => {
         const state = get();
         const vehicle = state.vehicles.find(
           (item) => item.id === state.bookingDraft.vehicleId,
@@ -289,8 +294,16 @@ export const useAppStore = create<Store>()(
         }
 
         const total = calculateBookingTotal(state.bookingDraft, vehicle);
-        const ref = referenceOverride || createRef();
+        const ref = options?.referenceOverride || createRef();
         const checkoutStatuses = getCheckoutStatuses(state.bookingDraft.paymentMethod);
+        const notes = [
+          state.bookingDraft.customer.specialRequests.trim(),
+          options?.paymentReferenceId
+            ? `MTN MoMo reference: ${options.paymentReferenceId}`
+            : "",
+        ]
+          .filter(Boolean)
+          .join(" | ");
         const booking: Booking = {
           ref,
           vehicleId: vehicle.id,
@@ -309,8 +322,9 @@ export const useAppStore = create<Store>()(
           paymentMethod: state.bookingDraft.paymentMethod,
           source: "Online",
           amount: total,
+          paymentReferenceId: options?.paymentReferenceId,
           createdAt: new Date().toISOString(),
-          notes: state.bookingDraft.customer.specialRequests || undefined,
+          notes: notes || undefined,
         };
 
         set((currentState) => {

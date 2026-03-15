@@ -1,6 +1,8 @@
 import { getOrRefreshToken } from "./auth";
 import { getMomoConfig } from "./config";
 
+export const MOMO_SANDBOX_TEST_NUMBER = "46733123450";
+
 export type RequestToPayParams = {
   amount: number;
   phoneNumber: string;
@@ -36,6 +38,10 @@ export type MomoPaymentStatus = {
 export function normaliseZambianNumber(phone: string): string {
   const cleaned = phone.replace(/[^\d+]/g, "");
 
+  if (cleaned === MOMO_SANDBOX_TEST_NUMBER) {
+    return cleaned;
+  }
+
   if (cleaned.startsWith("+260")) {
     return cleaned.slice(1);
   }
@@ -49,6 +55,19 @@ export function normaliseZambianNumber(phone: string): string {
   }
 
   return cleaned;
+}
+
+/**
+ * Validates supported MSISDN input for production Zambia numbers and the MTN sandbox test number.
+ */
+export function isSupportedMomoPhoneNumber(phone: string): boolean {
+  const normalised = normaliseZambianNumber(phone);
+
+  if (/^260\d{9}$/.test(normalised)) {
+    return true;
+  }
+
+  return (process.env.MOMO_TARGET_ENVIRONMENT ?? "") === "sandbox" && normalised === MOMO_SANDBOX_TEST_NUMBER;
 }
 
 async function readResponseBody(response: Response): Promise<unknown> {

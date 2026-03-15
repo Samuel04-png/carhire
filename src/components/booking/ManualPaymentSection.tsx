@@ -12,7 +12,7 @@ type ManualPaymentSectionProps = {
   bookingRef: string;
   customerName: string;
   onPaymentMethodSelected: (method: string) => void;
-  onPaymentConfirmed: () => void;
+  onPaymentConfirmed: (method: string) => Promise<void> | void;
 };
 
 type PaymentMethodCard = {
@@ -48,7 +48,7 @@ const paymentMethods: PaymentMethodCard[] = [
     tintClass: "bg-[#FBBF24]/10",
     badgeClass: "bg-[#FBBF24] text-[#1F2937]",
     buttonClass: "bg-[#FBBF24] text-[#1F2937] hover:bg-[#F59E0B]",
-    confirmLabel: "I have sent the payment - confirm my booking",
+    confirmLabel: "Send MTN payment prompt",
   },
   {
     id: "Airtel Money",
@@ -106,6 +106,7 @@ export default function ManualPaymentSection({
   const [selectedMethod, setSelectedMethod] = useState<string>(paymentMethods[0].id);
   const [isConfirming, setIsConfirming] = useState(false);
   const [showPendingMessage, setShowPendingMessage] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   useEffect(() => {
     onPaymentMethodSelected(paymentMethods[0].id);
@@ -117,14 +118,26 @@ export default function ManualPaymentSection({
     if (isConfirming) return;
     setSelectedMethod(method);
     setShowPendingMessage(false);
+    setErrorMessage(null);
     onPaymentMethodSelected(method);
   };
 
-  const handleConfirm = () => {
+  const handleConfirm = async () => {
     if (isConfirming) return;
     setIsConfirming(true);
     setShowPendingMessage(true);
-    onPaymentConfirmed();
+    setErrorMessage(null);
+
+    try {
+      await onPaymentConfirmed(selectedMethod);
+    } catch (error) {
+      console.error("[booking][ManualPaymentSection] Payment confirmation failed", error);
+      setShowPendingMessage(false);
+      setErrorMessage(
+        error instanceof Error ? error.message : "Payment request failed. Please try again.",
+      );
+      setIsConfirming(false);
+    }
   };
 
   return (
@@ -132,6 +145,7 @@ export default function ManualPaymentSection({
       {paymentMethods.map((method) => {
         const selected = selectedMethod === method.id;
         const Icon = method.icon;
+        const isAutomatedMtn = method.id === "MTN Mobile Money";
 
         return (
           <div
@@ -162,7 +176,39 @@ export default function ManualPaymentSection({
 
             <div className={`overflow-hidden px-5 transition-[max-height,opacity] duration-300 ease-out ${selected ? "max-h-[720px] pb-5 opacity-100" : "max-h-0 opacity-0"}`}>
               <div className="rounded-xl border border-white/60 bg-white/80 p-5">
-                {method.id !== "Bank Transfer" && method.id !== "Pay on Pickup" ? (
+                {isAutomatedMtn ? (
+                  <div className="space-y-5">
+                    <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+                      <div className="text-xs font-semibold uppercase tracking-[0.22em] text-slate-500">
+                        MTN prompt
+                      </div>
+                      <div className="mt-2 text-xl font-bold tracking-tight text-slate-950 sm:text-2xl">
+                        We will send a secure MTN MoMo approval prompt to your phone.
+                      </div>
+                      <div className="mt-2 text-sm leading-6 text-slate-600">
+                        Reference <span className="font-semibold text-slate-950">{bookingRef}</span> will be attached to the request for {customerName}.
+                      </div>
+                    </div>
+
+                    <ol className="space-y-3">
+                      {[
+                        "Check that the MTN number on this booking can receive a mobile money approval prompt.",
+                        "Tap the button below to send the collection request to your phone.",
+                        "Approve the MTN MoMo prompt on your device with your PIN.",
+                        "Keep this page open while we confirm the status and mark the booking.",
+                      ].map((step, index) => (
+                        <li key={step} className="flex gap-3 rounded-xl bg-slate-50 p-3">
+                          <span className={`mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-xs font-bold ${method.badgeClass}`}>{index + 1}</span>
+                          <span className="text-sm leading-6 text-slate-700">{step}</span>
+                        </li>
+                      ))}
+                    </ol>
+                  </div>
+                ) : null}
+
+                {method.id !== "MTN Mobile Money" &&
+                method.id !== "Bank Transfer" &&
+                method.id !== "Pay on Pickup" ? (
                   <div className="space-y-5">
                     <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
                       <div className="text-xs font-semibold uppercase tracking-[0.22em] text-slate-500">Send payment to</div>
@@ -234,7 +280,15 @@ export default function ManualPaymentSection({
 
                 {showPendingMessage && selected ? (
                   <div className="mt-4 rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm leading-6 text-amber-900">
-                    Your booking is pending confirmation. Our team will verify your payment and send you a WhatsApp confirmation within 30 minutes during business hours.
+                    {isAutomatedMtn
+                      ? "Your MTN payment request has been sent. Approve the prompt on your phone while we watch for confirmation."
+                      : "Your booking is pending confirmation. Our team will verify your payment and send you a WhatsApp confirmation within 30 minutes during business hours."}
+                  </div>
+                ) : null}
+
+                {errorMessage && selected ? (
+                  <div className="mt-4 rounded-xl border border-red-200 bg-red-50 p-4 text-sm leading-6 text-red-700">
+                    {errorMessage}
                   </div>
                 ) : null}
               </div>

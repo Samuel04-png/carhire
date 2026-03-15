@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import { ArrowLeft } from "lucide-react";
 import { Navigate, useNavigate } from "react-router-dom";
 import ManualPaymentSection from "@/components/booking/ManualPaymentSection";
+import { getApiUrl } from "@/lib/api";
 import { Button } from "@/components/ui/button";
 import { bookingExtras } from "@/data/mock";
 import { calculateBookingTotal, calculateDays, getVehicleById } from "@/lib/booking";
@@ -43,11 +44,48 @@ export default function Step4Review() {
     return `SCH-${stamp}-${suffix}`;
   }, []);
 
-  const handlePaymentConfirmed = () => {
-    window.setTimeout(() => {
-      const { ref } = submitBooking(bookingRefPreview);
+  const handlePaymentConfirmed = async (method: string) => {
+    if (method === "MTN Mobile Money") {
+      const phoneNumber = `${draft.customer.countryCode}${draft.customer.phone}`.replace(/\s+/g, "");
+      const response = await fetch(getApiUrl("/api/payments/momo"), {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          amount: total,
+          phoneNumber,
+          bookingRef: bookingRefPreview,
+          customerName,
+        }),
+      });
+
+      const payload = (await response.json()) as {
+        success?: boolean;
+        error?: string;
+        message?: string;
+        referenceId?: string;
+        status?: string;
+      };
+
+      if (!response.ok || !payload.success || !payload.referenceId) {
+        throw new Error(payload.error || "Payment request failed");
+      }
+
+      const { ref } = submitBooking({
+        referenceOverride: bookingRefPreview,
+        paymentReferenceId: payload.referenceId,
+      });
       navigate(`/booking/confirmation/${ref}`);
-    }, 1100);
+      return;
+    }
+
+    window.setTimeout(() => {
+      const { ref } = submitBooking({
+        referenceOverride: bookingRefPreview,
+      });
+      navigate(`/booking/confirmation/${ref}`);
+    }, 700);
   };
 
   if (!vehicle) {
@@ -96,10 +134,10 @@ export default function Step4Review() {
 
           <div className="rounded-[28px] bg-[var(--color-gray-100)] p-6">
             <div className="text-xs uppercase tracking-[0.24em] text-[var(--color-gray-500)]">
-              Manual payment
+              Payment
             </div>
             <div className="mt-3 text-sm leading-7 text-[var(--color-gray-600)]">
-              Choose one payment route, follow the instructions exactly, and use <span className="font-semibold text-[var(--color-primary)]">{bookingRefPreview}</span> as the payment reference.
+              Use MTN for an instant mobile prompt, or follow the manual instructions for Airtel, Zamtel, bank transfer, and corporate billing. Use <span className="font-semibold text-[var(--color-primary)]">{bookingRefPreview}</span> as the payment reference whenever a manual reference is required.
             </div>
             {!isCorporate && (
               <div className="mt-4 rounded-[22px] border border-amber-200 bg-amber-50 px-4 py-3 text-sm leading-6 text-amber-900">

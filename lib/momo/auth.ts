@@ -1,4 +1,4 @@
-import { config, getMomoConfig } from "./config";
+import { getMomoConfig } from "./config";
 
 type ApiKeyResponse = {
   apiKey: string;
@@ -18,6 +18,14 @@ type CachedToken = {
 let cachedApiUserId: string | null = process.env.MOMO_API_USER_ID ?? null;
 let cachedApiKey: string | null = process.env.MOMO_API_KEY ?? null;
 let cachedToken: CachedToken | null = null;
+
+function getProviderCallbackHost(callbackUrl: string): string {
+  try {
+    return new URL(callbackUrl).host;
+  } catch {
+    return callbackUrl.replace(/^https?:\/\//, "").split("/")[0] ?? callbackUrl;
+  }
+}
 
 /**
  * Safely reads a response body so MTN error details can be logged without being exposed upstream.
@@ -51,7 +59,7 @@ export async function createApiUser(): Promise<string> {
         "X-Reference-Id": apiUserId,
       },
       body: JSON.stringify({
-        providerCallbackHost: momoConfig.callbackUrl,
+        providerCallbackHost: getProviderCallbackHost(momoConfig.callbackUrl),
       }),
       cache: "no-store",
     });

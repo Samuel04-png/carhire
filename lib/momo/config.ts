@@ -7,16 +7,31 @@ export type MomoConfig = {
   subscriptionKey: string;
   targetEnvironment: string;
   callbackUrl: string;
-  currency: "ZMW";
+  currency: "ZMW" | "EUR";
 };
 
-export const config: MomoConfig = {
-  baseUrl: process.env.MOMO_BASE_URL ?? "",
-  subscriptionKey: process.env.MOMO_SUBSCRIPTION_KEY ?? "",
-  targetEnvironment: process.env.MOMO_TARGET_ENVIRONMENT ?? "",
-  callbackUrl: process.env.MOMO_CALLBACK_URL ?? "",
-  currency: "ZMW",
-};
+export const config = {
+  get baseUrl() {
+    return process.env.MOMO_BASE_URL ?? "";
+  },
+  get subscriptionKey() {
+    return process.env.MOMO_SUBSCRIPTION_KEY ?? "";
+  },
+  get targetEnvironment() {
+    return process.env.MOMO_TARGET_ENVIRONMENT ?? "";
+  },
+  get callbackUrl() {
+    return process.env.MOMO_CALLBACK_URL ?? "";
+  },
+  get currency() {
+    const configuredCurrency = process.env.MOMO_CURRENCY;
+    if (configuredCurrency === "ZMW" || configuredCurrency === "EUR") {
+      return configuredCurrency;
+    }
+
+    return process.env.MOMO_TARGET_ENVIRONMENT === "sandbox" ? "EUR" : "ZMW";
+  },
+} satisfies MomoConfig;
 
 /**
  * Validates the required MTN MoMo environment variables before a request is sent.

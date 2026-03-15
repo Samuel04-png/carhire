@@ -4,7 +4,11 @@
  * 2. Test collections with the sandbox number 46733123450.
  * 3. When MTN approves production, switch the MOMO_* environment variables only.
  */
-import { normaliseZambianNumber, requestToPay } from "../../../../lib/momo/collections";
+import {
+  isSupportedMomoPhoneNumber,
+  normaliseZambianNumber,
+  requestToPay,
+} from "../../../../lib/momo/collections";
 
 type MomoPaymentRequest = {
   amount: number;
@@ -20,10 +24,6 @@ function jsonResponse(body: unknown, status: number) {
       "Content-Type": "application/json",
     },
   });
-}
-
-function isValidMsisdn(phoneNumber: string) {
-  return /^260\d{9}$/.test(phoneNumber);
 }
 
 /**
@@ -45,7 +45,7 @@ export async function POST(request: Request) {
       return jsonResponse({ success: false, error: "Booking reference is required" }, 400);
     }
 
-    if (!isValidMsisdn(phoneNumber)) {
+    if (!isSupportedMomoPhoneNumber(phoneNumber)) {
       return jsonResponse({ success: false, error: "Invalid phone number" }, 400);
     }
 
