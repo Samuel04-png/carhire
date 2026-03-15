@@ -3,10 +3,10 @@ import type { BlogPost, City, LocationOffice, Testimonial } from "@/types";
 export const company = {
   name: "Shark Car Hire",
   tagline: "Premium vehicles. Professional service. Kitwe, Lusaka, Ndola.",
-  phone: "+260 970 000 000",
-  phoneAlt: "+260 960 111 222",
+  phone: "+260 972 826 350",
+  phoneAlt: "",
   email: "bookings@sharkcarhire.com",
-  whatsapp: "https://wa.me/260970000000",
+  whatsapp: "https://wa.me/260972826350",
   address: "Great East Road, Lusaka, Zambia",
   founded: 2016,
 };
@@ -75,7 +75,7 @@ export const offices: LocationOffice[] = [
     city: "Lusaka",
     label: "Lusaka HQ",
     address: "Great East Road, Rhodes Park, Lusaka, Zambia",
-    phone: "+260 970 000 000",
+    phone: "+260 972 826 350",
     hours: "Mon-Sun, 06:00 to 22:00",
     mapEmbed: "https://www.google.com/maps?q=Lusaka%20Zambia&output=embed",
     directionsUrl: "https://maps.google.com/?q=Lusaka%20Zambia",

@@ -108,7 +108,9 @@ export function Footer() {
                 <Phone className="mt-1 h-4 w-4 text-[var(--color-accent)]" />
                 <div>
                   <div>{company.phone}</div>
-                  <div>{company.phoneAlt}</div>
+                  {company.phoneAlt && company.phoneAlt !== company.phone ? (
+                    <div>{company.phoneAlt}</div>
+                  ) : null}
                 </div>
               </a>
               <a

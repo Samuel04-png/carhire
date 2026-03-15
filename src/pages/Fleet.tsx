@@ -244,7 +244,7 @@ export default function FleetPage() {
                   Clear Filters
                 </Button>
                 <Button asChild variant="secondary" className="rounded-full">
-                  <a href="https://wa.me/260970000000" target="_blank" rel="noreferrer">
+                  <a href="https://wa.me/260972826350" target="_blank" rel="noreferrer">
                     Call Us on WhatsApp
                   </a>
                 </Button>

@@ -227,7 +227,7 @@ export default function BookingConfirmation() {
         </div>
 
         <a
-          href="https://wa.me/260970000000"
+          href="https://wa.me/260972826350"
           target="_blank"
           rel="noreferrer"
           className="mt-8 inline-flex items-center gap-2 rounded-full bg-[#25D366]/10 px-6 py-3 text-sm font-semibold text-[#25D366]"
