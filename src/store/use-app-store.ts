@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import { initialAdminSettings } from "@/data/admin";
 import {
   bookingExtras,
   clients as initialClients,
@@ -9,12 +10,16 @@ import {
 } from "@/data/mock";
 import { calculateBookingTotal } from "@/lib/booking";
 import type {
+  AdminBookingInput,
   AdminRole,
+  AdminSettings,
+  AdminVehicleInput,
   Booking,
   BookingDraft,
   BookingStatus,
   Client,
   Driver,
+  DriverStatus,
   PaymentMethod,
   PaymentStatus,
   Vehicle,
@@ -67,6 +72,76 @@ function buildClientId() {
   return `cli_${Math.random().toString(36).slice(2, 8)}`;
 }
 
+function buildVehicleId() {
+  return `veh_${Math.random().toString(36).slice(2, 8)}`;
+}
+
+function slugify(value: string) {
+  return value
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+function ensureUniqueSlug(baseSlug: string, existingSlugs: string[]) {
+  if (!existingSlugs.includes(baseSlug)) {
+    return baseSlug;
+  }
+
+  let counter = 2;
+  let nextSlug = `${baseSlug}-${counter}`;
+  while (existingSlugs.includes(nextSlug)) {
+    counter += 1;
+    nextSlug = `${baseSlug}-${counter}`;
+  }
+  return nextSlug;
+}
+
+function createVehicleServices(input: AdminVehicleInput) {
+  const services = new Set<string>(["self-drive"]);
+  if (input.withDriverAvailable) {
+    services.add("airport-transfers");
+    services.add("corporate");
+    services.add("events");
+  }
+  if (input.category === "Luxury") {
+    services.add("weddings");
+  }
+  if (input.category === "Pickup" || input.category === "Minibus") {
+    services.add("long-term");
+  }
+  return Array.from(services);
+}
+
+function createClientRecord(input: AdminBookingInput) {
+  return {
+    id: buildClientId(),
+    firstName: input.customer.firstName.trim(),
+    lastName: input.customer.lastName.trim(),
+    email: input.customer.email.trim(),
+    phone: input.customer.phone.trim(),
+    city: input.pickupCity,
+    tier: input.customer.accountType === "Corporate" ? "Gold" : "Standard",
+    bookingCount: 0,
+    totalSpend: 0,
+    loyaltyPoints: 0,
+    memberSince: new Date().toISOString(),
+    accountType: input.customer.accountType,
+    idNumber: "Pending verification",
+    savedAddresses: [input.pickupLocation],
+    preferences: {
+      email: true,
+      sms: true,
+      whatsapp: true,
+      promotions: false,
+    },
+    companyName: input.customer.companyName?.trim() || undefined,
+    outstandingBalance:
+      input.paymentStatus === "Paid" ? 0 : undefined,
+  } satisfies Client;
+}
+
 type Store = {
   vehicles: Vehicle[];
   clients: Client[];
@@ -75,6 +150,7 @@ type Store = {
   bookingDraft: BookingDraft;
   customerSessionId: string | null;
   adminRole: AdminRole | null;
+  adminSettings: AdminSettings;
   updateDraft: (partial: Partial<BookingDraft>) => void;
   updateDraftCustomer: (partial: Partial<BookingDraft["customer"]>) => void;
   setDraftVehicle: (vehicleId: string) => void;
@@ -83,6 +159,8 @@ type Store = {
   setCustomerSession: (clientId: string | null) => void;
   setAdminRole: (role: AdminRole | null) => void;
   submitBooking: () => { ref: string; total: number };
+  createAdminBooking: (input: AdminBookingInput) => { ref: string; total: number };
+  addVehicle: (input: AdminVehicleInput) => Vehicle;
   updateBookingStatus: (ref: string, status: BookingStatus) => void;
   updatePaymentStatus: (
     ref: string,
@@ -90,7 +168,9 @@ type Store = {
     paymentMethod?: PaymentMethod,
   ) => void;
   assignDriver: (ref: string, driverId: string) => void;
+  updateDriverStatus: (driverId: string, status: DriverStatus) => void;
   updateVehicleStatus: (vehicleId: string, status: VehicleStatus) => void;
+  saveAdminSettings: (settings: AdminSettings) => void;
 };
 
 export const useAppStore = create<Store>()(
@@ -102,7 +182,8 @@ export const useAppStore = create<Store>()(
       bookings: initialBookings,
       bookingDraft: defaultDraft,
       customerSessionId: initialClients[0]?.id ?? null,
-      adminRole: "Super Admin",
+      adminRole: null,
+      adminSettings: initialAdminSettings,
 
       updateDraft: (partial) =>
         set((state) => ({
@@ -248,6 +329,188 @@ export const useAppStore = create<Store>()(
         return { ref, total };
       },
 
+      createAdminBooking: (input) => {
+        const state = get();
+        const vehicle = state.vehicles.find((item) => item.id === input.vehicleId);
+
+        if (!vehicle) {
+          return { ref: createRef(), total: 0 };
+        }
+
+        let clientId = input.clientId;
+        const createdClient =
+          clientId == null || !state.clients.some((client) => client.id === clientId)
+            ? createClientRecord(input)
+            : null;
+
+        if (createdClient) {
+          clientId = createdClient.id;
+        }
+
+        const bookingDraft: BookingDraft = {
+          vehicleId: input.vehicleId,
+          pickupCity: input.pickupCity,
+          pickupLocation: input.pickupLocation,
+          customAddress: "",
+          pickupDate: input.pickupDate,
+          pickupTime: input.pickupTime,
+          returnDate: input.returnDate,
+          returnTime: input.returnTime,
+          withDriver: input.withDriver,
+          flightNumber: input.flightNumber ?? "",
+          tripType: input.tripType ?? "Arrival",
+          extras: input.extras,
+          customer: {
+            firstName: input.customer.firstName,
+            lastName: input.customer.lastName,
+            email: input.customer.email,
+            countryCode: "+260",
+            phone: input.customer.phone,
+            idNumber: "",
+            licenseNumber: "",
+            licenseExpiry: "",
+            specialRequests: input.notes ?? "",
+            createAccount: false,
+            password: "",
+            confirmPassword: "",
+            privacyAccepted: true,
+          },
+          paymentMethod: input.paymentMethod,
+          mobileMoneyNetwork: "MTN",
+        };
+
+        const total = calculateBookingTotal(bookingDraft, vehicle);
+        const ref = createRef();
+        const createdAt = new Date().toISOString();
+        const booking: Booking = {
+          ref,
+          vehicleId: input.vehicleId,
+          clientId: clientId!,
+          pickupCity: input.pickupCity,
+          pickupLocation: input.pickupLocation,
+          pickupDateTime: `${input.pickupDate}T${input.pickupTime}:00`,
+          returnDateTime: `${input.returnDate}T${input.returnTime}:00`,
+          withDriver: input.withDriver,
+          extras: input.extras,
+          flightNumber: input.flightNumber,
+          tripType: input.tripType,
+          status: input.status,
+          paymentStatus: input.paymentStatus,
+          paymentMethod: input.paymentMethod,
+          source: input.source,
+          amount: total,
+          assignedDriverId: input.assignedDriverId,
+          notes: input.notes?.trim() || undefined,
+          createdAt,
+        };
+
+        set((currentState) => {
+          const nextClients = createdClient
+            ? [createdClient, ...currentState.clients]
+            : currentState.clients;
+
+          const updatedClients = nextClients.map((client) =>
+            client.id === clientId
+              ? {
+                  ...client,
+                  bookingCount: client.bookingCount + 1,
+                  totalSpend: client.totalSpend + total,
+                  loyaltyPoints: client.loyaltyPoints + Math.max(20, Math.round(total / 50)),
+                  outstandingBalance:
+                    input.paymentStatus === "Paid"
+                      ? 0
+                      : (client.outstandingBalance ?? 0) + total,
+                }
+              : client,
+          );
+
+          return {
+            bookings: [booking, ...currentState.bookings],
+            clients: updatedClients,
+            drivers: currentState.drivers.map((driver) =>
+              input.assignedDriverId && driver.id === input.assignedDriverId
+                ? { ...driver, status: "On Trip", currentAssignment: ref }
+                : driver,
+            ),
+            vehicles: currentState.vehicles.map((item) =>
+              item.id === input.vehicleId
+                ? {
+                    ...item,
+                    status:
+                      input.status === "Active"
+                        ? "On Hire"
+                        : input.status === "Cancelled"
+                          ? item.status
+                          : "On Request",
+                    currentCity: input.pickupCity,
+                    nextBookingDate: input.pickupDate,
+                  }
+                : item,
+            ),
+          };
+        });
+
+        return { ref, total };
+      },
+
+      addVehicle: (input) => {
+        const existingSlugs = get().vehicles.map((vehicle) => vehicle.slug);
+        const slug = ensureUniqueSlug(slugify(input.name), existingSlugs);
+        const baseDailyRate = Number(input.baseDailyRate);
+        const vehicle: Vehicle = {
+          id: buildVehicleId(),
+          slug,
+          name: input.name.trim(),
+          make: input.make.trim(),
+          model: input.model.trim(),
+          year: Number(input.year),
+          regPlate: input.regPlate.trim().toUpperCase(),
+          vin: `VIN-${Math.random().toString(36).slice(2, 12).toUpperCase()}`,
+          color: input.color.trim(),
+          category: input.category,
+          transmission: input.transmission,
+          fuel: input.fuel.trim(),
+          seats: Number(input.seats),
+          doors: Number(input.doors),
+          ac: true,
+          mileagePolicy: input.mileagePolicy.trim(),
+          insuranceIncluded: input.insuranceIncluded.trim(),
+          baseDailyRate,
+          weeklyRate: input.weeklyRate ?? Math.round(baseDailyRate * 6.2),
+          monthlyRate: input.monthlyRate ?? Math.round(baseDailyRate * 24),
+          chauffeurRate: input.chauffeurRate ?? get().adminSettings.pricingRules.defaultChauffeurRate,
+          cityRates: Object.fromEntries(
+            input.cities.map((city) => [city, baseDailyRate]),
+          ),
+          rating: 4.9,
+          reviewCount: 0,
+          featured: false,
+          popular: false,
+          newest: true,
+          withDriverAvailable: input.withDriverAvailable,
+          cities: input.cities,
+          status: input.status,
+          currentCity: input.currentCity,
+          nextBookingDate: new Date(Date.now() + 24 * 60 * 60 * 1000)
+            .toISOString()
+            .slice(0, 10),
+          mainImage: input.mainImage.trim(),
+          gallery: [input.mainImage.trim()],
+          description: input.description.trim(),
+          features: input.features,
+          services: createVehicleServices(input),
+          heroMetric: input.withDriverAvailable
+            ? "Configured for premium managed mobility"
+            : "Configured for fast self-drive turnaround",
+        };
+
+        set((state) => ({
+          vehicles: [vehicle, ...state.vehicles],
+        }));
+
+        return vehicle;
+      },
+
       updateBookingStatus: (ref, status) =>
         set((state) => ({
           bookings: state.bookings.map((booking) =>
@@ -280,12 +543,35 @@ export const useAppStore = create<Store>()(
           ),
         })),
 
+      updateDriverStatus: (driverId, status) =>
+        set((state) => ({
+          drivers: state.drivers.map((driver) =>
+            driver.id === driverId
+              ? {
+                  ...driver,
+                  status,
+                  currentAssignment:
+                    status === "Available"
+                      ? "Ready for next dispatch"
+                      : status === "Off Duty"
+                        ? "Available tomorrow from 06:00"
+                        : driver.currentAssignment,
+                }
+              : driver,
+          ),
+        })),
+
       updateVehicleStatus: (vehicleId, status) =>
         set((state) => ({
           vehicles: state.vehicles.map((vehicle) =>
             vehicle.id === vehicleId ? { ...vehicle, status } : vehicle,
           ),
         })),
+
+      saveAdminSettings: (settings) =>
+        set({
+          adminSettings: settings,
+        }),
     }),
     {
       name: "shark-car-hire-store",
@@ -297,6 +583,7 @@ export const useAppStore = create<Store>()(
         bookingDraft: state.bookingDraft,
         customerSessionId: state.customerSessionId,
         adminRole: state.adminRole,
+        adminSettings: state.adminSettings,
       }),
     },
   ),

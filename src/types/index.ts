@@ -16,6 +16,49 @@ export type DriverStatus = "Available" | "On Trip" | "Off Duty" | "Suspended";
 export type AdminRole = "Super Admin" | "Operations Manager" | "Booking Agent" | "Driver" | "Accountant";
 export type PaymentMethod = "MTN Mobile Money" | "Airtel Money" | "Bank Transfer" | "Credit / Debit Card" | "Pay on Pickup";
 
+export interface AdminSettings {
+  companyProfile: {
+    companyName: string;
+    tagline: string;
+    supportPhone: string;
+    supportEmail: string;
+    whatsappUrl: string;
+    officeAddress: string;
+  };
+  bookingRules: {
+    selfDriveLeadHours: number;
+    chauffeurLeadHours: number;
+    holdWindowHours: number;
+    taxRate: number;
+    defaultPickupWindow: string;
+  };
+  pricingRules: {
+    airportMeetAndGreetFee: number;
+    defaultChauffeurRate: number;
+    securityDeposit: number;
+    corporateDiscountPercent: number;
+    lowAvailabilityThreshold: number;
+  };
+  notifications: {
+    bookingConfirmationTemplate: string;
+    paymentReminderTemplate: string;
+    dispatchTemplate: string;
+  };
+  paymentSettings: {
+    mobileMoneyEnabled: boolean;
+    bankTransferEnabled: boolean;
+    cardEnabled: boolean;
+    payOnPickupEnabled: boolean;
+    settlementTerms: string;
+  };
+  cms: {
+    heroHeadline: string;
+    heroSubheadline: string;
+    corporateBannerTitle: string;
+    trustBadgeLabel: string;
+  };
+}
+
 export interface Vehicle {
   id: string;
   slug: string;
@@ -177,6 +220,62 @@ export interface Booking {
   assignedDriverId?: string;
   notes?: string;
   createdAt: string;
+}
+
+export interface AdminBookingInput {
+  clientId?: string;
+  customer: {
+    firstName: string;
+    lastName: string;
+    email: string;
+    phone: string;
+    accountType: "Individual" | "Corporate";
+    companyName?: string;
+  };
+  vehicleId: string;
+  pickupCity: City;
+  pickupLocation: string;
+  pickupDate: string;
+  pickupTime: string;
+  returnDate: string;
+  returnTime: string;
+  withDriver: boolean;
+  extras: string[];
+  flightNumber?: string;
+  tripType?: "Arrival" | "Departure";
+  status: BookingStatus;
+  paymentStatus: PaymentStatus;
+  paymentMethod: PaymentMethod;
+  source: BookingSource;
+  assignedDriverId?: string;
+  notes?: string;
+}
+
+export interface AdminVehicleInput {
+  name: string;
+  make: string;
+  model: string;
+  year: number;
+  regPlate: string;
+  color: string;
+  category: VehicleCategory;
+  transmission: Transmission;
+  fuel: string;
+  seats: number;
+  doors: number;
+  baseDailyRate: number;
+  weeklyRate?: number;
+  monthlyRate?: number;
+  chauffeurRate?: number;
+  currentCity: City;
+  cities: City[];
+  status: VehicleStatus;
+  mainImage: string;
+  description: string;
+  withDriverAvailable: boolean;
+  mileagePolicy: string;
+  insuranceIncluded: string;
+  features: string[];
 }
 
 export interface BookingDraft {
