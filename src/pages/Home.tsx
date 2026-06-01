@@ -16,6 +16,7 @@ import { VehicleCard } from "@/components/fleet/VehicleCard";
 import { SectionHeader } from "@/components/shared/SectionHeader";
 import { Button } from "@/components/ui/button";
 import { formatCurrency } from "@/lib/format";
+import { withBase } from "@/lib/utils";
 import { useAppStore } from "@/store/use-app-store";
 
 const trustPillars = [
@@ -72,7 +73,7 @@ const corporateBenefits = [
   },
 ];
 
-const heroImage = "/brand/dots/dots-hero-cover.jpg";
+const heroImage = withBase("/brand/dots/dots-hero-cover.jpg");
 
 export default function HomePage() {
   const navigate = useNavigate();
