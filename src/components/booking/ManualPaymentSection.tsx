@@ -27,7 +27,7 @@ type PaymentMethodCard = {
   confirmLabel: string;
 };
 
-const MOBILE_MONEY_NUMBER = "+260 972 826 350";
+const MOBILE_MONEY_NUMBER = "+260 962 106 053";
 const USSD_CODE = "*115#";
 // TODO: Replace with the live bank name before launch.
 const BANK_NAME = "[BANK_NAME]";
@@ -237,7 +237,7 @@ export default function ManualPaymentSection({
                   <div className="space-y-5">
                     <div className="grid gap-3 rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-700">
                       <DetailRow label="Bank Name" value={BANK_NAME} />
-                      <DetailRow label="Account Name" value="Shark Car Hire Limited" />
+                      <DetailRow label="Account Name" value="Dots Car Hire Limited" />
                       <DetailRow label="Account Number" value={ACCOUNT_NUMBER} />
                       <DetailRow label="Branch" value={BRANCH_NAME} />
                       <DetailRow label="Reference" value={`${bookingRef} - must be used as payment reference`} />
@@ -251,7 +251,7 @@ export default function ManualPaymentSection({
                 {method.id === "Pay on Pickup" ? (
                   <div className="space-y-5">
                     <div className="rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm leading-7 text-slate-700">
-                      This option is available for Shark Car Hire corporate account holders only. Your booking will be confirmed and invoiced to your company account. Payment is due within 30 days of the booking date.
+                      This option is available for Dots Car Hire corporate account holders only. Your booking will be confirmed and invoiced to your company account. Payment is due within 30 days of the booking date.
                     </div>
                     <div className="rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm leading-6 text-amber-900">
                       Not a corporate account? Contact us to open one.

@@ -6,7 +6,7 @@ export default function PrivacyPage() {
       <PageHero
         eyebrow="Privacy"
         title="Privacy Policy"
-        description="How Shark Car Hire collects, uses, and protects your booking and contact information."
+        description="How Dots Car Hire collects, uses, and protects your booking and contact information."
         crumbs={[
           { label: "Home", href: "/" },
           { label: "Privacy Policy" },
@@ -49,7 +49,7 @@ export default function PrivacyPage() {
             </h2>
             <p className="mt-3">
               You may request an update to your contact details or ask questions about how
-              your information is handled by contacting Shark Car Hire directly.
+              your information is handled by contacting Dots Car Hire directly.
             </p>
           </section>
         </div>

@@ -12,7 +12,7 @@ const categories = ["All", "Economy", "Saloon", "SUV", "Minibus", "Luxury", "Pic
 const transmissions = ["Any", "Manual", "Automatic"];
 const seatOptions = ["Any", "2-4", "5", "6-7", "8+"] as const;
 const driverModes = ["Any", "Self-Drive", "Chauffeur"] as const;
-const cities = ["All", "Lusaka", "Kitwe", "Ndola"] as const;
+const cities = ["All", "Lusaka", "Ndola"] as const;
 const sorts = ["Most Popular", "Newest", "Price Low-High", "Price High-Low"] as const;
 
 export default function FleetPage() {
@@ -237,7 +237,7 @@ export default function FleetPage() {
               </div>
               <p className="mx-auto mt-4 max-w-xl text-[var(--color-gray-600)]">
                 No vehicles match these filters right now. Clear the filters or call us
-                for alternatives in Lusaka, Kitwe, or Ndola.
+                for alternatives in Lusaka or Ndola.
               </p>
               <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
                 <Button onClick={clearFilters} className="rounded-full">

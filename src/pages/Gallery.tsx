@@ -1,4 +1,4 @@
-﻿import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import {
   ArrowRight,
@@ -120,7 +120,7 @@ export default function GalleryPage() {
       <PageHero
         eyebrow="Gallery"
         title="The public image library for fleet, events, airport, and corporate movement."
-        description="Browse how Shark positions its vehicles across executive arrivals, wedding presentation, event logistics, and day-to-day business travel."
+        description="Browse how Dots positions its vehicles across executive arrivals, wedding presentation, event logistics, and day-to-day business travel."
         crumbs={[
           { label: "Home", href: "/" },
           { label: "Gallery" },

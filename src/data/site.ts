@@ -1,71 +1,44 @@
 import type { BlogPost, City, LocationOffice, Testimonial } from "@/types";
 
 export const company = {
-  name: "Shark Car Hire",
-  tagline: "Premium vehicles. Professional service. Kitwe, Lusaka, Ndola.",
-  phone: "+260 972 826 350",
-  phoneAlt: "",
-  email: "bookings@sharkcarhire.com",
-  whatsapp: "https://wa.me/260972826350",
-  address: "Great East Road, Lusaka, Zambia",
-  founded: 2016,
+  name: "Dots Car Hire",
+  tagline: "Reliable car rental, always on time — Lusaka and Ndola.",
+  phone: "+260 962 106 053",
+  phoneAlt: "+260 965 796 430",
+  email: "bookings@dotscarhire.com",
+  whatsapp: "https://wa.me/260962106053",
+  address: "House Number 11 Kamwala South, opposite Spectra Filling Station, Lusaka, Zambia",
+  founded: 2024,
 };
 
-export const cities: City[] = ["Lusaka", "Kitwe", "Ndola"];
+export const cities: City[] = ["Lusaka", "Ndola"];
 
 export const testimonials: Testimonial[] = [
   {
     id: "t1",
-    name: "Mutale Banda",
-    role: "Operations Lead",
-    company: "Copperbelt Energy Partners",
+    name: "Events Client",
+    role: "Event Coordinator",
+    company: "Lusaka Special Events",
     quote:
-      "The booking flow was fast, the vehicle arrived spotless, and the team handled a last-minute timing change without friction.",
+      "Dots handled guest movement with clean vehicles, timely coordination, and clear phone support throughout the event day.",
     rating: 5,
   },
   {
     id: "t2",
-    name: "Chileshe Phiri",
-    role: "Admin Manager",
-    company: "Northgate Mining Services",
+    name: "Corporate Traveller",
+    role: "Business Client",
+    company: "Private Client",
     quote:
-      "For executive airport pickups and site visits, Shark gives us the reliability and polish we need in front of partners.",
+      "The team was responsive on WhatsApp and helped us secure reliable transport quickly for Lusaka movement.",
     rating: 5,
   },
   {
     id: "t3",
-    name: "Natasha Mwila",
-    role: "Bride",
-    company: "Private Client",
+    name: "Wedding Client",
+    role: "Private Event Client",
+    company: "Wedding Hire",
     quote:
-      "The chauffeur, the presentation, and the timing on the day were exact. The cars looked expensive and photographed beautifully.",
-    rating: 5,
-  },
-  {
-    id: "t4",
-    name: "Alick Musonda",
-    role: "Travel Coordinator",
-    company: "Lusaka Growth Forum",
-    quote:
-      "We moved delegates across sessions all day with zero drama. The dispatch team was responsive and organised.",
-    rating: 5,
-  },
-  {
-    id: "t5",
-    name: "Racheal Tembo",
-    role: "Project Director",
-    company: "Blue River Infrastructure",
-    quote:
-      "Their long-term fleet support gave us better visibility, cleaner reporting, and fewer transport issues on our project sites.",
-    rating: 5,
-  },
-  {
-    id: "t6",
-    name: "Brian Kunda",
-    role: "Procurement Lead",
-    company: "Savanna Foods Zambia",
-    quote:
-      "Corporate account setup was straightforward, and the digital dashboard makes it much easier to manage recurring bookings.",
+      "The vehicle presentation was photo-ready and the chauffeur support made the day feel organised.",
     rating: 5,
   },
 ];
@@ -73,36 +46,25 @@ export const testimonials: Testimonial[] = [
 export const offices: LocationOffice[] = [
   {
     city: "Lusaka",
-    label: "Lusaka HQ",
-    address: "Great East Road, Rhodes Park, Lusaka, Zambia",
-    phone: "+260 972 826 350",
-    hours: "Mon-Sun, 06:00 to 22:00",
-    mapEmbed: "https://www.google.com/maps?q=Lusaka%20Zambia&output=embed",
-    directionsUrl: "https://maps.google.com/?q=Lusaka%20Zambia",
+    label: "Lusaka Branch",
+    address: "House Number 11 Kamwala South, opposite Spectra Filling Station, Lusaka, Zambia",
+    phone: "+260 962 106 053",
+    hours: "24/7 by confirmed booking",
+    mapEmbed: "https://www.google.com/maps?q=Kamwala%20South%20Spectra%20Filling%20Station%20Lusaka%20Zambia&output=embed",
+    directionsUrl: "https://maps.google.com/?q=Kamwala%20South%20Spectra%20Filling%20Station%20Lusaka%20Zambia",
     summary:
-      "Primary operations hub covering airport pickups, executive city transfers, and corporate account support.",
-  },
-  {
-    city: "Kitwe",
-    label: "Kitwe Operations",
-    address: "Freedom Avenue, Parklands, Kitwe, Zambia",
-    phone: "+260 960 111 222",
-    hours: "Mon-Sun, 06:00 to 21:00",
-    mapEmbed: "https://www.google.com/maps?q=Kitwe%20Zambia&output=embed",
-    directionsUrl: "https://maps.google.com/?q=Kitwe%20Zambia",
-    summary:
-      "Copperbelt coverage for airport transfers, field mobility, and mining-sector corporate bookings.",
+      "Main Dots Car Hire branch for self-drive, chauffeur, event, wedding, and airport movement across Lusaka.",
   },
   {
     city: "Ndola",
-    label: "Ndola Service Point",
-    address: "Broadway, Kansenshi, Ndola, Zambia",
-    phone: "+260 961 444 555",
-    hours: "Mon-Sun, 07:00 to 21:00",
-    mapEmbed: "https://www.google.com/maps?q=Ndola%20Zambia&output=embed",
-    directionsUrl: "https://maps.google.com/?q=Ndola%20Zambia",
+    label: "Ndola Branch",
+    address: "Office 3, 32 Broadway, Ndola, Zambia",
+    phone: "+260 965 796 430",
+    hours: "24/7 by confirmed booking",
+    mapEmbed: "https://www.google.com/maps?q=32%20Broadway%20Ndola%20Zambia&output=embed",
+    directionsUrl: "https://maps.google.com/?q=32%20Broadway%20Ndola%20Zambia",
     summary:
-      "Efficient pickup, return, and chauffeur support for business travel and regional event movements.",
+      "Ndola branch support for Copperbelt bookings, business travel, and event vehicle hire.",
   },
 ];
 
@@ -208,6 +170,6 @@ export const faqs = [
     category: "Coverage",
     question: "Which cities do you operate in?",
     answer:
-      "Shark Car Hire serves Lusaka, Kitwe, and Ndola with tailored corporate, airport, event, and self-drive coverage.",
+      "Dots Car Hire serves Lusaka and Ndola with reliable self-drive, chauffeur, airport, event, and special-occasion coverage.",
   },
 ];

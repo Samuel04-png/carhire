@@ -59,7 +59,7 @@ export default function ContactPage() {
                 {
                   icon: MessageCircle,
                   label: "WhatsApp",
-                  value: "Chat with Shark Car Hire",
+                  value: "Chat with Dots Car Hire",
                   href: company.whatsapp,
                 },
                 {
@@ -123,7 +123,6 @@ export default function ContactPage() {
               <Field label="Preferred city">
                 <select className={inputClassName} defaultValue="Lusaka">
                   <option>Lusaka</option>
-                  <option>Kitwe</option>
                   <option>Ndola</option>
                 </select>
               </Field>

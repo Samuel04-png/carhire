@@ -1,4 +1,4 @@
-﻿import { useMemo, useState, type ReactNode } from "react";
+import { useMemo, useState, type ReactNode } from "react";
 import {
   ArrowRight,
   BadgeDollarSign,
@@ -24,7 +24,7 @@ import {
 import { formatCurrency } from "@/lib/format";
 import type { City, Vehicle } from "@/types";
 
-const cityOptions: City[] = ["Lusaka", "Kitwe", "Ndola"];
+const cityOptions: City[] = ["Lusaka", "Ndola"];
 
 const serviceLabels = new Map(services.map((service) => [service.slug, service.shortTitle]));
 
@@ -92,7 +92,7 @@ export default function RatesPage() {
       <PageHero
         eyebrow="Rates"
         title="Transparent public pricing for fleet, chauffeur, and repeat-use travel."
-        description="Use this page to benchmark daily, weekly, and monthly hire across Shark's public fleet. Final quotes are then confirmed to your exact route, city, and service mode."
+        description="Use this page to benchmark daily, weekly, and monthly hire across Dots' public fleet. Final quotes are then confirmed to your exact route, city, and service mode."
         crumbs={[
           { label: "Home", href: "/" },
           { label: "Rates" },
@@ -158,7 +158,7 @@ export default function RatesPage() {
       <section className="mx-auto max-w-7xl px-4 pt-20">
         <SectionHeader
           eyebrow="Pricing logic"
-          title="How Shark prices public bookings"
+          title="How Dots prices public bookings"
           description="The goal is simple: let clients understand the cost structure early, then confirm the final quote against dates, route, and service conditions."
         />
         <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-4">

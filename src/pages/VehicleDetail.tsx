@@ -246,7 +246,7 @@ export default function VehicleDetailPage() {
                         Lusaka Airport
                       </option>
                       <option value="Lusaka CBD Pickup">Lusaka CBD</option>
-                      <option value="Kitwe City Pickup">Kitwe</option>
+
                       <option value="Ndola City Pickup">Ndola</option>
                     </select>
                   </div>

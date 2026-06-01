@@ -29,8 +29,8 @@ app.use((request, response, next) => {
   const allowedOrigins = new Set([
     "http://localhost:3000",
     "http://127.0.0.1:3000",
-    "https://sharkcarhire.org",
-    "https://www.sharkcarhire.org",
+    "https://dotscarhire.com",
+    "https://www.dotscarhire.com",
     "https://samuel04-png.github.io",
   ]);
   const origin = request.headers.origin;
@@ -54,7 +54,7 @@ app.use((request, response, next) => {
 app.get("/api/health", (_request, response) => {
   response.json({
     ok: true,
-    service: "shark-car-hire-api",
+    service: "dots-car-hire-api",
     timestamp: new Date().toISOString(),
   });
 });
@@ -64,7 +64,7 @@ app.post("/api/payments/momo", async (request, response) => {
     const body = request.body as Partial<MomoPaymentRequest>;
     const amount = Number(body.amount);
     const bookingRef = body.bookingRef?.trim();
-    const customerName = body.customerName?.trim() || "Shark Car Hire customer";
+    const customerName = body.customerName?.trim() || "Dots Car Hire customer";
     const phoneNumber = normaliseZambianNumber(body.phoneNumber?.trim() ?? "");
 
     if (!Number.isFinite(amount) || amount <= 0) {
@@ -147,7 +147,7 @@ export function startServer() {
   return new Promise<Server>((resolve, reject) => {
     const server = app.listen(port, () => {
       serverInstance = server;
-      console.info(`[server] Shark Car Hire API listening on http://localhost:${port}`);
+      console.info(`[server] Dots Car Hire API listening on http://localhost:${port}`);
       resolve(server);
     });
 

@@ -72,13 +72,11 @@ const corporateBenefits = [
   },
 ];
 
-const heroVideo =
-  "https://player.vimeo.com/external/434045526.sd.mp4?s=66db1f9ec0f9e7ebcf0d753f9d47d37e2b2fc90a&profile_id=139&oauth2_token_id=57447761";
+const heroImage = "/brand/dots/dots-hero-cover.jpg";
 
 export default function HomePage() {
   const navigate = useNavigate();
   const { bookingDraft, updateDraft } = useAppStore();
-  const [isVideoReady, setIsVideoReady] = useState(true);
   const [pickupCity, setPickupCity] = useState(bookingDraft.pickupCity);
   const [pickupDate, setPickupDate] = useState(bookingDraft.pickupDate);
   const [returnDate, setReturnDate] = useState(bookingDraft.returnDate);
@@ -105,7 +103,7 @@ export default function HomePage() {
   const stats = [
     { label: "Vehicles in fleet", value: String(vehicles.length) },
     { label: "Years in operation", value: String(yearsInOperation) },
-    { label: "Cities served", value: "3" },
+    { label: "Branches", value: "2" },
     { label: "Average client rating", value: `${averageRating}/5` },
   ];
 
@@ -134,27 +132,11 @@ export default function HomePage() {
     <div className="bg-[var(--color-gray-100)]">
       <section className="relative min-h-screen overflow-hidden bg-[var(--color-primary)] text-white">
         <div className="absolute inset-0">
-          {isVideoReady ? (
-            <video
-              className="h-full w-full object-cover"
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="metadata"
-              poster="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1600&q=80"
-              onError={() => setIsVideoReady(false)}
-            >
-              <source src={heroVideo} type="video/mp4" />
-            </video>
-          ) : (
-            <img
-              src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1600&q=80"
-              alt=""
-              className="h-full w-full object-cover"
-              referrerPolicy="no-referrer"
-            />
-          )}
+          <img
+            src={heroImage}
+            alt="Dots Car Hire vehicle interior and brand banner"
+            className="h-full w-full object-cover"
+          />
         </div>
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,22,40,0.15),rgba(10,22,40,0.86))]" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(26,127,212,0.28),transparent_32%),radial-gradient(circle_at_bottom_right,rgba(14,77,140,0.72),transparent_42%)]" />
@@ -167,14 +149,14 @@ export default function HomePage() {
             className="max-w-4xl"
           >
             <div className="mb-6 inline-flex rounded-full border border-white/10 bg-white/10 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.3em] text-white/80 backdrop-blur">
-              Executive car hire across Lusaka, Kitwe, and Ndola
+              Reliable 24/7 car hire across Lusaka and Ndola
             </div>
             <h1 className="font-display text-5xl font-extrabold tracking-[-0.06em] md:text-7xl lg:text-[5.2rem] lg:leading-[1]">
-              Premium Car Hire For Zambia's Business Hubs
+              Drive the Difference With Dots
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-white/78 md:text-xl">
-              Book a serviced vehicle or confirmed chauffeur in minutes for airport
-              transfers, corporate travel, events, weddings, and self-drive journeys.
+              Reliable car rental for airport transfers, events, weddings, business
+              movement, and everyday self-drive journeys — always on time.
             </p>
 
             <div className="mt-10 flex flex-col gap-4 sm:flex-row">
@@ -247,7 +229,6 @@ export default function HomePage() {
                 className="h-14 w-full rounded-2xl border border-[var(--color-gray-200)] bg-[var(--color-gray-100)] px-4 text-[var(--color-primary)] outline-none transition focus:border-[var(--color-accent)]"
               >
                 <option value="Lusaka">Lusaka Airport</option>
-                <option value="Kitwe">Kitwe</option>
                 <option value="Ndola">Ndola</option>
               </select>
             </label>
@@ -380,7 +361,7 @@ export default function HomePage() {
 
       <section className="mx-auto max-w-7xl px-4 py-20">
         <SectionHeader
-          eyebrow="Why choose Shark"
+          eyebrow="Why choose Dots"
           title="Trust signals that matter in a premium car hire business."
           description="When timing matters, presentation matters, and plans can change, details decide the journey."
         />
@@ -474,7 +455,7 @@ export default function HomePage() {
             <div className="mt-6 grid gap-3 sm:grid-cols-3">
               {[
                 { value: "5.0/5", label: "Average testimonial rating" },
-                { value: "3 Cities", label: "Lusaka, Kitwe, Ndola coverage" },
+                { value: "2 Branches", label: "Lusaka and Ndola coverage" },
                 { value: "24/7", label: "WhatsApp booking support" },
               ].map((item) => (
                 <div
@@ -503,7 +484,7 @@ export default function HomePage() {
                 </h3>
                 <p className="mt-4 max-w-2xl text-base leading-7 text-white/70 sm:text-lg">
                   Open one account for airport transfers, executive travel, site
-                  visits, and event transport across Lusaka, Kitwe, and Ndola.
+                  visits, and event transport across Lusaka and Ndola.
                 </p>
                 <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                   <Button asChild size="lg" className="rounded-full px-8">

@@ -35,7 +35,7 @@ export function CorporateBanner() {
             
             <p className="text-lg md:text-xl text-[var(--color-gray-300)] mb-10 leading-relaxed max-w-2xl font-light">
               Dedicated fleet. Monthly invoicing. Priority service for Zambia's leading businesses. 
-              Streamline your company's transportation needs with a Shark Corporate Account.
+              Streamline your company's transportation needs with a Dots Corporate Account.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4">

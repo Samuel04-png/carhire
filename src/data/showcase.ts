@@ -1,4 +1,4 @@
-﻿import { bookingExtras } from "@/data/operations";
+import { bookingExtras } from "@/data/operations";
 import { services } from "@/data/services";
 import { vehicles } from "@/data/vehicles";
 import type { City, VehicleCategory } from "@/types";
@@ -37,7 +37,7 @@ export const pricingPrinciples = [
   {
     title: "City-based day rates",
     description:
-      "Rates are shown against the operating city so Lusaka, Kitwe, and Ndola availability stays transparent.",
+      "Rates are shown against the operating city so Lusaka and Ndola availability stays transparent.",
   },
   {
     title: "Weekly and monthly savings",
@@ -75,7 +75,7 @@ export const pricingFaq = [
   {
     question: "Can I mix chauffeur and self-drive bookings on one account?",
     answer:
-      "Yes. Shark can run mixed booking types for authorised corporate users and project teams.",
+      "Yes. Dots can run mixed booking types for authorised corporate users and project teams.",
   },
 ] as const;
 
@@ -116,7 +116,7 @@ const longTerm = getService("long-term");
 export const serviceRateCards = [
   {
     title: airportTransfers.title,
-    priceLabel: "From K950",
+    priceLabel: "From K600",
     note: "Arrival and departure transfer pricing varies by city, timing, and vehicle class.",
     href: "/services/airport-transfers",
     ctaLabel: "See Airport Service",
@@ -144,14 +144,14 @@ export const serviceRateCards = [
   },
   {
     title: selfDrive.title,
-    priceLabel: "From K980 / day",
+    priceLabel: "From K600 / day",
     note: "Best for independent city movement and planned multi-day travel.",
     href: "/services/self-drive",
     ctaLabel: "Browse Self-Drive",
   },
   {
     title: longTerm.title,
-    priceLabel: "From K24,300 / month",
+    priceLabel: "Monthly quotes",
     note: "Long-term lease planning works best with a confirmed route profile and account contact.",
     href: "/services/long-term",
     ctaLabel: "Discuss Lease Terms",
@@ -183,7 +183,7 @@ export const publicGalleryHighlights = [
   {
     title: "Corporate movement",
     description:
-      "Reliable project, partner, and account-use mobility across Lusaka, Kitwe, and Ndola.",
+      "Reliable project, partner, and account-use mobility across Lusaka and Ndola.",
     collection: "Corporate" as const,
   },
   {
@@ -209,10 +209,10 @@ export const publicGalleryAssets: GalleryAsset[] = [
   {
     id: "gal-corporate-hilux",
     title: "Project mobility with presence",
-    caption: "Toyota Hilux support for site visits, team movement, and mixed-road assignments.",
+    caption: "Dots fleet support for site visits, team movement, and mixed-road assignments.",
     image: hilux.gallery[0],
     collection: "Corporate",
-    city: "Kitwe",
+    city: "Ndola",
     href: `/fleet/${hilux.slug}`,
     ctaLabel: "View vehicle",
     size: "tall",
@@ -267,7 +267,7 @@ export const publicGalleryAssets: GalleryAsset[] = [
     caption: "Account mobility for executives, site teams, and recurring business travel.",
     image: corporateHire.heroImage,
     collection: "Corporate",
-    city: "Kitwe",
+    city: "Ndola",
     href: "/services/corporate",
     ctaLabel: "See service",
     size: "standard",
@@ -322,7 +322,7 @@ export const publicGalleryAssets: GalleryAsset[] = [
     caption: "Digital self-drive planning with optional protection and fast vehicle matching.",
     image: selfDrive.heroImage,
     collection: "Fleet",
-    city: "Kitwe",
+    city: "Ndola",
     href: "/services/self-drive",
     ctaLabel: "See service",
     size: "standard",
@@ -333,7 +333,7 @@ export const publicGalleryAssets: GalleryAsset[] = [
     caption: "Monthly mobility planning for project teams, business units, and repeat-use operations.",
     image: longTerm.heroImage,
     collection: "Corporate",
-    city: "Kitwe",
+    city: "Ndola",
     href: "/services/long-term",
     ctaLabel: "See service",
     size: "standard",

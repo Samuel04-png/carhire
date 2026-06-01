@@ -64,7 +64,6 @@ export default function Step1TripDetails() {
             >
               <option>Kenneth Kaunda International Airport</option>
               <option>Lusaka CBD Pickup</option>
-              <option>Kitwe City Pickup</option>
               <option>Ndola City Pickup</option>
               <option>Custom Address</option>
             </select>
@@ -80,7 +79,6 @@ export default function Step1TripDetails() {
               className={inputClassName}
             >
               <option value="Lusaka">Lusaka</option>
-              <option value="Kitwe">Kitwe</option>
               <option value="Ndola">Ndola</option>
             </select>
           </Field>

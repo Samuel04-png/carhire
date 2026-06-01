@@ -597,7 +597,7 @@ export const useAppStore = create<Store>()(
         }),
     }),
     {
-      name: "shark-car-hire-store",
+      name: "dots-car-hire-store",
       partialize: (state) => ({
         vehicles: state.vehicles,
         clients: state.clients,

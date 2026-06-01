@@ -92,7 +92,7 @@ export function AdminShell({
               <ShieldCheck className="h-4 w-4" />
               {adminRole ?? "Admin"}
             </div>
-            <div className="mt-4 text-2xl font-bold tracking-[-0.04em]">Shark Ops</div>
+            <div className="mt-4 text-2xl font-bold tracking-[-0.04em]">Dots Ops</div>
             <div className="mt-2 text-sm leading-6 text-white/68">
               Bookings, fleet, clients, dispatch, and revenue in one responsive command center.
             </div>

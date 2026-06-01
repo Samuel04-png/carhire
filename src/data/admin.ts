@@ -10,22 +10,22 @@ export const adminAccessProfiles: Array<{
 }> = [
   {
     role: "Super Admin",
-    email: "admin@sharkcarhire.com",
+    email: "admin@dotscarhire.com",
     summary: "Full operational, financial, and content access.",
   },
   {
     role: "Operations Manager",
-    email: "ops@sharkcarhire.com",
+    email: "ops@dotscarhire.com",
     summary: "Bookings, fleet deployment, dispatch, and service oversight.",
   },
   {
     role: "Booking Agent",
-    email: "desk@sharkcarhire.com",
+    email: "desk@dotscarhire.com",
     summary: "Reservation intake, client support, and payment follow-up.",
   },
   {
     role: "Accountant",
-    email: "finance@sharkcarhire.com",
+    email: "finance@dotscarhire.com",
     summary: "Revenue, payment status, and settlement reporting.",
   },
 ];

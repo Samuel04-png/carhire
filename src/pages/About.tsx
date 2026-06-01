@@ -20,7 +20,7 @@ const values = [
     icon: Building2,
     title: "Zambian Roads, Global Standards",
     description:
-      "We know Lusaka, Kitwe, and Ndola well, and we hold every booking to a premium service standard.",
+      "We know Lusaka and Ndola well, and we hold every booking to a premium service standard.",
   },
   {
     icon: Award,
@@ -36,9 +36,9 @@ export default function AboutPage() {
   return (
     <div className="bg-[var(--color-gray-100)] pb-20">
       <PageHero
-        eyebrow="About Shark"
+        eyebrow="About Dots"
         title="A Zambian car hire team built around punctuality, presentation, and trust."
-        description={`Founded in ${company.founded}, Shark Car Hire serves Lusaka, Kitwe, and Ndola with premium vehicles, confirmed drivers, and direct support for every booking.`}
+        description={`Founded in ${company.founded}, Dots Car Hire serves Lusaka and Ndola with premium vehicles, confirmed drivers, and direct support for every booking.`}
         crumbs={[
           { label: "Home", href: "/" },
           { label: "About" },
@@ -51,18 +51,18 @@ export default function AboutPage() {
           <div className="rounded-[34px] border border-[var(--color-gray-200)] bg-white p-8 shadow-[0_20px_70px_rgba(10,22,40,0.08)]">
             <SectionHeader
               eyebrow="The story"
-              title="Why clients trust Shark Car Hire with important journeys."
+              title="Why clients trust Dots Car Hire with important journeys."
               description="When timing matters and presentation matters, clients need more than a vehicle. They need a team that is prepared before the journey starts."
             />
             <div className="mt-8 space-y-5 text-[var(--color-gray-600)]">
               <p>
-                Shark Car Hire was built for travellers, companies, event planners, and
+                Dots Car Hire was built for travellers, companies, event planners, and
                 families who cannot afford guesswork on the day of travel. Every booking
                 is handled with clear timing, prepared vehicles, and direct communication.
               </p>
               <p>
                 From airport arrivals and executive movement to wedding cars and long-term
-                fleet support, the standard stays the same across Lusaka, Kitwe, and Ndola:
+                fleet support, the standard stays the same across Lusaka and Ndola:
                 clean vehicles, confirmed routes, and people who respect your schedule.
               </p>
               <p>

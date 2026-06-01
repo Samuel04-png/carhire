@@ -1,6 +1,6 @@
-﻿# Shark Car Hire
+# Dots Car Hire
 
-Premium car hire website and admin dashboard for Shark Car Hire.
+Premium car hire website and admin dashboard for Dots Car Hire.
 
 ## Local development
 

@@ -34,7 +34,7 @@ export function AdminReportsScreen() {
 
   const downloadOperationsSummary = () => {
     const lines = [
-      "Shark Car Hire Operations Summary",
+      "Dots Car Hire Operations Summary",
       `Generated: ${new Date().toLocaleString()}`,
       "",
       `Total bookings: ${bookings.length}`,

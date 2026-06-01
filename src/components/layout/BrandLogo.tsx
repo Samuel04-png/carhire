@@ -10,8 +10,8 @@ type BrandLogoProps = {
 };
 
 const logoSources = {
-  transparent: withBase("/brand/shark-logo-transparent.png"),
-  boxed: withBase("/brand/shark-logo-on-white.png"),
+  transparent: withBase("/brand/dots/dots-logo-transparent.png"),
+  boxed: withBase("/brand/dots/dots-logo-on-white.png"),
 };
 
 export function BrandLogo({
@@ -24,7 +24,7 @@ export function BrandLogo({
   const image = (
     <img
       src={logoSources[variant]}
-      alt="Shark Car Hire"
+      alt="Dots Car Hire"
       className={cn("h-12 w-auto object-contain", imageClassName)}
       loading={priority ? "eager" : "lazy"}
     />
@@ -35,7 +35,7 @@ export function BrandLogo({
   }
 
   return (
-    <Link to={href} className={className} aria-label="Shark Car Hire home">
+    <Link to={href} className={className} aria-label="Dots Car Hire home">
       {image}
     </Link>
   );

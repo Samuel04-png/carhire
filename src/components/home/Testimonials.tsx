@@ -5,14 +5,14 @@ import { Star, ChevronLeft, ChevronRight, Quote } from "lucide-react";
 const TESTIMONIALS = [
   {
     id: 1,
-    quote: "Shark Car Hire provided an exceptional service for our corporate retreat. The vehicles were immaculate and the drivers were highly professional.",
+    quote: "Dots Car Hire provided an exceptional service for our corporate retreat. The vehicles were immaculate and the drivers were highly professional.",
     name: "Sarah M.",
     role: "Events Director, TechCorp Zambia",
     rating: 5,
   },
   {
     id: 2,
-    quote: "I always use Shark when flying into Lusaka. Their airport transfer service is flawless. The driver is always waiting, even when my flight is delayed.",
+    quote: "I always use Dots when flying into Lusaka. Their airport transfer service is flawless. The driver is always waiting, even when my flight is delayed.",
     name: "David K.",
     role: "Frequent Business Traveler",
     rating: 5,

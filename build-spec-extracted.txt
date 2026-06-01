@@ -7,13 +7,13 @@ Software & AI Automation · Lusaka, Zambia
 S H A R K  C A R  H I R E
 Full Digital Platform
 Master Build Specification — Frontend
-This document is the complete master specification for the Shark Car Hire digital platform. It 
+This document is the complete master specification for the Dots Car Hire digital platform. It 
 covers every screen, every component, every user flow, the design system, and the full feature 
 set for both the public-facing website and the internal admin/operations dashboard. Developers 
 should treat this as the single source of truth. Nothing is built outside this specification without a 
 written change order.
 Document Version Status Prepared By
-Shark Car Hire — 
+Dots Car Hire — 
 Master Frontend Spec
 1.0 Ready for Development Byte & Berry
 Platform Phase Target Delivery Last Updated
@@ -29,7 +29,7 @@ Every visual decision in this system follows the design system defined here. No 
 built with ad-hoc styles. All colors, typography, spacing, and motion rules are defined as design 
 tokens and referenced consistently across the entire platform.
 1.1  Brand Identity & Visual Direction
-The Shark Car Hire brand communicates power, reliability, and premium quality. The visual 
+The Dots Car Hire brand communicates power, reliability, and premium quality. The visual 
 language is clean, bold, and professional — dark backgrounds with sharp white type and 
 electric blue accents. Think premium automotive meets corporate confidence. Inspired by 
 brands like Hertz Gold, Enterprise Business, and BMW Digital — not generic template car hire 
@@ -165,13 +165,13 @@ Zustand for state. All pages are server-side rendered for SEO.
 Desktop Navigation (sticky, transforms on scroll)
 • Transparent over hero image on load → solid --color-primary background after 80px 
 scroll
-• Left: Shark Car Hire logo (SVG, links to homepage)
+• Left: Dots Car Hire logo (SVG, links to homepage)
 • Centre: Nav links — Home | Our Fleet | Services | About | Locations | Contact
 • Right: Phone number (clickable tel: link) + 'Book Now' primary button (accent color)
 • Active page link: --color-accent color + 2px bottom border underline
 • Dropdown on 'Services': Airport Transfers | Corporate | Weddings | Events | Self-
 Drive | Long Term
-• Dropdown on 'Locations': Lusaka | Kitwe | Ndola
+• Dropdown on 'Locations': Lusaka | Ndola
 Mobile Navigation (hamburger menu)
 • Hamburger icon top-right → full-screen slide-in menu from right (400ms)
 • Menu background: --color-primary (dark navy)
@@ -190,7 +190,7 @@ vehicles on Zambian roads (can use stock initially)
 • Dark overlay (gradient: navy 60% opacity bottom-to-top) for text readability
 • Headline: 'Zambia's Most Trusted Car Hire' — Sora ExtraBold, 72px desktop, 40px 
 mobile, white
-• Subheadline: 'Premium vehicles. Professional service. Kitwe · Lusaka · Ndola.' — Inter 
+• Subheadline: 'Premium vehicles. Professional service. Lusaka · Ndola.' — Inter 
 Regular, 20px, white 80% opacity
 • Two CTA buttons side by side: 'Book a Vehicle' (Primary) + 'View Our Fleet' (Ghost)
 • Scroll indicator arrow at bottom center, animated bounce
@@ -201,7 +201,7 @@ Visitors ]
 • Sticky booking bar that appears immediately below the hero section
 • Background: white card with strong drop shadow
 • Fields in a horizontal row (desktop) or stacked (mobile):
-•   → Pickup Location: dropdown (Lusaka Airport | Lusaka CBD | Kitwe | Ndola | Custom 
+•   → Pickup Location: dropdown (Lusaka Airport | Lusaka CBD | Ndola | Custom 
 Address)
 •   → Pickup Date: date picker (blocks past dates, highlights today)
 •   → Return Date: date picker (must be after pickup date, auto-sets +1 day if before 
@@ -253,7 +253,7 @@ S C R E E N  8   Homepage — Footer  [ Public / All Visitors ]
 • 4-column layout: Logo + tagline | Quick Links | Services | Contact Info
 • Contact: phone, email, WhatsApp link, physical addresses per city
 • Social icons: Facebook, Instagram, LinkedIn, Twitter/X
-• Bottom bar: Copyright © [Year] Shark Car Hire Limited | Privacy Policy | Terms & 
+• Bottom bar: Copyright © [Year] Dots Car Hire Limited | Privacy Policy | Terms & 
 Conditions
 • WhatsApp floating button: fixed bottom-right, green WhatsApp icon, always visible
 
@@ -267,7 +267,7 @@ S C R E E N  9   Fleet Page — Vehicle Listing  [ /fleet — Public ]
 •   → Transmission: Any | Manual | Automatic
 •   → Seats: Any | 2-4 | 5 | 6-7 | 8+
 •   → With Driver: Any | Self-Drive | Chauffeur
-•   → Location availability: Lusaka | Kitwe | Ndola
+•   → Location availability: Lusaka | Ndola
 •   → Price range: slider (min/max per day)
 • Results count shown: 'Showing X vehicles'
 • Sort by: Price Low-High | Price High-Low | Most Popular | Newest
@@ -407,7 +407,7 @@ Service Page Template Structure (all 6 pages follow this)
 2.6  Additional Public Pages
 Page URL Purpose Key Components
 About Us /about Build trust, tell the 
-Shark story
+Dots story
 Founding story, team, 
 values, fleet size stats, 
 certifications
@@ -485,9 +485,9 @@ Promotional offers (each toggleable)
 
 S E C T I O N  4
 Admin & Operations Dashboard
-The admin dashboard is a separate authenticated application accessible only to Shark Car Hire 
+The admin dashboard is a separate authenticated application accessible only to Dots Car Hire 
 staff. It is the operational nerve centre — every booking, vehicle, client, driver, and revenue 
-figure is visible and manageable from here. It runs at admin.sharkcarhire.org or /admin with 
+figure is visible and manageable from here. It runs at admin.dotscarhire.com or /admin with 
 role-based access control.
 Admin dashboard shares the design system tokens but uses a lighter theme: white backgrounds, 
 navy/blue accents. More data-dense than the public site. Built for desktop-first but fully functional on 
@@ -521,7 +521,7 @@ real-time
 assignments needed
 • Quick actions: + New Booking | + New Vehicle | View Today's Schedule | Generate 
 Report
-• City filter tabs: All | Lusaka | Kitwe | Ndola — all stats filter by city
+• City filter tabs: All | Lusaka | Ndola — all stats filter by city
 4.3  Bookings Management
 S C R E E N  2 1   All Bookings  [ /admin/bookings ]
 • Master bookings table with columns: Ref # | Client Name | Vehicle | Pickup Date | Return 
@@ -901,7 +901,7 @@ without justification.
 purpose in JSDoc.
 • Git commits follow Conventional Commits format: feat:, fix:, chore:, docs:, style:
 8.2  File Structure
-shark-car-hire/
+dots-car-hire/
 ├── app/                    # Next.js App Router pages
 │   ├── (public)/          # Public website routes
 │   ├── (auth)/            # Login, register, password reset
@@ -953,4 +953,4 @@ pagination?: {...} }. Frontend components always check success before rendering 
 
 BYTE & BERRY  ·  Software & AI Automation  ·  Lusaka, Zambia
 byteandberry.com  ·  hello@byteandberry.com
-This document is confidential and prepared exclusively for Shark Car Hire Limited.
+This document is confidential and prepared exclusively for Dots Car Hire Limited.

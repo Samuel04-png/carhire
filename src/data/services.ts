@@ -28,7 +28,7 @@ export const services: Service[] = [
       "You ride with live support available if plans change.",
     ],
     pricingNote:
-      "Starting from K950 depending on city, timing, and vehicle class.",
+      "Starting from K600 for small-vehicle promotions; final rates depend on timing, city, and vehicle class.",
     testimonialIds: ["t1", "t4"],
     vehicleCategories: ["Economy", "Saloon", "SUV", "Luxury"],
     faq: [
@@ -40,12 +40,12 @@ export const services: Service[] = [
       {
         question: "Can I request a name board?",
         answer:
-          "Yes. Name board meet-and-greet is available and is included in premium airport packages.",
+          "Yes. Name board meet-and-greet is available and is included in confirmed airport packages.",
       },
       {
         question: "Which airports do you cover?",
         answer:
-          "We cover Lusaka, Ndola, and Kitwe transfer corridors and arrange longer-distance pickups on request.",
+          "We cover Lusaka and Ndola transfer corridors and arrange longer-distance pickups on request.",
       },
       {
         question: "Do you offer late-night airport pickups?",
@@ -61,7 +61,7 @@ export const services: Service[] = [
     tagline:
       "Dedicated business mobility for teams, executives, visiting partners, and project operations.",
     description:
-      "Structured business accounts with monthly invoicing, account support, and dependable fleet allocation across Shark Car Hire's operating cities.",
+      "Structured business accounts with monthly invoicing, account support, and dependable fleet allocation across Dots Car Hire's Lusaka and Ndola branches.",
     heroImage:
       "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1600&q=80",
     icon: "BriefcaseBusiness",
@@ -114,7 +114,7 @@ export const services: Service[] = [
     tagline:
       "Elegant arrival vehicles, polished chauffeurs, and picture-ready presentation for your event day.",
     description:
-      "Luxury sedans and SUVs prepared for ceremonies, VIP guest movements, and full day wedding logistics with premium detailing.",
+      "Clean sedans, SUVs, and chauffeur support prepared for ceremonies, VIP guest movements, and full-day event logistics.",
     heroImage:
       "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=1600&q=80",
     icon: "Gem",
@@ -156,7 +156,7 @@ export const services: Service[] = [
       {
         question: "How early should I book?",
         answer:
-          "Peak weekends move quickly, so we recommend securing premium cars several weeks in advance.",
+          "Peak weekends move quickly, so we recommend securing event and wedding cars several weeks in advance.",
       },
     ],
   },
@@ -167,7 +167,7 @@ export const services: Service[] = [
     tagline:
       "Vehicle coordination for conferences, launches, delegations, and special events.",
     description:
-      "A structured event mobility service for moving speakers, executives, and guests on tight schedules across multiple venues.",
+      "A structured event and special-occasion hire service for moving speakers, models, executives, and guests on tight schedules across multiple venues.",
     heroImage:
       "https://images.unsplash.com/photo-1493238792000-8113da705763?auto=format&fit=crop&w=1600&q=80",
     icon: "CalendarDays",

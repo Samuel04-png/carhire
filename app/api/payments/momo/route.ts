@@ -34,7 +34,7 @@ export async function POST(request: Request) {
     const body = (await request.json()) as Partial<MomoPaymentRequest>;
     const amount = Number(body.amount);
     const bookingRef = body.bookingRef?.trim();
-    const customerName = body.customerName?.trim() || "Shark Car Hire customer";
+    const customerName = body.customerName?.trim() || "Dots Car Hire customer";
     const phoneNumber = normaliseZambianNumber(body.phoneNumber?.trim() ?? "");
 
     if (!Number.isFinite(amount) || amount <= 0) {

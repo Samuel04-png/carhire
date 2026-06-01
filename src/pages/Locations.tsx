@@ -8,8 +8,8 @@ export default function LocationsPage() {
     <div className="bg-[var(--color-gray-100)] pb-20">
       <PageHero
         eyebrow="Locations"
-        title="Lusaka, Kitwe, and Ndola"
-        description="Book with the same standard of service across Lusaka, Kitwe, and Ndola."
+        title="Lusaka and Ndola"
+        description="Book with the same standard of service across Lusaka and Ndola."
         crumbs={[
           { label: "Home", href: "/" },
           { label: "Locations" },

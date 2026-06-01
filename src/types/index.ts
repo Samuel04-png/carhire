@@ -1,4 +1,4 @@
-export type City = "Lusaka" | "Kitwe" | "Ndola";
+export type City = "Lusaka" | "Ndola";
 export type VehicleCategory =
   | "Economy"
   | "Saloon"

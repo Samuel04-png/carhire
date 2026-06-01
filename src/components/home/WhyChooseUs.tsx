@@ -49,7 +49,7 @@ export function WhyChooseUs() {
             transition={{ duration: 0.6 }}
           >
             <span className="text-[var(--color-accent)] font-semibold tracking-wider uppercase text-sm mb-4 block">
-              The Shark Difference
+              The Dots Difference
             </span>
             <h2 className="font-display font-bold text-4xl md:text-5xl text-[var(--color-primary)] mb-6 tracking-tight">
               Why Choose Us

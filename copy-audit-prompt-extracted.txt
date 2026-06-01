@@ -6,11 +6,11 @@ S H A R K  C A R  H I R E
 Website Copy Audit &
 AI Rewrite Prompt
 This document contains the master AI prompt for auditing and rewriting every piece of copy on 
-the Shark Car Hire website. It defines what bad copy looks like, what good copy sounds like, the 
+the Dots Car Hire website. It defines what bad copy looks like, what good copy sounds like, the 
 rules the AI must follow, the brand voice, and page-by-page rewrite instructions. Use this with 
 Claude, ChatGPT, or any AI writing tool.
 Document Version Prepared By Date
-Shark Car Hire — Copy 
+Dots Car Hire — Copy 
 Audit & Rewrite Prompt
 1.0 Byte & Berry March 2026
 
@@ -52,13 +52,13 @@ like in this sector. That is exactly what this document provides.
 
 --- PAGE 3 ---
 S E C T I O N  2
-The Shark Car Hire Brand Voice
+The Dots Car Hire Brand Voice
 Before any copy is written or rewritten, the AI must internalise the brand voice. Every sentence 
 on the website must sound like it comes from the same person — a confident, knowledgeable, 
 trustworthy professional who runs a premium mobility business in Zambia.
 2.1  Voice Pillars
 Voice Pillar What It Means What It Sounds Like
-Confident Shark Car Hire knows its 
+Confident Dots Car Hire knows its 
 market. It does not hedge, 
 qualify unnecessarily, or 
 apologise for its prices. It states 
@@ -86,12 +86,12 @@ early morning flight or a fleet of vehicles for
 your company's annual conference — we 
 are ready.' — not 'We offer various vehicle 
 options for different requirements.'
-Local & Proud Shark Car Hire is a Zambian 
+Local & Proud Dots Car Hire is a Zambian 
 business that knows Zambia. 
 The copy reflects local reality 
 without apologising for it or over-
 explaining it.
-'Serving Lusaka, Kitwe, and Ndola with the 
+'Serving Lusaka and Ndola with the 
 same standard of service across all three 
 cities.' — not 'We operate in multiple 
 locations across Zambia.'
@@ -131,7 +131,7 @@ presentation, and a team that
 understands the stakes.'
 About Page Warm, proud, 
 grounded
-Medium 'Shark Car Hire was built on one 
+Medium 'Dots Car Hire was built on one 
 principle: that Zambian businesses and 
 travellers deserve a world-class mobility 
 experience at home.'
@@ -161,7 +161,7 @@ High
 everything you need to know before your 
 journey.'
 2.3  Banned Words & Phrases
-The following words and phrases must never appear in client-facing copy on the Shark Car Hire 
+The following words and phrases must never appear in client-facing copy on the Dots Car Hire 
 website. They are either too generic, too technical, too vague, or too AI-typical to belong on a 
 premium brand's website.
 Never use these words or phrases in client-facing copy:
@@ -188,7 +188,7 @@ ready, direct, clear
 • journey, arrival, departure, transfer, route, collection, handover, fleet, vehicle, 
 booking, itinerary
 • executive, corporate, premium, reliable, consistent, precise, on-time, prepared
-• Lusaka, Kitwe, Ndola, Zambia, airport, city centre, hotel, office — always name the 
+• Lusaka, Ndola, Zambia, airport, city centre, hotel, office — always name the 
 place specifically
 • your driver, your vehicle, your booking, your journey — personal and specific
 • instantly confirmed, same-day, 24-hour, morning of your trip, the evening before — 
@@ -208,8 +208,8 @@ You are a senior brand copywriter specialising in premium automotive and
 executive mobility services. You have written copy for car hire companies,
 chauffeur services, airport transfer businesses, and corporate transport
 operators across Africa and internationally.
-The client is Shark Car Hire Limited — a premium car hire company operating
-across Lusaka, Kitwe, and Ndola, Zambia. Services include airport transfers,
+The client is Dots Car Hire Limited — a premium car hire company operating
+across Lusaka and Ndola, Zambia. Services include airport transfers,
 corporate hire, wedding cars, event vehicles, self-drive hire, and long-term
 lease. Their clients include corporate executives, NGO professionals, government
 officials, event planners, and individual travellers who value reliability.
@@ -240,7 +240,7 @@ their clients' time and intelligence.
 6. Write for a client who is time-poor, discerning, and has options.
 7. Every paragraph should make the client want to take the next step.
 ── YOUR TASK ──
-I will give you the current copy from a specific page of the Shark Car Hire
+I will give you the current copy from a specific page of the Dots Car Hire
 website. You will:
 STEP 1 — AUDIT: List every sentence or phrase that violates the rules
 above. For each violation, state which rule it breaks and why.
@@ -270,17 +270,17 @@ unmissable. Do not try to say everything — say the most important thing perfec
 copy is the most valuable real estate on the site. Every word must earn its position.
 Stats section: Replace placeholder stats with these — confirm actual numbers with client 
 first:
-• [X] Vehicles — ask Shark Car Hire for actual fleet count
+• [X] Vehicles — ask Dots Car Hire for actual fleet count
 • [X] Years in Operation — ask for founding year
 • [X]+ Completed Bookings — ask for cumulative bookings
-• 3 Cities — Lusaka · Kitwe · Ndola (this one is confirmed)
+• 2 Branches — Lusaka · Ndola (this one is confirmed)
 4.2  About Us Page
 Add to prompt when rewriting the About Us Page:
 This is the About page. The client is here because they want to know who is behind the 
 business before they trust them with their executive travel or their wedding. The copy must tell a 
-real story about Shark Car Hire — why it was founded, what drives it, and what it stands for. 
+real story about Dots Car Hire — why it was founded, what drives it, and what it stands for. 
 Avoid generic mission statements. Every statement must be specific enough to be true only of 
-Shark Car Hire, not any other car hire company. Remove every trace of design commentary, 
+Dots Car Hire, not any other car hire company. Remove every trace of design commentary, 
 build language, or placeholder copy. The values section must read like convictions, not 
 marketing claims.
 Specific instructions for the Values section:
@@ -316,8 +316,8 @@ Add to prompt when rewriting any Service Page:
 This is a service page. The client has clicked because they have a specific need — an airport 
 transfer, a corporate account, a wedding car. They are not browsing. They are deciding. The 
 copy must speak directly to that specific need. Open with the client's situation, not the 
-company's offering. Show that Shark Car Hire understands exactly what this service involves 
-and what can go wrong if they choose the wrong provider. Then show why Shark Car Hire is 
+company's offering. Show that Dots Car Hire understands exactly what this service involves 
+and what can go wrong if they choose the wrong provider. Then show why Dots Car Hire is 
 the right choice — specifically, not generally.
 Service page opening formulas by service type:
 • Airport Transfers: Open with the stress of missing a flight or waiting for a driver who 
@@ -350,7 +350,7 @@ options.' not 'No results found.'
 contact you the evening before your pickup.' not 'Booking successful.'
 4.6  Admin Dashboard Copy
 Add to prompt when rewriting Admin Dashboard copy:
-This is the admin dashboard. The audience is Shark Car Hire's internal team — booking 
+This is the admin dashboard. The audience is Dots Car Hire's internal team — booking 
 agents, operations managers, drivers, and directors. The copy here is functional, not 
 persuasive. It should be direct, scannable, and unambiguous. No marketing language. No 
 flowery descriptions. Labels should be as short as possible while remaining clear. Status 
@@ -375,7 +375,7 @@ S E C T I O N  5
 Placeholder Stats Replacement Guide
 The current site contains placeholder or AI-generated stats that are either wrong, meaningless, 
 or internally facing. These must all be replaced with real, client-meaningful numbers confirmed 
-with Shark Car Hire before the site goes live.
+with Dots Car Hire before the site goes live.
 Placeholder Found Problem Replace With (Confirm 
 With Client)
 Where It 
@@ -446,7 +446,7 @@ subheading
 Stats That Would Actually Build Trust (Confirm Numbers With Client):
 • Years in operation — founding year to today
 • Total vehicles in fleet — exact number
-• Cities covered — 3 (Lusaka, Kitwe, Ndola) — already confirmed
+• Cities covered — 3 (Lusaka, Ndola) — already confirmed
 • Completed bookings to date — cumulative number
 • Corporate clients served — number of companies on account
 
@@ -456,4 +456,4 @@ Stats That Would Actually Build Trust (Confirm Numbers With Client):
 • Fleet age — 'Fleet renewed every [X] years' or 'All vehicles [year] and newer'
 BYTE & BERRY  ·  Software & AI Automation  ·  Lusaka, Zambia
 byteandberry.com  ·  hello@byteandberry.com
-Prepared for Shark Car Hire Limited · Confidential
+Prepared for Dots Car Hire Limited · Confidential

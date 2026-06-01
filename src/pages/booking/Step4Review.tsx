@@ -35,7 +35,7 @@ export default function Step4Review() {
 
   const customerName = useMemo(() => {
     const fullName = `${draft.customer.firstName} ${draft.customer.lastName}`.trim();
-    return fullName || activeCustomer?.firstName || "Shark Car Hire client";
+    return fullName || activeCustomer?.firstName || "Dots Car Hire client";
   }, [activeCustomer?.firstName, draft.customer.firstName, draft.customer.lastName]);
 
   const bookingRefPreview = useMemo(() => {

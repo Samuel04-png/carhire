@@ -4,7 +4,6 @@ import { Toaster } from "react-hot-toast";
 import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/Navbar";
 import { ScrollToTop } from "@/components/layout/ScrollToTop";
-import { Watermark } from "@/components/layout/Watermark";
 
 const AboutPage = lazy(() => import("@/pages/About"));
 const AccountAuthPage = lazy(() => import("@/pages/AccountAuth"));
@@ -74,7 +73,6 @@ function AppRoutes() {
         </Suspense>
       </main>
       {showPublicShell && <Footer />}
-      <Watermark />
       <Toaster position="top-right" />
     </>
   );

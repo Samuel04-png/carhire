@@ -1,4 +1,4 @@
-﻿import {
+import {
   Mail,
   MapPin,
   MessageCircle,
@@ -139,7 +139,7 @@ export function Footer() {
         </div>
 
         <div className="mt-12 flex flex-col gap-4 border-t border-white/10 pt-6 text-sm text-white/60 md:flex-row md:items-center md:justify-between">
-          <div>Copyright (c) {new Date().getFullYear()} Shark Car Hire Limited</div>
+          <div>Copyright (c) {new Date().getFullYear()} Dots Car Hire Limited</div>
           <div className="flex flex-wrap gap-6">
             <Link to="/privacy" className="transition hover:text-white">
               Privacy Policy
@@ -156,7 +156,7 @@ export function Footer() {
         target="_blank"
         rel="noreferrer"
         className="fixed bottom-6 right-6 z-50 grid h-14 w-14 place-items-center rounded-full bg-[#25D366] text-white shadow-[0_20px_60px_rgba(37,211,102,0.4)] transition hover:-translate-y-1"
-        aria-label="Chat with Shark Car Hire on WhatsApp"
+        aria-label="Chat with Dots Car Hire on WhatsApp"
       >
         <MessageCircle className="h-6 w-6" />
       </a>

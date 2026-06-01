@@ -50,7 +50,7 @@ export function QuickBookingWidget() {
                 <option value="">Select Location</option>
                 <option value="Lusaka Airport">Lusaka Airport</option>
                 <option value="Lusaka CBD">Lusaka CBD</option>
-                <option value="Kitwe">Kitwe</option>
+
                 <option value="Ndola">Ndola</option>
               </select>
             </div>
