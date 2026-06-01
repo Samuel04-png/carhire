@@ -12,7 +12,7 @@ export default defineConfig(({command}) => ({
   build: {
     rollupOptions: {
       input: {
-        main: path.resolve(__dirname, 'index.html'),
+        main: path.resolve(__dirname, 'app.html'),
         404: path.resolve(__dirname, '404.html'),
       },
     },
