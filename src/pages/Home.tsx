@@ -5,7 +5,6 @@ import {
   BriefcaseBusiness,
   CalendarClock,
   CarFront,
-  ChevronDown,
   Headset,
   ShieldCheck,
   Star,
@@ -15,8 +14,6 @@ import { company, services, testimonials, vehicles } from "@/data/mock";
 import { VehicleCard } from "@/components/fleet/VehicleCard";
 import { SectionHeader } from "@/components/shared/SectionHeader";
 import { Button } from "@/components/ui/button";
-import { formatCurrency } from "@/lib/format";
-import { withBase } from "@/lib/utils";
 import { useAppStore } from "@/store/use-app-store";
 
 const trustPillars = [
@@ -73,7 +70,6 @@ const corporateBenefits = [
   },
 ];
 
-const heroImage = withBase("/brand/dots/dots-hero-cover.jpg");
 
 export default function HomePage() {
   const navigate = useNavigate();
@@ -131,25 +127,18 @@ export default function HomePage() {
 
   return (
     <div className="bg-[var(--color-gray-100)]">
-      <section className="relative min-h-screen overflow-hidden bg-[var(--color-primary)] text-white">
-        <div className="absolute inset-0">
-          <img
-            src={heroImage}
-            alt="Dots Car Hire vehicle interior and brand banner"
-            className="h-full w-full object-cover"
-          />
-        </div>
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,22,40,0.15),rgba(10,22,40,0.86))]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(26,127,212,0.28),transparent_32%),radial-gradient(circle_at_bottom_right,rgba(14,77,140,0.72),transparent_42%)]" />
+      <section className="relative overflow-hidden bg-[linear-gradient(135deg,#071827_0%,#0b3157_48%,#0f6fad_100%)] text-white">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_14%_18%,rgba(255,255,255,0.13),transparent_28%),radial-gradient(circle_at_82%_18%,rgba(255,255,255,0.10),transparent_30%),linear-gradient(180deg,rgba(7,24,39,0.06),rgba(7,24,39,0.36))]" />
+        <div className="absolute inset-x-0 bottom-0 h-40 bg-[linear-gradient(180deg,transparent,rgba(246,248,251,0.14))]" />
 
-        <div className="relative mx-auto flex min-h-screen max-w-7xl flex-col justify-center px-4 pb-16 pt-32">
+        <div className="relative mx-auto grid min-h-[calc(100vh-74px)] max-w-7xl items-center gap-10 px-4 py-24 pt-32 lg:grid-cols-[0.9fr_1.1fr] lg:py-28 lg:pt-36">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="max-w-4xl"
+            className="max-w-3xl"
           >
-            <div className="mb-6 inline-flex rounded-full border border-white/10 bg-white/10 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.3em] text-white/80 backdrop-blur">
+            <div className="mb-6 inline-flex rounded-full border border-white/12 bg-white/10 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.3em] text-white/78 backdrop-blur">
               Reliable 24/7 car hire across Lusaka and Ndola
             </div>
             <h1 className="font-display text-5xl font-extrabold tracking-[-0.06em] md:text-7xl lg:text-[5.2rem] lg:leading-[1]">
@@ -167,142 +156,122 @@ export default function HomePage() {
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
-              <Button asChild variant="ghost" size="lg" className="rounded-full px-8">
+              <Button asChild variant="ghost" size="lg" className="rounded-full px-8 text-white hover:bg-white/10 hover:text-white">
                 <Link to="/fleet">View Our Fleet</Link>
               </Button>
             </div>
-          </motion.div>
 
-          <div className="mt-16 grid gap-4 md:grid-cols-3 lg:max-w-4xl">
-            {featuredVehicles.slice(0, 3).map((vehicle) => (
-              <div
-                key={vehicle.id}
-                className="rounded-[28px] border border-white/10 bg-white/8 p-5 backdrop-blur-xl"
-              >
-                <div className="text-xs uppercase tracking-[0.26em] text-white/55">
-                  {vehicle.category}
+            <div className="mt-10 grid max-w-2xl gap-3 sm:grid-cols-3">
+              {[
+                { value: "24/7", label: "Booking support" },
+                { value: "2", label: "Branches" },
+                { value: "5.0", label: "Client rating" },
+              ].map((item) => (
+                <div key={item.label} className="rounded-[24px] border border-white/10 bg-white/8 px-5 py-4 backdrop-blur">
+                  <div className="font-display text-3xl font-bold tracking-[-0.05em] text-white">{item.value}</div>
+                  <div className="mt-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/58">{item.label}</div>
                 </div>
-                <div className="mt-2 font-display text-2xl font-bold tracking-[-0.04em]">
-                  {vehicle.name}
-                </div>
-                <div className="mt-3 text-sm text-white/65">{vehicle.heroMetric}</div>
-                <div className="mt-4 flex items-center justify-between">
-                  <div className="font-semibold text-white">
-                    {formatCurrency(vehicle.baseDailyRate)}
-                  </div>
-                  <Link
-                    to={`/fleet/${vehicle.slug}`}
-                    className="text-sm font-semibold text-[var(--color-accent)]"
-                  >
-                    Details
-                  </Link>
-                </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, y: 12 }}
+            initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="mt-12 flex justify-center"
+            transition={{ duration: 0.65, delay: 0.1 }}
+            className="rounded-[34px] border border-white/70 bg-white p-6 text-[var(--color-primary)] shadow-[0_28px_110px_rgba(0,0,0,0.28)] md:p-8"
           >
-            <ChevronDown className="h-8 w-8 animate-bounce text-white/60" />
-          </motion.div>
-        </div>
-      </section>
-
-      <section className="-mt-14 relative z-10 mx-auto max-w-7xl px-4">
-        <div className="rounded-[32px] border border-white/60 bg-white p-6 shadow-[0_24px_100px_rgba(10,22,40,0.12)] md:p-8">
-          <SectionHeader
-            eyebrow="Quick booking"
-            title="Check availability in seconds"
-            description="Choose your city, dates, vehicle type, and service mode. We will take you straight to the best matches."
-          />
-          <div className="mt-8 grid gap-4 lg:grid-cols-[1.1fr_1fr_1fr_1fr_auto]">
-            <label className="space-y-2">
-              <span className="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--color-gray-500)]">
-                Pickup location
-              </span>
-              <select
-                value={pickupCity}
-                onChange={(event) => setPickupCity(event.target.value as typeof pickupCity)}
-                className="h-14 w-full rounded-2xl border border-[var(--color-gray-200)] bg-[var(--color-gray-100)] px-4 text-[var(--color-primary)] outline-none transition focus:border-[var(--color-accent)]"
-              >
-                <option value="Lusaka">Lusaka Airport</option>
-                <option value="Ndola">Ndola</option>
-              </select>
-            </label>
-            <label className="space-y-2">
-              <span className="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--color-gray-500)]">
-                Pickup date
-              </span>
-              <input
-                type="date"
-                min={new Date().toISOString().split("T")[0]}
-                value={pickupDate}
-                onChange={(event) => setPickupDate(event.target.value)}
-                className="h-14 w-full rounded-2xl border border-[var(--color-gray-200)] bg-[var(--color-gray-100)] px-4 text-[var(--color-primary)] outline-none transition focus:border-[var(--color-accent)]"
-              />
-            </label>
-            <label className="space-y-2">
-              <span className="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--color-gray-500)]">
-                Return date
-              </span>
-              <input
-                type="date"
-                min={pickupDate || new Date().toISOString().split("T")[0]}
-                value={returnDate}
-                onChange={(event) => setReturnDate(event.target.value)}
-                className="h-14 w-full rounded-2xl border border-[var(--color-gray-200)] bg-[var(--color-gray-100)] px-4 text-[var(--color-primary)] outline-none transition focus:border-[var(--color-accent)]"
-              />
-            </label>
-            <label className="space-y-2">
-              <span className="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--color-gray-500)]">
-                Vehicle type
-              </span>
-              <select
-                value={vehicleType}
-                onChange={(event) => setVehicleType(event.target.value)}
-                className="h-14 w-full rounded-2xl border border-[var(--color-gray-200)] bg-[var(--color-gray-100)] px-4 text-[var(--color-primary)] outline-none transition focus:border-[var(--color-accent)]"
-              >
-                <option value="All">All categories</option>
-                <option value="Economy">Economy</option>
-                <option value="Saloon">Saloon</option>
-                <option value="SUV">SUV</option>
-                <option value="Minibus">Minibus</option>
-                <option value="Luxury">Luxury</option>
-                <option value="Pickup">Pickup</option>
-              </select>
-            </label>
-            <div className="space-y-2">
-              <span className="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--color-gray-500)]">
-                Driver
-              </span>
-              <div className="flex h-14 items-center justify-between rounded-2xl border border-[var(--color-gray-200)] bg-[var(--color-gray-100)] px-4">
-                <span className="text-sm font-medium text-[var(--color-primary)]">
-                  {withDriver ? "With chauffeur" : "Self-drive"}
+            <SectionHeader
+              eyebrow="Quick booking"
+              title="Check availability in seconds"
+              description="Choose your city, dates, vehicle type, and service mode. We will take you straight to the best matches."
+            />
+            <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-[1.1fr_1fr]">
+              <label className="space-y-2">
+                <span className="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--color-gray-500)]">
+                  Pickup location
                 </span>
-                <button
-                  type="button"
-                  onClick={() => setWithDriver((value) => !value)}
-                  className={`relative h-8 w-14 rounded-full transition ${
-                    withDriver ? "bg-[var(--color-accent)]" : "bg-[var(--color-gray-300)]"
-                  }`}
+                <select
+                  value={pickupCity}
+                  onChange={(event) => setPickupCity(event.target.value as typeof pickupCity)}
+                  className="h-14 w-full rounded-2xl border border-[var(--color-gray-200)] bg-[var(--color-gray-100)] px-4 text-[var(--color-primary)] outline-none transition focus:border-[var(--color-accent)]"
                 >
-                  <span
-                    className={`absolute top-1 h-6 w-6 rounded-full bg-white transition ${
-                      withDriver ? "left-7" : "left-1"
+                  <option value="Lusaka">Lusaka Airport</option>
+                  <option value="Ndola">Ndola</option>
+                </select>
+              </label>
+              <label className="space-y-2">
+                <span className="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--color-gray-500)]">
+                  Pickup date
+                </span>
+                <input
+                  type="date"
+                  min={new Date().toISOString().split("T")[0]}
+                  value={pickupDate}
+                  onChange={(event) => setPickupDate(event.target.value)}
+                  className="h-14 w-full rounded-2xl border border-[var(--color-gray-200)] bg-[var(--color-gray-100)] px-4 text-[var(--color-primary)] outline-none transition focus:border-[var(--color-accent)]"
+                />
+              </label>
+              <label className="space-y-2">
+                <span className="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--color-gray-500)]">
+                  Return date
+                </span>
+                <input
+                  type="date"
+                  min={pickupDate || new Date().toISOString().split("T")[0]}
+                  value={returnDate}
+                  onChange={(event) => setReturnDate(event.target.value)}
+                  className="h-14 w-full rounded-2xl border border-[var(--color-gray-200)] bg-[var(--color-gray-100)] px-4 text-[var(--color-primary)] outline-none transition focus:border-[var(--color-accent)]"
+                />
+              </label>
+              <label className="space-y-2">
+                <span className="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--color-gray-500)]">
+                  Vehicle type
+                </span>
+                <select
+                  value={vehicleType}
+                  onChange={(event) => setVehicleType(event.target.value)}
+                  className="h-14 w-full rounded-2xl border border-[var(--color-gray-200)] bg-[var(--color-gray-100)] px-4 text-[var(--color-primary)] outline-none transition focus:border-[var(--color-accent)]"
+                >
+                  <option value="All">All categories</option>
+                  <option value="Economy">Economy</option>
+                  <option value="Saloon">Saloon</option>
+                  <option value="SUV">SUV</option>
+                  <option value="Minibus">Minibus</option>
+                  <option value="Luxury">Luxury</option>
+                  <option value="Pickup">Pickup</option>
+                </select>
+              </label>
+              <div className="space-y-2 md:col-span-2 xl:col-span-1">
+                <span className="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--color-gray-500)]">
+                  Driver
+                </span>
+                <div className="flex h-14 items-center justify-between rounded-2xl border border-[var(--color-gray-200)] bg-[var(--color-gray-100)] px-4">
+                  <span className="text-sm font-medium text-[var(--color-primary)]">
+                    {withDriver ? "With chauffeur" : "Self-drive"}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => setWithDriver((value) => !value)}
+                    className={`relative h-8 w-14 rounded-full transition ${
+                      withDriver ? "bg-[var(--color-accent)]" : "bg-[var(--color-gray-300)]"
                     }`}
-                  />
-                </button>
+                    aria-label="Toggle chauffeur option"
+                  >
+                    <span
+                      className={`absolute top-1 h-6 w-6 rounded-full bg-white transition ${
+                        withDriver ? "left-7" : "left-1"
+                      }`}
+                    />
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-          <Button onClick={handleSearch} className="mt-6 h-14 w-full rounded-full md:w-auto">
-            Search Available Vehicles
-            <ArrowRight className="ml-2 h-4 w-4" />
-          </Button>
+            <Button onClick={handleSearch} className="mt-6 h-14 w-full rounded-full md:w-auto">
+              Search Available Vehicles
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
+          </motion.div>
         </div>
       </section>
 
