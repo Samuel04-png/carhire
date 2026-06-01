@@ -10,8 +10,8 @@ type BrandLogoProps = {
 };
 
 const logoSources = {
-  transparent: withBase("/brand/dots/dots-logo-transparent.png"),
-  boxed: withBase("/brand/dots/dots-logo-on-white.png"),
+  transparent: withBase("/brand/dots/dots-logo-navbar.png"),
+  boxed: withBase("/brand/dots/dots-logo-navbar.png"),
 };
 
 export function BrandLogo({
@@ -25,7 +25,7 @@ export function BrandLogo({
     <img
       src={logoSources[variant]}
       alt="Dots Car Hire"
-      className={cn("h-12 w-auto object-contain", imageClassName)}
+      className={cn("block h-12 w-auto object-contain", imageClassName)}
       loading={priority ? "eager" : "lazy"}
     />
   );

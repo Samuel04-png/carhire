@@ -63,8 +63,8 @@ export function Navbar() {
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:py-4">
         <BrandLogo
           priority
-          className="shrink-0 rounded-[24px] border border-white/50 bg-white/96 px-3 py-2 shadow-[0_18px_45px_rgba(10,22,40,0.16)] transition hover:bg-white"
-          imageClassName="h-8 max-w-[150px] sm:h-9 sm:max-w-[175px] lg:h-10 lg:max-w-[205px]"
+          className="flex shrink-0 items-center rounded-[20px] border border-white/45 bg-white/96 px-2.5 py-1.5 shadow-[0_16px_42px_rgba(10,22,40,0.15)] transition hover:bg-white sm:px-3 lg:rounded-[22px]"
+          imageClassName="h-10 max-w-[104px] sm:h-11 sm:max-w-[118px] lg:h-12 lg:max-w-[132px]"
         />
 
         <nav className="hidden items-center gap-2 lg:flex">
@@ -149,8 +149,8 @@ export function Navbar() {
               <div className="flex items-center justify-between">
                 <BrandLogo
                   priority
-                  className="max-w-[210px] rounded-[24px] border border-white/40 bg-white px-3 py-2 shadow-[0_14px_32px_rgba(10,22,40,0.18)]"
-                  imageClassName="h-10 max-w-full sm:h-12"
+                  className="flex max-w-[180px] items-center rounded-[22px] border border-white/40 bg-white px-3 py-2 shadow-[0_14px_32px_rgba(10,22,40,0.18)]"
+                  imageClassName="h-11 max-w-full sm:h-12"
                 />
                 <button
                   className="grid h-10 w-10 place-items-center rounded-2xl border border-white/10 bg-white/6 text-white sm:h-12 sm:w-12"
