@@ -10,7 +10,7 @@ import {
   Star,
 } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
-import { company, services, testimonials, vehicles } from "@/data/mock";
+import { company, services, testimonials } from "@/data/mock";
 import { VehicleCard } from "@/components/fleet/VehicleCard";
 import { SectionHeader } from "@/components/shared/SectionHeader";
 import { Button } from "@/components/ui/button";
@@ -74,10 +74,14 @@ const corporateBenefits = [
 export default function HomePage() {
   const navigate = useNavigate();
   const { bookingDraft, updateDraft } = useAppStore();
+  const vehicles = useAppStore((state) => state.vehicles);
   const [pickupCity, setPickupCity] = useState(bookingDraft.pickupCity);
+  const [pickupLocation, setPickupLocation] = useState(bookingDraft.pickupLocation);
+  const [dropoffLocation, setDropoffLocation] = useState(bookingDraft.dropoffLocation || bookingDraft.pickupLocation);
   const [pickupDate, setPickupDate] = useState(bookingDraft.pickupDate);
   const [returnDate, setReturnDate] = useState(bookingDraft.returnDate);
   const [vehicleType, setVehicleType] = useState("All");
+  const [vehicleModel, setVehicleModel] = useState("");
   const [withDriver, setWithDriver] = useState(bookingDraft.withDriver);
   const [activeTestimonial, setActiveTestimonial] = useState(0);
 
@@ -90,7 +94,17 @@ export default function HomePage() {
 
   const featuredVehicles = useMemo(
     () => vehicles.filter((vehicle) => vehicle.featured).slice(0, 6),
-    [],
+    [vehicles],
+  );
+  const availabilityResults = useMemo(
+    () =>
+      vehicles
+        .filter((vehicle) => vehicle.availableQuantity > 0 && vehicle.status !== "Maintenance" && vehicle.status !== "Retired" && vehicle.status !== "Inactive")
+        .filter((vehicle) => (vehicleType === "All" ? true : vehicle.category === vehicleType))
+        .filter((vehicle) => (vehicleModel.trim() ? `${vehicle.name} ${vehicle.make} ${vehicle.model}`.toLowerCase().includes(vehicleModel.trim().toLowerCase()) : true))
+        .filter((vehicle) => vehicle.cities.includes(pickupCity))
+        .slice(0, 4),
+    [pickupCity, vehicleModel, vehicleType, vehicles],
   );
   const yearsInOperation = new Date().getFullYear() - company.founded;
   const averageRating = (
@@ -107,10 +121,8 @@ export default function HomePage() {
   const handleSearch = () => {
     updateDraft({
       pickupCity,
-      pickupLocation:
-        pickupCity === "Lusaka"
-          ? "Kenneth Kaunda International Airport"
-          : `${pickupCity} City Pickup`,
+      pickupLocation,
+      dropoffLocation,
       pickupDate,
       returnDate,
       withDriver,
@@ -118,6 +130,7 @@ export default function HomePage() {
 
     const params = new URLSearchParams();
     if (vehicleType !== "All") params.set("category", vehicleType);
+    if (vehicleModel.trim()) params.set("search", vehicleModel.trim());
     if (withDriver) params.set("driverMode", "Chauffeur");
     params.set("city", pickupCity);
     if (pickupDate) params.set("pickupDate", pickupDate);
@@ -193,12 +206,30 @@ export default function HomePage() {
                 </span>
                 <select
                   value={pickupCity}
-                  onChange={(event) => setPickupCity(event.target.value as typeof pickupCity)}
+                  onChange={(event) => {
+                    const nextCity = event.target.value as typeof pickupCity;
+                    setPickupCity(nextCity);
+                    const defaultLocation = nextCity === "Lusaka" ? "Kenneth Kaunda International Airport" : "Ndola City Pickup";
+                    setPickupLocation(defaultLocation);
+                    setDropoffLocation(defaultLocation);
+                  }}
                   className="h-14 w-full rounded-2xl border border-[var(--color-gray-200)] bg-[var(--color-gray-100)] px-4 text-[var(--color-primary)] outline-none transition focus:border-[var(--color-accent)]"
                 >
                   <option value="Lusaka">Lusaka Airport</option>
                   <option value="Ndola">Ndola</option>
                 </select>
+              </label>
+              <label className="space-y-2">
+                <span className="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--color-gray-500)]">
+                  Exact pickup point
+                </span>
+                <input value={pickupLocation} onChange={(event) => setPickupLocation(event.target.value)} className="h-14 w-full rounded-2xl border border-[var(--color-gray-200)] bg-[var(--color-gray-100)] px-4 text-[var(--color-primary)] outline-none transition focus:border-[var(--color-accent)]" placeholder="Airport, office, lodge, or address" />
+              </label>
+              <label className="space-y-2">
+                <span className="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--color-gray-500)]">
+                  Drop-off location
+                </span>
+                <input value={dropoffLocation} onChange={(event) => setDropoffLocation(event.target.value)} className="h-14 w-full rounded-2xl border border-[var(--color-gray-200)] bg-[var(--color-gray-100)] px-4 text-[var(--color-primary)] outline-none transition focus:border-[var(--color-accent)]" placeholder="Same as pickup or alternate address" />
               </label>
               <label className="space-y-2">
                 <span className="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--color-gray-500)]">
@@ -226,7 +257,18 @@ export default function HomePage() {
               </label>
               <label className="space-y-2">
                 <span className="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--color-gray-500)]">
-                  Vehicle type
+                  Car type / model
+                </span>
+                <input
+                  value={vehicleModel}
+                  onChange={(event) => setVehicleModel(event.target.value)}
+                  className="h-14 w-full rounded-2xl border border-[var(--color-gray-200)] bg-[var(--color-gray-100)] px-4 text-[var(--color-primary)] outline-none transition focus:border-[var(--color-accent)]"
+                  placeholder="Honda Fit, SUV, Toyota..."
+                />
+              </label>
+              <label className="space-y-2">
+                <span className="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--color-gray-500)]">
+                  Vehicle category
                 </span>
                 <select
                   value={vehicleType}
@@ -265,6 +307,24 @@ export default function HomePage() {
                     />
                   </button>
                 </div>
+              </div>
+            </div>
+            <div className="mt-6 rounded-[28px] border border-[var(--color-gray-200)] bg-[var(--color-gray-100)] p-4">
+              <div className="flex items-center justify-between gap-3">
+                <div>
+                  <div className="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--color-gray-500)]">Live availability</div>
+                  <div className="mt-1 text-sm text-[var(--color-gray-600)]">Pending bookings do not reduce these counts until admin approval.</div>
+                </div>
+                <span className="rounded-full bg-white px-3 py-1 text-xs font-semibold text-[var(--color-primary)]">{availabilityResults.length} matches</span>
+              </div>
+              <div className="mt-4 grid gap-2">
+                {availabilityResults.map((vehicle) => (
+                  <button key={vehicle.id} type="button" onClick={() => updateDraft({ vehicleId: vehicle.id })} className="flex items-center justify-between rounded-2xl bg-white px-4 py-3 text-left text-sm transition hover:shadow-[0_12px_32px_rgba(10,22,40,0.08)]">
+                    <span className="font-semibold text-[var(--color-primary)]">{vehicle.name}</span>
+                    <span className="text-[var(--color-accent)]">{vehicle.availableQuantity} available</span>
+                  </button>
+                ))}
+                {availabilityResults.length === 0 && <div className="rounded-2xl bg-white px-4 py-4 text-sm text-[var(--color-gray-600)]">No matching cars are available for this filter. Try another category, model, or location.</div>}
               </div>
             </div>
             <Button onClick={handleSearch} className="mt-6 h-14 w-full rounded-full md:w-auto">

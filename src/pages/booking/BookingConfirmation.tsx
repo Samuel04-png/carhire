@@ -60,8 +60,7 @@ export default function BookingConfirmation() {
 
         if (payload.status === "SUCCESSFUL") {
           updatePaymentStatus(booking.ref, "Paid", "MTN Mobile Money");
-          updateBookingStatus(booking.ref, "Confirmed");
-          setMomoStatusMessage("MTN MoMo payment confirmed. Your booking is now fully confirmed.");
+          setMomoStatusMessage("MTN MoMo payment recorded. Your booking remains pending until an admin approves availability.");
           return;
         }
 

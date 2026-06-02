@@ -17,10 +17,12 @@ export function AdminDashboardScreen() {
   const todayKey = new Date().toISOString().slice(0, 10);
   const todaysBookings = bookings.filter((booking) => booking.pickupDateTime.startsWith(todayKey));
   const pendingPayments = bookings.filter((booking) => ["Pending Payment", "Partial"].includes(booking.paymentStatus));
-  const vehiclesOnRoad = vehicles.filter((vehicle) => vehicle.status === "On Hire");
+  const vehiclesOnRoad = vehicles.filter((vehicle) => vehicle.status === "On Hire" || vehicle.availableQuantity === 0);
+  const availableCars = vehicles.reduce((sum, vehicle) => sum + vehicle.availableQuantity, 0);
+  const totalFleet = vehicles.reduce((sum, vehicle) => sum + vehicle.totalQuantity, 0);
   const maintenanceVehicles = vehicles.filter((vehicle) => vehicle.status === "Maintenance");
   const revenueToday = todaysBookings.reduce((sum, booking) => sum + booking.amount, 0);
-  const dispatchQueue = bookings.filter((booking) => ["Pending", "Confirmed", "Active"].includes(booking.status)).slice(0, 5);
+  const dispatchQueue = bookings.filter((booking) => ["Pending", "Approved", "Agreement Sent", "Agreement Accepted", "Active"].includes(booking.status)).slice(0, 5);
   const highValueClients = [...clients].sort((a, b) => b.totalSpend - a.totalSpend).slice(0, 4);
   const revenueByCity = cities.map((city) => ({
     name: city,
@@ -55,9 +57,13 @@ export function AdminDashboardScreen() {
       }
     >
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-        <MetricCard label="Today's bookings" value={String(todaysBookings.length)} icon={Clock3} accent="blue" />
-        <MetricCard label="Vehicles on road" value={String(vehiclesOnRoad.length)} icon={CarFront} accent="navy" />
-        <MetricCard label="Revenue today" value={formatCurrency(revenueToday)} icon={Activity} accent="green" />
+        <MetricCard label="Total fleet" value={String(totalFleet)} icon={CarFront} accent="blue" />
+        <MetricCard label="Available cars" value={String(availableCars)} icon={CarFront} accent="green" />
+        <MetricCard label="Pending bookings" value={String(bookings.filter((item) => item.status === "Pending").length)} icon={Clock3} accent="amber" />
+        <MetricCard label="Approved bookings" value={String(bookings.filter((item) => ["Approved", "Agreement Sent", "Agreement Accepted"].includes(item.status)).length)} icon={CalendarRange} accent="navy" />
+        <MetricCard label="Active rentals" value={String(bookings.filter((item) => item.status === "Active").length)} icon={Activity} accent="blue" />
+        <MetricCard label="Completed rentals" value={String(bookings.filter((item) => item.status === "Completed").length)} icon={FileBarChart} accent="green" />
+        <MetricCard label="Cancelled bookings" value={String(bookings.filter((item) => item.status === "Cancelled" || item.status === "Rejected").length)} icon={FileBarChart} accent="amber" />
         <MetricCard label="Pending payments" value={String(pendingPayments.length)} icon={FileBarChart} accent="amber" />
       </div>
 
@@ -149,7 +155,7 @@ export function AdminDashboardScreen() {
                   </div>
                   <div>
                     <div className="font-semibold text-[var(--color-primary)]">{client.firstName} {client.lastName}</div>
-                    <div className="text-sm text-[var(--color-gray-600)]">{client.accountType}{client.companyName ? ` · ${client.companyName}` : ""}</div>
+                    <div className="text-sm text-[var(--color-gray-600)]">{client.accountType}{client.companyName ? ` ï¿½ ${client.companyName}` : ""}</div>
                   </div>
                 </div>
                 <div className="text-sm font-semibold text-[var(--color-primary)]">{formatCurrency(client.totalSpend)}</div>

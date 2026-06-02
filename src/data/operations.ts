@@ -180,7 +180,7 @@ export const initialBookings: Booking[] = [
     returnDateTime: "2026-03-17T10:00:00",
     withDriver: true,
     extras: ["roadside", "fuel"],
-    status: "Confirmed",
+    status: "Approved",
     paymentStatus: "Paid",
     paymentMethod: "Bank Transfer",
     source: "Corporate Account",

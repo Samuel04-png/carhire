@@ -11,10 +11,13 @@ import type {
 
 export const bookingStatusOptions: BookingStatus[] = [
   "Pending",
-  "Confirmed",
+  "Approved",
+  "Agreement Sent",
+  "Agreement Accepted",
   "Active",
   "Completed",
   "Cancelled",
+  "Rejected",
 ];
 
 export const paymentStatusOptions: PaymentStatus[] = [
@@ -26,8 +29,10 @@ export const paymentStatusOptions: PaymentStatus[] = [
 
 export const vehicleStatusOptions: VehicleStatus[] = [
   "Available",
+  "Active",
   "On Hire",
   "Maintenance",
+  "Inactive",
   "Retired",
   "On Request",
 ];

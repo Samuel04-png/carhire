@@ -9,6 +9,7 @@ import {
   vehicles as initialVehicles,
 } from "@/data/mock";
 import { calculateBookingTotal } from "@/lib/booking";
+import { getAgreementStatus, normaliseVehicleQuantities, transitionBookingInventory } from "@/lib/fleet-booking";
 import type {
   AdminBookingInput,
   AdminRole,
@@ -30,6 +31,7 @@ const defaultDraft: BookingDraft = {
   vehicleId: initialVehicles[0]?.id ?? null,
   pickupCity: "Lusaka",
   pickupLocation: "Kenneth Kaunda International Airport",
+  dropoffLocation: "Kenneth Kaunda International Airport",
   customAddress: "",
   pickupDate: "",
   pickupTime: "10:00",
@@ -142,14 +144,9 @@ function createClientRecord(input: AdminBookingInput) {
   } satisfies Client;
 }
 
-function getCheckoutStatuses(paymentMethod: PaymentMethod) {
-  if (paymentMethod === "Pay on Pickup") {
-    return {
-      status: "Confirmed" as BookingStatus,
-      paymentStatus: "Pending Payment" as PaymentStatus,
-    };
-  }
-
+function getCheckoutStatuses(_paymentMethod: PaymentMethod) {
+  // Public bookings are intentionally stored as Pending. Fleet quantity is only
+  // deducted when an authorised admin approves the booking.
   return {
     status: "Pending" as BookingStatus,
     paymentStatus: "Pending Payment" as PaymentStatus,
@@ -180,7 +177,12 @@ type Store = {
   submitBooking: (options?: SubmitBookingOptions) => { ref: string; total: number };
   createAdminBooking: (input: AdminBookingInput) => { ref: string; total: number };
   addVehicle: (input: AdminVehicleInput) => Vehicle;
-  updateBookingStatus: (ref: string, status: BookingStatus) => void;
+  updateVehicle: (vehicleId: string, input: Partial<AdminVehicleInput>) => void;
+  deactivateVehicle: (vehicleId: string) => void;
+  updateBookingStatus: (ref: string, status: BookingStatus) => { ok: boolean; error?: string };
+  approveBooking: (ref: string) => { ok: boolean; error?: string };
+  acceptAgreement: (ref: string, acceptedBy: string) => void;
+  updateBookingNotes: (ref: string, notes: string) => void;
   updatePaymentStatus: (
     ref: string,
     paymentStatus: PaymentStatus,
@@ -195,7 +197,7 @@ type Store = {
 export const useAppStore = create<Store>()(
   persist(
     (set, get) => ({
-      vehicles: initialVehicles,
+      vehicles: initialVehicles.map(normaliseVehicleQuantities),
       clients: initialClients,
       drivers: initialDrivers,
       bookings: initialBookings,
@@ -311,6 +313,7 @@ export const useAppStore = create<Store>()(
           pickupCity: state.bookingDraft.pickupCity,
           pickupLocation:
             state.bookingDraft.customAddress || state.bookingDraft.pickupLocation,
+          dropoffLocation: state.bookingDraft.dropoffLocation || state.bookingDraft.pickupLocation,
           pickupDateTime: `${state.bookingDraft.pickupDate}T${state.bookingDraft.pickupTime}:00`,
           returnDateTime: `${state.bookingDraft.returnDate}T${state.bookingDraft.returnTime}:00`,
           withDriver: state.bookingDraft.withDriver,
@@ -324,6 +327,7 @@ export const useAppStore = create<Store>()(
           amount: total,
           paymentReferenceId: options?.paymentReferenceId,
           createdAt: new Date().toISOString(),
+          agreementStatus: "Not Sent",
           notes: notes || undefined,
         };
 
@@ -374,6 +378,7 @@ export const useAppStore = create<Store>()(
           vehicleId: input.vehicleId,
           pickupCity: input.pickupCity,
           pickupLocation: input.pickupLocation,
+          dropoffLocation: input.dropoffLocation ?? input.pickupLocation,
           customAddress: "",
           pickupDate: input.pickupDate,
           pickupTime: input.pickupTime,
@@ -411,6 +416,7 @@ export const useAppStore = create<Store>()(
           clientId: clientId!,
           pickupCity: input.pickupCity,
           pickupLocation: input.pickupLocation,
+          dropoffLocation: input.dropoffLocation ?? input.pickupLocation,
           pickupDateTime: `${input.pickupDate}T${input.pickupTime}:00`,
           returnDateTime: `${input.returnDate}T${input.returnTime}:00`,
           withDriver: input.withDriver,
@@ -424,6 +430,9 @@ export const useAppStore = create<Store>()(
           amount: total,
           assignedDriverId: input.assignedDriverId,
           notes: input.notes?.trim() || undefined,
+          internalNotes: input.notes?.trim() || undefined,
+          agreementStatus: getAgreementStatus({ ...({} as Booking), status: input.status }),
+          agreementSentAt: ["Agreement Sent", "Agreement Accepted", "Active"].includes(input.status) ? createdAt : undefined,
           createdAt,
         };
 
@@ -447,6 +456,9 @@ export const useAppStore = create<Store>()(
               : client,
           );
 
+          const inventoryBooking = { ...booking, status: "Pending" as BookingStatus };
+          const inventory = transitionBookingInventory(currentState.vehicles, inventoryBooking, input.status);
+
           return {
             bookings: [booking, ...currentState.bookings],
             clients: updatedClients,
@@ -455,21 +467,13 @@ export const useAppStore = create<Store>()(
                 ? { ...driver, status: "On Trip", currentAssignment: ref }
                 : driver,
             ),
-            vehicles: currentState.vehicles.map((item) =>
-              item.id === input.vehicleId
-                ? {
-                    ...item,
-                    status:
-                      input.status === "Active"
-                        ? "On Hire"
-                        : input.status === "Cancelled"
-                          ? item.status
-                          : "On Request",
-                    currentCity: input.pickupCity,
-                    nextBookingDate: input.pickupDate,
-                  }
-                : item,
-            ),
+            vehicles: inventory.error
+              ? currentState.vehicles
+              : inventory.vehicles.map((item) =>
+                  item.id === input.vehicleId
+                    ? { ...item, currentCity: input.pickupCity, nextBookingDate: input.pickupDate }
+                    : item,
+                ),
           };
         });
 
@@ -499,6 +503,9 @@ export const useAppStore = create<Store>()(
           mileagePolicy: input.mileagePolicy.trim(),
           insuranceIncluded: input.insuranceIncluded.trim(),
           baseDailyRate,
+          pricePerDay: input.pricePerDay ?? baseDailyRate,
+          totalQuantity: Math.max(0, Number(input.totalQuantity)),
+          availableQuantity: Math.max(0, Math.min(Number(input.totalQuantity), Number(input.availableQuantity))),
           weeklyRate: input.weeklyRate ?? Math.round(baseDailyRate * 6.2),
           monthlyRate: input.monthlyRate ?? Math.round(baseDailyRate * 24),
           chauffeurRate: input.chauffeurRate ?? get().adminSettings.pricingRules.defaultChauffeurRate,
@@ -534,10 +541,73 @@ export const useAppStore = create<Store>()(
         return vehicle;
       },
 
-      updateBookingStatus: (ref, status) =>
+      updateVehicle: (vehicleId, input) =>
+        set((state) => ({
+          vehicles: state.vehicles.map((vehicle) =>
+            vehicle.id === vehicleId
+              ? normaliseVehicleQuantities({
+                  ...vehicle,
+                  ...input,
+                  pricePerDay: input.pricePerDay ?? input.baseDailyRate ?? vehicle.pricePerDay ?? vehicle.baseDailyRate,
+                  baseDailyRate: input.baseDailyRate ?? vehicle.baseDailyRate,
+                  totalQuantity: input.totalQuantity ?? vehicle.totalQuantity,
+                  availableQuantity: input.availableQuantity ?? vehicle.availableQuantity,
+                } as Vehicle)
+              : vehicle,
+          ),
+        })),
+
+      deactivateVehicle: (vehicleId) =>
+        set((state) => ({
+          vehicles: state.vehicles.map((vehicle) =>
+            vehicle.id === vehicleId ? { ...vehicle, status: "Inactive" } : vehicle,
+          ),
+        })),
+
+      updateBookingStatus: (ref, status) => {
+        const state = get();
+        const booking = state.bookings.find((item) => item.ref === ref);
+        if (!booking) return { ok: false, error: "Booking not found." };
+        const inventory = transitionBookingInventory(state.vehicles, booking, status);
+        if (inventory.error) return { ok: false, error: inventory.error };
+        set({
+          vehicles: inventory.vehicles,
+          bookings: state.bookings.map((item) =>
+            item.ref === ref
+              ? {
+                  ...item,
+                  status,
+                  agreementStatus: getAgreementStatus({ ...item, status }),
+                  agreementSentAt: status === "Agreement Sent" && !item.agreementSentAt ? new Date().toISOString() : item.agreementSentAt,
+                }
+              : item,
+          ),
+        });
+        return { ok: true };
+      },
+
+      approveBooking: (ref) => get().updateBookingStatus(ref, "Agreement Sent"),
+
+      acceptAgreement: (ref, acceptedBy) =>
         set((state) => ({
           bookings: state.bookings.map((booking) =>
-            booking.ref === ref ? { ...booking, status } : booking,
+            booking.ref === ref
+              ? {
+                  ...booking,
+                  status: "Agreement Accepted",
+                  agreementAccepted: true,
+                  agreementStatus: "Accepted",
+                  acceptedAt: new Date().toISOString(),
+                  acceptedBy,
+                }
+              : booking,
+          ),
+        })),
+
+      updateBookingNotes: (ref, notes) =>
+        set((state) => ({
+          bookings: state.bookings.map((booking) =>
+            booking.ref === ref ? { ...booking, internalNotes: notes } : booking,
           ),
         })),
 

@@ -7,8 +7,16 @@ export type VehicleCategory =
   | "Luxury"
   | "Pickup";
 export type Transmission = "Manual" | "Automatic";
-export type VehicleStatus = "Available" | "On Hire" | "Maintenance" | "Retired" | "On Request";
-export type BookingStatus = "Pending" | "Confirmed" | "Active" | "Completed" | "Cancelled";
+export type VehicleStatus = "Available" | "On Hire" | "Maintenance" | "Retired" | "On Request" | "Active" | "Inactive";
+export type BookingStatus =
+  | "Pending"
+  | "Approved"
+  | "Agreement Sent"
+  | "Agreement Accepted"
+  | "Active"
+  | "Completed"
+  | "Cancelled"
+  | "Rejected";
 export type PaymentStatus = "Pending Payment" | "Paid" | "Partial" | "Refunded";
 export type BookingSource = "Online" | "Phone" | "Walk-in" | "WhatsApp" | "Corporate Account" | "Referral";
 export type LoyaltyTier = "Standard" | "Silver" | "Gold" | "Platinum";
@@ -84,6 +92,9 @@ export interface Vehicle {
   mileagePolicy: string;
   insuranceIncluded: string;
   baseDailyRate: number;
+  pricePerDay?: number;
+  totalQuantity: number;
+  availableQuantity: number;
   weeklyRate: number;
   monthlyRate: number;
   chauffeurRate: number;
@@ -212,6 +223,7 @@ export interface Booking {
   clientId: string;
   pickupCity: City;
   pickupLocation: string;
+  dropoffLocation?: string;
   pickupDateTime: string;
   returnDateTime: string;
   withDriver: boolean;
@@ -226,6 +238,12 @@ export interface Booking {
   paymentReferenceId?: string;
   assignedDriverId?: string;
   notes?: string;
+  internalNotes?: string;
+  agreementAccepted?: boolean;
+  agreementStatus?: "Not Sent" | "Sent" | "Accepted";
+  agreementSentAt?: string;
+  acceptedAt?: string;
+  acceptedBy?: string;
   createdAt: string;
 }
 
@@ -242,6 +260,7 @@ export interface AdminBookingInput {
   vehicleId: string;
   pickupCity: City;
   pickupLocation: string;
+  dropoffLocation?: string;
   pickupDate: string;
   pickupTime: string;
   returnDate: string;
@@ -271,6 +290,9 @@ export interface AdminVehicleInput {
   seats: number;
   doors: number;
   baseDailyRate: number;
+  pricePerDay?: number;
+  totalQuantity: number;
+  availableQuantity: number;
   weeklyRate?: number;
   monthlyRate?: number;
   chauffeurRate?: number;
@@ -289,6 +311,7 @@ export interface BookingDraft {
   vehicleId: string | null;
   pickupCity: City;
   pickupLocation: string;
+  dropoffLocation: string;
   customAddress: string;
   pickupDate: string;
   pickupTime: string;

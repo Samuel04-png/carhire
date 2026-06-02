@@ -29,6 +29,7 @@ const ServiceDetailPage = lazy(() => import("@/pages/ServiceDetail"));
 const TermsPage = lazy(() => import("@/pages/Terms"));
 const VehicleDetailPage = lazy(() => import("@/pages/VehicleDetail"));
 const BookingConfirmation = lazy(() => import("@/pages/booking/BookingConfirmation"));
+const BookingAgreement = lazy(() => import("@/pages/booking/BookingAgreement"));
 const BookingWizard = lazy(() => import("@/pages/booking/BookingWizard"));
 
 function AppRoutes() {
@@ -51,6 +52,7 @@ function AppRoutes() {
             <Route path="/book/confirmation/:ref" element={<LegacyConfirmationRedirect />} />
             <Route path="/book/*" element={<BookingWizard />} />
             <Route path="/booking/confirmation/:ref" element={<BookingConfirmation />} />
+            <Route path="/booking/agreement/:ref" element={<BookingAgreement />} />
             <Route path="/booking/lookup" element={<BookingLookupPage />} />
             <Route path="/services" element={<ServicesPage />} />
             <Route path="/services/:slug" element={<ServiceDetailPage />} />
@@ -66,6 +68,7 @@ function AppRoutes() {
             <Route path="/account/dashboard" element={<AccountDashboardPage />} />
             <Route path="/account/bookings" element={<AccountBookingsPage />} />
             <Route path="/account/profile" element={<AccountProfilePage />} />
+            <Route path="/admin/login" element={<AdminLoginPage />} />
             <Route path="/admin" element={<AdminLoginPage />} />
             <Route path="/admin/*" element={<AdminPortalPage />} />
             <Route path="*" element={<NotFoundPage />} />

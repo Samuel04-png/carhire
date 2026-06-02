@@ -178,9 +178,9 @@ export function EmptyState({
 }
 
 export function bookingStatusTone(status: BookingStatus) {
-  if (status === "Completed") return "green" as const;
-  if (status === "Active") return "blue" as const;
-  if (status === "Confirmed") return "navy" as const;
+  if (status === "Completed" || status === "Agreement Accepted") return "green" as const;
+  if (status === "Active" || status === "Agreement Sent") return "blue" as const;
+  if (status === "Approved") return "navy" as const;
   if (status === "Pending") return "amber" as const;
   return "slate" as const;
 }
@@ -212,7 +212,7 @@ export function bookingStatusColor(status: BookingStatus) {
       return "#22C55E";
     case "Active":
       return "#1A7FD4";
-    case "Confirmed":
+    case "Approved":
       return "#0A1628";
     case "Pending":
       return "#F59E0B";

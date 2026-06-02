@@ -34,6 +34,8 @@ export function AdminFleetScreen() {
     seats: 5,
     doors: 5,
     baseDailyRate: 1850,
+    totalQuantity: 1,
+    availableQuantity: 1,
     chauffeurRate: 700,
     currentCity: "Lusaka" as City,
     cities: ["Lusaka"] as City[],
@@ -77,6 +79,9 @@ export function AdminFleetScreen() {
       seats: Number(vehicleDraft.seats),
       doors: Number(vehicleDraft.doors),
       baseDailyRate: Number(vehicleDraft.baseDailyRate),
+      pricePerDay: Number(vehicleDraft.baseDailyRate),
+      totalQuantity: Number(vehicleDraft.totalQuantity),
+      availableQuantity: Number(vehicleDraft.availableQuantity),
       chauffeurRate: Number(vehicleDraft.chauffeurRate),
       currentCity: vehicleDraft.currentCity,
       cities: vehicleDraft.cities,
@@ -120,6 +125,8 @@ export function AdminFleetScreen() {
             <TextField label="Seats" type="number" value={String(vehicleDraft.seats)} onChange={(value) => setVehicleDraft((current) => ({ ...current, seats: Number(value) }))} />
             <TextField label="Doors" type="number" value={String(vehicleDraft.doors)} onChange={(value) => setVehicleDraft((current) => ({ ...current, doors: Number(value) }))} />
             <TextField label="Base daily rate" type="number" value={String(vehicleDraft.baseDailyRate)} onChange={(value) => setVehicleDraft((current) => ({ ...current, baseDailyRate: Number(value) }))} />
+            <TextField label="Total quantity" type="number" value={String(vehicleDraft.totalQuantity)} onChange={(value) => setVehicleDraft((current) => ({ ...current, totalQuantity: Number(value), availableQuantity: Math.min(current.availableQuantity, Number(value)) }))} />
+            <TextField label="Available quantity" type="number" value={String(vehicleDraft.availableQuantity)} onChange={(value) => setVehicleDraft((current) => ({ ...current, availableQuantity: Math.min(Number(value), current.totalQuantity) }))} />
             <TextField label="Chauffeur rate" type="number" value={String(vehicleDraft.chauffeurRate)} onChange={(value) => setVehicleDraft((current) => ({ ...current, chauffeurRate: Number(value) }))} />
             <label><div className="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-[var(--color-gray-500)]">Current city</div><select className={inputClassName} value={vehicleDraft.currentCity} onChange={(event) => setVehicleDraft((current) => ({ ...current, currentCity: event.target.value as City }))}>{cities.map((city) => <option key={city}>{city}</option>)}</select></label>
             <label><div className="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-[var(--color-gray-500)]">Status</div><select className={inputClassName} value={vehicleDraft.status} onChange={(event) => setVehicleDraft((current) => ({ ...current, status: event.target.value as VehicleStatus }))}>{vehicleStatusOptions.map((option) => <option key={option}>{option}</option>)}</select></label>
@@ -154,13 +161,14 @@ export function AdminFleetScreen() {
               <div className="flex items-start justify-between gap-3">
                 <div>
                   <div className="font-display text-2xl font-bold tracking-[-0.04em] text-[var(--color-primary)]">{vehicle.name}</div>
-                  <div className="mt-1 text-sm text-[var(--color-gray-600)]">{vehicle.regPlate} · {vehicle.currentCity}</div>
+                  <div className="mt-1 text-sm text-[var(--color-gray-600)]">{vehicle.regPlate} ï¿½ {vehicle.currentCity}</div>
                 </div>
                 <StatusPill label={vehicle.status} tone={vehicleStatusTone(vehicle.status)} />
               </div>
               <div className="mt-4 grid gap-2 text-sm text-[var(--color-gray-600)]">
                 <div>Category: {vehicle.category}</div>
                 <div>Daily rate: {formatCurrency(vehicle.baseDailyRate)}</div>
+                <div>Quantity: {vehicle.availableQuantity} / {vehicle.totalQuantity} available</div>
                 <div>Next booking: {formatDateOnly(vehicle.nextBookingDate)}</div>
               </div>
               <div className="mt-5 flex flex-wrap gap-2">{vehicle.cities.map((city) => <span key={city} className="rounded-full bg-[var(--color-gray-100)] px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-gray-500)]">{city}</span>)}</div>

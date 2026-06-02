@@ -74,7 +74,7 @@ export function AdminBookingsScreen({ createMode = false }: { createMode?: boole
     extras: [] as string[],
     paymentMethod: "Bank Transfer" as PaymentMethod,
     paymentStatus: "Pending Payment" as PaymentStatus,
-    status: "Confirmed" as BookingStatus,
+    status: "Approved" as BookingStatus,
     source: "Phone" as BookingSource,
     assignedDriverId: "",
     notes: "",
@@ -109,6 +109,7 @@ export function AdminBookingsScreen({ createMode = false }: { createMode?: boole
     vehicleId: form.vehicleId,
     pickupCity: form.pickupCity,
     pickupLocation: form.pickupLocation,
+    dropoffLocation: form.pickupLocation,
     customAddress: "",
     pickupDate: form.pickupDate,
     pickupTime: form.pickupTime,
@@ -178,6 +179,7 @@ export function AdminBookingsScreen({ createMode = false }: { createMode?: boole
       vehicleId: form.vehicleId,
       pickupCity: form.pickupCity,
       pickupLocation: form.pickupLocation,
+      dropoffLocation: form.pickupLocation,
       pickupDate: form.pickupDate,
       pickupTime: form.pickupTime,
       returnDate: form.returnDate,
@@ -219,7 +221,7 @@ export function AdminBookingsScreen({ createMode = false }: { createMode?: boole
                       <div className="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-[var(--color-gray-500)]">Client</div>
                       <select className={inputClassName} value={form.clientId} onChange={(event) => updateField("clientId", event.target.value)}>
                         {clients.map((client) => (
-                          <option key={client.id} value={client.id}>{client.firstName} {client.lastName} · {client.accountType}</option>
+                          <option key={client.id} value={client.id}>{client.firstName} {client.lastName} ï¿½ {client.accountType}</option>
                         ))}
                       </select>
                     </label>
@@ -244,7 +246,7 @@ export function AdminBookingsScreen({ createMode = false }: { createMode?: boole
                   <div className="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-[var(--color-gray-500)]">Vehicle</div>
                   <select className={inputClassName} value={form.vehicleId} onChange={(event) => updateField("vehicleId", event.target.value)}>
                     {vehicles.filter((vehicle) => vehicle.status !== "Retired").map((vehicle) => (
-                      <option key={vehicle.id} value={vehicle.id}>{vehicle.name} · {vehicle.currentCity}</option>
+                      <option key={vehicle.id} value={vehicle.id}>{vehicle.name} ï¿½ {vehicle.currentCity}</option>
                     ))}
                   </select>
                 </label>
@@ -259,7 +261,7 @@ export function AdminBookingsScreen({ createMode = false }: { createMode?: boole
                   <div className="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-[var(--color-gray-500)]">Assigned driver</div>
                   <select className={inputClassName} value={form.assignedDriverId} onChange={(event) => updateField("assignedDriverId", event.target.value)}>
                     <option value="">Assign later</option>
-                    {availableDrivers.map((driver) => <option key={driver.id} value={driver.id}>{driver.name} · {driver.status}</option>)}
+                    {availableDrivers.map((driver) => <option key={driver.id} value={driver.id}>{driver.name} ï¿½ {driver.status}</option>)}
                   </select>
                 </label>
                 <TextField label="Pickup date" type="date" value={form.pickupDate} onChange={(value) => updateField("pickupDate", value)} />
@@ -335,7 +337,7 @@ export function AdminBookingsScreen({ createMode = false }: { createMode?: boole
               <div className="space-y-4">
                 <SummaryRow label="Vehicle" value={selectedVehicle?.name ?? "Select a vehicle"} />
                 <SummaryRow label="Client" value={`${form.firstName || "-"} ${form.lastName || ""}`.trim() || "Select or create client"} />
-                <SummaryRow label="Pickup" value={`${form.pickupCity} · ${form.pickupDate} ${form.pickupTime}`} />
+                <SummaryRow label="Pickup" value={`${form.pickupCity} ï¿½ ${form.pickupDate} ${form.pickupTime}`} />
                 <SummaryRow label="Return" value={`${form.returnDate} ${form.returnTime}`} />
                 <SummaryRow label="With driver" value={form.withDriver ? "Yes" : "No"} />
                 <div className="rounded-[24px] bg-[var(--color-primary)] p-5 text-white">
@@ -397,7 +399,7 @@ export function AdminBookingsScreen({ createMode = false }: { createMode?: boole
                     <StatusPill label={booking.status} tone={bookingStatusTone(booking.status)} />
                     <StatusPill label={booking.paymentStatus} tone={paymentStatusTone(booking.paymentStatus)} />
                   </div>
-                  <div className="mt-3 text-sm text-[var(--color-gray-600)]">{client?.firstName} {client?.lastName} · {vehicle?.name}</div>
+                  <div className="mt-3 text-sm text-[var(--color-gray-600)]">{client?.firstName} {client?.lastName} ï¿½ {vehicle?.name}</div>
                   <div className="mt-1 text-sm text-[var(--color-gray-600)]">{booking.pickupLocation}</div>
                   <div className="mt-2 text-xs uppercase tracking-[0.22em] text-[var(--color-gray-500)]">{formatDateTime(booking.pickupDateTime)} to {formatDateTime(booking.returnDateTime)}</div>
                 </div>
@@ -405,7 +407,10 @@ export function AdminBookingsScreen({ createMode = false }: { createMode?: boole
                 <InfoBlock label="Amount" value={formatCurrency(booking.amount)} subvalue={booking.paymentMethod} />
                 <div className="space-y-3">
                   <div className="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--color-gray-500)]">Booking status</div>
-                  <select className={inputClassName} value={booking.status} onChange={(event) => updateBookingStatus(booking.ref, event.target.value as BookingStatus)}>
+                  <select className={inputClassName} value={booking.status} onChange={(event) => {
+                    const result = updateBookingStatus(booking.ref, event.target.value as BookingStatus);
+                    result.ok ? toast.success(`Booking moved to ${event.target.value}.`) : toast.error(result.error ?? "Could not update booking.");
+                  }}>
                     {bookingStatusOptions.map((option) => <option key={option}>{option}</option>)}
                   </select>
                 </div>

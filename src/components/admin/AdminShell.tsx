@@ -22,10 +22,12 @@ import { useAppStore } from "@/store/use-app-store";
 const links = [
   { href: "/admin/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { href: "/admin/bookings", label: "Bookings", icon: CalendarRange },
+  { href: "/admin/agreements", label: "Agreements", icon: BarChart3 },
   { href: "/admin/fleet", label: "Fleet", icon: CarFront },
   { href: "/admin/clients", label: "Clients", icon: Users2 },
   { href: "/admin/drivers", label: "Drivers", icon: BriefcaseBusiness },
   { href: "/admin/reports/revenue", label: "Revenue", icon: BarChart3 },
+  { href: "/admin/users", label: "Users", icon: Users2 },
   { href: "/admin/settings", label: "Settings", icon: Cog },
 ];
 

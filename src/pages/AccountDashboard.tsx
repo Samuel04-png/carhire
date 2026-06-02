@@ -18,7 +18,7 @@ export default function AccountDashboardPage() {
       <div className="space-y-8">
         <div className="grid gap-4 md:grid-cols-3">
           {[
-            ["Active bookings", customerBookings.filter((item) => item.status === "Active" || item.status === "Confirmed").length],
+            ["Active bookings", customerBookings.filter((item) => ["Approved", "Agreement Sent", "Agreement Accepted", "Active"].includes(item.status)).length],
             ["Total spend", formatCurrency(client?.totalSpend ?? 0)],
             ["Loyalty points", client?.loyaltyPoints ?? 0],
           ].map(([label, value]) => (
