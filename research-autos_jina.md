@@ -1,0 +1,78 @@
+Title: DOTS CAR HIRE, HOUSE NUMBER 11 KAMWALA SOUTH, OPP SPECTRA FILLING STATION, Lusaka (2026)
+
+URL Source: https://www.autos1000.com/ZM/Lusaka/345884801935548/DOTS-CAR-HIRE
+
+Published Time: Sat, 30 May 2026 16:02:54 GMT
+
+Markdown Content:
+![Image 1: DOTS CAR HIRE - Always on time. 24/7EVENTS & SPECIAL OCCASIONS HIRE- Reliable transportation for weddings, conferences a...](https://img5.autos1000.com/032/322/122210309150323221.jpg)
+
+##### 29/05/2026
+
+DOTS CAR HIRE - Always on time. 24/7
+
+EVENTS & SPECIAL OCCASIONS HIRE- Reliable transportation for weddings, conferences and other events.
+
+ We are Located in kamwala South, along Paul Ngozi road opposite Spectra filling station. 
+
+ 📞 0962106053 Lusaka Branch
+
+ 📞 0965796430 Ndola Branch
+
+##### 28/05/2026
+
+Abana KB motors munchende..👏🏽
+
+ DOTS CAR HIRE eyabako tata! Tabesha. 
+
+ To hire luxurious vehicles, DO NOT hesitate to call us on the contacts below 
+
+ 📞 0962106053 LUSAKA BRANCH
+
+ 📞 0965796430 NDOLA BRANCH
+
+Benson Banda
+
+![Image 2: YOUR FRIENDS ARE FLEXING, DRIVING AROUND AND THERE YOU ARE…THINKING OF WHAT TO DO💁WHEN DOTS CAR HIRE IS YOUR ANSWER.HURR...](https://img3.autos1000.com/432/322/122210092364323221.jpg)
+
+##### 27/05/2026
+
+YOUR FRIENDS ARE FLEXING, DRIVING AROUND AND THERE YOU ARE…THINKING OF WHAT TO DO💁WHEN DOTS CAR HIRE IS YOUR ANSWER.
+
+ HURRY !! HURRY !!
+
+VACHIPA LELO…!! K600 FOR ALL SMALL VEHICLES.
+
+ 📞 0962106053 LUSAKA BRANCH
+
+ 📞 0965796430 NDOLA BRANCH
+
+##### 26/05/2026
+
+##### 26/05/2026
+
+![Image 3: THE PURPOSE OF FREEDOM IS TO CREATE IT FOR OTHERS… AS DOTS CAR HIRE WE ARE HERE TO ENDURE THAT YOUR TRAVELING FREEDOM BE...](https://img3.autos1000.com/432/322/122209920584323221.jpg)
+
+##### 25/05/2026
+
+THE PURPOSE OF FREEDOM IS TO CREATE IT FOR OTHERS… AS DOTS CAR HIRE WE ARE HERE TO ENDURE THAT YOUR TRAVELING FREEDOM BEGINS WITH US.
+
+TO HIRE A VEHICLE WITH US CONTACT US ON THE NUMBERS BELOW
+
+ 📞 0962106053 LUSAKA BRANCH
+
+ 📞 0965796430 NDOLA BRANCH
+
+![Image 4: Throw back on how DOTS CAR HIRE transported the models at the DAVIDO , RICK ROSS AND KOFFI OLOMIDE NETWORKING EVENT held...](https://img4.autos1000.com/232/322/122209814852323221.jpg)
+
+##### 24/05/2026
+
+Throw back on how DOTS CAR HIRE transported the models at the DAVIDO , RICK ROSS AND KOFFI OLOMIDE NETWORKING EVENT held in Lusaka at the Ciela resort.
+
+📞0962106053 LUSAKA BRANCH
+
+ 📞 0965796430 NDOLA BRANCH
+
+##### 24/05/2026
+
+🙌🏼
