@@ -43,34 +43,6 @@ const trustPillars = [
   },
 ];
 
-const corporateBenefits = [
-  {
-    icon: BriefcaseBusiness,
-    title: "Priority reservation desk",
-    description:
-      "Fast repeat booking for company users, site teams, and recurring executive travel.",
-  },
-  {
-    icon: CalendarClock,
-    title: "Monthly invoicing",
-    description:
-      "Clear statements, payment follow-up, and cleaner internal approvals for account teams.",
-  },
-  {
-    icon: Headset,
-    title: "Responsive account support",
-    description:
-      "Dispatch support for schedule changes, arrival delays, and event movement updates.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Presentation standards",
-    description:
-      "Vehicles are cleaned, checked, and released with the level of polish clients expect.",
-  },
-];
-
-
 export default function HomePage() {
   const navigate = useNavigate();
   const { bookingDraft, updateDraft } = useAppStore();
@@ -140,70 +112,40 @@ export default function HomePage() {
 
   return (
     <div className="bg-[var(--color-gray-100)]">
+      {/* HERO — Search-first */}
       <section className="relative overflow-hidden bg-[linear-gradient(135deg,#071827_0%,#0b3157_48%,#0f6fad_100%)] text-white">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_14%_18%,rgba(255,255,255,0.13),transparent_28%),radial-gradient(circle_at_82%_18%,rgba(255,255,255,0.10),transparent_30%),linear-gradient(180deg,rgba(7,24,39,0.06),rgba(7,24,39,0.36))]" />
         <div className="absolute inset-x-0 bottom-0 h-40 bg-[linear-gradient(180deg,transparent,rgba(246,248,251,0.14))]" />
 
-        <div className="relative mx-auto grid min-h-[calc(100vh-74px)] max-w-7xl items-center gap-10 px-4 py-24 pt-32 lg:grid-cols-[0.9fr_1.1fr] lg:py-28 lg:pt-36">
+        <div className="relative mx-auto max-w-7xl px-4 py-20 pt-28 lg:py-24 lg:pt-32">
+          {/* Header text — compact */}
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="max-w-3xl"
+            transition={{ duration: 0.5 }}
+            className="mx-auto max-w-2xl text-center"
           >
-            <div className="mb-6 inline-flex rounded-full border border-white/12 bg-white/10 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.3em] text-white/78 backdrop-blur">
-              Reliable 24/7 car hire across Lusaka and Ndola
-            </div>
-            <h1 className="font-display text-5xl font-extrabold tracking-[-0.06em] md:text-7xl lg:text-[5.2rem] lg:leading-[1]">
-              Drive the Difference With Dots
+            <h1 className="font-display text-3xl font-bold tracking-[-0.03em] md:text-4xl lg:text-5xl">
+              Premium car hire in Lusaka & Ndola
             </h1>
-            <p className="mt-6 max-w-2xl text-lg leading-8 text-white/78 md:text-xl">
-              Reliable car rental for airport transfers, events, weddings, business
-              movement, and everyday self-drive journeys — always on time.
+            <p className="mt-4 text-sm leading-6 text-white/70 md:text-base">
+              Reliable vehicles for airport transfers, events, business travel, and self-drive — always on time.
             </p>
-
-            <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-              <Button asChild size="lg" className="rounded-full px-8">
-                <Link to="/book/step-1">
-                  Book a Vehicle
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
-              <Button asChild variant="ghost" size="lg" className="rounded-full px-8 text-white hover:bg-white/10 hover:text-white">
-                <Link to="/fleet">View Our Fleet</Link>
-              </Button>
-            </div>
-
-            <div className="mt-10 grid max-w-2xl gap-3 sm:grid-cols-3">
-              {[
-                { value: "24/7", label: "Booking support" },
-                { value: "2", label: "Branches" },
-                { value: "5.0", label: "Client rating" },
-              ].map((item) => (
-                <div key={item.label} className="rounded-[24px] border border-white/10 bg-white/8 px-5 py-4 backdrop-blur">
-                  <div className="font-display text-3xl font-bold tracking-[-0.05em] text-white">{item.value}</div>
-                  <div className="mt-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/58">{item.label}</div>
-                </div>
-              ))}
-            </div>
           </motion.div>
 
+          {/* Search card — the first thing people see */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.65, delay: 0.1 }}
-            className="rounded-[34px] border border-white/70 bg-white p-6 text-[var(--color-primary)] shadow-[0_28px_110px_rgba(0,0,0,0.28)] md:p-8"
+            transition={{ duration: 0.55, delay: 0.1 }}
+            className="mx-auto mt-8 max-w-2xl rounded-2xl border border-white/20 bg-white p-5 text-[var(--color-primary)] shadow-[0_28px_80px_rgba(0,0,0,0.25)] sm:p-6"
           >
-            <SectionHeader
-              eyebrow="Quick booking"
-              title="Check availability in seconds"
-              description="Choose your city, dates, vehicle type, and service mode. We will take you straight to the best matches."
-            />
-            <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-[1.1fr_1fr]">
-              <label className="space-y-2">
-                <span className="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--color-gray-500)]">
-                  Pickup location
-                </span>
+            <div className="mb-5 text-sm font-semibold text-[var(--color-primary)]">
+              Search available cars
+            </div>
+            <div className="grid gap-3 sm:grid-cols-2">
+              <label className="space-y-1">
+                <span className="text-xs font-medium uppercase tracking-[0.15em] text-[var(--color-gray-500)]">Pickup city</span>
                 <select
                   value={pickupCity}
                   onChange={(event) => {
@@ -213,69 +155,44 @@ export default function HomePage() {
                     setPickupLocation(defaultLocation);
                     setDropoffLocation(defaultLocation);
                   }}
-                  className="h-14 w-full rounded-2xl border border-[var(--color-gray-200)] bg-[var(--color-gray-100)] px-4 text-[var(--color-primary)] outline-none transition focus:border-[var(--color-accent)]"
+                  className="h-12 w-full rounded-xl border border-[var(--color-gray-200)] bg-[var(--color-gray-100)] px-3 text-sm text-[var(--color-primary)] outline-none transition focus:border-[var(--color-accent)]"
                 >
-                  <option value="Lusaka">Lusaka Airport</option>
+                  <option value="Lusaka">Lusaka</option>
                   <option value="Ndola">Ndola</option>
                 </select>
               </label>
-              <label className="space-y-2">
-                <span className="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--color-gray-500)]">
-                  Exact pickup point
-                </span>
-                <input value={pickupLocation} onChange={(event) => setPickupLocation(event.target.value)} className="h-14 w-full rounded-2xl border border-[var(--color-gray-200)] bg-[var(--color-gray-100)] px-4 text-[var(--color-primary)] outline-none transition focus:border-[var(--color-accent)]" placeholder="Airport, office, lodge, or address" />
+              <label className="space-y-1">
+                <span className="text-xs font-medium uppercase tracking-[0.15em] text-[var(--color-gray-500)]">Pickup location</span>
+                <input value={pickupLocation} onChange={(event) => setPickupLocation(event.target.value)} className="h-12 w-full rounded-xl border border-[var(--color-gray-200)] bg-[var(--color-gray-100)] px-3 text-sm text-[var(--color-primary)] outline-none transition focus:border-[var(--color-accent)]" placeholder="Airport, hotel, or address" />
               </label>
-              <label className="space-y-2">
-                <span className="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--color-gray-500)]">
-                  Drop-off location
-                </span>
-                <input value={dropoffLocation} onChange={(event) => setDropoffLocation(event.target.value)} className="h-14 w-full rounded-2xl border border-[var(--color-gray-200)] bg-[var(--color-gray-100)] px-4 text-[var(--color-primary)] outline-none transition focus:border-[var(--color-accent)]" placeholder="Same as pickup or alternate address" />
-              </label>
-              <label className="space-y-2">
-                <span className="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--color-gray-500)]">
-                  Pickup date
-                </span>
+              <label className="space-y-1">
+                <span className="text-xs font-medium uppercase tracking-[0.15em] text-[var(--color-gray-500)]">Pickup date</span>
                 <input
                   type="date"
                   min={new Date().toISOString().split("T")[0]}
                   value={pickupDate}
                   onChange={(event) => setPickupDate(event.target.value)}
-                  className="h-14 w-full rounded-2xl border border-[var(--color-gray-200)] bg-[var(--color-gray-100)] px-4 text-[var(--color-primary)] outline-none transition focus:border-[var(--color-accent)]"
+                  className="h-12 w-full rounded-xl border border-[var(--color-gray-200)] bg-[var(--color-gray-100)] px-3 text-sm text-[var(--color-primary)] outline-none transition focus:border-[var(--color-accent)]"
                 />
               </label>
-              <label className="space-y-2">
-                <span className="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--color-gray-500)]">
-                  Return date
-                </span>
+              <label className="space-y-1">
+                <span className="text-xs font-medium uppercase tracking-[0.15em] text-[var(--color-gray-500)]">Return date</span>
                 <input
                   type="date"
                   min={pickupDate || new Date().toISOString().split("T")[0]}
                   value={returnDate}
                   onChange={(event) => setReturnDate(event.target.value)}
-                  className="h-14 w-full rounded-2xl border border-[var(--color-gray-200)] bg-[var(--color-gray-100)] px-4 text-[var(--color-primary)] outline-none transition focus:border-[var(--color-accent)]"
+                  className="h-12 w-full rounded-xl border border-[var(--color-gray-200)] bg-[var(--color-gray-100)] px-3 text-sm text-[var(--color-primary)] outline-none transition focus:border-[var(--color-accent)]"
                 />
               </label>
-              <label className="space-y-2">
-                <span className="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--color-gray-500)]">
-                  Car type / model
-                </span>
-                <input
-                  value={vehicleModel}
-                  onChange={(event) => setVehicleModel(event.target.value)}
-                  className="h-14 w-full rounded-2xl border border-[var(--color-gray-200)] bg-[var(--color-gray-100)] px-4 text-[var(--color-primary)] outline-none transition focus:border-[var(--color-accent)]"
-                  placeholder="Honda Fit, SUV, Toyota..."
-                />
-              </label>
-              <label className="space-y-2">
-                <span className="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--color-gray-500)]">
-                  Vehicle category
-                </span>
+              <label className="space-y-1">
+                <span className="text-xs font-medium uppercase tracking-[0.15em] text-[var(--color-gray-500)]">Vehicle type</span>
                 <select
                   value={vehicleType}
                   onChange={(event) => setVehicleType(event.target.value)}
-                  className="h-14 w-full rounded-2xl border border-[var(--color-gray-200)] bg-[var(--color-gray-100)] px-4 text-[var(--color-primary)] outline-none transition focus:border-[var(--color-accent)]"
+                  className="h-12 w-full rounded-xl border border-[var(--color-gray-200)] bg-[var(--color-gray-100)] px-3 text-sm text-[var(--color-primary)] outline-none transition focus:border-[var(--color-accent)]"
                 >
-                  <option value="All">All categories</option>
+                  <option value="All">All types</option>
                   <option value="Economy">Economy</option>
                   <option value="Saloon">Saloon</option>
                   <option value="SUV">SUV</option>
@@ -284,50 +201,41 @@ export default function HomePage() {
                   <option value="Pickup">Pickup</option>
                 </select>
               </label>
-              <div className="space-y-2 md:col-span-2 xl:col-span-1">
-                <span className="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--color-gray-500)]">
-                  Driver
-                </span>
-                <div className="flex h-14 items-center justify-between rounded-2xl border border-[var(--color-gray-200)] bg-[var(--color-gray-100)] px-4">
-                  <span className="text-sm font-medium text-[var(--color-primary)]">
-                    {withDriver ? "With chauffeur" : "Self-drive"}
-                  </span>
+              <label className="space-y-1">
+                <span className="text-xs font-medium uppercase tracking-[0.15em] text-[var(--color-gray-500)]">Driver</span>
+                <div className="flex h-12 items-center justify-between rounded-xl border border-[var(--color-gray-200)] bg-[var(--color-gray-100)] px-3">
+                  <span className="text-sm text-[var(--color-primary)]">{withDriver ? "With chauffeur" : "Self-drive"}</span>
                   <button
                     type="button"
                     onClick={() => setWithDriver((value) => !value)}
-                    className={`relative h-8 w-14 rounded-full transition ${
-                      withDriver ? "bg-[var(--color-accent)]" : "bg-[var(--color-gray-300)]"
-                    }`}
+                    className={`relative h-7 w-12 rounded-full transition ${withDriver ? "bg-[var(--color-accent)]" : "bg-[var(--color-gray-300)]"}`}
                     aria-label="Toggle chauffeur option"
                   >
-                    <span
-                      className={`absolute top-1 h-6 w-6 rounded-full bg-white transition ${
-                        withDriver ? "left-7" : "left-1"
-                      }`}
-                    />
+                    <span className={`absolute top-0.5 h-6 w-6 rounded-full bg-white transition ${withDriver ? "left-[22px]" : "left-0.5"}`} />
                   </button>
                 </div>
-              </div>
+              </label>
             </div>
-            <div className="mt-6 rounded-[28px] border border-[var(--color-gray-200)] bg-[var(--color-gray-100)] p-4">
-              <div className="flex items-center justify-between gap-3">
-                <div>
-                  <div className="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--color-gray-500)]">Live availability</div>
-                  <div className="mt-1 text-sm text-[var(--color-gray-600)]">Pending bookings do not reduce these counts until admin approval.</div>
+
+            {/* Live availability */}
+            {availabilityResults.length > 0 && (
+              <div className="mt-4 rounded-xl border border-[var(--color-gray-200)] bg-[var(--color-gray-100)] p-3">
+                <div className="flex items-center justify-between gap-2">
+                  <span className="text-xs text-[var(--color-gray-500)]">{availabilityResults.length} vehicle{availabilityResults.length !== 1 ? 's' : ''} available</span>
                 </div>
-                <span className="rounded-full bg-white px-3 py-1 text-xs font-semibold text-[var(--color-primary)]">{availabilityResults.length} matches</span>
+                <div className="mt-2 grid gap-1.5">
+                  {availabilityResults.slice(0, 3).map((vehicle) => (
+                    <button key={vehicle.id} type="button" onClick={() => updateDraft({ vehicleId: vehicle.id })} className="flex items-center justify-between rounded-lg bg-white px-3 py-2 text-left text-sm transition hover:shadow-sm">
+                      <span className="font-medium text-[var(--color-primary)]">{vehicle.name}</span>
+                      <span className="text-xs text-[var(--color-accent)]">{vehicle.availableQuantity} avail.</span>
+                    </button>
+                  ))}
+                </div>
               </div>
-              <div className="mt-4 grid gap-2">
-                {availabilityResults.map((vehicle) => (
-                  <button key={vehicle.id} type="button" onClick={() => updateDraft({ vehicleId: vehicle.id })} className="flex items-center justify-between rounded-2xl bg-white px-4 py-3 text-left text-sm transition hover:shadow-[0_12px_32px_rgba(10,22,40,0.08)]">
-                    <span className="font-semibold text-[var(--color-primary)]">{vehicle.name}</span>
-                    <span className="text-[var(--color-accent)]">{vehicle.availableQuantity} available</span>
-                  </button>
-                ))}
-                {availabilityResults.length === 0 && <div className="rounded-2xl bg-white px-4 py-4 text-sm text-[var(--color-gray-600)]">No matching cars are available for this filter. Try another category, model, or location.</div>}
-              </div>
-            </div>
-            <Button onClick={handleSearch} className="mt-6 h-14 w-full rounded-full md:w-auto">
+            )}
+
+            {/* Search button — underneath everything */}
+            <Button onClick={handleSearch} className="mt-4 h-12 w-full rounded-xl text-sm">
               Search Available Vehicles
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
@@ -335,53 +243,55 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 py-20">
+      {/* Featured Fleet */}
+      <section className="mx-auto max-w-7xl px-4 py-16">
         <SectionHeader
-          eyebrow="Featured fleet"
-          title="Vehicles that feel premium before you even step in"
-          description="A shortlist of vehicles selected for executive travel, airport movement, events, and self-drive bookings."
+          eyebrow="Our fleet"
+          title="Vehicles ready for your journey"
+          description="A curated selection available for airport transfers, business travel, and self-drive."
         />
-        <div className="mt-10 grid gap-6 lg:grid-cols-3">
+        <div className="mt-8 grid gap-6 lg:grid-cols-3">
           {featuredVehicles.map((vehicle) => (
             <div key={vehicle.id}>
               <VehicleCard vehicle={vehicle} />
             </div>
           ))}
         </div>
-        <div className="mt-10 flex justify-center">
-          <Button asChild variant="secondary" className="rounded-full px-8">
+        <div className="mt-8 flex justify-center">
+          <Button asChild variant="secondary" className="rounded-full px-6">
             <Link to="/fleet">View Full Fleet</Link>
           </Button>
         </div>
       </section>
 
-      <section className="bg-[var(--color-primary)] py-20 text-white">
+      {/* Services */}
+      <section className="bg-[var(--color-primary)] py-16 text-white">
         <div className="mx-auto max-w-7xl px-4">
           <SectionHeader
             eyebrow="Services"
-            title="A service mix built for executive travel, events, and repeat business."
-            description="Choose the service that fits your journey and we will match it with the right vehicle, route, and support."
+            title="Built for business, events, and every journey in between"
+            description="Choose the service that fits your trip — we'll match the right vehicle and support."
             className="[&>h2]:text-white [&>p]:text-white/70"
           />
-          <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+          <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
             {services.map((service) => (
               <Link
                 key={service.slug}
                 to={`/services/${service.slug}`}
-                className="rounded-[30px] border border-white/10 bg-[rgba(255,255,255,0.05)] p-6 backdrop-blur transition hover:border-white/20 hover:bg-[rgba(255,255,255,0.08)]"
+                className="rounded-2xl border border-white/10 bg-[rgba(255,255,255,0.05)] p-5 backdrop-blur transition hover:border-white/20 hover:bg-[rgba(255,255,255,0.08)]"
               >
-                <div className="text-xs uppercase tracking-[0.26em] text-[var(--color-accent)]">
+                <div className="text-xs uppercase tracking-[0.2em] text-[var(--color-accent)]">
                   {service.accentLabel}
                 </div>
-                <div className="mt-4 font-display text-2xl font-bold tracking-[-0.04em]">
+                <div className="mt-3 font-display text-lg font-bold tracking-[-0.02em]">
                   {service.title}
                 </div>
-                <p className="mt-3 text-sm leading-7 text-white/70">
+                <p className="mt-2 text-sm leading-6 text-white/70">
                   {service.description}
                 </p>
-                <div className="mt-6 inline-flex items-center text-sm font-semibold text-white">
+                <div className="mt-4 inline-flex items-center text-sm font-medium text-white">
                   Learn More
-                  <ArrowRight className="ml-2 h-4 w-4" />
+                  <ArrowRight className="ml-2 h-3.5 w-3.5" />
                 </div>
               </Link>
             ))}
@@ -389,40 +299,41 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 py-20">
+      {/* Trust section */}
+      <section className="mx-auto max-w-7xl px-4 py-16">
         <SectionHeader
           eyebrow="Why choose Dots"
-          title="Trust signals that matter in a premium car hire business."
-          description="When timing matters, presentation matters, and plans can change, details decide the journey."
+          title="Trust signals that matter in premium car hire"
+          description="When timing matters and plans can change, the details decide the journey."
         />
-        <div className="mt-10 grid gap-4 md:grid-cols-4">
+        <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {stats.map((stat) => (
             <div
               key={stat.label}
-              className="rounded-[28px] border border-[var(--color-gray-200)] bg-white p-6 shadow-[0_18px_60px_rgba(10,22,40,0.06)]"
+              className="rounded-2xl border border-[var(--color-gray-200)] bg-white p-5"
             >
-              <div className="font-display text-4xl font-bold tracking-[-0.05em] text-[var(--color-primary)]">
+              <div className="font-display text-2xl font-bold tracking-[-0.03em] text-[var(--color-primary)]">
                 {stat.value}
               </div>
-              <div className="mt-2 text-sm text-[var(--color-gray-600)]">
+              <div className="mt-1 text-sm text-[var(--color-gray-600)]">
                 {stat.label}
               </div>
             </div>
           ))}
         </div>
-        <div className="mt-8 grid gap-6 lg:grid-cols-4">
+        <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {trustPillars.map((pillar) => (
             <div
               key={pillar.title}
-              className="rounded-[28px] border border-[var(--color-gray-200)] bg-white p-6"
+              className="rounded-2xl border border-[var(--color-gray-200)] bg-white p-5"
             >
-              <div className="grid h-14 w-14 place-items-center rounded-2xl bg-[var(--color-accent)]/10 text-[var(--color-accent)]">
-                <pillar.icon className="h-6 w-6" />
+              <div className="grid h-10 w-10 place-items-center rounded-xl bg-[var(--color-accent)]/10 text-[var(--color-accent)]">
+                <pillar.icon className="h-5 w-5" />
               </div>
-              <div className="mt-5 font-display text-2xl font-bold tracking-[-0.04em] text-[var(--color-primary)]">
+              <div className="mt-4 font-semibold text-[var(--color-primary)]">
                 {pillar.title}
               </div>
-              <p className="mt-3 text-sm leading-7 text-[var(--color-gray-600)]">
+              <p className="mt-2 text-sm leading-6 text-[var(--color-gray-600)]">
                 {pillar.description}
               </p>
             </div>
@@ -430,36 +341,27 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 pb-20">
+      {/* Testimonials */}
+      <section className="mx-auto max-w-7xl px-4 pb-16">
         <div className="grid gap-6 xl:grid-cols-[0.92fr_1.08fr]">
-          <div className="rounded-[34px] border border-[var(--color-gray-200)] bg-white p-6 shadow-[0_18px_70px_rgba(10,22,40,0.08)] sm:p-8">
+          <div className="rounded-2xl border border-[var(--color-gray-200)] bg-white p-6 sm:p-8">
             <SectionHeader
               eyebrow="Testimonials"
-              title="Trusted by business teams, event planners, and private clients."
-              description="Clients return when the vehicle is ready, the driver is prepared, and the handover is clear."
+              title="Trusted by business teams and private clients"
+              description="Clients return when the vehicle is ready and the handover is clear."
             />
-            <div className="mt-6 flex flex-wrap gap-2">
-              {["Corporate teams", "Event planners", "Airport clients"].map((label) => (
-                <div
-                  key={label}
-                  className="rounded-full border border-[var(--color-gray-200)] bg-[var(--color-gray-100)] px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-[var(--color-gray-500)]"
-                >
-                  {label}
-                </div>
-              ))}
-            </div>
-            <div className="mt-8 rounded-[30px] bg-[linear-gradient(180deg,#f6f8fb,#edf2f9)] p-6">
-              <div className="mb-5 flex gap-1 text-[var(--color-gold)]">
+            <div className="mt-6 rounded-2xl bg-[linear-gradient(180deg,#f6f8fb,#edf2f9)] p-5">
+              <div className="mb-3 flex gap-1 text-[var(--color-gold)]">
                 {Array.from({ length: testimonials[activeTestimonial].rating }).map(
                   (_, index) => (
-                    <Star key={index} className="h-5 w-5 fill-current" />
+                    <Star key={index} className="h-4 w-4 fill-current" />
                   ),
                 )}
               </div>
-              <p className="text-lg leading-8 text-[var(--color-primary)]">
+              <p className="text-base leading-7 text-[var(--color-primary)]">
                 "{testimonials[activeTestimonial].quote}"
               </p>
-              <div className="mt-6">
+              <div className="mt-4">
                 <div className="font-semibold text-[var(--color-primary)]">
                   {testimonials[activeTestimonial].name}
                 </div>
@@ -467,14 +369,14 @@ export default function HomePage() {
                   {testimonials[activeTestimonial].role}, {testimonials[activeTestimonial].company}
                 </div>
               </div>
-              <div className="mt-6 flex gap-2">
+              <div className="mt-4 flex gap-2">
                 {testimonials.map((testimonial, index) => (
                   <button
                     key={testimonial.id}
-                    className={`h-2.5 rounded-full transition ${
+                    className={`h-2 rounded-full transition ${
                       index === activeTestimonial
-                        ? "w-10 bg-[var(--color-accent)]"
-                        : "w-2.5 bg-[var(--color-gray-300)]"
+                        ? "w-8 bg-[var(--color-accent)]"
+                        : "w-2 bg-[var(--color-gray-300)]"
                     }`}
                     onClick={() => setActiveTestimonial(index)}
                     aria-label={`Show testimonial ${index + 1}`}
@@ -482,82 +384,46 @@ export default function HomePage() {
                 ))}
               </div>
             </div>
+          </div>
+
+          {/* Why choose summary */}
+          <div className="rounded-2xl border border-[var(--color-gray-200)] bg-[var(--color-primary)] p-6 text-white sm:p-8">
+            <div className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent)]">
+              The Dots difference
+            </div>
+            <div className="mt-4 font-display text-2xl font-bold tracking-[-0.03em]">
+              Premium car hire, simplified
+            </div>
+            <p className="mt-3 text-sm leading-6 text-white/70">
+              From booking to handover, every step is designed for reliability. Clean vehicles, clear pricing, and support that's reachable when plans change.
+            </p>
             <div className="mt-6 grid gap-3 sm:grid-cols-3">
               {[
-                { value: "5.0/5", label: "Average testimonial rating" },
-                { value: "2 Branches", label: "Lusaka and Ndola coverage" },
-                { value: "24/7", label: "WhatsApp booking support" },
+                { value: "5.0/5", label: "Client rating" },
+                { value: "2", label: "Branches" },
+                { value: "24/7", label: "Support" },
               ].map((item) => (
                 <div
                   key={item.label}
-                  className="rounded-[24px] border border-[var(--color-gray-200)] bg-[var(--color-gray-100)] px-5 py-4"
+                  className="rounded-xl border border-white/10 bg-white/8 px-4 py-3"
                 >
-                  <div className="font-display text-2xl font-bold tracking-[-0.04em] text-[var(--color-primary)]">
+                  <div className="font-display text-xl font-bold tracking-[-0.03em]">
                     {item.value}
                   </div>
-                  <div className="mt-1 text-sm text-[var(--color-gray-600)]">{item.label}</div>
+                  <div className="mt-1 text-xs text-white/60">{item.label}</div>
                 </div>
               ))}
             </div>
-          </div>
-
-          <div className="relative overflow-hidden rounded-[34px] bg-[linear-gradient(160deg,#081222_0%,#0b1730_55%,#10213d_100%)] text-white shadow-[0_18px_70px_rgba(10,22,40,0.16)]">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(26,127,212,0.22),transparent_26%),radial-gradient(circle_at_bottom_left,rgba(212,168,90,0.12),transparent_24%)]" />
-            <div className="absolute inset-y-0 right-0 hidden w-[34%] border-l border-white/8 bg-[linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.02))] xl:block" />
-            <div className="relative h-full p-6 sm:p-8">
-              <div className="max-w-2xl">
-                <div className="inline-flex rounded-full border border-white/10 bg-white/10 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.3em] text-white/72">
-                  Corporate accounts
-                </div>
-                <h3 className="mt-5 max-w-3xl font-display text-3xl font-bold tracking-[-0.05em] sm:text-4xl xl:text-[3.2rem] xl:leading-[1.02]">
-                  Dedicated fleet. Monthly invoicing. Priority service for repeat-use travel.
-                </h3>
-                <p className="mt-4 max-w-2xl text-base leading-7 text-white/70 sm:text-lg">
-                  Open one account for airport transfers, executive travel, site
-                  visits, and event transport across Lusaka and Ndola.
-                </p>
-                <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                  <Button asChild size="lg" className="rounded-full px-8">
-                    <Link to="/contact">Open a Corporate Account</Link>
-                  </Button>
-                  <Button asChild variant="ghost" size="lg" className="rounded-full px-8">
-                    <Link to="/services/corporate">See Corporate Service</Link>
-                  </Button>
-                </div>
-              </div>
-
-              <div className="mt-8 grid gap-3 sm:grid-cols-2">
-                {corporateBenefits.map((benefit) => (
-                  <div
-                    key={benefit.title}
-                    className="rounded-[26px] border border-white/10 bg-white/6 p-5 backdrop-blur"
-                  >
-                    <div className="grid h-12 w-12 place-items-center rounded-2xl bg-[var(--color-accent)]/16 text-[var(--color-accent)]">
-                      <benefit.icon className="h-6 w-6" />
-                    </div>
-                    <div className="mt-5 text-lg font-semibold text-white">{benefit.title}</div>
-                    <p className="mt-2 text-sm leading-7 text-white/68">{benefit.description}</p>
-                  </div>
-                ))}
-              </div>
-
-              <div className="mt-6 grid gap-3 md:grid-cols-3">
-                {[
-                  { value: "3", label: "Operating cities" },
-                  { value: "Fast", label: "Repeat-booking turnaround" },
-                  { value: "Clear", label: "Monthly account statements" },
-                ].map((item) => (
-                  <div
-                    key={item.label}
-                    className="rounded-[24px] border border-white/10 bg-black/16 px-5 py-4"
-                  >
-                    <div className="font-display text-3xl font-bold tracking-[-0.04em] text-white">
-                      {item.value}
-                    </div>
-                    <div className="mt-1 text-sm text-white/62">{item.label}</div>
-                  </div>
-                ))}
-              </div>
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+              <Button asChild className="rounded-full">
+                <Link to="/book/step-1">
+                  Book a Vehicle
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+              <Button asChild variant="ghost" className="rounded-full text-white hover:bg-white/10 hover:text-white">
+                <Link to="/fleet">View Fleet</Link>
+              </Button>
             </div>
           </div>
         </div>

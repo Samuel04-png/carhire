@@ -63,8 +63,8 @@ export function Navbar() {
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:py-4">
         <BrandLogo
           priority
-          className="flex shrink-0 items-center rounded-[20px] border border-white/45 bg-white/96 px-2.5 py-1.5 shadow-[0_16px_42px_rgba(10,22,40,0.15)] transition hover:bg-white sm:px-3 lg:rounded-[22px]"
-          imageClassName="h-10 max-w-[104px] sm:h-11 sm:max-w-[118px] lg:h-12 lg:max-w-[132px]"
+          className="flex shrink-0 items-center"
+          imageClassName="h-9 sm:h-10 lg:h-11 w-auto"
         />
 
         <nav className="hidden items-center gap-2 lg:flex">

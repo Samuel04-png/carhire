@@ -18,22 +18,21 @@ export function SectionHeader({
   return (
     <div
       className={cn(
-        "space-y-4",
+        "space-y-3",
         align === "center" && "mx-auto max-w-3xl text-center",
         className,
       )}
     >
       {eyebrow && (
-        <div className="inline-flex items-center gap-2 rounded-full border border-[var(--color-accent)]/20 bg-[var(--color-accent)]/10 px-4 py-1 text-[11px] font-semibold uppercase tracking-[0.3em] text-[var(--color-accent)]">
-          <span className="h-2 w-2 rounded-full bg-[var(--color-accent)]" />
+        <div className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent)]">
           {eyebrow}
         </div>
       )}
-      <h2 className="font-display text-4xl font-bold tracking-[-0.04em] text-[var(--color-primary)] md:text-5xl">
+      <h2 className="font-display text-2xl font-bold tracking-[-0.03em] text-[var(--color-primary)] md:text-3xl">
         {title}
       </h2>
       {description && (
-        <p className="max-w-2xl text-base leading-7 text-[var(--color-gray-600)] md:text-lg">
+        <p className="max-w-2xl text-sm leading-6 text-[var(--color-gray-600)] md:text-base">
           {description}
         </p>
       )}
