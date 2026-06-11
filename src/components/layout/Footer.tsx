@@ -80,6 +80,9 @@ export function Footer() {
               <Link className="block transition hover:text-white" to="/blog">
                 Blog
               </Link>
+              <Link className="mt-2 block text-sm text-white/40 transition hover:text-white/70" to="/admin/login">
+                Admin
+              </Link>
             </div>
           </div>
 
