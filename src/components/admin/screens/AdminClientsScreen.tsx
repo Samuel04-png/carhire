@@ -46,11 +46,11 @@ export function AdminClientsScreen() {
         {filteredClients.map((client) => {
           const clientBookings = bookings.filter((booking) => booking.clientId === client.id);
           return (
-            <div key={client.id} className="rounded-[30px] border border-[var(--color-gray-200)] bg-white p-6 shadow-[0_18px_60px_rgba(10,22,40,0.06)]">
+            <div key={client.id} className="rounded-xl border border-[var(--color-gray-200)] bg-white p-5 shadow-sm">
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <div className="font-semibold text-[var(--color-primary)]">{client.firstName} {client.lastName}</div>
-                  <div className="text-sm text-[var(--color-gray-600)]">{client.accountType} · {client.tier}</div>
+                  <div className="text-sm text-[var(--color-gray-600)]">{client.accountType} Â· {client.tier}</div>
                 </div>
                 {client.outstandingBalance ? <StatusPill label="Balance due" tone="amber" /> : <StatusPill label="Clear" tone="green" />}
               </div>
@@ -62,9 +62,9 @@ export function AdminClientsScreen() {
                 <div>Bookings: {clientBookings.length}</div>
               </div>
               <div className="mt-6 flex flex-wrap gap-2">
-                <Button asChild size="sm" variant="secondary" className="rounded-full"><a href={`mailto:${client.email}`}><Mail className="mr-2 h-4 w-4" />Email</a></Button>
-                <Button asChild size="sm" variant="secondary" className="rounded-full"><a href={toPhoneHref(client.phone)}><Phone className="mr-2 h-4 w-4" />Call</a></Button>
-                <Button asChild size="sm" className="rounded-full"><a href={toWhatsAppHref(client.phone)} target="_blank" rel="noreferrer">WhatsApp</a></Button>
+                <Button asChild size="sm" variant="secondary" className="rounded-md"><a href={`mailto:${client.email}`}><Mail className="mr-2 h-4 w-4" />Email</a></Button>
+                <Button asChild size="sm" variant="secondary" className="rounded-md"><a href={toPhoneHref(client.phone)}><Phone className="mr-2 h-4 w-4" />Call</a></Button>
+                <Button asChild size="sm" className="rounded-md"><a href={toWhatsAppHref(client.phone)} target="_blank" rel="noreferrer">WhatsApp</a></Button>
               </div>
             </div>
           );

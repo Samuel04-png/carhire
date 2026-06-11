@@ -205,15 +205,15 @@ export function AdminBookingsScreen({ createMode = false }: { createMode?: boole
       <AdminShell
         title="New Booking"
         description="Create a reservation, client record, and dispatch-ready booking from one admin flow."
-        actions={<Button type="button" variant="secondary" className="rounded-full" onClick={() => navigate("/admin/bookings")}>Back to Bookings</Button>}
+        actions={<Button type="button" variant="secondary" className="rounded-md" onClick={() => navigate("/admin/bookings")}>Back to Bookings</Button>}
       >
         <div className="grid gap-6 xl:grid-cols-[1.25fr_0.75fr]">
           <SurfaceCard title="Booking intake" subtitle="Manual reservations update live booking state immediately.">
             <div className="space-y-8">
               <section>
                 <div className="mb-4 flex flex-wrap gap-2">
-                  <button type="button" className={`rounded-full px-4 py-2 text-sm font-medium ${clientMode === "existing" ? "bg-[var(--color-accent)] text-white" : "border border-[var(--color-gray-200)] bg-white text-[var(--color-gray-600)]"}`} onClick={() => setClientMode("existing")}>Existing client</button>
-                  <button type="button" className={`rounded-full px-4 py-2 text-sm font-medium ${clientMode === "new" ? "bg-[var(--color-accent)] text-white" : "border border-[var(--color-gray-200)] bg-white text-[var(--color-gray-600)]"}`} onClick={() => setClientMode("new")}>New client</button>
+                  <button type="button" className={`rounded-md px-4 py-2 text-sm font-medium ${clientMode === "existing" ? "bg-[var(--color-accent)] text-white" : "border border-[var(--color-gray-200)] bg-white text-[var(--color-gray-600)]"}`} onClick={() => setClientMode("existing")}>Existing client</button>
+                  <button type="button" className={`rounded-md px-4 py-2 text-sm font-medium ${clientMode === "new" ? "bg-[var(--color-accent)] text-white" : "border border-[var(--color-gray-200)] bg-white text-[var(--color-gray-600)]"}`} onClick={() => setClientMode("new")}>New client</button>
                 </div>
                 <div className="grid gap-4 md:grid-cols-2">
                   {clientMode === "existing" && (
@@ -221,7 +221,7 @@ export function AdminBookingsScreen({ createMode = false }: { createMode?: boole
                       <div className="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-[var(--color-gray-500)]">Client</div>
                       <select className={inputClassName} value={form.clientId} onChange={(event) => updateField("clientId", event.target.value)}>
                         {clients.map((client) => (
-                          <option key={client.id} value={client.id}>{client.firstName} {client.lastName} � {client.accountType}</option>
+                          <option key={client.id} value={client.id}>{client.firstName} {client.lastName} · {client.accountType}</option>
                         ))}
                       </select>
                     </label>
@@ -246,7 +246,7 @@ export function AdminBookingsScreen({ createMode = false }: { createMode?: boole
                   <div className="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-[var(--color-gray-500)]">Vehicle</div>
                   <select className={inputClassName} value={form.vehicleId} onChange={(event) => updateField("vehicleId", event.target.value)}>
                     {vehicles.filter((vehicle) => vehicle.status !== "Retired").map((vehicle) => (
-                      <option key={vehicle.id} value={vehicle.id}>{vehicle.name} � {vehicle.currentCity}</option>
+                      <option key={vehicle.id} value={vehicle.id}>{vehicle.name} · {vehicle.currentCity}</option>
                     ))}
                   </select>
                 </label>
@@ -261,7 +261,7 @@ export function AdminBookingsScreen({ createMode = false }: { createMode?: boole
                   <div className="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-[var(--color-gray-500)]">Assigned driver</div>
                   <select className={inputClassName} value={form.assignedDriverId} onChange={(event) => updateField("assignedDriverId", event.target.value)}>
                     <option value="">Assign later</option>
-                    {availableDrivers.map((driver) => <option key={driver.id} value={driver.id}>{driver.name} � {driver.status}</option>)}
+                    {availableDrivers.map((driver) => <option key={driver.id} value={driver.id}>{driver.name} · {driver.status}</option>)}
                   </select>
                 </label>
                 <TextField label="Pickup date" type="date" value={form.pickupDate} onChange={(value) => updateField("pickupDate", value)} />
@@ -326,8 +326,8 @@ export function AdminBookingsScreen({ createMode = false }: { createMode?: boole
               </section>
 
               <div className="flex flex-wrap gap-3">
-                <Button type="button" className="rounded-full" onClick={() => submit("confirm")}>Confirm Booking</Button>
-                <Button type="button" variant="secondary" className="rounded-full" onClick={() => submit("draft")}>Save Draft</Button>
+                <Button type="button" className="rounded-md" onClick={() => submit("confirm")}>Confirm Booking</Button>
+                <Button type="button" variant="secondary" className="rounded-md" onClick={() => submit("draft")}>Save Draft</Button>
               </div>
             </div>
           </SurfaceCard>
@@ -337,7 +337,7 @@ export function AdminBookingsScreen({ createMode = false }: { createMode?: boole
               <div className="space-y-4">
                 <SummaryRow label="Vehicle" value={selectedVehicle?.name ?? "Select a vehicle"} />
                 <SummaryRow label="Client" value={`${form.firstName || "-"} ${form.lastName || ""}`.trim() || "Select or create client"} />
-                <SummaryRow label="Pickup" value={`${form.pickupCity} � ${form.pickupDate} ${form.pickupTime}`} />
+                <SummaryRow label="Pickup" value={`${form.pickupCity} · ${form.pickupDate} ${form.pickupTime}`} />
                 <SummaryRow label="Return" value={`${form.returnDate} ${form.returnTime}`} />
                 <SummaryRow label="With driver" value={form.withDriver ? "Yes" : "No"} />
                 <div className="rounded-lg bg-[var(--color-primary)] p-5 text-white">
@@ -361,7 +361,7 @@ export function AdminBookingsScreen({ createMode = false }: { createMode?: boole
   }
 
   return (
-    <AdminShell title="Bookings" description="Search reservations, update status, collect payment state, assign drivers, and jump into the client-facing confirmation page." actions={<Button asChild className="rounded-full"><Link to="/admin/bookings/new"><Plus className="mr-2 h-4 w-4" />New Booking</Link></Button>}>
+    <AdminShell title="Bookings" description="Search reservations, update status, collect payment state, assign drivers, and jump into the client-facing confirmation page." actions={<Button asChild className="rounded-md"><Link to="/admin/bookings/new"><Plus className="mr-2 h-4 w-4" />New Booking</Link></Button>}>
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
         <MetricCard label="Total bookings" value={String(bookings.length)} icon={CalendarRange} accent="blue" />
         <MetricCard label="Pending" value={String(bookings.filter((item) => item.status === "Pending").length)} icon={CalendarRange} accent="amber" />
@@ -399,7 +399,7 @@ export function AdminBookingsScreen({ createMode = false }: { createMode?: boole
                     <StatusPill label={booking.status} tone={bookingStatusTone(booking.status)} />
                     <StatusPill label={booking.paymentStatus} tone={paymentStatusTone(booking.paymentStatus)} />
                   </div>
-                  <div className="mt-3 text-sm text-[var(--color-gray-600)]">{client?.firstName} {client?.lastName} � {vehicle?.name}</div>
+                  <div className="mt-3 text-sm text-[var(--color-gray-600)]">{client?.firstName} {client?.lastName} · {vehicle?.name}</div>
                   <div className="mt-1 text-sm text-[var(--color-gray-600)]">{booking.pickupLocation}</div>
                   <div className="mt-2 text-xs uppercase tracking-[0.22em] text-[var(--color-gray-500)]">{formatDateTime(booking.pickupDateTime)} to {formatDateTime(booking.returnDateTime)}</div>
                 </div>
@@ -427,15 +427,15 @@ export function AdminBookingsScreen({ createMode = false }: { createMode?: boole
                     {drivers.map((driver) => <option key={driver.id} value={driver.id}>{driver.name}</option>)}
                   </select>
                   <div className="flex flex-wrap gap-2">
-                    {client?.phone && <Button asChild size="sm" variant="secondary" className="rounded-full"><a href={toPhoneHref(client.phone)}><Phone className="mr-2 h-4 w-4" />Call</a></Button>}
-                    <Button asChild size="sm" className="rounded-full"><Link to={`/booking/confirmation/${booking.ref}`}><ExternalLink className="mr-2 h-4 w-4" />Open</Link></Button>
+                    {client?.phone && <Button asChild size="sm" variant="secondary" className="rounded-md"><a href={toPhoneHref(client.phone)}><Phone className="mr-2 h-4 w-4" />Call</a></Button>}
+                    <Button asChild size="sm" className="rounded-md"><Link to={`/booking/confirmation/${booking.ref}`}><ExternalLink className="mr-2 h-4 w-4" />Open</Link></Button>
                   </div>
                 </div>
               </div>
             </div>
           );
         })}
-        {filteredBookings.length === 0 && <EmptyState title="No bookings matched those filters" description="Clear the search or open a new reservation from the admin booking flow." action={<Button asChild className="rounded-full"><Link to="/admin/bookings/new">Create Booking</Link></Button>} />}
+        {filteredBookings.length === 0 && <EmptyState title="No bookings matched those filters" description="Clear the search or open a new reservation from the admin booking flow." action={<Button asChild className="rounded-md"><Link to="/admin/bookings/new">Create Booking</Link></Button>} />}
       </div>
     </AdminShell>
   );

@@ -124,7 +124,7 @@ export function InfoBlock({
 
 export function SummaryRow({ label, value }: { label: string; value: string }) {
   return (
-    <div className="flex items-start justify-between gap-4 rounded-[20px] bg-[var(--color-gray-100)] px-4 py-3">
+    <div className="flex items-start justify-between gap-4 rounded-lg bg-[var(--color-gray-100)] px-4 py-3">
       <span className="text-sm text-[var(--color-gray-600)]">{label}</span>
       <span className="max-w-[60%] text-right text-sm font-semibold text-[var(--color-primary)]">{value}</span>
     </div>

@@ -10,7 +10,6 @@ import {
   LayoutDashboard,
   LogOut,
   Menu,
-  ShieldCheck,
   Users2,
   X,
 } from "lucide-react";
@@ -45,7 +44,6 @@ export function AdminShell({
 }) {
   const location = useLocation();
   const navigate = useNavigate();
-  const adminRole = useAppStore((state) => state.adminRole);
   const setAdminRole = useAppStore((state) => state.setAdminRole);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -87,25 +85,25 @@ export function AdminShell({
 
         <aside
           className={cn(
-            "fixed inset-y-0 left-0 z-[60] flex h-dvh w-[min(88vw,300px)] flex-col overflow-hidden bg-[var(--color-primary)] px-4 py-5 text-white shadow-[0_24px_80px_rgba(8,31,53,0.32)] transition-transform lg:sticky lg:top-0 lg:z-30 lg:w-[264px] lg:min-w-[264px] lg:translate-x-0 lg:border-r lg:border-white/8 lg:shadow-none",
+            "fixed inset-y-0 left-0 z-[60] flex h-dvh w-[min(88vw,280px)] flex-col overflow-hidden bg-[#081f35] px-3 py-4 text-white shadow-[0_24px_80px_rgba(8,31,53,0.32)] transition-transform lg:sticky lg:top-0 lg:z-30 lg:w-[248px] lg:min-w-[248px] lg:translate-x-0 lg:border-r lg:border-white/10 lg:shadow-none",
             menuOpen ? "translate-x-0" : "-translate-x-full",
           )}
         >
-          <div className="shrink-0 rounded-xl border border-white/10 bg-white/[0.04] p-4">
-            <div className="inline-flex rounded-lg bg-white p-2 shadow-sm">
-              <BrandLogo variant="boxed" imageClassName="h-11" />
+          <div className="shrink-0 border-b border-white/10 px-1 pb-4">
+            <div className="inline-flex rounded-md bg-white p-2 shadow-sm">
+              <BrandLogo variant="boxed" imageClassName="h-10" />
             </div>
-            <div className="mt-4 flex items-center gap-2 rounded-md border border-white/10 bg-white/[0.05] px-3 py-2 text-[11px] uppercase tracking-[0.16em] text-white/70">
-              <ShieldCheck className="h-4 w-4 text-[var(--color-accent)]" />
-              {adminRole ?? "Admin"}
-            </div>
-            <div className="mt-4 text-lg font-semibold tracking-[-0.02em]">Operations</div>
-            <div className="mt-2 text-sm leading-6 text-white/64">
-              Manage bookings, fleet availability, clients, drivers, and reports.
+            <div className="mt-4">
+              <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-white/45">
+                Dots Admin
+              </div>
+              <div className="mt-1 text-base font-semibold tracking-[-0.01em] text-white">
+                Operations
+              </div>
             </div>
           </div>
 
-          <nav className="mt-6 min-h-0 flex-1 space-y-2 overflow-y-auto pr-1">
+          <nav className="mt-4 min-h-0 flex-1 space-y-1 overflow-y-auto pr-1">
             {links.map((link) => {
               const active = location.pathname.startsWith(link.href);
               return (
@@ -113,10 +111,10 @@ export function AdminShell({
                   key={link.href}
                   to={link.href}
                   className={cn(
-                    "flex items-center gap-3 rounded-lg px-3 py-3 text-sm font-medium transition-colors",
+                    "flex min-h-10 items-center gap-3 rounded-md px-3 py-2.5 text-sm font-medium transition-colors",
                     active
-                      ? "bg-white text-[var(--color-primary)] shadow-[0_16px_36px_rgba(255,255,255,0.08)]"
-                      : "text-white/72 hover:bg-white/8 hover:text-white",
+                      ? "bg-white text-[#081f35]"
+                      : "text-white/70 hover:bg-white/8 hover:text-white",
                   )}
                 >
                   <link.icon className="h-4 w-4" />
@@ -126,20 +124,20 @@ export function AdminShell({
             })}
           </nav>
 
-          <div className="mt-6 shrink-0">
-            <div className="rounded-xl border border-white/10 bg-white/[0.04] p-4">
-              <div className="text-[11px] uppercase tracking-[0.16em] text-white/45">
-                Access note
+          <div className="mt-4 shrink-0 border-t border-white/10 pt-4">
+            <div className="mb-3 px-1">
+              <div className="text-[11px] font-semibold uppercase tracking-[0.14em] text-white/40">
+                Admin session
               </div>
-              <div className="mt-2 text-sm leading-6 text-white/66">
-                Admin access is stored locally so client review flows can be tested end to end.
+              <div className="mt-1 text-sm font-medium text-white/80">
+                Active
               </div>
             </div>
 
             <Button
               type="button"
               variant="ghost"
-              className="mt-4 h-12 w-full justify-center rounded-md border-white/20 text-white hover:bg-white/10"
+              className="h-10 w-full justify-center rounded-md border border-white/15 text-white hover:bg-white/10"
               onClick={handleSignOut}
             >
               <LogOut className="mr-2 h-4 w-4" />
@@ -159,12 +157,7 @@ export function AdminShell({
               </h1>
               <p className="mt-2 max-w-3xl text-sm leading-6 text-[var(--color-gray-600)]">{description}</p>
             </div>
-            <div className="flex flex-wrap items-center gap-3">
-              <div className="inline-flex h-10 items-center rounded-md border border-[var(--color-gray-200)] bg-white px-3 text-sm font-medium text-[var(--color-gray-600)] shadow-sm">
-                {adminRole ?? "Admin"} access
-              </div>
-              {actions}
-            </div>
+            {actions ? <div className="flex flex-wrap items-center gap-3">{actions}</div> : null}
           </div>
           {children}
         </main>

@@ -101,7 +101,7 @@ export function AdminFleetScreen() {
     <AdminShell
       title="Fleet"
       description="Track availability, city placement, and daily pricing. Add new vehicles directly into the live public fleet state."
-      actions={<Button type="button" className="rounded-full" onClick={() => setShowForm((value) => !value)}><Plus className="mr-2 h-4 w-4" />{showForm ? "Close Form" : "Add Vehicle"}</Button>}
+      actions={<Button type="button" className="rounded-md" onClick={() => setShowForm((value) => !value)}><Plus className="mr-2 h-4 w-4" />{showForm ? "Close Form" : "Add Vehicle"}</Button>}
     >
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
         <MetricCard label="Fleet size" value={String(vehicles.length)} icon={CarFront} accent="blue" />
@@ -135,12 +135,12 @@ export function AdminFleetScreen() {
             <TextField label="Insurance" value={vehicleDraft.insuranceIncluded} onChange={(value) => setVehicleDraft((current) => ({ ...current, insuranceIncluded: value }))} />
             <label className="xl:col-span-3">
               <div className="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-[var(--color-gray-500)]">Operating cities</div>
-              <div className="flex flex-wrap gap-2">{cities.map((city) => <button key={city} type="button" className={`rounded-full px-4 py-2 text-sm font-medium ${vehicleDraft.cities.includes(city) ? "bg-[var(--color-accent)] text-white" : "border border-[var(--color-gray-200)] bg-white text-[var(--color-gray-600)]"}`} onClick={() => setVehicleDraft((current) => ({ ...current, cities: current.cities.includes(city) ? current.cities.filter((item) => item !== city) : [...current.cities, city] }))}>{city}</button>)}</div>
+              <div className="flex flex-wrap gap-2">{cities.map((city) => <button key={city} type="button" className={`rounded-md px-4 py-2 text-sm font-medium ${vehicleDraft.cities.includes(city) ? "bg-[var(--color-accent)] text-white" : "border border-[var(--color-gray-200)] bg-white text-[var(--color-gray-600)]"}`} onClick={() => setVehicleDraft((current) => ({ ...current, cities: current.cities.includes(city) ? current.cities.filter((item) => item !== city) : [...current.cities, city] }))}>{city}</button>)}</div>
             </label>
             <label className="xl:col-span-3"><div className="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-[var(--color-gray-500)]">Description</div><textarea className="min-h-[120px] w-full rounded-lg border border-[var(--color-gray-200)] bg-[var(--color-gray-100)] px-4 py-3 text-sm outline-none transition focus:border-[var(--color-accent)]" value={vehicleDraft.description} onChange={(event) => setVehicleDraft((current) => ({ ...current, description: event.target.value }))} /></label>
             <label className="xl:col-span-3"><div className="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-[var(--color-gray-500)]">Features</div><textarea className="min-h-[120px] w-full rounded-lg border border-[var(--color-gray-200)] bg-[var(--color-gray-100)] px-4 py-3 text-sm outline-none transition focus:border-[var(--color-accent)]" value={vehicleDraft.featuresText} onChange={(event) => setVehicleDraft((current) => ({ ...current, featuresText: event.target.value }))} /></label>
           </div>
-          <div className="mt-6 flex flex-wrap gap-3"><Button type="button" className="rounded-full" onClick={submitVehicle}>Save Vehicle</Button><Button type="button" variant="secondary" className="rounded-full" onClick={() => setShowForm(false)}>Cancel</Button></div>
+          <div className="mt-6 flex flex-wrap gap-3"><Button type="button" className="rounded-md" onClick={submitVehicle}>Save Vehicle</Button><Button type="button" variant="secondary" className="rounded-md" onClick={() => setShowForm(false)}>Cancel</Button></div>
         </SurfaceCard>
       )}
 
@@ -161,7 +161,7 @@ export function AdminFleetScreen() {
               <div className="flex items-start justify-between gap-3">
                 <div>
                   <div className="font-display text-2xl font-bold tracking-[-0.04em] text-[var(--color-primary)]">{vehicle.name}</div>
-                  <div className="mt-1 text-sm text-[var(--color-gray-600)]">{vehicle.regPlate} � {vehicle.currentCity}</div>
+                  <div className="mt-1 text-sm text-[var(--color-gray-600)]">{vehicle.regPlate} · {vehicle.currentCity}</div>
                 </div>
                 <StatusPill label={vehicle.status} tone={vehicleStatusTone(vehicle.status)} />
               </div>
@@ -171,10 +171,10 @@ export function AdminFleetScreen() {
                 <div>Quantity: {vehicle.availableQuantity} / {vehicle.totalQuantity} available</div>
                 <div>Next booking: {formatDateOnly(vehicle.nextBookingDate)}</div>
               </div>
-              <div className="mt-5 flex flex-wrap gap-2">{vehicle.cities.map((city) => <span key={city} className="rounded-full bg-[var(--color-gray-100)] px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-gray-500)]">{city}</span>)}</div>
+              <div className="mt-5 flex flex-wrap gap-2">{vehicle.cities.map((city) => <span key={city} className="rounded-md bg-[var(--color-gray-100)] px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-gray-500)]">{city}</span>)}</div>
               <div className="mt-5 grid gap-3 sm:grid-cols-[1fr_auto] sm:items-center">
                 <select className={inputClassName} value={vehicle.status} onChange={(event) => updateVehicleStatus(vehicle.id, event.target.value as VehicleStatus)}>{vehicleStatusOptions.map((option) => <option key={option}>{option}</option>)}</select>
-                <Button asChild variant="secondary" className="rounded-full"><Link to={`/fleet/${vehicle.slug}`}>View Page<ExternalLink className="ml-2 h-4 w-4" /></Link></Button>
+                <Button asChild variant="secondary" className="rounded-md"><Link to={`/fleet/${vehicle.slug}`}>View Page<ExternalLink className="ml-2 h-4 w-4" /></Link></Button>
               </div>
             </div>
           </div>

@@ -12,11 +12,11 @@ const permissionsByRole = {
 
 export function AdminUsersScreen() {
   return (
-    <AdminShell title="Users" description="Role-based demo admin access with permissions ready for Firebase, Supabase, or another backend auth layer.">
+    <AdminShell title="Users" description="Role-based admin access with permissions ready for Firebase, Supabase, or another backend auth layer.">
       <div className="grid gap-4 md:grid-cols-3">
         <SurfaceCard title="Admin users" subtitle={String(adminAccessProfiles.length)}><div /></SurfaceCard>
         <SurfaceCard title="Approval roles" subtitle="2"><div /></SurfaceCard>
-        <SurfaceCard title="Auth mode" subtitle="Local demo"><div /></SurfaceCard>
+        <SurfaceCard title="Auth mode" subtitle="Local store"><div /></SurfaceCard>
       </div>
       <div className="mt-6 grid gap-5 xl:grid-cols-2">
         {adminAccessProfiles.map((profile) => {
@@ -30,7 +30,7 @@ export function AdminUsersScreen() {
                   <div className="mt-1 text-sm text-[var(--color-gray-600)]">{profile.email}</div>
                   <div className="mt-3 text-sm text-[var(--color-gray-600)]">{profile.summary}</div>
                   <div className="mt-4 flex flex-wrap gap-2">
-                    {permissions.map((permission) => <span key={permission} className="inline-flex items-center gap-1 rounded-full bg-[var(--color-gray-100)] px-3 py-1 text-xs font-semibold text-[var(--color-primary)]"><ShieldCheck className="h-3 w-3" />{permission}</span>)}
+                    {permissions.map((permission) => <span key={permission} className="inline-flex items-center gap-1 rounded-md bg-[var(--color-gray-100)] px-3 py-1 text-xs font-semibold text-[var(--color-primary)]"><ShieldCheck className="h-3 w-3" />{permission}</span>)}
                   </div>
                 </div>
               </div>

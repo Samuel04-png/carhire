@@ -36,7 +36,7 @@ export function AdminAgreementsScreen() {
                   <div>Accepted at: {booking.acceptedAt ? formatDateOnly(booking.acceptedAt) : "—"}</div>
                   <div>Amount: {formatCurrency(booking.amount)}</div>
                 </div>
-                <Button asChild className="rounded-full"><Link to={`/booking/agreement/${booking.ref}`}><ExternalLink className="mr-2 h-4 w-4" />Open agreement</Link></Button>
+                <Button asChild className="rounded-md"><Link to={`/booking/agreement/${booking.ref}`}><ExternalLink className="mr-2 h-4 w-4" />Open agreement</Link></Button>
               </div>
             </div>
           );

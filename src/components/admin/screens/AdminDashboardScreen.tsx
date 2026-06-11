@@ -133,7 +133,7 @@ export function AdminDashboardScreen() {
               {paymentMix.map((item) => (
                 <div key={item.name} className="flex items-center justify-between rounded-lg bg-[var(--color-gray-100)] px-4 py-3">
                   <div className="flex items-center gap-3">
-                    <span className="h-3 w-3 rounded-full" style={{ backgroundColor: item.color }} />
+                    <span className="h-3 w-3 rounded-md" style={{ backgroundColor: item.color }} />
                     <span className="text-sm font-medium text-[var(--color-gray-600)]">{item.name}</span>
                   </div>
                   <span className="font-semibold text-[var(--color-primary)]">{item.value}</span>
@@ -155,7 +155,7 @@ export function AdminDashboardScreen() {
                   </div>
                   <div>
                     <div className="font-semibold text-[var(--color-primary)]">{client.firstName} {client.lastName}</div>
-                    <div className="text-sm text-[var(--color-gray-600)]">{client.accountType}{client.companyName ? ` � ${client.companyName}` : ""}</div>
+                    <div className="text-sm text-[var(--color-gray-600)]">{client.accountType}{client.companyName ? ` · ${client.companyName}` : ""}</div>
                   </div>
                 </div>
                 <div className="text-sm font-semibold text-[var(--color-primary)]">{formatCurrency(client.totalSpend)}</div>

@@ -57,13 +57,13 @@ export function AdminDriversScreen() {
               <div>Rating: {driver.rating.toFixed(1)}</div>
               <div>Assignment: {driver.currentAssignment}</div>
             </div>
-            <div className="mt-5 flex flex-wrap gap-2">{driver.vehiclePreferences.map((preference) => <span key={preference} className="rounded-full bg-[var(--color-gray-100)] px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-gray-500)]">{preference}</span>)}</div>
+            <div className="mt-5 flex flex-wrap gap-2">{driver.vehiclePreferences.map((preference) => <span key={preference} className="rounded-md bg-[var(--color-gray-100)] px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-gray-500)]">{preference}</span>)}</div>
             <div className="mt-6 grid gap-3">
               <select className={inputClassName} value={driver.status} onChange={(event) => updateDriverStatus(driver.id, event.target.value as DriverStatus)}>{driverStatusOptions.map((option) => <option key={option}>{option}</option>)}</select>
               <div className="flex flex-wrap gap-2">
-                <Button asChild size="sm" variant="secondary" className="rounded-full"><a href={toPhoneHref(driver.phone)}><Phone className="mr-2 h-4 w-4" />Call</a></Button>
-                <Button asChild size="sm" variant="secondary" className="rounded-full"><a href={`mailto:${driver.email}`}><Mail className="mr-2 h-4 w-4" />Email</a></Button>
-                {driver.currentAssignment.startsWith("SCH-") && <Button asChild size="sm" className="rounded-full"><Link to={`/booking/confirmation/${driver.currentAssignment}`}>Open Trip</Link></Button>}
+                <Button asChild size="sm" variant="secondary" className="rounded-md"><a href={toPhoneHref(driver.phone)}><Phone className="mr-2 h-4 w-4" />Call</a></Button>
+                <Button asChild size="sm" variant="secondary" className="rounded-md"><a href={`mailto:${driver.email}`}><Mail className="mr-2 h-4 w-4" />Email</a></Button>
+                {driver.currentAssignment.startsWith("SCH-") && <Button asChild size="sm" className="rounded-md"><Link to={`/booking/confirmation/${driver.currentAssignment}`}>Open Trip</Link></Button>}
               </div>
             </div>
           </div>
