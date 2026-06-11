@@ -149,6 +149,7 @@ export function Navbar() {
               <div className="flex items-center justify-between">
                 <BrandLogo
                   priority
+                  variant="boxed"
                   className="flex max-w-[180px] items-center rounded-[22px] border border-white/40 bg-white px-3 py-2 shadow-[0_14px_32px_rgba(10,22,40,0.18)]"
                   imageClassName="h-11 max-w-full sm:h-12"
                 />

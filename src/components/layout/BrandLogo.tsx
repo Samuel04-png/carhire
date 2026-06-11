@@ -11,7 +11,7 @@ type BrandLogoProps = {
 
 const logoSources = {
   transparent: withBase("/brand/dots/dots-logo-navbar.png"),
-  boxed: withBase("/brand/dots/dots-logo-navbar.png"),
+  boxed: withBase("/brand/dots/dots-logo-on-white.png"),
 };
 
 export function BrandLogo({
