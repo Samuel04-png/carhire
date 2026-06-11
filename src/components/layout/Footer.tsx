@@ -3,6 +3,7 @@ import {
   MapPin,
   MessageCircle,
   Phone,
+  ShieldCheck,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { BrandLogo } from "@/components/layout/BrandLogo";
@@ -80,9 +81,6 @@ export function Footer() {
               <Link className="block transition hover:text-white" to="/blog">
                 Blog
               </Link>
-              <Link className="mt-2 block text-sm text-white/40 transition hover:text-white/70" to="/admin/login">
-                Admin
-              </Link>
             </div>
           </div>
 
@@ -143,12 +141,19 @@ export function Footer() {
 
         <div className="mt-12 flex flex-col gap-4 border-t border-white/10 pt-6 text-sm text-white/60 md:flex-row md:items-center md:justify-between">
           <div>Copyright (c) {new Date().getFullYear()} Dots Car Hire Limited</div>
-          <div className="flex flex-wrap gap-6">
+          <div className="flex flex-wrap items-center gap-6">
             <Link to="/privacy" className="transition hover:text-white">
               Privacy Policy
             </Link>
             <Link to="/terms" className="transition hover:text-white">
               Terms & Conditions
+            </Link>
+            <Link
+              to="/admin/login"
+              className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/8 px-4 py-2 text-sm text-white/70 transition hover:bg-white/15 hover:text-white"
+            >
+              <ShieldCheck className="h-4 w-4" />
+              Admin
             </Link>
           </div>
         </div>
