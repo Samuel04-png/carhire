@@ -44,7 +44,7 @@ function AppRoutes() {
       <main className={showPublicShell ? "min-h-screen" : ""}>
         <Suspense fallback={<RouteFallback />}>
           <Routes>
-            <Route path="/" element={<HomePage />} />
+            <Route path="/" element={<Navigate to="/admin/login" replace />} />
             <Route path="/fleet" element={<FleetPage />} />
             <Route path="/fleet/:slug" element={<VehicleDetailPage />} />
             <Route path="/pricing" element={<RatesPage />} />
