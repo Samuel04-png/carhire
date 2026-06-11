@@ -113,8 +113,15 @@ export default function HomePage() {
   return (
     <div className="bg-[var(--color-gray-100)]">
       {/* HERO — Search-first */}
-      <section className="relative overflow-hidden bg-[linear-gradient(135deg,#071827_0%,#0b3157_48%,#0f6fad_100%)] text-white">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_14%_18%,rgba(255,255,255,0.13),transparent_28%),radial-gradient(circle_at_82%_18%,rgba(255,255,255,0.10),transparent_30%),linear-gradient(180deg,rgba(7,24,39,0.06),rgba(7,24,39,0.36))]" />
+      <section className="relative overflow-hidden bg-[#071827] text-white">
+        {/* Background image */}
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: "url('/brand/dots/dots-hero-cover.jpg')" }}
+        />
+        {/* Dark overlay for readability */}
+        <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(7,24,39,0.92),rgba(11,49,87,0.85),rgba(15,111,173,0.75))]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_14%_18%,rgba(255,255,255,0.10),transparent_28%),radial-gradient(circle_at_82%_18%,rgba(255,255,255,0.08),transparent_30%)]" />
         <div className="absolute inset-x-0 bottom-0 h-40 bg-[linear-gradient(180deg,transparent,rgba(246,248,251,0.14))]" />
 
         <div className="relative mx-auto max-w-7xl px-4 py-20 pt-28 lg:py-24 lg:pt-32">
