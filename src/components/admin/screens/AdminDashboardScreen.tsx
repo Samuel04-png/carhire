@@ -41,13 +41,13 @@ export function AdminDashboardScreen() {
       description="Today's bookings, dispatch readiness, payment follow-up, and fleet pressure points in one view."
       actions={
         <div className="flex flex-wrap gap-3">
-          <Button asChild className="rounded-full">
+          <Button asChild className="rounded-md">
             <Link to="/admin/bookings/new">
               <CalendarRange className="mr-2 h-4 w-4" />
               New Booking
             </Link>
           </Button>
-          <Button asChild variant="secondary" className="rounded-full">
+          <Button asChild variant="secondary" className="rounded-md">
             <Link to="/admin/reports/revenue">
               <ArrowRight className="mr-2 h-4 w-4" />
               Open Reports
@@ -67,7 +67,7 @@ export function AdminDashboardScreen() {
         <MetricCard label="Pending payments" value={String(pendingPayments.length)} icon={FileBarChart} accent="amber" />
       </div>
 
-      <div className="mt-6 grid gap-6 xl:grid-cols-[1.25fr_0.75fr]">
+      <div className="mt-5 grid gap-5 xl:grid-cols-[1.25fr_0.75fr]">
         <SurfaceCard title="Revenue by city" subtitle="Current booking value across the operating cities.">
           <div className="h-[320px]">
             <ResponsiveContainer width="100%" height="100%">
@@ -83,7 +83,7 @@ export function AdminDashboardScreen() {
         </SurfaceCard>
 
         <SurfaceCard title="Control alerts" subtitle="Issues that need operational attention.">
-          <div className="space-y-4">
+          <div className="space-y-3">
             <AlertTile title={`${maintenanceVehicles.length} vehicles in maintenance`} description="Check return-to-service timing before confirming new allocations." tone="amber" />
             <AlertTile title={`${pendingPayments.length} bookings need payment follow-up`} description="Pending and partial payments are the highest operational risk for no-shows." tone="blue" />
             <AlertTile title={`${drivers.filter((driver) => driver.status === "Available").length} drivers available`} description="Ready to cover airport runs, executive movement, and event dispatch." tone="green" />
@@ -91,11 +91,11 @@ export function AdminDashboardScreen() {
         </SurfaceCard>
       </div>
 
-      <div className="mt-6 grid gap-6 xl:grid-cols-[1.05fr_0.95fr]">
+      <div className="mt-5 grid gap-5 xl:grid-cols-[1.05fr_0.95fr]">
         <SurfaceCard title="Dispatch queue" subtitle="Bookings with active operational movement.">
-          <div className="space-y-4">
+          <div className="space-y-3">
             {dispatchQueue.map((booking) => (
-              <div key={booking.ref} className="rounded-[24px] border border-[var(--color-gray-200)] bg-[var(--color-gray-100)] p-4">
+              <div key={booking.ref} className="rounded-lg border border-[var(--color-gray-200)] bg-[var(--color-gray-100)] p-4">
                 <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                   <div>
                     <div className="flex flex-wrap items-center gap-2">
@@ -106,7 +106,7 @@ export function AdminDashboardScreen() {
                       {booking.pickupCity} | {formatDateTime(booking.pickupDateTime)}
                     </div>
                   </div>
-                  <Button asChild size="sm" variant="secondary" className="rounded-full">
+                  <Button asChild size="sm" variant="secondary" className="rounded-md">
                     <Link to="/admin/bookings">Open bookings</Link>
                   </Button>
                 </div>
@@ -131,7 +131,7 @@ export function AdminDashboardScreen() {
             </div>
             <div className="space-y-3">
               {paymentMix.map((item) => (
-                <div key={item.name} className="flex items-center justify-between rounded-[20px] bg-[var(--color-gray-100)] px-4 py-3">
+                <div key={item.name} className="flex items-center justify-between rounded-lg bg-[var(--color-gray-100)] px-4 py-3">
                   <div className="flex items-center gap-3">
                     <span className="h-3 w-3 rounded-full" style={{ backgroundColor: item.color }} />
                     <span className="text-sm font-medium text-[var(--color-gray-600)]">{item.name}</span>
@@ -144,13 +144,13 @@ export function AdminDashboardScreen() {
         </SurfaceCard>
       </div>
 
-      <div className="mt-6 grid gap-6 xl:grid-cols-[1fr_1fr]">
+      <div className="mt-5 grid gap-5 xl:grid-cols-[1fr_1fr]">
         <SurfaceCard title="Top clients" subtitle="Accounts driving the highest value.">
-          <div className="space-y-4">
+          <div className="space-y-3">
             {highValueClients.map((client) => (
-              <div key={client.id} className="flex flex-col gap-3 rounded-[24px] border border-[var(--color-gray-200)] bg-white p-4 sm:flex-row sm:items-center sm:justify-between">
+              <div key={client.id} className="flex flex-col gap-3 rounded-lg border border-[var(--color-gray-200)] bg-white p-4 sm:flex-row sm:items-center sm:justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="grid h-12 w-12 place-items-center rounded-2xl bg-[var(--color-primary)] text-white">
+                  <div className="grid h-10 w-10 place-items-center rounded-lg bg-[var(--color-primary)] text-white">
                     <Users2 className="h-5 w-5" />
                   </div>
                   <div>
@@ -172,10 +172,10 @@ export function AdminDashboardScreen() {
               { label: "Client directory", href: "/admin/clients", icon: Users2 },
               { label: "Settings", href: "/admin/settings", icon: FileBarChart },
             ].map((item) => (
-              <Link key={item.href} to={item.href} className="rounded-[26px] border border-[var(--color-gray-200)] bg-white p-5 transition hover:-translate-y-[2px] hover:shadow-[0_18px_40px_rgba(10,22,40,0.08)]">
+              <Link key={item.href} to={item.href} className="rounded-lg border border-[var(--color-gray-200)] bg-white p-4 transition-colors hover:border-[var(--color-accent)] hover:bg-[var(--color-gray-100)]">
                 <item.icon className="h-5 w-5 text-[var(--color-accent)]" />
                 <div className="mt-4 font-semibold text-[var(--color-primary)]">{item.label}</div>
-                <div className="mt-1 text-sm text-[var(--color-gray-600)]">Open this area.</div>
+                <div className="mt-1 text-sm text-[var(--color-gray-600)]">View records</div>
               </Link>
             ))}
           </div>

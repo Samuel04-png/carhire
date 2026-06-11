@@ -47,7 +47,7 @@ export default function BookingLookupPage() {
       />
 
       <section className="mx-auto max-w-4xl px-4 py-20">
-        <div className="rounded-[34px] border border-[var(--color-gray-200)] bg-white p-8 shadow-[0_20px_70px_rgba(10,22,40,0.08)]">
+        <div className="rounded-xl border border-[var(--color-gray-200)] bg-white p-8 shadow-sm">
           <form onSubmit={handleSubmit} className="grid gap-4 md:grid-cols-[1fr_1fr_auto]">
             <label className="block">
               <span className="mb-2 block text-xs font-semibold uppercase tracking-[0.24em] text-[var(--color-gray-500)]">
@@ -82,7 +82,7 @@ export default function BookingLookupPage() {
           {error && <div className="mt-6 text-sm text-[var(--color-error)]">{error}</div>}
 
           {booking && vehicle && (
-            <div className="mt-8 rounded-[28px] bg-[var(--color-gray-100)] p-6">
+            <div className="mt-8 rounded-lg bg-[var(--color-gray-100)] p-6">
               <div className="font-display text-3xl font-bold tracking-[-0.04em] text-[var(--color-primary)]">
                 {booking.ref}
               </div>

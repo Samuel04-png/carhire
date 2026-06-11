@@ -25,7 +25,7 @@ export default function BlogDetailPage() {
       />
 
       <article className="mx-auto max-w-4xl px-4 py-20">
-        <div className="rounded-[34px] border border-[var(--color-gray-200)] bg-white p-8 shadow-[0_20px_70px_rgba(10,22,40,0.08)] md:p-12">
+        <div className="rounded-xl border border-[var(--color-gray-200)] bg-white p-8 shadow-sm md:p-12">
           <div className="mb-6 text-xs uppercase tracking-[0.26em] text-[var(--color-gray-500)]">
             {post.publishedAt} | {post.readTime}
           </div>

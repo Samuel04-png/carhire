@@ -34,7 +34,7 @@ export default function ServicesPage() {
             return (
               <div
                 key={service.slug}
-                className="overflow-hidden rounded-[34px] border border-[var(--color-gray-200)] bg-white shadow-[0_20px_70px_rgba(10,22,40,0.08)]"
+                className="overflow-hidden rounded-xl border border-[var(--color-gray-200)] bg-white shadow-sm"
               >
                 <div className="grid gap-0 md:grid-cols-[0.9fr_1.1fr]">
                   <img
@@ -58,7 +58,7 @@ export default function ServicesPage() {
                         <div key={item}>{item}</div>
                       ))}
                     </div>
-                    <div className="mt-6 rounded-[24px] bg-[var(--color-gray-100)] p-4">
+                    <div className="mt-6 rounded-lg bg-[var(--color-gray-100)] p-4">
                       <div className="text-xs uppercase tracking-[0.22em] text-[var(--color-gray-500)]">
                         Matching categories
                       </div>

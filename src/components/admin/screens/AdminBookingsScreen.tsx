@@ -268,7 +268,7 @@ export function AdminBookingsScreen({ createMode = false }: { createMode?: boole
                 <TextField label="Pickup time" type="time" value={form.pickupTime} onChange={(value) => updateField("pickupTime", value)} />
                 <TextField label="Return date" type="date" value={form.returnDate} onChange={(value) => updateField("returnDate", value)} />
                 <TextField label="Return time" type="time" value={form.returnTime} onChange={(value) => updateField("returnTime", value)} />
-                <label className="md:col-span-2 flex items-center justify-between rounded-[24px] border border-[var(--color-gray-200)] bg-[var(--color-gray-100)] px-4 py-4">
+                <label className="md:col-span-2 flex items-center justify-between rounded-lg border border-[var(--color-gray-200)] bg-[var(--color-gray-100)] px-4 py-4">
                   <div>
                     <div className="text-sm font-semibold text-[var(--color-primary)]">Chauffeur required</div>
                     <div className="mt-1 text-sm text-[var(--color-gray-600)]">Toggle managed driver service for this booking.</div>
@@ -290,7 +290,7 @@ export function AdminBookingsScreen({ createMode = false }: { createMode?: boole
                   {availableExtras.map((extra) => {
                     const selected = form.extras.includes(extra.id);
                     return (
-                      <button key={extra.id} type="button" onClick={() => toggleExtra(extra.id)} className={`rounded-[24px] border px-4 py-4 text-left transition ${selected ? "border-[var(--color-accent)] bg-[rgba(26,127,212,0.08)]" : "border-[var(--color-gray-200)] bg-white"}`}>
+                      <button key={extra.id} type="button" onClick={() => toggleExtra(extra.id)} className={`rounded-lg border px-4 py-4 text-left transition ${selected ? "border-[var(--color-accent)] bg-[rgba(26,127,212,0.08)]" : "border-[var(--color-gray-200)] bg-white"}`}>
                         <div className="font-semibold text-[var(--color-primary)]">{extra.title}</div>
                         <div className="mt-2 text-sm text-[var(--color-gray-600)]">{extra.description}</div>
                         <div className="mt-3 text-xs uppercase tracking-[0.22em] text-[var(--color-gray-500)]">{extra.pricing === "daily" ? `${formatCurrency(extra.price)} / day` : formatCurrency(extra.price)}</div>
@@ -340,7 +340,7 @@ export function AdminBookingsScreen({ createMode = false }: { createMode?: boole
                 <SummaryRow label="Pickup" value={`${form.pickupCity} � ${form.pickupDate} ${form.pickupTime}`} />
                 <SummaryRow label="Return" value={`${form.returnDate} ${form.returnTime}`} />
                 <SummaryRow label="With driver" value={form.withDriver ? "Yes" : "No"} />
-                <div className="rounded-[24px] bg-[var(--color-primary)] p-5 text-white">
+                <div className="rounded-lg bg-[var(--color-primary)] p-5 text-white">
                   <div className="text-xs uppercase tracking-[0.22em] text-white/45">Projected total</div>
                   <div className="mt-3 font-display text-4xl font-bold tracking-[-0.05em]">{formatCurrency(projectedTotal)}</div>
                 </div>
@@ -391,7 +391,7 @@ export function AdminBookingsScreen({ createMode = false }: { createMode?: boole
           const vehicle = vehicles.find((item) => item.id === booking.vehicleId);
           const client = clients.find((item) => item.id === booking.clientId);
           return (
-            <div key={booking.ref} className="rounded-[30px] border border-[var(--color-gray-200)] bg-white p-5 shadow-[0_18px_60px_rgba(10,22,40,0.06)]">
+            <div key={booking.ref} className="rounded-xl border border-[var(--color-gray-200)] bg-white p-5 shadow-sm">
               <div className="grid gap-5 2xl:grid-cols-[1.3fr_0.75fr_0.75fr_0.95fr_0.95fr_0.9fr]">
                 <div>
                   <div className="flex flex-wrap items-center gap-2">

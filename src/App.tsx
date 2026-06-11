@@ -97,7 +97,7 @@ function LegacyConfirmationRedirect() {
 function RouteFallback() {
   return (
     <div className="flex min-h-[60vh] items-center justify-center bg-[var(--color-gray-100)] px-4 pt-28">
-      <div className="rounded-[28px] border border-[var(--color-gray-200)] bg-white px-6 py-5 text-sm font-medium text-[var(--color-gray-600)] shadow-[0_18px_60px_rgba(10,22,40,0.06)]">
+      <div className="rounded-lg border border-[var(--color-gray-200)] bg-white px-6 py-5 text-sm font-medium text-[var(--color-gray-600)] shadow-sm">
         Loading interface...
       </div>
     </div>

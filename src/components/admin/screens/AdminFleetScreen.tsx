@@ -137,8 +137,8 @@ export function AdminFleetScreen() {
               <div className="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-[var(--color-gray-500)]">Operating cities</div>
               <div className="flex flex-wrap gap-2">{cities.map((city) => <button key={city} type="button" className={`rounded-full px-4 py-2 text-sm font-medium ${vehicleDraft.cities.includes(city) ? "bg-[var(--color-accent)] text-white" : "border border-[var(--color-gray-200)] bg-white text-[var(--color-gray-600)]"}`} onClick={() => setVehicleDraft((current) => ({ ...current, cities: current.cities.includes(city) ? current.cities.filter((item) => item !== city) : [...current.cities, city] }))}>{city}</button>)}</div>
             </label>
-            <label className="xl:col-span-3"><div className="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-[var(--color-gray-500)]">Description</div><textarea className="min-h-[120px] w-full rounded-[24px] border border-[var(--color-gray-200)] bg-[var(--color-gray-100)] px-4 py-3 text-sm outline-none transition focus:border-[var(--color-accent)]" value={vehicleDraft.description} onChange={(event) => setVehicleDraft((current) => ({ ...current, description: event.target.value }))} /></label>
-            <label className="xl:col-span-3"><div className="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-[var(--color-gray-500)]">Features</div><textarea className="min-h-[120px] w-full rounded-[24px] border border-[var(--color-gray-200)] bg-[var(--color-gray-100)] px-4 py-3 text-sm outline-none transition focus:border-[var(--color-accent)]" value={vehicleDraft.featuresText} onChange={(event) => setVehicleDraft((current) => ({ ...current, featuresText: event.target.value }))} /></label>
+            <label className="xl:col-span-3"><div className="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-[var(--color-gray-500)]">Description</div><textarea className="min-h-[120px] w-full rounded-lg border border-[var(--color-gray-200)] bg-[var(--color-gray-100)] px-4 py-3 text-sm outline-none transition focus:border-[var(--color-accent)]" value={vehicleDraft.description} onChange={(event) => setVehicleDraft((current) => ({ ...current, description: event.target.value }))} /></label>
+            <label className="xl:col-span-3"><div className="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-[var(--color-gray-500)]">Features</div><textarea className="min-h-[120px] w-full rounded-lg border border-[var(--color-gray-200)] bg-[var(--color-gray-100)] px-4 py-3 text-sm outline-none transition focus:border-[var(--color-accent)]" value={vehicleDraft.featuresText} onChange={(event) => setVehicleDraft((current) => ({ ...current, featuresText: event.target.value }))} /></label>
           </div>
           <div className="mt-6 flex flex-wrap gap-3"><Button type="button" className="rounded-full" onClick={submitVehicle}>Save Vehicle</Button><Button type="button" variant="secondary" className="rounded-full" onClick={() => setShowForm(false)}>Cancel</Button></div>
         </SurfaceCard>
@@ -155,7 +155,7 @@ export function AdminFleetScreen() {
 
       <div className="mt-6 grid gap-6 md:grid-cols-2 2xl:grid-cols-3">
         {filteredVehicles.map((vehicle) => (
-          <div key={vehicle.id} className="overflow-hidden rounded-[32px] border border-[var(--color-gray-200)] bg-white shadow-[0_18px_60px_rgba(10,22,40,0.06)]">
+          <div key={vehicle.id} className="overflow-hidden rounded-xl border border-[var(--color-gray-200)] bg-white shadow-sm">
             <img src={vehicle.mainImage} alt={vehicle.name} className="h-52 w-full object-cover" referrerPolicy="no-referrer" />
             <div className="p-5">
               <div className="flex items-start justify-between gap-3">

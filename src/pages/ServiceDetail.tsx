@@ -81,7 +81,7 @@ export default function ServiceDetailPage() {
               {service.includes.map((item) => (
                 <div
                   key={item}
-                  className="rounded-[28px] border border-[var(--color-gray-200)] bg-white p-5 shadow-[0_18px_60px_rgba(10,22,40,0.06)]"
+                  className="rounded-lg border border-[var(--color-gray-200)] bg-white p-5 shadow-sm"
                 >
                   <CheckCircle2 className="h-5 w-5 text-[var(--color-accent)]" />
                   <div className="mt-4 font-semibold text-[var(--color-primary)]">
@@ -92,7 +92,7 @@ export default function ServiceDetailPage() {
             </div>
           </div>
 
-          <div className="rounded-[34px] border border-[var(--color-gray-200)] bg-white p-8 shadow-[0_20px_70px_rgba(10,22,40,0.08)]">
+          <div className="rounded-xl border border-[var(--color-gray-200)] bg-white p-8 shadow-sm">
             <div className="text-xs uppercase tracking-[0.26em] text-[var(--color-accent)]">
               How it works
             </div>
@@ -106,7 +106,7 @@ export default function ServiceDetailPage() {
                 </div>
               ))}
             </div>
-            <div className="mt-8 rounded-[28px] bg-[var(--color-primary)] p-6 text-white">
+            <div className="mt-8 rounded-lg bg-[var(--color-primary)] p-6 text-white">
               <div className="text-xs uppercase tracking-[0.26em] text-white/55">
                 Pricing note
               </div>
@@ -141,7 +141,7 @@ export default function ServiceDetailPage() {
 
       <section className="mx-auto max-w-7xl px-4 pb-20">
         <div className="grid gap-8 lg:grid-cols-2">
-          <div className="rounded-[34px] border border-[var(--color-gray-200)] bg-white p-8 shadow-[0_18px_60px_rgba(10,22,40,0.06)]">
+          <div className="rounded-xl border border-[var(--color-gray-200)] bg-white p-8 shadow-sm">
             <SectionHeader
               eyebrow="FAQ"
               title="Questions clients ask before they confirm"
@@ -149,7 +149,7 @@ export default function ServiceDetailPage() {
             />
             <div className="mt-8 space-y-4">
               {service.faq.map((item) => (
-                <div key={item.question} className="rounded-[26px] bg-[var(--color-gray-100)] p-5">
+                <div key={item.question} className="rounded-lg bg-[var(--color-gray-100)] p-5">
                   <div className="font-semibold text-[var(--color-primary)]">
                     {item.question}
                   </div>
@@ -161,7 +161,7 @@ export default function ServiceDetailPage() {
             </div>
           </div>
 
-          <div className="rounded-[34px] border border-[var(--color-gray-200)] bg-white p-8 shadow-[0_18px_60px_rgba(10,22,40,0.06)]">
+          <div className="rounded-xl border border-[var(--color-gray-200)] bg-white p-8 shadow-sm">
             <SectionHeader
               eyebrow="Testimonials"
               title="What clients say after the journey"
@@ -169,7 +169,7 @@ export default function ServiceDetailPage() {
             />
             <div className="mt-8 space-y-4">
               {serviceTestimonials.map((testimonial) => (
-                <div key={testimonial.id} className="rounded-[26px] bg-[var(--color-gray-100)] p-5">
+                <div key={testimonial.id} className="rounded-lg bg-[var(--color-gray-100)] p-5">
                   <div className="font-semibold text-[var(--color-primary)]">
                     {testimonial.name}
                   </div>
@@ -187,7 +187,7 @@ export default function ServiceDetailPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-4">
-        <div className="overflow-hidden rounded-[36px] bg-[var(--color-primary)] p-8 text-white shadow-[0_20px_80px_rgba(10,22,40,0.18)]">
+        <div className="overflow-hidden rounded-xl bg-[var(--color-primary)] p-8 text-white shadow-md">
           <div className="grid gap-6 lg:grid-cols-[1.3fr_0.7fr] lg:items-center">
             <div>
               <div className="text-xs uppercase tracking-[0.3em] text-[var(--color-accent)]">

@@ -74,7 +74,7 @@ export function AdminReportsScreen() {
 
       <div className="mt-6 grid gap-6 xl:grid-cols-[1fr_1fr]">
         <SurfaceCard title="Top clients by spend" subtitle="Current highest-value accounts.">
-          <div className="space-y-4">{topClients.map((client) => <div key={client.client} className="flex items-center justify-between rounded-[24px] bg-[var(--color-gray-100)] px-4 py-4"><div className="font-semibold text-[var(--color-primary)]">{client.client}</div><div className="text-sm font-semibold text-[var(--color-primary)]">{formatCurrency(client.spend)}</div></div>)}</div>
+          <div className="space-y-4">{topClients.map((client) => <div key={client.client} className="flex items-center justify-between rounded-lg bg-[var(--color-gray-100)] px-4 py-4"><div className="font-semibold text-[var(--color-primary)]">{client.client}</div><div className="text-sm font-semibold text-[var(--color-primary)]">{formatCurrency(client.spend)}</div></div>)}</div>
         </SurfaceCard>
         <SurfaceCard title="Report shortcuts" subtitle="Every action below downloads a real file.">
           <div className="grid gap-4 sm:grid-cols-2">
@@ -83,7 +83,7 @@ export function AdminReportsScreen() {
               { label: "Monthly revenue export", action: downloadRevenueCsv, summary: "City-level revenue CSV for finance review." },
               { label: "Fleet utilisation report", action: () => { downloadFile("fleet-utilisation.csv", buildCsv(vehicles.map((vehicle) => ({ vehicle: vehicle.name, city: vehicle.currentCity, status: vehicle.status, next_booking: vehicle.nextBookingDate }))), "text/csv;charset=utf-8"); toast.success("Fleet utilisation report exported."); }, summary: "Vehicle status, city placement, and next booking timing." },
               { label: "Client activity report", action: () => { downloadFile("client-activity.csv", buildCsv(clients.map((client) => ({ client: `${client.firstName} ${client.lastName}`, account_type: client.accountType, bookings: client.bookingCount, total_spend: client.totalSpend }))), "text/csv;charset=utf-8"); toast.success("Client activity report exported."); }, summary: "Bookings and spend by client record." },
-            ].map((item) => <button key={item.label} type="button" onClick={item.action} className="rounded-[24px] border border-[var(--color-gray-200)] bg-white p-5 text-left transition hover:-translate-y-[2px] hover:shadow-[0_18px_36px_rgba(10,22,40,0.08)]"><Download className="h-5 w-5 text-[var(--color-accent)]" /><div className="mt-4 font-semibold text-[var(--color-primary)]">{item.label}</div><div className="mt-2 text-sm text-[var(--color-gray-600)]">{item.summary}</div></button>)}
+            ].map((item) => <button key={item.label} type="button" onClick={item.action} className="rounded-lg border border-[var(--color-gray-200)] bg-white p-5 text-left transition hover:shadow-[0_18px_36px_rgba(10,22,40,0.08)]"><Download className="h-5 w-5 text-[var(--color-accent)]" /><div className="mt-4 font-semibold text-[var(--color-primary)]">{item.label}</div><div className="mt-2 text-sm text-[var(--color-gray-600)]">{item.summary}</div></button>)}
           </div>
         </SurfaceCard>
       </div>

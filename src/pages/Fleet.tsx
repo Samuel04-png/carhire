@@ -70,7 +70,7 @@ export default function FleetPage() {
         </button>
       </div>
 
-        <div className="rounded-[30px] border border-[var(--color-gray-200)] bg-white p-6 shadow-[0_20px_70px_rgba(10,22,40,0.06)]">
+        <div className="rounded-xl border border-[var(--color-gray-200)] bg-white p-6 shadow-[0_20px_70px_rgba(10,22,40,0.06)]">
           <div className="mb-5 flex items-center gap-3">
             <Filter className="h-5 w-5 text-[var(--color-accent)]" />
             <div>
@@ -183,7 +183,7 @@ export default function FleetPage() {
         <div className="hidden w-[320px] shrink-0 lg:block">{filterPanel}</div>
 
         <div className="min-w-0 flex-1">
-          <div className="mb-6 flex flex-col gap-4 rounded-[30px] border border-[var(--color-gray-200)] bg-white p-5 shadow-[0_20px_70px_rgba(10,22,40,0.06)] md:flex-row md:items-center md:justify-between">
+          <div className="mb-6 flex flex-col gap-4 rounded-xl border border-[var(--color-gray-200)] bg-white p-5 shadow-[0_20px_70px_rgba(10,22,40,0.06)] md:flex-row md:items-center md:justify-between">
             <div>
               <div className="text-sm font-medium text-[var(--color-gray-500)]">
                 Showing{" "}
@@ -231,7 +231,7 @@ export default function FleetPage() {
               ))}
             </div>
           ) : (
-            <div className="rounded-[32px] border border-dashed border-[var(--color-gray-300)] bg-white p-12 text-center shadow-[0_20px_70px_rgba(10,22,40,0.06)]">
+            <div className="rounded-xl border border-dashed border-[var(--color-gray-300)] bg-white p-12 text-center shadow-[0_20px_70px_rgba(10,22,40,0.06)]">
               <div className="font-display text-3xl font-bold tracking-[-0.04em] text-[var(--color-primary)]">
                 No vehicles match this view.
               </div>

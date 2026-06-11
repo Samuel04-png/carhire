@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import type { LucideIcon } from "lucide-react";
-import { Activity, Sparkles } from "lucide-react";
+import { Activity } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type {
   AdminSettings,
@@ -29,14 +29,14 @@ export function MetricCard({
   };
 
   return (
-    <div className="rounded-[30px] border border-[var(--color-gray-200)] bg-white p-6 shadow-[0_18px_60px_rgba(10,22,40,0.06)]">
-      <div className="flex items-center gap-3">
-        <div className={cn("grid h-12 w-12 place-items-center rounded-2xl", accentClasses[accent])}>
-          <Icon className="h-5 w-5" />
+    <div className="rounded-xl border border-[var(--color-gray-200)] bg-white p-5 shadow-sm">
+      <div className="flex items-center justify-between gap-3">
+        <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--color-gray-500)]">{label}</div>
+        <div className={cn("grid h-9 w-9 place-items-center rounded-lg", accentClasses[accent])}>
+          <Icon className="h-4 w-4" />
         </div>
-        <div className="text-xs uppercase tracking-[0.22em] text-[var(--color-gray-500)]">{label}</div>
       </div>
-      <div className="mt-6 font-display text-4xl font-bold tracking-[-0.05em] text-[var(--color-primary)]">{value}</div>
+      <div className="mt-4 font-display text-2xl font-semibold tracking-[-0.03em] text-[var(--color-primary)]">{value}</div>
     </div>
   );
 }
@@ -53,12 +53,12 @@ export function SurfaceCard({
   className?: string;
 }) {
   return (
-    <div className={cn("rounded-[32px] border border-[var(--color-gray-200)] bg-white p-6 shadow-[0_18px_60px_rgba(10,22,40,0.06)]", className)}>
+    <div className={cn("rounded-xl border border-[var(--color-gray-200)] bg-white p-5 shadow-sm", className)}>
       <div>
-        <div className="font-display text-3xl font-bold tracking-[-0.04em] text-[var(--color-primary)]">{title}</div>
-        {subtitle && <div className="mt-2 text-sm text-[var(--color-gray-600)]">{subtitle}</div>}
+        <div className="font-display text-xl font-semibold tracking-[-0.025em] text-[var(--color-primary)]">{title}</div>
+        {subtitle && <div className="mt-1.5 text-sm leading-6 text-[var(--color-gray-600)]">{subtitle}</div>}
       </div>
-      <div className="mt-6">{children}</div>
+      <div className="mt-5">{children}</div>
     </div>
   );
 }
@@ -78,7 +78,7 @@ export function StatusPill({
     slate: "bg-[var(--color-gray-100)] text-[var(--color-gray-600)]",
   };
 
-  return <span className={cn("rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em]", tones[tone])}>{label}</span>;
+  return <span className={cn("rounded-md px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.12em]", tones[tone])}>{label}</span>;
 }
 
 export function AlertTile({
@@ -97,9 +97,9 @@ export function AlertTile({
   };
 
   return (
-    <div className={cn("rounded-[24px] border p-4", toneClasses[tone])}>
-      <div className="font-semibold text-[var(--color-primary)]">{title}</div>
-      <div className="mt-2 text-sm text-[var(--color-gray-600)]">{description}</div>
+    <div className={cn("rounded-lg border p-4", toneClasses[tone])}>
+      <div className="text-sm font-semibold text-[var(--color-primary)]">{title}</div>
+      <div className="mt-1.5 text-sm leading-6 text-[var(--color-gray-600)]">{description}</div>
     </div>
   );
 }
@@ -166,12 +166,12 @@ export function EmptyState({
   action?: ReactNode;
 }) {
   return (
-    <div className="rounded-[30px] border border-dashed border-[var(--color-gray-300)] bg-white px-6 py-12 text-center">
-      <div className="mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-[var(--color-gray-100)] text-[var(--color-accent)]">
-        <Sparkles className="h-5 w-5" />
+    <div className="rounded-xl border border-dashed border-[var(--color-gray-300)] bg-white px-6 py-10 text-center">
+      <div className="mx-auto grid h-12 w-12 place-items-center rounded-lg bg-[var(--color-gray-100)] text-[var(--color-accent)]">
+        <Activity className="h-5 w-5" />
       </div>
-      <div className="mt-5 font-display text-3xl font-bold tracking-[-0.04em] text-[var(--color-primary)]">{title}</div>
-      <div className="mx-auto mt-3 max-w-xl text-sm text-[var(--color-gray-600)]">{description}</div>
+      <div className="mt-4 font-display text-xl font-semibold tracking-[-0.025em] text-[var(--color-primary)]">{title}</div>
+      <div className="mx-auto mt-2 max-w-xl text-sm leading-6 text-[var(--color-gray-600)]">{description}</div>
       {action && <div className="mt-6">{action}</div>}
     </div>
   );
@@ -285,10 +285,10 @@ export const inputClassName =
   "h-12 w-full rounded-2xl border border-[var(--color-gray-200)] bg-[var(--color-gray-100)] px-4 text-sm outline-none transition focus:border-[var(--color-accent)]";
 
 export const textareaClassName =
-  "min-h-[120px] w-full rounded-[24px] border border-[var(--color-gray-200)] bg-[var(--color-gray-100)] px-4 py-3 text-sm outline-none transition focus:border-[var(--color-accent)]";
+  "min-h-[120px] w-full rounded-lg border border-[var(--color-gray-200)] bg-[var(--color-gray-100)] px-4 py-3 text-sm outline-none transition focus:border-[var(--color-accent)]";
 
 export const chipClassName =
-  "rounded-full border border-[var(--color-gray-200)] bg-white px-4 py-2 text-sm font-medium text-[var(--color-gray-600)] transition hover:border-[var(--color-gray-300)]";
+  "rounded-md border border-[var(--color-gray-200)] bg-white px-4 py-2 text-sm font-medium text-[var(--color-gray-600)] transition hover:border-[var(--color-gray-300)]";
 
 export const activeChipClassName =
   "border-[var(--color-accent)] bg-[rgba(26,127,212,0.08)] text-[var(--color-accent)]";

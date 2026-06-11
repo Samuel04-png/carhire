@@ -41,7 +41,7 @@ export default function Step1TripDetails() {
   };
 
   return (
-    <div className="space-y-6 rounded-[34px] border border-[var(--color-gray-200)] bg-white p-6 shadow-[0_20px_70px_rgba(10,22,40,0.08)] md:p-8">
+    <div className="space-y-6 rounded-xl border border-[var(--color-gray-200)] bg-white p-6 shadow-sm md:p-8">
       <div>
         <div className="text-xs uppercase tracking-[0.26em] text-[var(--color-accent)]">Booking</div>
         <h1 className="mt-3 font-display text-4xl font-bold tracking-[-0.05em] text-[var(--color-primary)]">
@@ -97,7 +97,7 @@ export default function Step1TripDetails() {
         </div>
 
         {isAirport && (
-          <div className="grid gap-4 rounded-[28px] bg-[var(--color-gray-100)] p-5 md:grid-cols-2">
+          <div className="grid gap-4 rounded-lg bg-[var(--color-gray-100)] p-5 md:grid-cols-2">
             <Field label="Flight number">
               <div className="relative">
                 <Plane className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-[var(--color-gray-500)]" />
@@ -131,7 +131,7 @@ export default function Step1TripDetails() {
         )}
 
         <div className="grid gap-4 md:grid-cols-2">
-          <div className="space-y-4 rounded-[28px] bg-[var(--color-gray-100)] p-5">
+          <div className="space-y-4 rounded-lg bg-[var(--color-gray-100)] p-5">
             <div className="text-xs uppercase tracking-[0.24em] text-[var(--color-gray-500)]">
               Pickup
             </div>
@@ -154,7 +154,7 @@ export default function Step1TripDetails() {
             </Field>
           </div>
 
-          <div className="space-y-4 rounded-[28px] bg-[var(--color-gray-100)] p-5">
+          <div className="space-y-4 rounded-lg bg-[var(--color-gray-100)] p-5">
             <div className="text-xs uppercase tracking-[0.24em] text-[var(--color-gray-500)]">
               Return
             </div>
@@ -181,7 +181,7 @@ export default function Step1TripDetails() {
         <button
           type="button"
           onClick={() => updateDraft({ withDriver: !draft.withDriver })}
-          className="flex w-full items-center justify-between rounded-[28px] border border-[var(--color-gray-200)] bg-[var(--color-gray-100)] p-5"
+          className="flex w-full items-center justify-between rounded-lg border border-[var(--color-gray-200)] bg-[var(--color-gray-100)] p-5"
         >
           <div>
             <div className="font-semibold text-[var(--color-primary)]">
@@ -205,7 +205,7 @@ export default function Step1TripDetails() {
         </button>
 
         {!validation.valid && (
-          <div className="rounded-[24px] border border-[var(--color-error)]/20 bg-[var(--color-error)]/8 px-4 py-3 text-sm text-[var(--color-error)]">
+          <div className="rounded-lg border border-[var(--color-error)]/20 bg-[var(--color-error)]/8 px-4 py-3 text-sm text-[var(--color-error)]">
             {validation.message}
           </div>
         )}

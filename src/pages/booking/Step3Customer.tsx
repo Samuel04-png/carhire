@@ -32,7 +32,7 @@ export default function Step3Customer() {
   };
 
   return (
-    <div className="space-y-6 rounded-[34px] border border-[var(--color-gray-200)] bg-white p-6 shadow-[0_20px_70px_rgba(10,22,40,0.08)] md:p-8">
+    <div className="space-y-6 rounded-xl border border-[var(--color-gray-200)] bg-white p-6 shadow-sm md:p-8">
       <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
         <div>
           <div className="text-xs uppercase tracking-[0.26em] text-[var(--color-accent)]">Booking</div>
@@ -149,7 +149,7 @@ export default function Step3Customer() {
           />
         </Field>
 
-        <div className="rounded-[28px] bg-[var(--color-gray-100)] p-5">
+        <div className="rounded-lg bg-[var(--color-gray-100)] p-5">
           <label className="flex items-start gap-4">
             <input
               type="checkbox"
@@ -194,7 +194,7 @@ export default function Step3Customer() {
           )}
         </div>
 
-        <label className="flex items-start gap-4 rounded-[28px] border border-[var(--color-gray-200)] bg-[var(--color-gray-100)] p-5">
+        <label className="flex items-start gap-4 rounded-lg border border-[var(--color-gray-200)] bg-[var(--color-gray-100)] p-5">
           <input
             type="checkbox"
             checked={draft.customer.privacyAccepted}
@@ -210,7 +210,7 @@ export default function Step3Customer() {
         </label>
 
         {!isValid && (
-          <div className="rounded-[24px] border border-[var(--color-warning)]/20 bg-[var(--color-warning)]/10 px-4 py-3 text-sm text-[var(--color-primary)]">
+          <div className="rounded-lg border border-[var(--color-warning)]/20 bg-[var(--color-warning)]/10 px-4 py-3 text-sm text-[var(--color-primary)]">
             Complete all required customer details, document fields, and privacy consent
             before continuing.
           </div>

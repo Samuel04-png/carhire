@@ -120,11 +120,10 @@ export default function HomePage() {
           style={{ backgroundImage: "url('/brand/dots/dots-hero-cover.jpg')" }}
         />
         {/* Dark overlay for readability */}
-        <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(7,24,39,0.92),rgba(11,49,87,0.85),rgba(15,111,173,0.75))]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_14%_18%,rgba(255,255,255,0.10),transparent_28%),radial-gradient(circle_at_82%_18%,rgba(255,255,255,0.08),transparent_30%)]" />
-        <div className="absolute inset-x-0 bottom-0 h-40 bg-[linear-gradient(180deg,transparent,rgba(246,248,251,0.14))]" />
+        <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(8,31,53,0.88),rgba(11,49,87,0.78),rgba(26,127,212,0.58))]" />
+        <div className="absolute inset-x-0 bottom-0 h-32 bg-[linear-gradient(180deg,transparent,rgba(248,250,252,0.16))]" />
 
-        <div className="relative mx-auto max-w-7xl px-4 py-20 pt-28 lg:py-24 lg:pt-32">
+        <div className="relative mx-auto max-w-7xl px-4 py-14 pt-28 lg:py-20 lg:pt-32">
           {/* Header text — compact */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -132,11 +131,11 @@ export default function HomePage() {
             transition={{ duration: 0.5 }}
             className="mx-auto max-w-2xl text-center"
           >
-            <h1 className="font-display text-3xl font-bold tracking-[-0.03em] md:text-4xl lg:text-5xl">
-              Premium car hire in Lusaka & Ndola
+            <h1 className="font-display text-3xl font-semibold tracking-[-0.025em] md:text-4xl">
+              Car hire in Lusaka and Ndola
             </h1>
-            <p className="mt-4 text-sm leading-6 text-white/70 md:text-base">
-              Reliable vehicles for airport transfers, events, business travel, and self-drive — always on time.
+            <p className="mt-3 text-sm leading-6 text-white/76 md:text-base">
+              Airport transfers, business travel, events, and self-drive bookings with clean vehicles and reliable support.
             </p>
           </motion.div>
 
@@ -145,10 +144,11 @@ export default function HomePage() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55, delay: 0.1 }}
-            className="mx-auto mt-8 max-w-2xl rounded-2xl border border-white/20 bg-white p-5 text-[var(--color-primary)] shadow-[0_28px_80px_rgba(0,0,0,0.25)] sm:p-6"
+            className="mx-auto mt-7 max-w-3xl rounded-xl border border-white/20 bg-white/95 p-4 text-[var(--color-primary)] shadow-[0_18px_60px_rgba(0,0,0,0.22)] sm:p-5"
           >
-            <div className="mb-5 text-sm font-semibold text-[var(--color-primary)]">
-              Search available cars
+            <div className="mb-4 flex items-center justify-between gap-3">
+              <div className="text-base font-semibold text-[var(--color-primary)]">Search available cars</div>
+              <div className="hidden text-sm text-[var(--color-gray-500)] sm:block">Lusaka · Ndola</div>
             </div>
             <div className="grid gap-3 sm:grid-cols-2">
               <label className="space-y-1">
@@ -251,7 +251,7 @@ export default function HomePage() {
       </section>
 
       {/* Featured Fleet */}
-      <section className="mx-auto max-w-7xl px-4 py-16">
+      <section className="mx-auto max-w-7xl px-4 py-14">
         <SectionHeader
           eyebrow="Our fleet"
           title="Vehicles ready for your journey"
@@ -272,7 +272,7 @@ export default function HomePage() {
       </section>
 
       {/* Services */}
-      <section className="bg-[var(--color-primary)] py-16 text-white">
+      <section className="bg-[var(--color-primary)] py-14 text-white">
         <div className="mx-auto max-w-7xl px-4">
           <SectionHeader
             eyebrow="Services"
@@ -285,12 +285,9 @@ export default function HomePage() {
               <Link
                 key={service.slug}
                 to={`/services/${service.slug}`}
-                className="rounded-2xl border border-white/10 bg-[rgba(255,255,255,0.05)] p-5 backdrop-blur transition hover:border-white/20 hover:bg-[rgba(255,255,255,0.08)]"
+                className="rounded-xl border border-white/10 bg-[rgba(255,255,255,0.05)] p-5 backdrop-blur transition hover:border-white/20 hover:bg-[rgba(255,255,255,0.08)]"
               >
-                <div className="text-xs uppercase tracking-[0.2em] text-[var(--color-accent)]">
-                  {service.accentLabel}
-                </div>
-                <div className="mt-3 font-display text-lg font-bold tracking-[-0.02em]">
+                <div className="font-display text-lg font-semibold tracking-[-0.02em]">
                   {service.title}
                 </div>
                 <p className="mt-2 text-sm leading-6 text-white/70">
@@ -307,7 +304,7 @@ export default function HomePage() {
       </section>
 
       {/* Trust section */}
-      <section className="mx-auto max-w-7xl px-4 py-16">
+      <section className="mx-auto max-w-7xl px-4 py-14">
         <SectionHeader
           eyebrow="Why choose Dots"
           title="Trust signals that matter in premium car hire"
@@ -317,9 +314,9 @@ export default function HomePage() {
           {stats.map((stat) => (
             <div
               key={stat.label}
-              className="rounded-2xl border border-[var(--color-gray-200)] bg-white p-5"
+              className="rounded-xl border border-[var(--color-gray-200)] bg-white p-5"
             >
-              <div className="font-display text-2xl font-bold tracking-[-0.03em] text-[var(--color-primary)]">
+              <div className="font-display text-xl font-semibold tracking-[-0.03em] text-[var(--color-primary)]">
                 {stat.value}
               </div>
               <div className="mt-1 text-sm text-[var(--color-gray-600)]">
@@ -332,7 +329,7 @@ export default function HomePage() {
           {trustPillars.map((pillar) => (
             <div
               key={pillar.title}
-              className="rounded-2xl border border-[var(--color-gray-200)] bg-white p-5"
+              className="rounded-xl border border-[var(--color-gray-200)] bg-white p-5"
             >
               <div className="grid h-10 w-10 place-items-center rounded-xl bg-[var(--color-accent)]/10 text-[var(--color-accent)]">
                 <pillar.icon className="h-5 w-5" />
@@ -349,15 +346,15 @@ export default function HomePage() {
       </section>
 
       {/* Testimonials */}
-      <section className="mx-auto max-w-7xl px-4 pb-16">
+      <section className="mx-auto max-w-7xl px-4 pb-14">
         <div className="grid gap-6 xl:grid-cols-[0.92fr_1.08fr]">
-          <div className="rounded-2xl border border-[var(--color-gray-200)] bg-white p-6 sm:p-8">
+          <div className="rounded-xl border border-[var(--color-gray-200)] bg-white p-6 sm:p-8">
             <SectionHeader
               eyebrow="Testimonials"
               title="Trusted by business teams and private clients"
               description="Clients return when the vehicle is ready and the handover is clear."
             />
-            <div className="mt-6 rounded-2xl bg-[linear-gradient(180deg,#f6f8fb,#edf2f9)] p-5">
+            <div className="mt-6 rounded-xl bg-[linear-gradient(180deg,#f6f8fb,#edf2f9)] p-5">
               <div className="mb-3 flex gap-1 text-[var(--color-gold)]">
                 {Array.from({ length: testimonials[activeTestimonial].rating }).map(
                   (_, index) => (
@@ -394,11 +391,11 @@ export default function HomePage() {
           </div>
 
           {/* Why choose summary */}
-          <div className="rounded-2xl border border-[var(--color-gray-200)] bg-[var(--color-primary)] p-6 text-white sm:p-8">
+          <div className="rounded-xl border border-[var(--color-gray-200)] bg-[var(--color-primary)] p-6 text-white sm:p-8">
             <div className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent)]">
               The Dots difference
             </div>
-            <div className="mt-4 font-display text-2xl font-bold tracking-[-0.03em]">
+            <div className="mt-4 font-display text-xl font-semibold tracking-[-0.03em]">
               Premium car hire, simplified
             </div>
             <p className="mt-3 text-sm leading-6 text-white/70">

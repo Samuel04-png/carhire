@@ -15,12 +15,12 @@ export default function AccountBookingsPage() {
       title="My Bookings"
       description="View upcoming, active, and completed bookings in one place."
     >
-      <div className="rounded-[34px] border border-[var(--color-gray-200)] bg-white p-6 shadow-[0_20px_70px_rgba(10,22,40,0.08)]">
+      <div className="rounded-xl border border-[var(--color-gray-200)] bg-white p-6 shadow-sm">
         <div className="space-y-4">
           {customerBookings.map((booking) => {
             const vehicle = vehicles.find((item) => item.id === booking.vehicleId);
             return (
-              <div key={booking.ref} className="rounded-[28px] bg-[var(--color-gray-100)] p-5">
+              <div key={booking.ref} className="rounded-lg bg-[var(--color-gray-100)] p-5">
                 <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
                   <div>
                     <div className="font-semibold text-[var(--color-primary)]">

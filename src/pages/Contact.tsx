@@ -35,7 +35,7 @@ export default function ContactPage() {
 
       <section className="mx-auto max-w-7xl px-4 py-20">
         <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr]">
-          <div className="rounded-[34px] border border-[var(--color-gray-200)] bg-[var(--color-primary)] p-8 text-white shadow-[0_20px_80px_rgba(10,22,40,0.18)]">
+          <div className="rounded-xl border border-[var(--color-gray-200)] bg-[var(--color-primary)] p-8 text-white shadow-md">
             <SectionHeader
               eyebrow="Direct channels"
               title="Fast ways to reach us"
@@ -74,7 +74,7 @@ export default function ContactPage() {
                   href={item.href}
                   target={item.label === "WhatsApp" || item.label === "HQ" ? "_blank" : undefined}
                   rel={item.label === "WhatsApp" || item.label === "HQ" ? "noreferrer" : undefined}
-                  className="flex items-start gap-4 rounded-[28px] border border-white/10 bg-white/6 p-5 transition hover:bg-white/10"
+                  className="flex items-start gap-4 rounded-lg border border-white/10 bg-white/6 p-5 transition hover:bg-white/10"
                 >
                   <div className="grid h-12 w-12 place-items-center rounded-2xl bg-[var(--color-accent)]/16 text-[var(--color-accent)]">
                     <item.icon className="h-5 w-5" />
@@ -90,7 +90,7 @@ export default function ContactPage() {
             </div>
           </div>
 
-          <div className="rounded-[34px] border border-[var(--color-gray-200)] bg-white p-8 shadow-[0_20px_70px_rgba(10,22,40,0.08)]">
+          <div className="rounded-xl border border-[var(--color-gray-200)] bg-white p-8 shadow-sm">
             <SectionHeader
               eyebrow="Enquiry form"
               title="Tell us what you need"

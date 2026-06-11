@@ -28,7 +28,7 @@ export default function LocationsPage() {
             <div
               key={office.city}
               id={office.city.toLowerCase()}
-              className="grid gap-0 overflow-hidden rounded-[34px] border border-[var(--color-gray-200)] bg-white shadow-[0_20px_70px_rgba(10,22,40,0.08)] lg:grid-cols-[0.9fr_1.1fr]"
+              className="grid gap-0 overflow-hidden rounded-xl border border-[var(--color-gray-200)] bg-white shadow-sm lg:grid-cols-[0.9fr_1.1fr]"
             >
               <iframe
                 title={`${office.city} map`}
@@ -49,19 +49,19 @@ export default function LocationsPage() {
                 </p>
 
                 <div className="mt-8 grid gap-4 md:grid-cols-3">
-                  <div className="rounded-[24px] bg-[var(--color-gray-100)] p-4">
+                  <div className="rounded-lg bg-[var(--color-gray-100)] p-4">
                     <MapPin className="h-5 w-5 text-[var(--color-accent)]" />
                     <div className="mt-3 text-sm text-[var(--color-gray-600)]">
                       {office.address}
                     </div>
                   </div>
-                  <div className="rounded-[24px] bg-[var(--color-gray-100)] p-4">
+                  <div className="rounded-lg bg-[var(--color-gray-100)] p-4">
                     <Phone className="h-5 w-5 text-[var(--color-accent)]" />
                     <div className="mt-3 text-sm text-[var(--color-gray-600)]">
                       {office.phone}
                     </div>
                   </div>
-                  <div className="rounded-[24px] bg-[var(--color-gray-100)] p-4">
+                  <div className="rounded-lg bg-[var(--color-gray-100)] p-4">
                     <Clock3 className="h-5 w-5 text-[var(--color-accent)]" />
                     <div className="mt-3 text-sm text-[var(--color-gray-600)]">
                       {office.hours}

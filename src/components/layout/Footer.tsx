@@ -17,7 +17,7 @@ export function Footer() {
         <div className="grid gap-10 lg:grid-cols-[1.2fr_1fr_1fr_1.2fr]">
           <div className="space-y-6">
             <div>
-              <div className="inline-flex rounded-[28px] border border-white/30 bg-white p-3 shadow-[0_20px_55px_rgba(10,22,40,0.18)]">
+              <div className="inline-flex rounded-lg border border-white/30 bg-white p-3 shadow-[0_20px_55px_rgba(10,22,40,0.18)]">
                 <BrandLogo imageClassName="h-20 sm:h-24" />
               </div>
               <p className="mt-3 max-w-sm text-sm leading-7 text-white/70">

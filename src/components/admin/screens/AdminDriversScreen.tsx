@@ -43,7 +43,7 @@ export function AdminDriversScreen() {
 
       <div className="mt-6 grid gap-6 md:grid-cols-2 2xl:grid-cols-3">
         {filteredDrivers.map((driver) => (
-          <div key={driver.id} className="rounded-[30px] border border-[var(--color-gray-200)] bg-white p-6 shadow-[0_18px_60px_rgba(10,22,40,0.06)]">
+          <div key={driver.id} className="rounded-xl border border-[var(--color-gray-200)] bg-white p-6 shadow-sm">
             <div className="flex items-start justify-between gap-3">
               <div>
                 <div className="font-display text-2xl font-bold tracking-[-0.04em] text-[var(--color-primary)]">{driver.name}</div>

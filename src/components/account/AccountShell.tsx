@@ -34,13 +34,13 @@ export function AccountShell({
         </div>
 
         <div className="grid gap-8 lg:grid-cols-[280px_1fr]">
-          <aside className="rounded-[32px] border border-[var(--color-gray-200)] bg-white p-4 shadow-[0_20px_70px_rgba(10,22,40,0.08)]">
+          <aside className="rounded-xl border border-[var(--color-gray-200)] bg-white p-4 shadow-sm">
             {links.map((link) => (
               <Link
                 key={link.href}
                 to={link.href}
                 className={cn(
-                  "mb-2 flex items-center gap-3 rounded-[24px] px-4 py-4 text-sm font-medium transition",
+                  "mb-2 flex items-center gap-3 rounded-lg px-4 py-4 text-sm font-medium transition",
                   location.pathname === link.href
                     ? "bg-[var(--color-primary)] text-white"
                     : "text-[var(--color-gray-600)] hover:bg-[var(--color-gray-100)]",

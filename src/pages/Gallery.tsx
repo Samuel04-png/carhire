@@ -135,7 +135,7 @@ export default function GalleryPage() {
               key={highlight.title}
               type="button"
               onClick={() => setActiveFilter(highlight.collection)}
-              className="rounded-[32px] border border-[var(--color-gray-200)] bg-white p-6 text-left shadow-[0_18px_70px_rgba(10,22,40,0.06)] transition hover:-translate-y-1 hover:shadow-[0_28px_90px_rgba(10,22,40,0.1)]"
+              className="rounded-xl border border-[var(--color-gray-200)] bg-white p-6 text-left shadow-sm transition hover:-translate-y-1 hover:shadow-[0_28px_90px_rgba(10,22,40,0.1)]"
             >
               <div className="inline-flex rounded-full border border-[var(--color-accent)]/18 bg-[var(--color-accent)]/10 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.28em] text-[var(--color-accent)]">
                 {highlight.collection}
@@ -156,7 +156,7 @@ export default function GalleryPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-4 py-20">
-        <div className="rounded-[34px] border border-[var(--color-gray-200)] bg-white p-6 shadow-[0_20px_80px_rgba(10,22,40,0.08)] sm:p-8">
+        <div className="rounded-xl border border-[var(--color-gray-200)] bg-white p-6 shadow-[0_20px_80px_rgba(10,22,40,0.08)] sm:p-8">
           <SectionHeader
             eyebrow="Media wall"
             title="Curated public imagery with direct links back into the live product."
@@ -197,7 +197,7 @@ export default function GalleryPage() {
                 key={asset.id}
                 type="button"
                 onClick={() => openAsset(asset)}
-                className={`group relative overflow-hidden rounded-[28px] text-left shadow-[0_18px_70px_rgba(10,22,40,0.1)] ${sizeClassName[asset.size]}`}
+                className={`group relative overflow-hidden rounded-lg text-left shadow-[0_18px_70px_rgba(10,22,40,0.1)] ${sizeClassName[asset.size]}`}
               >
                 <img
                   src={asset.image}
@@ -228,7 +228,7 @@ export default function GalleryPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-4">
-        <div className="rounded-[36px] bg-[linear-gradient(150deg,#081222_0%,#0e1f3a_58%,#12345d_100%)] p-6 text-white shadow-[0_24px_100px_rgba(10,22,40,0.18)] sm:p-8">
+        <div className="rounded-xl bg-[linear-gradient(150deg,#081222_0%,#0e1f3a_58%,#12345d_100%)] p-6 text-white shadow-[0_24px_100px_rgba(10,22,40,0.18)] sm:p-8">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
             <div>
               <div className="inline-flex rounded-full border border-white/10 bg-white/10 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.3em] text-white/76">
@@ -248,7 +248,7 @@ export default function GalleryPage() {
 
           <div className="mt-10 grid gap-6 xl:grid-cols-3">
             {spotlightVehicles.map((vehicle) => (
-              <div key={vehicle.id} className="rounded-[30px] bg-white/6 p-2 backdrop-blur">
+              <div key={vehicle.id} className="rounded-xl bg-white/6 p-2 backdrop-blur">
                 <VehicleCard vehicle={vehicle} />
               </div>
             ))}
@@ -293,7 +293,7 @@ export default function GalleryPage() {
                 className="grid min-h-0 flex-1 gap-4 lg:grid-cols-[minmax(0,1fr)_340px]"
                 onClick={(event) => event.stopPropagation()}
               >
-                <div className="relative min-h-[280px] overflow-hidden rounded-[32px] border border-white/10 bg-black/40">
+                <div className="relative min-h-[280px] overflow-hidden rounded-xl border border-white/10 bg-black/40">
                   <img
                     src={activeAsset.image}
                     alt={activeAsset.title}
@@ -318,13 +318,13 @@ export default function GalleryPage() {
                   </button>
                 </div>
 
-                <div className="overflow-y-auto rounded-[32px] border border-white/10 bg-[rgba(10,22,40,0.55)] p-6 text-white backdrop-blur">
+                <div className="overflow-y-auto rounded-xl border border-white/10 bg-[rgba(10,22,40,0.55)] p-6 text-white backdrop-blur">
                   <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/8 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.28em] text-white/75">
                     <MapPin className="h-3 w-3" />
                     {activeAsset.city}
                   </div>
                   <p className="mt-5 text-base leading-8 text-white/76">{activeAsset.caption}</p>
-                  <div className="mt-6 rounded-[24px] border border-white/10 bg-white/6 p-5">
+                  <div className="mt-6 rounded-lg border border-white/10 bg-white/6 p-5">
                     <div className="text-xs font-semibold uppercase tracking-[0.22em] text-white/55">
                       Asset {activeIndex + 1} of {filteredAssets.length}
                     </div>

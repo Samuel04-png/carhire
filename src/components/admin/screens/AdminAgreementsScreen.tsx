@@ -24,7 +24,7 @@ export function AdminAgreementsScreen() {
           const vehicle = vehicles.find((item) => item.id === booking.vehicleId);
           const client = clients.find((item) => item.id === booking.clientId);
           return (
-            <div key={booking.ref} className="rounded-[30px] border border-[var(--color-gray-200)] bg-white p-5 shadow-[0_18px_60px_rgba(10,22,40,0.06)]">
+            <div key={booking.ref} className="rounded-xl border border-[var(--color-gray-200)] bg-white p-5 shadow-sm">
               <div className="grid gap-5 lg:grid-cols-[1fr_1fr_auto] lg:items-center">
                 <div>
                   <div className="flex flex-wrap items-center gap-2"><FileSignature className="h-4 w-4 text-[var(--color-accent)]" /><span className="font-semibold text-[var(--color-primary)]">{booking.ref}</span><StatusPill label={booking.status} tone={bookingStatusTone(booking.status)} /></div>

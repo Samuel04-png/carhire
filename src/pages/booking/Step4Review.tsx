@@ -100,7 +100,7 @@ export default function Step4Review() {
   }
 
   return (
-    <div className="space-y-6 rounded-[34px] border border-[var(--color-gray-200)] bg-white p-6 shadow-[0_20px_70px_rgba(10,22,40,0.08)] md:p-8">
+    <div className="space-y-6 rounded-xl border border-[var(--color-gray-200)] bg-white p-6 shadow-sm md:p-8">
       <div>
         <div className="text-xs uppercase tracking-[0.26em] text-[var(--color-accent)]">Booking</div>
         <h1 className="mt-3 font-display text-4xl font-bold tracking-[-0.05em] text-[var(--color-primary)]">
@@ -113,7 +113,7 @@ export default function Step4Review() {
 
       <div className="grid gap-8 lg:grid-cols-[1.15fr_0.85fr]">
         <div className="space-y-6">
-          <div className="rounded-[28px] bg-[var(--color-gray-100)] p-6">
+          <div className="rounded-lg bg-[var(--color-gray-100)] p-6">
             <CompactBookingMeta />
             <div className="mt-6 grid gap-4 md:grid-cols-2">
               <SummaryBlock
@@ -139,7 +139,7 @@ export default function Step4Review() {
             </div>
           </div>
 
-          <div className="rounded-[28px] bg-[var(--color-gray-100)] p-6">
+          <div className="rounded-lg bg-[var(--color-gray-100)] p-6">
             <div className="text-xs uppercase tracking-[0.24em] text-[var(--color-gray-500)]">
               Payment
             </div>
@@ -147,7 +147,7 @@ export default function Step4Review() {
               Use MTN for an instant mobile prompt, or follow the manual instructions for Airtel, Zamtel, bank transfer, and corporate billing. Use <span className="font-semibold text-[var(--color-primary)]">{bookingRefPreview}</span> as the payment reference whenever a manual reference is required.
             </div>
             {!isCorporate && (
-              <div className="mt-4 rounded-[22px] border border-amber-200 bg-amber-50 px-4 py-3 text-sm leading-6 text-amber-900">
+              <div className="mt-4 rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm leading-6 text-amber-900">
                 Pay on Pickup is intended for verified corporate accounts. If you choose it, our team will still confirm account eligibility manually before release.
               </div>
             )}
@@ -175,7 +175,7 @@ export default function Step4Review() {
           </div>
         </div>
 
-        <div className="rounded-[30px] bg-[var(--color-primary)] p-6 text-white shadow-[0_20px_70px_rgba(10,22,40,0.18)]">
+        <div className="rounded-xl bg-[var(--color-primary)] p-6 text-white shadow-[0_20px_70px_rgba(10,22,40,0.18)]">
           <div className="text-xs uppercase tracking-[0.26em] text-[var(--color-accent)]">
             Price breakdown
           </div>
@@ -203,11 +203,11 @@ export default function Step4Review() {
             </div>
           </div>
 
-          <div className="mt-6 rounded-[24px] bg-white/6 p-4 text-sm leading-7 text-white/72">
+          <div className="mt-6 rounded-lg bg-white/6 p-4 text-sm leading-7 text-white/72">
             Your booking will remain in a pending review state until our team verifies payment or confirms your corporate account billing terms.
           </div>
 
-          <div className="mt-4 rounded-[24px] bg-white/6 p-4 text-sm leading-7 text-white/72">
+          <div className="mt-4 rounded-lg bg-white/6 p-4 text-sm leading-7 text-white/72">
             Free cancellation up to 48 hours before pickup. Later cancellations may attract a service charge depending on preparation already completed.
           </div>
 
@@ -236,7 +236,7 @@ function SummaryBlock({
   sub: string;
 }) {
   return (
-    <div className="rounded-[22px] bg-white p-4">
+    <div className="rounded-lg bg-white p-4">
       <div className="text-xs uppercase tracking-[0.24em] text-[var(--color-gray-500)]">
         {label}
       </div>

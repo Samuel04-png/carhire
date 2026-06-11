@@ -96,7 +96,7 @@ export default function VehicleDetailPage() {
 
         <div className="grid gap-6 lg:grid-cols-[1.35fr_0.65fr] lg:gap-10">
           <div className="space-y-8">
-            <div className="overflow-hidden rounded-[28px] border border-[var(--color-gray-200)] bg-white shadow-[0_20px_70px_rgba(10,22,40,0.08)] sm:rounded-[34px]">
+            <div className="overflow-hidden rounded-lg border border-[var(--color-gray-200)] bg-white shadow-sm sm:rounded-xl">
               <button
                 onClick={() => setIsLightboxOpen(true)}
                 className="block h-[260px] w-full overflow-hidden sm:h-[360px] lg:h-[430px]"
@@ -130,7 +130,7 @@ export default function VehicleDetailPage() {
               </div>
             </div>
 
-            <div className="rounded-[28px] border border-[var(--color-gray-200)] bg-white p-5 shadow-[0_20px_70px_rgba(10,22,40,0.08)] sm:rounded-[34px] sm:p-8">
+            <div className="rounded-lg border border-[var(--color-gray-200)] bg-white p-5 shadow-sm sm:rounded-xl sm:p-8">
               <div className="flex flex-wrap items-center gap-3">
                 <StatusBadge tone={statusTone}>{vehicle.status}</StatusBadge>
                 <StatusBadge tone="info">{vehicle.category}</StatusBadge>
@@ -145,7 +145,7 @@ export default function VehicleDetailPage() {
                     {vehicle.description}
                   </p>
                 </div>
-                <div className="rounded-[28px] bg-[var(--color-primary)] p-5 text-white">
+                <div className="rounded-lg bg-[var(--color-primary)] p-5 text-white">
                   <div className="text-xs uppercase tracking-[0.28em] text-white/55">
                     From
                   </div>
@@ -157,7 +157,7 @@ export default function VehicleDetailPage() {
               </div>
             </div>
 
-            <div className="rounded-[28px] border border-[var(--color-gray-200)] bg-white p-5 shadow-[0_20px_70px_rgba(10,22,40,0.08)] sm:rounded-[34px] sm:p-8">
+            <div className="rounded-lg border border-[var(--color-gray-200)] bg-white p-5 shadow-sm sm:rounded-xl sm:p-8">
               <h2 className="font-display text-2xl font-bold tracking-[-0.04em] text-[var(--color-primary)] sm:text-3xl">
                 Vehicle Specifications
               </h2>
@@ -175,7 +175,7 @@ export default function VehicleDetailPage() {
                 ].map(([label, value]) => (
                   <div
                     key={label}
-                    className="rounded-[26px] bg-[var(--color-gray-100)] p-5"
+                    className="rounded-lg bg-[var(--color-gray-100)] p-5"
                   >
                     <div className="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--color-gray-500)]">
                       {label}
@@ -189,7 +189,7 @@ export default function VehicleDetailPage() {
             </div>
 
             <div className="grid gap-8 lg:grid-cols-2">
-              <div className="rounded-[28px] border border-[var(--color-gray-200)] bg-white p-5 shadow-[0_20px_70px_rgba(10,22,40,0.08)] sm:rounded-[34px] sm:p-8">
+              <div className="rounded-lg border border-[var(--color-gray-200)] bg-white p-5 shadow-sm sm:rounded-xl sm:p-8">
                 <h2 className="font-display text-2xl font-bold tracking-[-0.04em] text-[var(--color-primary)] sm:text-3xl">
                   Key Features
                 </h2>
@@ -202,7 +202,7 @@ export default function VehicleDetailPage() {
                   ))}
                 </div>
               </div>
-              <div className="rounded-[28px] border border-[var(--color-gray-200)] bg-white p-5 shadow-[0_20px_70px_rgba(10,22,40,0.08)] sm:rounded-[34px] sm:p-8">
+              <div className="rounded-lg border border-[var(--color-gray-200)] bg-white p-5 shadow-sm sm:rounded-xl sm:p-8">
                 <h2 className="font-display text-2xl font-bold tracking-[-0.04em] text-[var(--color-primary)] sm:text-3xl">
                   Ideal For
                 </h2>
@@ -217,7 +217,7 @@ export default function VehicleDetailPage() {
           </div>
 
           <div className="space-y-8">
-            <div className="rounded-[28px] border border-[var(--color-gray-200)] bg-white p-5 shadow-[0_20px_80px_rgba(10,22,40,0.12)] lg:sticky lg:top-28 lg:rounded-[34px] lg:p-8">
+            <div className="rounded-lg border border-[var(--color-gray-200)] bg-white p-5 shadow-[0_20px_80px_rgba(10,22,40,0.12)] lg:sticky lg:top-28 lg:rounded-xl lg:p-8">
               <div className="mb-6 flex items-center gap-3">
                 <ShieldCheck className="h-6 w-6 text-[var(--color-accent)]" />
                 <div>
@@ -297,7 +297,7 @@ export default function VehicleDetailPage() {
                 <button
                   type="button"
                   onClick={() => setWithDriver((value) => !value)}
-                  className="flex w-full items-center justify-between rounded-[26px] border border-[var(--color-gray-200)] bg-[var(--color-gray-100)] p-4"
+                  className="flex w-full items-center justify-between rounded-lg border border-[var(--color-gray-200)] bg-[var(--color-gray-100)] p-4"
                 >
                   <div>
                     <div className="font-semibold text-[var(--color-primary)]">
@@ -323,7 +323,7 @@ export default function VehicleDetailPage() {
                 </button>
               </div>
 
-              <div className="mt-8 rounded-[28px] bg-[var(--color-primary)] p-6 text-white">
+              <div className="mt-8 rounded-lg bg-[var(--color-primary)] p-6 text-white">
                 <div className="mb-4 flex items-center gap-2 text-white/72">
                   <CalendarDays className="h-4 w-4" />
                   {days > 0 ? `${days} day booking` : "Select dates to calculate total"}
@@ -377,7 +377,7 @@ export default function VehicleDetailPage() {
           className="fixed inset-0 z-[70] grid place-items-center bg-[rgba(10,22,40,0.82)] p-4 backdrop-blur"
           onClick={() => setIsLightboxOpen(false)}
         >
-          <div className="max-h-[90vh] max-w-5xl overflow-hidden rounded-[34px] border border-white/10">
+          <div className="max-h-[90vh] max-w-5xl overflow-hidden rounded-xl border border-white/10">
             <img src={mainImage} alt={vehicle.name} className="max-h-[90vh] w-full object-cover" />
           </div>
         </div>

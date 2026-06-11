@@ -32,7 +32,7 @@ export default function BookingAgreementPage() {
 
   return (
     <section className="bg-[var(--color-gray-100)] px-4 py-28">
-      <div className="mx-auto max-w-4xl rounded-[36px] border border-[var(--color-gray-200)] bg-white p-6 shadow-[0_24px_80px_rgba(10,22,40,0.08)] md:p-10">
+      <div className="mx-auto max-w-4xl rounded-xl border border-[var(--color-gray-200)] bg-white p-6 shadow-sm md:p-10">
         <div className="flex flex-wrap items-start justify-between gap-4 border-b border-[var(--color-gray-200)] pb-6">
           <div>
             <div className="inline-flex items-center gap-2 rounded-full bg-[var(--color-gray-100)] px-3 py-1 text-xs font-semibold uppercase tracking-[0.22em] text-[var(--color-accent)]"><FileSignature className="h-4 w-4" />Rental Agreement</div>
@@ -51,7 +51,7 @@ export default function BookingAgreementPage() {
           <Info label="Agreement status" value={booking.agreementAccepted ? `Accepted by ${booking.acceptedBy} on ${booking.acceptedAt ? formatDateOnly(booking.acceptedAt) : "recorded date"}` : "Not yet accepted"} />
         </div>
 
-        <div className="mt-8 rounded-[28px] bg-[var(--color-gray-100)] p-5">
+        <div className="mt-8 rounded-lg bg-[var(--color-gray-100)] p-5">
           <h2 className="text-lg font-semibold text-[var(--color-primary)]">Terms</h2>
           <ol className="mt-4 space-y-3 text-sm leading-6 text-[var(--color-gray-600)]">
             {agreementTerms.map((term, index) => <li key={term}><strong>{index + 1}.</strong> {term}</li>)}

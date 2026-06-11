@@ -61,11 +61,14 @@ export function Navbar() {
   return (
     <header className={cn("fixed inset-x-0 top-0 z-50 transition-all duration-500", navTone)}>
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:py-4">
-        <BrandLogo
-          priority
-          className="flex shrink-0 items-center"
-          imageClassName="h-9 sm:h-10 lg:h-11 w-auto"
-        />
+        <div className="rounded-lg bg-white px-2.5 py-1.5 shadow-sm ring-1 ring-white/10">
+          <BrandLogo
+            priority
+            variant="transparent"
+            className="flex shrink-0 items-center"
+            imageClassName="h-9 w-auto"
+          />
+        </div>
 
         <nav className="hidden items-center gap-2 lg:flex">
           {navLinks.map((item) => (
@@ -150,7 +153,7 @@ export function Navbar() {
                 <BrandLogo
                   priority
                   variant="boxed"
-                  className="flex max-w-[180px] items-center rounded-[22px] border border-white/40 bg-white px-3 py-2 shadow-[0_14px_32px_rgba(10,22,40,0.18)]"
+                  className="flex max-w-[180px] items-center rounded-lg border border-white/40 bg-white px-3 py-2 shadow-[0_14px_32px_rgba(10,22,40,0.18)]"
                   imageClassName="h-11 max-w-full sm:h-12"
                 />
                 <button

@@ -58,14 +58,14 @@ export default function FAQPage() {
             ([category, items]) => (
             <div
               key={category}
-              className="rounded-[34px] border border-[var(--color-gray-200)] bg-white p-8 shadow-[0_20px_70px_rgba(10,22,40,0.08)]"
+              className="rounded-xl border border-[var(--color-gray-200)] bg-white p-8 shadow-sm"
             >
               <div className="text-xs uppercase tracking-[0.28em] text-[var(--color-accent)]">
                 {category}
               </div>
               <div className="mt-6 space-y-4">
                 {items.map((item) => (
-                  <details key={item.question} className="group rounded-[26px] bg-[var(--color-gray-100)] p-5">
+                  <details key={item.question} className="group rounded-lg bg-[var(--color-gray-100)] p-5">
                     <summary className="cursor-pointer list-none font-semibold text-[var(--color-primary)]">
                       {item.question}
                     </summary>

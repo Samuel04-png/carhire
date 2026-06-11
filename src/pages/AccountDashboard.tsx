@@ -24,7 +24,7 @@ export default function AccountDashboardPage() {
           ].map(([label, value]) => (
             <div
               key={label}
-              className="rounded-[30px] border border-[var(--color-gray-200)] bg-white p-6 shadow-[0_18px_60px_rgba(10,22,40,0.06)]"
+              className="rounded-xl border border-[var(--color-gray-200)] bg-white p-6 shadow-sm"
             >
               <div className="text-xs uppercase tracking-[0.24em] text-[var(--color-gray-500)]">
                 {label}
@@ -36,7 +36,7 @@ export default function AccountDashboardPage() {
           ))}
         </div>
 
-        <div className="rounded-[34px] border border-[var(--color-gray-200)] bg-white p-6 shadow-[0_20px_70px_rgba(10,22,40,0.08)]">
+        <div className="rounded-xl border border-[var(--color-gray-200)] bg-white p-6 shadow-sm">
           <div className="font-display text-3xl font-bold tracking-[-0.04em] text-[var(--color-primary)]">
             Upcoming bookings
           </div>
@@ -44,7 +44,7 @@ export default function AccountDashboardPage() {
             {customerBookings.slice(0, 3).map((booking) => {
               const vehicle = vehicles.find((item) => item.id === booking.vehicleId);
               return (
-                <div key={booking.ref} className="rounded-[26px] bg-[var(--color-gray-100)] p-5">
+                <div key={booking.ref} className="rounded-lg bg-[var(--color-gray-100)] p-5">
                   <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
                     <div>
                       <div className="font-semibold text-[var(--color-primary)]">

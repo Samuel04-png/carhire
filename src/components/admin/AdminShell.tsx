@@ -59,11 +59,13 @@ export function AdminShell({
   };
 
   return (
-    <div className="min-h-dvh bg-[linear-gradient(180deg,#f7fbff_0%,#eff4f9_100%)] text-[var(--color-primary)] lg:h-dvh lg:overflow-hidden">
+    <div className="min-h-dvh bg-[#f6f8fb] text-[var(--color-primary)] lg:h-dvh lg:overflow-hidden">
       <div className="flex min-h-dvh flex-col lg:h-dvh lg:flex-row lg:overflow-hidden">
-        <div className="sticky top-0 z-40 border-b border-[var(--color-gray-200)] bg-white/92 px-4 py-4 backdrop-blur-lg lg:hidden">
+        <div className="sticky top-0 z-40 border-b border-[var(--color-gray-200)] bg-white px-4 py-3 lg:hidden">
           <div className="flex items-center justify-between gap-3">
-            <BrandLogo variant="boxed" imageClassName="h-11" />
+            <div className="rounded-lg border border-[var(--color-gray-200)] bg-white px-2 py-1.5 shadow-sm">
+              <BrandLogo variant="boxed" imageClassName="h-10" />
+            </div>
             <button
               type="button"
               onClick={() => setMenuOpen((value) => !value)}
@@ -85,19 +87,21 @@ export function AdminShell({
 
         <aside
           className={cn(
-            "fixed inset-y-0 left-0 z-[60] flex h-dvh w-[min(88vw,320px)] flex-col overflow-hidden bg-[var(--color-primary)] px-4 py-5 text-white shadow-[0_26px_90px_rgba(10,22,40,0.4)] transition-transform lg:sticky lg:top-0 lg:z-30 lg:w-[280px] lg:min-w-[280px] lg:translate-x-0 lg:border-r lg:border-white/6 lg:shadow-none",
+            "fixed inset-y-0 left-0 z-[60] flex h-dvh w-[min(88vw,300px)] flex-col overflow-hidden bg-[var(--color-primary)] px-4 py-5 text-white shadow-[0_24px_80px_rgba(8,31,53,0.32)] transition-transform lg:sticky lg:top-0 lg:z-30 lg:w-[264px] lg:min-w-[264px] lg:translate-x-0 lg:border-r lg:border-white/8 lg:shadow-none",
             menuOpen ? "translate-x-0" : "-translate-x-full",
           )}
         >
-          <div className="shrink-0 rounded-[30px] border border-white/10 bg-white/8 p-5">
-            <BrandLogo variant="boxed" imageClassName="h-12" />
-            <div className="mt-5 flex items-center gap-2 rounded-full border border-white/10 bg-white/6 px-4 py-2 text-xs uppercase tracking-[0.24em] text-[var(--color-accent)]">
-              <ShieldCheck className="h-4 w-4" />
+          <div className="shrink-0 rounded-xl border border-white/10 bg-white/[0.04] p-4">
+            <div className="inline-flex rounded-lg bg-white p-2 shadow-sm">
+              <BrandLogo variant="boxed" imageClassName="h-11" />
+            </div>
+            <div className="mt-4 flex items-center gap-2 rounded-md border border-white/10 bg-white/[0.05] px-3 py-2 text-[11px] uppercase tracking-[0.16em] text-white/70">
+              <ShieldCheck className="h-4 w-4 text-[var(--color-accent)]" />
               {adminRole ?? "Admin"}
             </div>
-            <div className="mt-4 text-2xl font-bold tracking-[-0.04em]">Dots Ops</div>
-            <div className="mt-2 text-sm leading-6 text-white/68">
-              Bookings, fleet, clients, dispatch, and revenue in one responsive command center.
+            <div className="mt-4 text-lg font-semibold tracking-[-0.02em]">Operations</div>
+            <div className="mt-2 text-sm leading-6 text-white/64">
+              Manage bookings, fleet availability, clients, drivers, and reports.
             </div>
           </div>
 
@@ -109,7 +113,7 @@ export function AdminShell({
                   key={link.href}
                   to={link.href}
                   className={cn(
-                    "flex items-center gap-3 rounded-[22px] px-4 py-4 text-sm font-medium transition",
+                    "flex items-center gap-3 rounded-lg px-3 py-3 text-sm font-medium transition-colors",
                     active
                       ? "bg-white text-[var(--color-primary)] shadow-[0_16px_36px_rgba(255,255,255,0.08)]"
                       : "text-white/72 hover:bg-white/8 hover:text-white",
@@ -123,19 +127,19 @@ export function AdminShell({
           </nav>
 
           <div className="mt-6 shrink-0">
-            <div className="rounded-[28px] border border-white/10 bg-white/7 p-4">
-              <div className="text-xs uppercase tracking-[0.22em] text-white/45">
+            <div className="rounded-xl border border-white/10 bg-white/[0.04] p-4">
+              <div className="text-[11px] uppercase tracking-[0.16em] text-white/45">
                 Access note
               </div>
-              <div className="mt-3 text-sm leading-6 text-white/72">
-                Demo admin access is local-state only. Actions persist in this browser session so flows can be reviewed end to end.
+              <div className="mt-2 text-sm leading-6 text-white/66">
+                Admin access is stored locally so client review flows can be tested end to end.
               </div>
             </div>
 
             <Button
               type="button"
               variant="ghost"
-              className="mt-4 h-12 w-full justify-center rounded-full border-white/20 text-white hover:bg-white/10"
+              className="mt-4 h-12 w-full justify-center rounded-md border-white/20 text-white hover:bg-white/10"
               onClick={handleSignOut}
             >
               <LogOut className="mr-2 h-4 w-4" />
@@ -145,18 +149,18 @@ export function AdminShell({
         </aside>
 
         <main className="min-w-0 flex-1 px-4 py-6 sm:px-6 lg:h-dvh lg:min-h-0 lg:overflow-y-auto lg:px-8 xl:px-10">
-          <div className="mb-8 flex flex-col gap-4 xl:flex-row xl:items-end xl:justify-between">
+          <div className="mb-6 flex flex-col gap-4 xl:flex-row xl:items-end xl:justify-between">
             <div>
-              <div className="text-xs uppercase tracking-[0.28em] text-[var(--color-accent)]">
-                Admin & operations
+              <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--color-accent)]">
+                Admin operations
               </div>
-              <h1 className="mt-3 font-display text-4xl font-bold tracking-[-0.05em] text-[var(--color-primary)] sm:text-5xl">
+              <h1 className="mt-2 font-display text-2xl font-semibold tracking-[-0.025em] text-[var(--color-primary)] sm:text-3xl">
                 {title}
               </h1>
-              <p className="mt-3 max-w-3xl text-[var(--color-gray-600)]">{description}</p>
+              <p className="mt-2 max-w-3xl text-sm leading-6 text-[var(--color-gray-600)]">{description}</p>
             </div>
             <div className="flex flex-wrap items-center gap-3">
-              <div className="inline-flex h-11 items-center rounded-full border border-[var(--color-gray-200)] bg-white px-4 text-sm font-medium text-[var(--color-gray-600)] shadow-[0_10px_30px_rgba(10,22,40,0.05)]">
+              <div className="inline-flex h-10 items-center rounded-md border border-[var(--color-gray-200)] bg-white px-3 text-sm font-medium text-[var(--color-gray-600)] shadow-sm">
                 {adminRole ?? "Admin"} access
               </div>
               {actions}

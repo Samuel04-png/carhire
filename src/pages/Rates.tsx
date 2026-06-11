@@ -101,7 +101,7 @@ export default function RatesPage() {
       />
 
       <section className="relative z-10 mx-auto -mt-10 max-w-7xl px-4">
-        <div className="overflow-hidden rounded-[34px] border border-white/60 bg-white shadow-[0_28px_120px_rgba(10,22,40,0.12)]">
+        <div className="overflow-hidden rounded-xl border border-white/60 bg-white shadow-[0_28px_120px_rgba(10,22,40,0.12)]">
           <div className="grid gap-8 p-6 lg:grid-cols-[1.1fr_0.9fr] lg:p-8">
             <div>
               <div className="inline-flex items-center gap-2 rounded-full border border-[var(--color-accent)]/18 bg-[var(--color-accent)]/10 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.28em] text-[var(--color-accent)]">
@@ -165,7 +165,7 @@ export default function RatesPage() {
           {pricingPrinciples.map((principle) => (
             <div
               key={principle.title}
-              className="rounded-[30px] border border-[var(--color-gray-200)] bg-white p-6 shadow-[0_18px_70px_rgba(10,22,40,0.06)]"
+              className="rounded-xl border border-[var(--color-gray-200)] bg-white p-6 shadow-sm"
             >
               <div className="grid h-12 w-12 place-items-center rounded-2xl bg-[var(--color-accent)]/10 text-[var(--color-accent)]">
                 <ShieldCheck className="h-5 w-5" />
@@ -191,7 +191,7 @@ export default function RatesPage() {
           {categoryCards.map((card) => (
             <article
               key={card.category}
-              className="overflow-hidden rounded-[34px] border border-[var(--color-gray-200)] bg-white shadow-[0_22px_80px_rgba(10,22,40,0.08)]"
+              className="overflow-hidden rounded-xl border border-[var(--color-gray-200)] bg-white shadow-[0_22px_80px_rgba(10,22,40,0.08)]"
             >
               <div className="grid gap-0 lg:grid-cols-[0.82fr_1.18fr]">
                 <div className="relative min-h-[280px] overflow-hidden">
@@ -269,7 +269,7 @@ export default function RatesPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-4">
-        <div className="rounded-[36px] bg-[var(--color-primary)] p-6 text-white shadow-[0_24px_100px_rgba(10,22,40,0.18)] sm:p-8">
+        <div className="rounded-xl bg-[var(--color-primary)] p-6 text-white shadow-[0_24px_100px_rgba(10,22,40,0.18)] sm:p-8">
           <SectionHeader
             eyebrow="Service models"
             title="Pricing models beyond a simple day rate"
@@ -280,7 +280,7 @@ export default function RatesPage() {
             {serviceRateCards.map((card) => (
               <div
                 key={card.title}
-                className="rounded-[28px] border border-white/10 bg-white/8 p-6 backdrop-blur"
+                className="rounded-lg border border-white/10 bg-white/8 p-6 backdrop-blur"
               >
                 <div className="text-xs font-semibold uppercase tracking-[0.24em] text-white/55">
                   {card.title}
@@ -304,7 +304,7 @@ export default function RatesPage() {
 
       <section className="mx-auto max-w-7xl px-4 py-20">
         <div className="grid gap-8 xl:grid-cols-[1.05fr_0.95fr]">
-          <div className="rounded-[34px] border border-[var(--color-gray-200)] bg-white p-6 shadow-[0_18px_70px_rgba(10,22,40,0.06)] sm:p-8">
+          <div className="rounded-xl border border-[var(--color-gray-200)] bg-white p-6 shadow-sm sm:p-8">
             <SectionHeader
               eyebrow="Included"
               title="What is normally built into the booking"
@@ -312,7 +312,7 @@ export default function RatesPage() {
             />
             <div className="mt-8 space-y-4">
               {pricingInclusions.map((item) => (
-                <div key={item} className="flex items-start gap-3 rounded-[24px] bg-[var(--color-gray-100)] p-4">
+                <div key={item} className="flex items-start gap-3 rounded-lg bg-[var(--color-gray-100)] p-4">
                   <CheckCircle2 className="mt-1 h-5 w-5 shrink-0 text-[var(--color-accent)]" />
                   <span className="text-[var(--color-gray-600)]">{item}</span>
                 </div>
@@ -320,7 +320,7 @@ export default function RatesPage() {
             </div>
           </div>
 
-          <div className="rounded-[34px] border border-[var(--color-gray-200)] bg-white p-6 shadow-[0_18px_70px_rgba(10,22,40,0.06)] sm:p-8">
+          <div className="rounded-xl border border-[var(--color-gray-200)] bg-white p-6 shadow-sm sm:p-8">
             <SectionHeader
               eyebrow="Add-ons"
               title="Optional extras priced before checkout"
@@ -330,7 +330,7 @@ export default function RatesPage() {
               {pricingAddOns.map((extra) => (
                 <div
                   key={extra.title}
-                  className="rounded-[24px] border border-[var(--color-gray-200)] bg-[var(--color-gray-100)] p-4"
+                  className="rounded-lg border border-[var(--color-gray-200)] bg-[var(--color-gray-100)] p-4"
                 >
                   <div className="flex items-start justify-between gap-4">
                     <div>
@@ -356,7 +356,7 @@ export default function RatesPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-4">
-        <div className="overflow-hidden rounded-[34px] border border-[var(--color-gray-200)] bg-white shadow-[0_18px_70px_rgba(10,22,40,0.06)]">
+        <div className="overflow-hidden rounded-xl border border-[var(--color-gray-200)] bg-white shadow-sm">
           <div className="border-b border-[var(--color-gray-200)] p-6 sm:p-8">
             <SectionHeader
               eyebrow="Comparison table"
@@ -400,7 +400,7 @@ export default function RatesPage() {
           {pricingFaq.map((item) => (
             <div
               key={item.question}
-              className="rounded-[30px] border border-[var(--color-gray-200)] bg-white p-6 shadow-[0_18px_70px_rgba(10,22,40,0.06)]"
+              className="rounded-xl border border-[var(--color-gray-200)] bg-white p-6 shadow-sm"
             >
               <div className="flex items-start gap-4">
                 <div className="grid h-12 w-12 place-items-center rounded-2xl bg-[var(--color-accent)]/10 text-[var(--color-accent)]">
@@ -419,7 +419,7 @@ export default function RatesPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-4">
-        <div className="overflow-hidden rounded-[36px] bg-[linear-gradient(150deg,#081222_0%,#0e1f3a_58%,#12345d_100%)] text-white shadow-[0_24px_100px_rgba(10,22,40,0.18)]">
+        <div className="overflow-hidden rounded-xl bg-[linear-gradient(150deg,#081222_0%,#0e1f3a_58%,#12345d_100%)] text-white shadow-[0_24px_100px_rgba(10,22,40,0.18)]">
           <div className="grid gap-8 p-6 sm:p-8 lg:grid-cols-[1.1fr_0.9fr]">
             <div>
               <div className="inline-flex rounded-full border border-white/10 bg-white/10 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.3em] text-white/76">
@@ -478,7 +478,7 @@ function StatCard({
   note: string;
 }) {
   return (
-    <div className="rounded-[28px] border border-[var(--color-gray-200)] bg-[var(--color-gray-100)] p-5">
+    <div className="rounded-lg border border-[var(--color-gray-200)] bg-[var(--color-gray-100)] p-5">
       <div className="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--color-gray-500)]">
         {label}
       </div>
@@ -492,7 +492,7 @@ function StatCard({
 
 function RateMetric({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-[24px] bg-[var(--color-gray-100)] p-4">
+    <div className="rounded-lg bg-[var(--color-gray-100)] p-4">
       <div className="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--color-gray-500)]">
         {label}
       </div>
@@ -503,7 +503,7 @@ function RateMetric({ label, value }: { label: string; value: string }) {
 
 function InfoPill({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-[22px] border border-[var(--color-gray-200)] px-4 py-3">
+    <div className="rounded-lg border border-[var(--color-gray-200)] px-4 py-3">
       <div className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[var(--color-gray-500)]">
         {label}
       </div>
@@ -522,7 +522,7 @@ function ContactCard({
   value: string;
 }) {
   return (
-    <div className="rounded-[28px] border border-white/10 bg-white/8 p-5 backdrop-blur">
+    <div className="rounded-lg border border-white/10 bg-white/8 p-5 backdrop-blur">
       <div className="grid h-11 w-11 place-items-center rounded-2xl bg-[var(--color-accent)]/16 text-[var(--color-accent)]">
         {icon}
       </div>

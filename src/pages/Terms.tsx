@@ -13,7 +13,7 @@ export default function TermsPage() {
         ]}
       />
       <div className="mx-auto max-w-4xl px-4 py-20">
-        <div className="space-y-6 rounded-[34px] border border-[var(--color-gray-200)] bg-white p-8 text-[var(--color-gray-600)] shadow-[0_20px_70px_rgba(10,22,40,0.08)]">
+        <div className="space-y-6 rounded-xl border border-[var(--color-gray-200)] bg-white p-8 text-[var(--color-gray-600)] shadow-sm">
           <section>
             <h2 className="font-display text-2xl font-bold text-[var(--color-primary)]">
               Reservations

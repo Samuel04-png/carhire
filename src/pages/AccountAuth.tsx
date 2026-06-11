@@ -36,7 +36,7 @@ export default function AccountAuthPage() {
   return (
     <div className="bg-[var(--color-gray-100)] px-4 pb-20 pt-28">
       <div className="mx-auto grid max-w-6xl gap-8 lg:grid-cols-[0.9fr_1.1fr]">
-        <div className="rounded-[36px] bg-[var(--color-primary)] p-8 text-white shadow-[0_20px_80px_rgba(10,22,40,0.18)]">
+        <div className="rounded-xl bg-[var(--color-primary)] p-8 text-white shadow-md">
           <div className="text-xs uppercase tracking-[0.3em] text-[var(--color-accent)]">
             Customer account
           </div>
@@ -47,13 +47,13 @@ export default function AccountAuthPage() {
             Sign in to review active bookings, past journeys, saved details, and
             account preferences in one place.
           </p>
-          <div className="mt-10 rounded-[28px] bg-white/8 p-5">
+          <div className="mt-10 rounded-lg bg-white/8 p-5">
             <div className="font-semibold">{company.name}</div>
             <div className="mt-2 text-sm text-white/70">{company.tagline}</div>
           </div>
         </div>
 
-        <div className="rounded-[36px] border border-[var(--color-gray-200)] bg-white p-8 shadow-[0_20px_80px_rgba(10,22,40,0.08)]">
+        <div className="rounded-xl border border-[var(--color-gray-200)] bg-white p-8 shadow-[0_20px_80px_rgba(10,22,40,0.08)]">
           <div className="mb-8 flex gap-3">
             {[
               ["sign-in", "Sign In"],

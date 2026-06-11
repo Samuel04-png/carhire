@@ -28,7 +28,7 @@ export default function BlogPage() {
           {blogPosts.map((post) => (
             <article
               key={post.slug}
-              className="overflow-hidden rounded-[30px] border border-[var(--color-gray-200)] bg-white shadow-[0_18px_60px_rgba(10,22,40,0.08)]"
+              className="overflow-hidden rounded-xl border border-[var(--color-gray-200)] bg-white shadow-[0_18px_60px_rgba(10,22,40,0.08)]"
             >
               <img
                 src={post.image}

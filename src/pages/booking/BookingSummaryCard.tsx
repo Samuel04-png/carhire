@@ -12,7 +12,7 @@ export function BookingSummaryCard() {
   }
 
   return (
-    <div className="rounded-[28px] border border-[var(--color-gray-200)] bg-[var(--color-gray-100)] p-5">
+    <div className="rounded-lg border border-[var(--color-gray-200)] bg-[var(--color-gray-100)] p-5">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
         <img
           src={vehicle.mainImage}
@@ -39,7 +39,7 @@ export function BookingSummaryCard() {
             </div>
           )}
         </div>
-        <div className="rounded-[24px] bg-white px-4 py-3 text-right shadow-sm">
+        <div className="rounded-lg bg-white px-4 py-3 text-right shadow-sm">
           <div className="text-xs uppercase tracking-[0.24em] text-[var(--color-gray-500)]">
             From
           </div>
@@ -62,7 +62,7 @@ export function CompactBookingMeta() {
   }
 
   return (
-    <div className="flex items-center gap-3 rounded-[24px] bg-[var(--color-gray-100)] p-4">
+    <div className="flex items-center gap-3 rounded-lg bg-[var(--color-gray-100)] p-4">
       <div className="grid h-10 w-10 place-items-center rounded-2xl bg-white text-[var(--color-accent)]">
         <CarFront className="h-5 w-5" />
       </div>

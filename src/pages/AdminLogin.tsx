@@ -54,22 +54,22 @@ export default function AdminLoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[var(--color-primary)] px-4 py-10 sm:px-6 lg:py-16">
-      <div className="mx-auto grid max-w-6xl gap-8 lg:grid-cols-[1fr_1.05fr]">
-        <div className="overflow-hidden rounded-[36px] border border-white/10 bg-[linear-gradient(145deg,rgba(255,255,255,0.12),rgba(255,255,255,0.04))] p-8 text-white shadow-[0_28px_90px_rgba(0,0,0,0.24)] sm:p-10">
-          <div className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/8 px-4 py-2 text-xs uppercase tracking-[0.28em] text-[var(--color-accent)]">
+    <div className="min-h-screen bg-[var(--color-primary)] px-4 py-8 sm:px-6 lg:py-12">
+      <div className="mx-auto grid max-w-6xl gap-6 lg:grid-cols-[0.95fr_1.05fr]">
+        <div className="overflow-hidden rounded-xl border border-white/10 bg-white/[0.04] p-6 text-white shadow-lg sm:p-8">
+          <div className="inline-flex items-center gap-2 rounded-md border border-white/12 bg-white/[0.06] px-3 py-2 text-[11px] uppercase tracking-[0.16em] text-white/72">
             <ShieldCheck className="h-4 w-4" />
             Admin access
           </div>
-          <h1 className="mt-6 max-w-xl font-display text-4xl font-bold tracking-[-0.06em] text-white sm:text-5xl">
+          <h1 className="mt-5 max-w-xl font-display text-3xl font-semibold tracking-[-0.03em] text-white sm:text-4xl">
             Run bookings, fleet, dispatch, and revenue from one operations console.
           </h1>
-          <p className="mt-5 max-w-xl text-base leading-7 text-white/72 sm:text-lg">
-            This demo login mirrors operational access levels for sales, dispatch, and finance.
-            Pick a role, use its seeded email, and enter the shared demo password.
+          <p className="mt-4 max-w-xl text-sm leading-6 text-white/72 sm:text-base">
+            This access screen mirrors operational roles for sales, dispatch, and finance.
+            Choose a role, confirm its email, and enter the assigned admin password.
           </p>
 
-          <div className="mt-10 grid gap-4">
+          <div className="mt-7 grid gap-3">
             {adminAccessProfiles.map((profile) => {
               const active = profile.role === role;
               return (
@@ -77,10 +77,10 @@ export default function AdminLoginPage() {
                   key={profile.role}
                   type="button"
                   onClick={() => applyProfile(profile.role)}
-                  className={`rounded-[28px] border px-5 py-5 text-left transition ${
+                  className={`rounded-lg border px-4 py-4 text-left transition-colors ${
                     active
-                      ? "border-[var(--color-accent)] bg-white/10 shadow-[0_16px_40px_rgba(26,127,212,0.18)]"
-                      : "border-white/10 bg-white/5 hover:border-white/20 hover:bg-white/8"
+                      ? "border-[var(--color-accent)] bg-white/[0.08]"
+                      : "border-white/10 bg-white/[0.04] hover:border-white/20 hover:bg-white/[0.07]"
                   }`}
                 >
                   <div className="flex items-center justify-between gap-3">
@@ -90,7 +90,7 @@ export default function AdminLoginPage() {
                     </div>
                     {active && <CheckCircle2 className="h-5 w-5 text-[var(--color-accent)]" />}
                   </div>
-                  <div className="mt-3 text-xs uppercase tracking-[0.22em] text-white/45">
+                  <div className="mt-3 text-[11px] uppercase tracking-[0.12em] text-white/45">
                     {profile.email}
                   </div>
                 </button>
@@ -99,18 +99,18 @@ export default function AdminLoginPage() {
           </div>
         </div>
 
-        <div className="rounded-[36px] border border-white/10 bg-white p-7 shadow-[0_24px_90px_rgba(10,22,40,0.3)] sm:p-10">
-          <div className="mb-6 inline-flex rounded-[24px] border border-[var(--color-gray-200)] bg-[var(--color-gray-100)] p-3">
-            <BrandLogo variant="boxed" imageClassName="h-14 sm:h-16" />
+        <div className="rounded-xl border border-[var(--color-gray-200)] bg-white p-6 shadow-lg sm:p-8">
+          <div className="mb-5 inline-flex rounded-lg border border-[var(--color-gray-200)] bg-white p-2 shadow-sm">
+            <BrandLogo variant="boxed" imageClassName="h-14" />
           </div>
 
-          <div className="rounded-[28px] bg-[var(--color-gray-100)] p-5">
-            <div className="text-xs uppercase tracking-[0.22em] text-[var(--color-gray-500)]">
-              Demo credentials
+          <div className="rounded-lg bg-[var(--color-gray-100)] p-4">
+            <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--color-gray-500)]">
+              Access credentials
             </div>
             <div className="mt-3 grid gap-2 text-sm text-[var(--color-gray-600)]">
               <div>Email: {selectedProfile.email}</div>
-              <div>Password: {demoAdminPassword}</div>
+              <div>Use the assigned admin password for this role.</div>
             </div>
           </div>
 
@@ -145,7 +145,7 @@ export default function AdminLoginPage() {
                 autoComplete="current-password"
               />
             </Field>
-            <Button type="submit" className="mt-4 h-14 w-full rounded-full px-8">
+            <Button type="submit" className="mt-4 h-11 w-full rounded-md px-6">
               Enter Dashboard
             </Button>
           </form>
@@ -164,7 +164,7 @@ function Field({
 }) {
   return (
     <label className="block">
-      <div className="mb-2 text-xs font-semibold uppercase tracking-[0.24em] text-[var(--color-gray-500)]">
+      <div className="mb-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--color-gray-500)]">
         {label}
       </div>
       {children}
@@ -173,4 +173,4 @@ function Field({
 }
 
 const inputClassName =
-  "h-14 w-full rounded-2xl border border-[var(--color-gray-200)] bg-[var(--color-gray-100)] px-4 outline-none focus:border-[var(--color-accent)]";
+  "h-11 w-full rounded-md border border-[var(--color-gray-200)] bg-[var(--color-gray-100)] px-3 text-sm outline-none focus:border-[var(--color-accent)]";

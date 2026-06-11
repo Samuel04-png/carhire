@@ -125,7 +125,7 @@ export default function BookingConfirmation() {
 
   return (
     <div className="bg-[var(--color-gray-100)] px-4 pb-20 pt-28">
-      <div className="mx-auto max-w-4xl rounded-[36px] border border-[var(--color-gray-200)] bg-white p-8 text-center shadow-[0_20px_90px_rgba(10,22,40,0.12)] md:p-12">
+      <div className="mx-auto max-w-4xl rounded-xl border border-[var(--color-gray-200)] bg-white p-8 text-center shadow-md md:p-12">
         <div className="mx-auto grid h-28 w-28 place-items-center rounded-full bg-[var(--color-success)]/10 text-[var(--color-success)]">
           <CheckCircle2 className="h-14 w-14" />
         </div>
@@ -141,8 +141,8 @@ export default function BookingConfirmation() {
             : "Your booking has been saved under this reference. Keep it close if you need to change dates, confirm details, or speak with our team before pickup."}
         </p>
 
-        <div className="mt-10 grid gap-4 rounded-[30px] bg-[var(--color-gray-100)] p-6 md:grid-cols-2">
-          <div className="rounded-[24px] bg-white p-5 text-left">
+        <div className="mt-10 grid gap-4 rounded-xl bg-[var(--color-gray-100)] p-6 md:grid-cols-2">
+          <div className="rounded-lg bg-white p-5 text-left">
             <div className="text-xs uppercase tracking-[0.24em] text-[var(--color-gray-500)]">
               Vehicle
             </div>
@@ -150,7 +150,7 @@ export default function BookingConfirmation() {
               {vehicle.name}
             </div>
           </div>
-          <div className="rounded-[24px] bg-white p-5 text-left">
+          <div className="rounded-lg bg-white p-5 text-left">
             <div className="text-xs uppercase tracking-[0.24em] text-[var(--color-gray-500)]">
               Pickup details
             </div>
@@ -161,7 +161,7 @@ export default function BookingConfirmation() {
               {formatDateOnly(booking.pickupDateTime)}
             </div>
           </div>
-          <div className="rounded-[24px] bg-white p-5 text-left">
+          <div className="rounded-lg bg-white p-5 text-left">
             <div className="text-xs uppercase tracking-[0.24em] text-[var(--color-gray-500)]">
               {requiresVerification ? "Amount pending verification" : "Total paid"}
             </div>
@@ -169,7 +169,7 @@ export default function BookingConfirmation() {
               {formatCurrency(booking.amount)}
             </div>
           </div>
-          <div className="rounded-[24px] bg-white p-5 text-left">
+          <div className="rounded-lg bg-white p-5 text-left">
             <div className="text-xs uppercase tracking-[0.24em] text-[var(--color-gray-500)]">
               Status
             </div>
@@ -180,7 +180,7 @@ export default function BookingConfirmation() {
         </div>
 
         {momoStatusMessage && (
-          <div className="mt-6 rounded-[24px] border border-[var(--color-accent)]/20 bg-[var(--color-accent)]/8 p-5 text-left text-sm leading-7 text-[var(--color-primary)]">
+          <div className="mt-6 rounded-lg border border-[var(--color-accent)]/20 bg-[var(--color-accent)]/8 p-5 text-left text-sm leading-7 text-[var(--color-primary)]">
             <div className="flex items-start gap-3">
               {shouldPollMtn ? <LoaderCircle className="mt-1 h-5 w-5 animate-spin text-[var(--color-accent)]" /> : <CheckCircle2 className="mt-1 h-5 w-5 text-[var(--color-success)]" />}
               <div>
@@ -191,7 +191,7 @@ export default function BookingConfirmation() {
           </div>
         )}
 
-        <div className="mt-10 rounded-[30px] bg-[var(--color-primary)] p-6 text-left text-white">
+        <div className="mt-10 rounded-xl bg-[var(--color-primary)] p-6 text-left text-white">
           <div className="font-display text-2xl font-bold tracking-[-0.04em]">
             What happens next
           </div>

@@ -22,7 +22,7 @@ export function AdminUsersScreen() {
         {adminAccessProfiles.map((profile) => {
           const permissions = permissionsByRole[profile.role as keyof typeof permissionsByRole] ?? [];
           return (
-            <div key={profile.email} className="rounded-[30px] border border-[var(--color-gray-200)] bg-white p-5 shadow-[0_18px_60px_rgba(10,22,40,0.06)]">
+            <div key={profile.email} className="rounded-xl border border-[var(--color-gray-200)] bg-white p-5 shadow-sm">
               <div className="flex items-start gap-4">
                 <div className="grid h-12 w-12 place-items-center rounded-2xl bg-[var(--color-primary)] text-white"><Users2 className="h-5 w-5" /></div>
                 <div className="min-w-0 flex-1">

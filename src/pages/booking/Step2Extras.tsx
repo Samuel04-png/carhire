@@ -16,7 +16,7 @@ export default function Step2Extras() {
   const total = calculateBookingTotal(draft, vehicle);
 
   return (
-    <div className="space-y-6 rounded-[34px] border border-[var(--color-gray-200)] bg-white p-6 shadow-[0_20px_70px_rgba(10,22,40,0.08)] md:p-8">
+    <div className="space-y-6 rounded-xl border border-[var(--color-gray-200)] bg-white p-6 shadow-sm md:p-8">
       <div>
         <div className="text-xs uppercase tracking-[0.26em] text-[var(--color-accent)]">Booking</div>
         <h1 className="mt-3 font-display text-4xl font-bold tracking-[-0.05em] text-[var(--color-primary)]">
@@ -37,7 +37,7 @@ export default function Step2Extras() {
               key={extra.id}
               type="button"
               onClick={() => toggleExtra(extra.id)}
-              className={`rounded-[28px] border p-6 text-left transition ${
+              className={`rounded-lg border p-6 text-left transition ${
                 isSelected
                   ? "border-[var(--color-accent)] bg-[var(--color-accent)]/8"
                   : "border-[var(--color-gray-200)] bg-[var(--color-gray-100)] hover:border-[var(--color-gray-300)]"
@@ -67,7 +67,7 @@ export default function Step2Extras() {
         })}
       </div>
 
-      <div className="rounded-[30px] bg-[var(--color-primary)] p-6 text-white">
+      <div className="rounded-xl bg-[var(--color-primary)] p-6 text-white">
         <div className="flex items-center gap-3 text-white/70">
           <ShieldCheck className="h-5 w-5 text-[var(--color-accent)]" />
           <span>{days} day booking | extras are included in your final total.</span>

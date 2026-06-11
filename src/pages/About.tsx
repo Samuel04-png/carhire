@@ -48,7 +48,7 @@ export default function AboutPage() {
 
       <section className="mx-auto max-w-7xl px-4 py-20">
         <div className="grid gap-10 lg:grid-cols-[1fr_0.9fr]">
-          <div className="rounded-[34px] border border-[var(--color-gray-200)] bg-white p-8 shadow-[0_20px_70px_rgba(10,22,40,0.08)]">
+          <div className="rounded-xl border border-[var(--color-gray-200)] bg-white p-8 shadow-sm">
             <SectionHeader
               eyebrow="The story"
               title="Why clients trust Dots Car Hire with important journeys."
@@ -82,7 +82,7 @@ export default function AboutPage() {
             ].map(([value, label]) => (
               <div
                 key={label}
-                className="rounded-[30px] border border-[var(--color-gray-200)] bg-white p-6 shadow-[0_18px_60px_rgba(10,22,40,0.06)]"
+                className="rounded-xl border border-[var(--color-gray-200)] bg-white p-6 shadow-sm"
               >
                 <div className="font-display text-4xl font-bold tracking-[-0.05em] text-[var(--color-primary)]">
                   {value}
@@ -104,7 +104,7 @@ export default function AboutPage() {
           {values.map((value) => (
             <div
               key={value.title}
-              className="rounded-[30px] border border-[var(--color-gray-200)] bg-white p-6 shadow-[0_18px_60px_rgba(10,22,40,0.06)]"
+              className="rounded-xl border border-[var(--color-gray-200)] bg-white p-6 shadow-sm"
             >
               <div className="grid h-14 w-14 place-items-center rounded-2xl bg-[var(--color-accent)]/10 text-[var(--color-accent)]">
                 <value.icon className="h-6 w-6" />
