@@ -4,7 +4,7 @@ import path from 'path';
 import {defineConfig} from 'vite';
 
 const hmrDisabled = process.env.DISABLE_HMR === 'true';
-const pagesBase = '/carhire/';
+const pagesBase = '/';
 
 export default defineConfig(({command}) => ({
   base: command === 'build' ? pagesBase : '/',

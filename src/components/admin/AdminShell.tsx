@@ -6,6 +6,7 @@ import {
   CalendarRange,
   CarFront,
   Cog,
+  FileBarChart,
   LayoutDashboard,
   LogOut,
   Menu,
@@ -26,7 +27,7 @@ const links = [
   { href: "/admin/fleet", label: "Fleet", icon: CarFront },
   { href: "/admin/clients", label: "Clients", icon: Users2 },
   { href: "/admin/drivers", label: "Drivers", icon: BriefcaseBusiness },
-  { href: "/admin/reports/revenue", label: "Revenue", icon: BarChart3 },
+  { href: "/admin/reports", label: "Reports", icon: FileBarChart },
   { href: "/admin/users", label: "Users", icon: Users2 },
   { href: "/admin/settings", label: "Settings", icon: Cog },
 ];
@@ -58,8 +59,8 @@ export function AdminShell({
   };
 
   return (
-    <div className="min-h-screen bg-[linear-gradient(180deg,#f7fbff_0%,#eff4f9_100%)] text-[var(--color-primary)]">
-      <div className="lg:grid lg:min-h-screen lg:grid-cols-[300px_1fr]">
+    <div className="min-h-dvh bg-[linear-gradient(180deg,#f7fbff_0%,#eff4f9_100%)] text-[var(--color-primary)] lg:h-dvh lg:overflow-hidden">
+      <div className="flex min-h-dvh flex-col lg:h-dvh lg:flex-row lg:overflow-hidden">
         <div className="sticky top-0 z-40 border-b border-[var(--color-gray-200)] bg-white/92 px-4 py-4 backdrop-blur-lg lg:hidden">
           <div className="flex items-center justify-between gap-3">
             <BrandLogo variant="boxed" imageClassName="h-11" />
@@ -84,12 +85,12 @@ export function AdminShell({
 
         <aside
           className={cn(
-            "fixed inset-y-0 left-0 z-[60] flex w-[min(88vw,320px)] flex-col bg-[var(--color-primary)] px-4 py-5 text-white shadow-[0_26px_90px_rgba(10,22,40,0.4)] transition-transform lg:static lg:w-auto lg:translate-x-0 lg:border-r lg:border-white/6",
+            "fixed inset-y-0 left-0 z-[60] flex h-dvh w-[min(88vw,320px)] flex-col overflow-hidden bg-[var(--color-primary)] px-4 py-5 text-white shadow-[0_26px_90px_rgba(10,22,40,0.4)] transition-transform lg:sticky lg:top-0 lg:z-30 lg:w-[280px] lg:min-w-[280px] lg:translate-x-0 lg:border-r lg:border-white/6 lg:shadow-none",
             menuOpen ? "translate-x-0" : "-translate-x-full",
           )}
         >
-          <div className="rounded-[30px] border border-white/10 bg-white/8 p-5">
-            <BrandLogo variant="transparent" imageClassName="h-12" />
+          <div className="shrink-0 rounded-[30px] border border-white/10 bg-white/8 p-5">
+            <BrandLogo variant="boxed" imageClassName="h-12" />
             <div className="mt-5 flex items-center gap-2 rounded-full border border-white/10 bg-white/6 px-4 py-2 text-xs uppercase tracking-[0.24em] text-[var(--color-accent)]">
               <ShieldCheck className="h-4 w-4" />
               {adminRole ?? "Admin"}
@@ -100,7 +101,7 @@ export function AdminShell({
             </div>
           </div>
 
-          <nav className="mt-6 flex-1 space-y-2 overflow-y-auto pr-1">
+          <nav className="mt-6 min-h-0 flex-1 space-y-2 overflow-y-auto pr-1">
             {links.map((link) => {
               const active = location.pathname.startsWith(link.href);
               return (
@@ -121,27 +122,29 @@ export function AdminShell({
             })}
           </nav>
 
-          <div className="mt-6 rounded-[28px] border border-white/10 bg-white/7 p-4">
-            <div className="text-xs uppercase tracking-[0.22em] text-white/45">
-              Access note
+          <div className="mt-6 shrink-0">
+            <div className="rounded-[28px] border border-white/10 bg-white/7 p-4">
+              <div className="text-xs uppercase tracking-[0.22em] text-white/45">
+                Access note
+              </div>
+              <div className="mt-3 text-sm leading-6 text-white/72">
+                Demo admin access is local-state only. Actions persist in this browser session so flows can be reviewed end to end.
+              </div>
             </div>
-            <div className="mt-3 text-sm leading-6 text-white/72">
-              Demo admin access is local-state only. Actions persist in this browser session so flows can be reviewed end to end.
-            </div>
-          </div>
 
-          <Button
-            type="button"
-            variant="ghost"
-            className="mt-4 h-12 justify-center rounded-full border-white/20 text-white hover:bg-white/10"
-            onClick={handleSignOut}
-          >
-            <LogOut className="mr-2 h-4 w-4" />
-            Sign Out
-          </Button>
+            <Button
+              type="button"
+              variant="ghost"
+              className="mt-4 h-12 w-full justify-center rounded-full border-white/20 text-white hover:bg-white/10"
+              onClick={handleSignOut}
+            >
+              <LogOut className="mr-2 h-4 w-4" />
+              Sign Out
+            </Button>
+          </div>
         </aside>
 
-        <main className="min-w-0 px-4 py-6 sm:px-6 lg:px-8 xl:px-10">
+        <main className="min-w-0 flex-1 px-4 py-6 sm:px-6 lg:h-dvh lg:min-h-0 lg:overflow-y-auto lg:px-8 xl:px-10">
           <div className="mb-8 flex flex-col gap-4 xl:flex-row xl:items-end xl:justify-between">
             <div>
               <div className="text-xs uppercase tracking-[0.28em] text-[var(--color-accent)]">

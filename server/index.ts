@@ -31,6 +31,7 @@ app.use((request, response, next) => {
     "http://127.0.0.1:3000",
     "https://dotscarhire.com",
     "https://www.dotscarhire.com",
+    "https://app.dotscarhire.com",
     "https://samuel04-png.github.io",
   ]);
   const origin = request.headers.origin;
