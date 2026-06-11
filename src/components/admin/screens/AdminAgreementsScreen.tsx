@@ -24,21 +24,21 @@ export function AdminAgreementsScreen() {
           const vehicle = vehicles.find((item) => item.id === booking.vehicleId);
           const client = clients.find((item) => item.id === booking.clientId);
           return (
-            <div key={booking.ref} className="rounded-xl border border-[var(--color-gray-200)] bg-white p-5 shadow-sm">
+            <article key={booking.ref} className="rounded-[var(--radius-xl)] border border-[var(--border-subtle)] bg-white p-5 shadow-[var(--shadow-card)] transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--brand)] hover:shadow-[var(--shadow-card-hover)]">
               <div className="grid gap-5 lg:grid-cols-[1fr_1fr_auto] lg:items-center">
                 <div>
-                  <div className="flex flex-wrap items-center gap-2"><FileSignature className="h-4 w-4 text-[var(--color-accent)]" /><span className="font-semibold text-[var(--color-primary)]">{booking.ref}</span><StatusPill label={booking.status} tone={bookingStatusTone(booking.status)} /></div>
-                  <div className="mt-2 text-sm text-[var(--color-gray-600)]">{client?.firstName} {client?.lastName} — {vehicle?.name}</div>
+                  <div className="flex flex-wrap items-center gap-2"><FileSignature className="h-4 w-4 text-[var(--brand)]" /><span className="font-semibold text-[var(--text-main)]">{booking.ref}</span><StatusPill label={booking.status} tone={bookingStatusTone(booking.status)} /></div>
+                  <div className="mt-2 text-sm text-[var(--text-muted)]">{client?.firstName} {client?.lastName} — {vehicle?.name}</div>
                 </div>
-                <div className="text-sm text-[var(--color-gray-600)]">
+                <div className="text-sm text-[var(--text-muted)]">
                   <div>Agreement: <strong>{booking.agreementAccepted ? "Accepted" : booking.agreementStatus ?? "Not Sent"}</strong></div>
                   <div>Accepted by: {booking.acceptedBy ?? "Awaiting client"}</div>
                   <div>Accepted at: {booking.acceptedAt ? formatDateOnly(booking.acceptedAt) : "—"}</div>
                   <div>Amount: {formatCurrency(booking.amount)}</div>
                 </div>
-                <Button asChild className="rounded-md"><Link to={`/booking/agreement/${booking.ref}`}><ExternalLink className="mr-2 h-4 w-4" />Open agreement</Link></Button>
+                <Button asChild><Link to={`/booking/agreement/${booking.ref}`}><ExternalLink className="mr-2 h-4 w-4" />Open agreement</Link></Button>
               </div>
-            </div>
+            </article>
           );
         })}
         {agreementBookings.length === 0 && <EmptyState title="No agreements yet" description="Approve a pending booking to generate a client rental agreement." />}

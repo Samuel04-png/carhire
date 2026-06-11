@@ -43,30 +43,30 @@ export function AdminDriversScreen() {
 
       <div className="mt-6 grid gap-6 md:grid-cols-2 2xl:grid-cols-3">
         {filteredDrivers.map((driver) => (
-          <div key={driver.id} className="rounded-xl border border-[var(--color-gray-200)] bg-white p-6 shadow-sm">
+          <article key={driver.id} className="rounded-[var(--radius-xl)] border border-[var(--border-subtle)] bg-white p-5 shadow-[var(--shadow-card)] transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--brand)] hover:shadow-[var(--shadow-card-hover)]">
             <div className="flex items-start justify-between gap-3">
               <div>
-                <div className="font-display text-2xl font-bold tracking-[-0.04em] text-[var(--color-primary)]">{driver.name}</div>
-                <div className="mt-1 text-sm text-[var(--color-gray-600)]">{driver.city}</div>
+                <div className="font-display text-xl font-semibold tracking-[-0.035em] text-[var(--text-main)]">{driver.name}</div>
+                <div className="mt-1 text-sm text-[var(--text-muted)]">{driver.city}</div>
               </div>
               <StatusPill label={driver.status} tone={driverStatusTone(driver.status)} />
             </div>
-            <div className="mt-5 space-y-3 text-sm text-[var(--color-gray-600)]">
+            <div className="mt-5 grid gap-2 rounded-[var(--radius-lg)] bg-[var(--bg-surface-soft)] p-4 text-sm text-[var(--text-muted)] ring-1 ring-[var(--border-subtle)]">
               <div>{driver.phone}</div>
-              <div>{driver.email}</div>
-              <div>Rating: {driver.rating.toFixed(1)}</div>
-              <div>Assignment: {driver.currentAssignment}</div>
+              <div className="truncate">{driver.email}</div>
+              <div className="flex justify-between gap-3"><span>Rating</span><strong className="text-[var(--text-main)]">{driver.rating.toFixed(1)}</strong></div>
+              <div className="flex justify-between gap-3"><span>Assignment</span><strong className="text-[var(--text-main)]">{driver.currentAssignment}</strong></div>
             </div>
-            <div className="mt-5 flex flex-wrap gap-2">{driver.vehiclePreferences.map((preference) => <span key={preference} className="rounded-md bg-[var(--color-gray-100)] px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-gray-500)]">{preference}</span>)}</div>
+            <div className="mt-5 flex flex-wrap gap-2">{driver.vehiclePreferences.map((preference) => <span key={preference} className="rounded-full bg-[var(--brand-soft)] px-3 py-1 text-[11px] font-bold uppercase tracking-[0.14em] text-[var(--brand-dark)]">{preference}</span>)}</div>
             <div className="mt-6 grid gap-3">
               <select className={inputClassName} value={driver.status} onChange={(event) => updateDriverStatus(driver.id, event.target.value as DriverStatus)}>{driverStatusOptions.map((option) => <option key={option}>{option}</option>)}</select>
               <div className="flex flex-wrap gap-2">
-                <Button asChild size="sm" variant="secondary" className="rounded-md"><a href={toPhoneHref(driver.phone)}><Phone className="mr-2 h-4 w-4" />Call</a></Button>
-                <Button asChild size="sm" variant="secondary" className="rounded-md"><a href={`mailto:${driver.email}`}><Mail className="mr-2 h-4 w-4" />Email</a></Button>
-                {driver.currentAssignment.startsWith("SCH-") && <Button asChild size="sm" className="rounded-md"><Link to={`/booking/confirmation/${driver.currentAssignment}`}>Open Trip</Link></Button>}
+                <Button asChild size="sm" variant="secondary"><a href={toPhoneHref(driver.phone)}><Phone className="mr-2 h-4 w-4" />Call</a></Button>
+                <Button asChild size="sm" variant="secondary"><a href={`mailto:${driver.email}`}><Mail className="mr-2 h-4 w-4" />Email</a></Button>
+                {driver.currentAssignment.startsWith("SCH-") && <Button asChild size="sm"><Link to={`/booking/confirmation/${driver.currentAssignment}`}>Open Trip</Link></Button>}
               </div>
             </div>
-          </div>
+          </article>
         ))}
       </div>
     </AdminShell>

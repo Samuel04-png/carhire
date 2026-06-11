@@ -26,6 +26,41 @@
   :root {
     color: var(--color-primary);
     background: var(--color-gray-100);
+
+    --bg-app: #f5f7fb;
+    --bg-surface: #ffffff;
+    --bg-surface-soft: #f8fafc;
+    --bg-sidebar: #071d33;
+    --bg-sidebar-hover: rgba(255, 255, 255, 0.08);
+    --bg-sidebar-active: #ffffff;
+
+    --text-main: #071426;
+    --text-muted: #5f6f85;
+    --text-soft: #8a98aa;
+
+    --brand: #1677d2;
+    --brand-dark: #0e5fb0;
+    --brand-soft: #e8f3ff;
+
+    --success-ui: #18b46b;
+    --success-soft: #e8f8ef;
+    --warning-ui: #f59e0b;
+    --warning-soft: #fff4df;
+    --danger-ui: #ef4444;
+    --danger-soft: #ffecec;
+    --info-soft: #eaf4ff;
+
+    --border-soft: #dfe7f0;
+    --border-subtle: #edf1f6;
+
+    --radius-sm: 10px;
+    --radius-md: 14px;
+    --radius-lg: 20px;
+    --radius-xl: 26px;
+
+    --shadow-card: 0 12px 35px rgba(15, 23, 42, 0.06);
+    --shadow-card-hover: 0 18px 45px rgba(15, 23, 42, 0.10);
+    --shadow-button: 0 8px 18px rgba(22, 119, 210, 0.22);
   }
 
   * {

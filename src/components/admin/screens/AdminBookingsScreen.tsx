@@ -205,20 +205,20 @@ export function AdminBookingsScreen({ createMode = false }: { createMode?: boole
       <AdminShell
         title="New Booking"
         description="Create a reservation, client record, and dispatch-ready booking from one admin flow."
-        actions={<Button type="button" variant="secondary" className="rounded-md" onClick={() => navigate("/admin/bookings")}>Back to Bookings</Button>}
+        actions={<Button type="button" variant="secondary" onClick={() => navigate("/admin/bookings")}>Back to Bookings</Button>}
       >
         <div className="grid gap-6 xl:grid-cols-[1.25fr_0.75fr]">
           <SurfaceCard title="Booking intake" subtitle="Manual reservations update live booking state immediately.">
             <div className="space-y-8">
               <section>
                 <div className="mb-4 flex flex-wrap gap-2">
-                  <button type="button" className={`rounded-md px-4 py-2 text-sm font-medium ${clientMode === "existing" ? "bg-[var(--color-accent)] text-white" : "border border-[var(--color-gray-200)] bg-white text-[var(--color-gray-600)]"}`} onClick={() => setClientMode("existing")}>Existing client</button>
-                  <button type="button" className={`rounded-md px-4 py-2 text-sm font-medium ${clientMode === "new" ? "bg-[var(--color-accent)] text-white" : "border border-[var(--color-gray-200)] bg-white text-[var(--color-gray-600)]"}`} onClick={() => setClientMode("new")}>New client</button>
+                  <button type="button" className={`rounded-md px-4 py-2 text-sm font-medium ${clientMode === "existing" ? "bg-[var(--brand)] text-white" : "border border-[var(--border-subtle)] bg-white text-[var(--text-muted)]"}`} onClick={() => setClientMode("existing")}>Existing client</button>
+                  <button type="button" className={`rounded-md px-4 py-2 text-sm font-medium ${clientMode === "new" ? "bg-[var(--brand)] text-white" : "border border-[var(--border-subtle)] bg-white text-[var(--text-muted)]"}`} onClick={() => setClientMode("new")}>New client</button>
                 </div>
                 <div className="grid gap-4 md:grid-cols-2">
                   {clientMode === "existing" && (
                     <label className="md:col-span-2">
-                      <div className="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-[var(--color-gray-500)]">Client</div>
+                      <div className="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-[var(--text-soft)]">Client</div>
                       <select className={inputClassName} value={form.clientId} onChange={(event) => updateField("clientId", event.target.value)}>
                         {clients.map((client) => (
                           <option key={client.id} value={client.id}>{client.firstName} {client.lastName} · {client.accountType}</option>
@@ -231,7 +231,7 @@ export function AdminBookingsScreen({ createMode = false }: { createMode?: boole
                   <TextField label="Email" value={form.email} onChange={(value) => updateField("email", value)} />
                   <TextField label="Phone" value={form.phone} onChange={(value) => updateField("phone", value)} />
                   <label>
-                    <div className="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-[var(--color-gray-500)]">Account type</div>
+                    <div className="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-[var(--text-soft)]">Account type</div>
                     <select className={inputClassName} value={form.accountType} onChange={(event) => updateField("accountType", event.target.value as "Individual" | "Corporate")}>
                       <option>Individual</option>
                       <option>Corporate</option>
@@ -243,7 +243,7 @@ export function AdminBookingsScreen({ createMode = false }: { createMode?: boole
 
               <section className="grid gap-4 md:grid-cols-2">
                 <label>
-                  <div className="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-[var(--color-gray-500)]">Vehicle</div>
+                  <div className="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-[var(--text-soft)]">Vehicle</div>
                   <select className={inputClassName} value={form.vehicleId} onChange={(event) => updateField("vehicleId", event.target.value)}>
                     {vehicles.filter((vehicle) => vehicle.status !== "Retired").map((vehicle) => (
                       <option key={vehicle.id} value={vehicle.id}>{vehicle.name} · {vehicle.currentCity}</option>
@@ -251,14 +251,14 @@ export function AdminBookingsScreen({ createMode = false }: { createMode?: boole
                   </select>
                 </label>
                 <label>
-                  <div className="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-[var(--color-gray-500)]">Pickup city</div>
+                  <div className="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-[var(--text-soft)]">Pickup city</div>
                   <select className={inputClassName} value={form.pickupCity} onChange={(event) => updateField("pickupCity", event.target.value as City)}>
                     {cities.map((city) => <option key={city}>{city}</option>)}
                   </select>
                 </label>
                 <TextField label="Pickup location" value={form.pickupLocation} onChange={(value) => updateField("pickupLocation", value)} />
                 <label>
-                  <div className="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-[var(--color-gray-500)]">Assigned driver</div>
+                  <div className="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-[var(--text-soft)]">Assigned driver</div>
                   <select className={inputClassName} value={form.assignedDriverId} onChange={(event) => updateField("assignedDriverId", event.target.value)}>
                     <option value="">Assign later</option>
                     {availableDrivers.map((driver) => <option key={driver.id} value={driver.id}>{driver.name} · {driver.status}</option>)}
@@ -268,16 +268,16 @@ export function AdminBookingsScreen({ createMode = false }: { createMode?: boole
                 <TextField label="Pickup time" type="time" value={form.pickupTime} onChange={(value) => updateField("pickupTime", value)} />
                 <TextField label="Return date" type="date" value={form.returnDate} onChange={(value) => updateField("returnDate", value)} />
                 <TextField label="Return time" type="time" value={form.returnTime} onChange={(value) => updateField("returnTime", value)} />
-                <label className="md:col-span-2 flex items-center justify-between rounded-lg border border-[var(--color-gray-200)] bg-[var(--color-gray-100)] px-4 py-4">
+                <label className="md:col-span-2 flex items-center justify-between rounded-[var(--radius-md)] border border-[var(--border-subtle)] bg-[var(--bg-surface-soft)] px-4 py-4">
                   <div>
-                    <div className="text-sm font-semibold text-[var(--color-primary)]">Chauffeur required</div>
-                    <div className="mt-1 text-sm text-[var(--color-gray-600)]">Toggle managed driver service for this booking.</div>
+                    <div className="text-sm font-semibold text-[var(--text-main)]">Chauffeur required</div>
+                    <div className="mt-1 text-sm text-[var(--text-muted)]">Toggle managed driver service for this booking.</div>
                   </div>
                   <input type="checkbox" checked={form.withDriver} onChange={(event) => updateField("withDriver", event.target.checked)} />
                 </label>
                 <TextField label="Flight number" value={form.flightNumber} onChange={(value) => updateField("flightNumber", value)} />
                 <label>
-                  <div className="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-[var(--color-gray-500)]">Booking source</div>
+                  <div className="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-[var(--text-soft)]">Booking source</div>
                   <select className={inputClassName} value={form.source} onChange={(event) => updateField("source", event.target.value as BookingSource)}>
                     {bookingSourceOptions.map((option) => <option key={option}>{option}</option>)}
                   </select>
@@ -285,15 +285,15 @@ export function AdminBookingsScreen({ createMode = false }: { createMode?: boole
               </section>
 
               <section>
-                <div className="mb-3 text-xs font-semibold uppercase tracking-[0.22em] text-[var(--color-gray-500)]">Extras</div>
+                <div className="mb-3 text-xs font-semibold uppercase tracking-[0.22em] text-[var(--text-soft)]">Extras</div>
                 <div className="grid gap-3 md:grid-cols-2">
                   {availableExtras.map((extra) => {
                     const selected = form.extras.includes(extra.id);
                     return (
-                      <button key={extra.id} type="button" onClick={() => toggleExtra(extra.id)} className={`rounded-lg border px-4 py-4 text-left transition ${selected ? "border-[var(--color-accent)] bg-[rgba(26,127,212,0.08)]" : "border-[var(--color-gray-200)] bg-white"}`}>
-                        <div className="font-semibold text-[var(--color-primary)]">{extra.title}</div>
-                        <div className="mt-2 text-sm text-[var(--color-gray-600)]">{extra.description}</div>
-                        <div className="mt-3 text-xs uppercase tracking-[0.22em] text-[var(--color-gray-500)]">{extra.pricing === "daily" ? `${formatCurrency(extra.price)} / day` : formatCurrency(extra.price)}</div>
+                      <button key={extra.id} type="button" onClick={() => toggleExtra(extra.id)} className={`rounded-[var(--radius-md)] border px-4 py-4 text-left transition ${selected ? "border-[var(--brand)] bg-[var(--brand-soft)]" : "border-[var(--border-subtle)] bg-white"}`}>
+                        <div className="font-semibold text-[var(--text-main)]">{extra.title}</div>
+                        <div className="mt-2 text-sm text-[var(--text-muted)]">{extra.description}</div>
+                        <div className="mt-3 text-xs uppercase tracking-[0.22em] text-[var(--text-soft)]">{extra.pricing === "daily" ? `${formatCurrency(extra.price)} / day` : formatCurrency(extra.price)}</div>
                       </button>
                     );
                   })}
@@ -302,32 +302,32 @@ export function AdminBookingsScreen({ createMode = false }: { createMode?: boole
 
               <section className="grid gap-4 md:grid-cols-3">
                 <label>
-                  <div className="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-[var(--color-gray-500)]">Booking status</div>
+                  <div className="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-[var(--text-soft)]">Booking status</div>
                   <select className={inputClassName} value={form.status} onChange={(event) => updateField("status", event.target.value as BookingStatus)}>
                     {bookingStatusOptions.map((option) => <option key={option}>{option}</option>)}
                   </select>
                 </label>
                 <label>
-                  <div className="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-[var(--color-gray-500)]">Payment method</div>
+                  <div className="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-[var(--text-soft)]">Payment method</div>
                   <select className={inputClassName} value={form.paymentMethod} onChange={(event) => updateField("paymentMethod", event.target.value as PaymentMethod)}>
                     {paymentMethodOptions.map((option) => <option key={option}>{option}</option>)}
                   </select>
                 </label>
                 <label>
-                  <div className="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-[var(--color-gray-500)]">Payment status</div>
+                  <div className="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-[var(--text-soft)]">Payment status</div>
                   <select className={inputClassName} value={form.paymentStatus} onChange={(event) => updateField("paymentStatus", event.target.value as PaymentStatus)}>
                     {paymentStatusOptions.map((option) => <option key={option}>{option}</option>)}
                   </select>
                 </label>
                 <label className="md:col-span-3">
-                  <div className="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-[var(--color-gray-500)]">Internal notes</div>
+                  <div className="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-[var(--text-soft)]">Internal notes</div>
                   <textarea className={textareaClassName} value={form.notes} onChange={(event) => updateField("notes", event.target.value)} />
                 </label>
               </section>
 
               <div className="flex flex-wrap gap-3">
-                <Button type="button" className="rounded-md" onClick={() => submit("confirm")}>Confirm Booking</Button>
-                <Button type="button" variant="secondary" className="rounded-md" onClick={() => submit("draft")}>Save Draft</Button>
+                <Button type="button" onClick={() => submit("confirm")}>Confirm Booking</Button>
+                <Button type="button" variant="secondary" onClick={() => submit("draft")}>Save Draft</Button>
               </div>
             </div>
           </SurfaceCard>
@@ -340,14 +340,14 @@ export function AdminBookingsScreen({ createMode = false }: { createMode?: boole
                 <SummaryRow label="Pickup" value={`${form.pickupCity} · ${form.pickupDate} ${form.pickupTime}`} />
                 <SummaryRow label="Return" value={`${form.returnDate} ${form.returnTime}`} />
                 <SummaryRow label="With driver" value={form.withDriver ? "Yes" : "No"} />
-                <div className="rounded-lg bg-[var(--color-primary)] p-5 text-white">
+                <div className="rounded-[var(--radius-md)] bg-[var(--bg-sidebar)] p-5 text-white">
                   <div className="text-xs uppercase tracking-[0.22em] text-white/45">Projected total</div>
                   <div className="mt-3 font-display text-4xl font-bold tracking-[-0.05em]">{formatCurrency(projectedTotal)}</div>
                 </div>
               </div>
             </SurfaceCard>
             <SurfaceCard title="Operational defaults" subtitle="Current admin rules affecting manual booking intake.">
-              <div className="space-y-4 text-sm text-[var(--color-gray-600)]">
+              <div className="space-y-4 text-sm text-[var(--text-muted)]">
                 <SummaryRow label="Self-drive lead time" value={`${adminSettings.bookingRules.selfDriveLeadHours} hours`} />
                 <SummaryRow label="Chauffeur lead time" value={`${adminSettings.bookingRules.chauffeurLeadHours} hours`} />
                 <SummaryRow label="Security deposit" value={formatCurrency(adminSettings.pricingRules.securityDeposit)} />
@@ -361,7 +361,7 @@ export function AdminBookingsScreen({ createMode = false }: { createMode?: boole
   }
 
   return (
-    <AdminShell title="Bookings" description="Search reservations, update status, collect payment state, assign drivers, and jump into the client-facing confirmation page." actions={<Button asChild className="rounded-md"><Link to="/admin/bookings/new"><Plus className="mr-2 h-4 w-4" />New Booking</Link></Button>}>
+    <AdminShell title="Bookings" description="Search reservations, update status, collect payment state, assign drivers, and jump into the client-facing confirmation page." actions={<Button asChild><Link to="/admin/bookings/new"><Plus className="mr-2 h-4 w-4" />New Booking</Link></Button>}>
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
         <MetricCard label="Total bookings" value={String(bookings.length)} icon={CalendarRange} accent="blue" />
         <MetricCard label="Pending" value={String(bookings.filter((item) => item.status === "Pending").length)} icon={CalendarRange} accent="amber" />
@@ -372,7 +372,7 @@ export function AdminBookingsScreen({ createMode = false }: { createMode?: boole
       <SurfaceCard className="mt-6" title="Find a booking" subtitle="Use status and city filters to focus the queue.">
         <div className="grid gap-4 lg:grid-cols-[1.2fr_0.8fr_0.8fr]">
           <label className="relative block">
-            <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-[var(--color-gray-500)]" />
+            <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-[var(--text-soft)]" />
             <input className={`${inputClassName} pl-11`} placeholder="Search by ref, client, or vehicle" value={query} onChange={(event) => setQuery(event.target.value)} />
           </label>
           <select className={inputClassName} value={statusFilter} onChange={(event) => setStatusFilter(event.target.value as BookingStatus | "All")}>
@@ -391,22 +391,23 @@ export function AdminBookingsScreen({ createMode = false }: { createMode?: boole
           const vehicle = vehicles.find((item) => item.id === booking.vehicleId);
           const client = clients.find((item) => item.id === booking.clientId);
           return (
-            <div key={booking.ref} className="rounded-xl border border-[var(--color-gray-200)] bg-white p-5 shadow-sm">
-              <div className="grid gap-5 2xl:grid-cols-[1.3fr_0.75fr_0.75fr_0.95fr_0.95fr_0.9fr]">
-                <div>
+            <article key={booking.ref} className="rounded-[var(--radius-xl)] border border-[var(--border-subtle)] bg-white p-5 shadow-[var(--shadow-card)] transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--brand)] hover:shadow-[var(--shadow-card-hover)]">
+              <div className="grid gap-5 2xl:grid-cols-[1.35fr_0.7fr_0.75fr_0.85fr_0.85fr_0.9fr]">
+                <div className="min-w-0">
                   <div className="flex flex-wrap items-center gap-2">
-                    <div className="font-semibold text-[var(--color-primary)]">{booking.ref}</div>
+                    <div className="font-mono text-sm font-semibold text-[var(--text-main)]">{booking.ref}</div>
                     <StatusPill label={booking.status} tone={bookingStatusTone(booking.status)} />
                     <StatusPill label={booking.paymentStatus} tone={paymentStatusTone(booking.paymentStatus)} />
                   </div>
-                  <div className="mt-3 text-sm text-[var(--color-gray-600)]">{client?.firstName} {client?.lastName} · {vehicle?.name}</div>
-                  <div className="mt-1 text-sm text-[var(--color-gray-600)]">{booking.pickupLocation}</div>
-                  <div className="mt-2 text-xs uppercase tracking-[0.22em] text-[var(--color-gray-500)]">{formatDateTime(booking.pickupDateTime)} to {formatDateTime(booking.returnDateTime)}</div>
+                  <div className="mt-3 font-semibold text-[var(--text-main)]">{client?.firstName} {client?.lastName}</div>
+                  <div className="mt-1 text-sm text-[var(--text-muted)]">{vehicle?.name}</div>
+                  <div className="mt-2 rounded-[var(--radius-md)] bg-[var(--bg-surface-soft)] px-3 py-2 text-sm text-[var(--text-muted)] ring-1 ring-[var(--border-subtle)]">{booking.pickupLocation}</div>
+                  <div className="mt-3 text-[11px] font-bold uppercase tracking-[0.12em] text-[var(--text-soft)]">{formatDateTime(booking.pickupDateTime)} to {formatDateTime(booking.returnDateTime)}</div>
                 </div>
                 <InfoBlock label="City" value={booking.pickupCity} subvalue={booking.source} />
                 <InfoBlock label="Amount" value={formatCurrency(booking.amount)} subvalue={booking.paymentMethod} />
                 <div className="space-y-3">
-                  <div className="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--color-gray-500)]">Booking status</div>
+                  <div className="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--text-soft)]">Booking status</div>
                   <select className={inputClassName} value={booking.status} onChange={(event) => {
                     const result = updateBookingStatus(booking.ref, event.target.value as BookingStatus);
                     result.ok ? toast.success(`Booking moved to ${event.target.value}.`) : toast.error(result.error ?? "Could not update booking.");
@@ -415,27 +416,27 @@ export function AdminBookingsScreen({ createMode = false }: { createMode?: boole
                   </select>
                 </div>
                 <div className="space-y-3">
-                  <div className="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--color-gray-500)]">Payment status</div>
+                  <div className="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--text-soft)]">Payment status</div>
                   <select className={inputClassName} value={booking.paymentStatus} onChange={(event) => updatePaymentStatus(booking.ref, event.target.value as PaymentStatus)}>
                     {paymentStatusOptions.map((option) => <option key={option}>{option}</option>)}
                   </select>
                 </div>
                 <div className="space-y-3">
-                  <div className="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--color-gray-500)]">Actions</div>
+                  <div className="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--text-soft)]">Actions</div>
                   <select className={inputClassName} value={booking.assignedDriverId ?? ""} onChange={(event) => event.target.value && assignDriver(booking.ref, event.target.value)}>
                     <option value="">Assign driver</option>
                     {drivers.map((driver) => <option key={driver.id} value={driver.id}>{driver.name}</option>)}
                   </select>
                   <div className="flex flex-wrap gap-2">
-                    {client?.phone && <Button asChild size="sm" variant="secondary" className="rounded-md"><a href={toPhoneHref(client.phone)}><Phone className="mr-2 h-4 w-4" />Call</a></Button>}
-                    <Button asChild size="sm" className="rounded-md"><Link to={`/booking/confirmation/${booking.ref}`}><ExternalLink className="mr-2 h-4 w-4" />Open</Link></Button>
+                    {client?.phone && <Button asChild size="sm" variant="secondary"><a href={toPhoneHref(client.phone)}><Phone className="mr-2 h-4 w-4" />Call</a></Button>}
+                    <Button asChild size="sm"><Link to={`/booking/confirmation/${booking.ref}`}><ExternalLink className="mr-2 h-4 w-4" />Open</Link></Button>
                   </div>
                 </div>
               </div>
-            </div>
+            </article>
           );
         })}
-        {filteredBookings.length === 0 && <EmptyState title="No bookings matched those filters" description="Clear the search or open a new reservation from the admin booking flow." action={<Button asChild className="rounded-md"><Link to="/admin/bookings/new">Create Booking</Link></Button>} />}
+        {filteredBookings.length === 0 && <EmptyState title="No bookings matched those filters" description="Clear the search or open a new reservation from the admin booking flow." action={<Button asChild><Link to="/admin/bookings/new">Create Booking</Link></Button>} />}
       </div>
     </AdminShell>
   );

@@ -10,6 +10,13 @@ import type {
   VehicleStatus,
 } from "@/types";
 
+const metricAccentClasses = {
+  blue: "bg-[var(--brand-soft)] text-[var(--brand)] ring-[rgba(22,119,210,0.14)]",
+  navy: "bg-[#eef3f8] text-[var(--bg-sidebar)] ring-[rgba(7,29,51,0.12)]",
+  green: "bg-[var(--success-soft)] text-[var(--success-ui)] ring-[rgba(24,180,107,0.14)]",
+  amber: "bg-[var(--warning-soft)] text-[var(--warning-ui)] ring-[rgba(245,158,11,0.16)]",
+};
+
 export function MetricCard({
   label,
   value,
@@ -21,22 +28,19 @@ export function MetricCard({
   icon: LucideIcon;
   accent: "blue" | "navy" | "green" | "amber";
 }) {
-  const accentClasses = {
-    blue: "bg-[rgba(26,127,212,0.12)] text-[var(--color-accent)]",
-    navy: "bg-[rgba(10,22,40,0.08)] text-[var(--color-primary)]",
-    green: "bg-[rgba(34,197,94,0.12)] text-[var(--color-success)]",
-    amber: "bg-[rgba(245,158,11,0.12)] text-[var(--color-warning)]",
-  };
-
   return (
-    <div className="rounded-xl border border-[var(--color-gray-200)] bg-white p-5 shadow-sm">
-      <div className="flex items-center justify-between gap-3">
-        <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--color-gray-500)]">{label}</div>
-        <div className={cn("grid h-9 w-9 place-items-center rounded-lg", accentClasses[accent])}>
-          <Icon className="h-4 w-4" />
+    <div className="group relative overflow-hidden rounded-[var(--radius-lg)] border border-[var(--border-subtle)] bg-[var(--bg-surface)] p-5 shadow-[var(--shadow-card)] transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--border-soft)] hover:shadow-[var(--shadow-card-hover)]">
+      <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-[var(--brand)]/70 via-[var(--brand)]/20 to-transparent" />
+      <div className="flex items-start justify-between gap-4">
+        <div className="min-w-0">
+          <div className="text-[11px] font-bold uppercase tracking-[0.14em] text-[var(--text-soft)]">{label}</div>
+          <div className="mt-4 font-display text-3xl font-semibold tracking-[-0.04em] text-[var(--text-main)] tabular-nums">{value}</div>
+          <div className="mt-2 text-xs font-medium text-[var(--text-muted)]">Current operational count</div>
+        </div>
+        <div className={cn("grid h-11 w-11 shrink-0 place-items-center rounded-[var(--radius-md)] ring-1", metricAccentClasses[accent])}>
+          <Icon className="h-5 w-5" />
         </div>
       </div>
-      <div className="mt-4 font-display text-2xl font-semibold tracking-[-0.03em] text-[var(--color-primary)]">{value}</div>
     </div>
   );
 }
@@ -53,13 +57,13 @@ export function SurfaceCard({
   className?: string;
 }) {
   return (
-    <div className={cn("rounded-xl border border-[var(--color-gray-200)] bg-white p-5 shadow-sm", className)}>
-      <div>
-        <div className="font-display text-xl font-semibold tracking-[-0.025em] text-[var(--color-primary)]">{title}</div>
-        {subtitle && <div className="mt-1.5 text-sm leading-6 text-[var(--color-gray-600)]">{subtitle}</div>}
+    <section className={cn("rounded-[var(--radius-lg)] border border-[var(--border-subtle)] bg-[var(--bg-surface)] p-5 shadow-[var(--shadow-card)] sm:p-6", className)}>
+      <div className="flex flex-col gap-1.5">
+        <h2 className="font-display text-lg font-semibold tracking-[-0.025em] text-[var(--text-main)] sm:text-xl">{title}</h2>
+        {subtitle && <p className="max-w-3xl text-sm leading-6 text-[var(--text-muted)]">{subtitle}</p>}
       </div>
       <div className="mt-5">{children}</div>
-    </div>
+    </section>
   );
 }
 
@@ -71,14 +75,14 @@ export function StatusPill({
   tone: "blue" | "navy" | "green" | "amber" | "slate";
 }) {
   const tones = {
-    blue: "bg-[rgba(26,127,212,0.12)] text-[var(--color-accent)]",
-    navy: "bg-[rgba(10,22,40,0.08)] text-[var(--color-primary)]",
-    green: "bg-[rgba(34,197,94,0.12)] text-[var(--color-success)]",
-    amber: "bg-[rgba(245,158,11,0.12)] text-[var(--color-warning)]",
-    slate: "bg-[var(--color-gray-100)] text-[var(--color-gray-600)]",
+    blue: "border-[rgba(22,119,210,0.18)] bg-[var(--brand-soft)] text-[var(--brand-dark)]",
+    navy: "border-[rgba(7,29,51,0.14)] bg-[#eef3f8] text-[var(--bg-sidebar)]",
+    green: "border-[rgba(24,180,107,0.18)] bg-[var(--success-soft)] text-[#0b7a47]",
+    amber: "border-[rgba(245,158,11,0.22)] bg-[var(--warning-soft)] text-[#a15c02]",
+    slate: "border-[var(--border-soft)] bg-[var(--bg-surface-soft)] text-[var(--text-muted)]",
   };
 
-  return <span className={cn("rounded-md px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.12em]", tones[tone])}>{label}</span>;
+  return <span className={cn("inline-flex items-center rounded-full border px-2.5 py-1 text-[11px] font-bold uppercase tracking-[0.08em]", tones[tone])}>{label}</span>;
 }
 
 export function AlertTile({
@@ -91,15 +95,15 @@ export function AlertTile({
   tone: "blue" | "green" | "amber";
 }) {
   const toneClasses = {
-    blue: "border-[rgba(26,127,212,0.16)] bg-[rgba(26,127,212,0.06)]",
-    green: "border-[rgba(34,197,94,0.16)] bg-[rgba(34,197,94,0.06)]",
-    amber: "border-[rgba(245,158,11,0.16)] bg-[rgba(245,158,11,0.06)]",
+    blue: "border-l-[var(--brand)] bg-[var(--info-soft)]",
+    green: "border-l-[var(--success-ui)] bg-[var(--success-soft)]",
+    amber: "border-l-[var(--warning-ui)] bg-[var(--warning-soft)]",
   };
 
   return (
-    <div className={cn("rounded-lg border p-4", toneClasses[tone])}>
-      <div className="text-sm font-semibold text-[var(--color-primary)]">{title}</div>
-      <div className="mt-1.5 text-sm leading-6 text-[var(--color-gray-600)]">{description}</div>
+    <div className={cn("rounded-[var(--radius-md)] border border-[var(--border-subtle)] border-l-4 px-4 py-3.5", toneClasses[tone])}>
+      <div className="text-sm font-semibold text-[var(--text-main)]">{title}</div>
+      <div className="mt-1 text-sm leading-6 text-[var(--text-muted)]">{description}</div>
     </div>
   );
 }
@@ -114,19 +118,19 @@ export function InfoBlock({
   subvalue?: string;
 }) {
   return (
-    <div>
-      <div className="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--color-gray-500)]">{label}</div>
-      <div className="mt-2 font-semibold text-[var(--color-primary)]">{value}</div>
-      {subvalue && <div className="mt-1 text-sm text-[var(--color-gray-600)]">{subvalue}</div>}
+    <div className="rounded-[var(--radius-md)] bg-[var(--bg-surface-soft)] px-4 py-3">
+      <div className="text-[11px] font-bold uppercase tracking-[0.12em] text-[var(--text-soft)]">{label}</div>
+      <div className="mt-2 font-semibold text-[var(--text-main)]">{value}</div>
+      {subvalue && <div className="mt-1 text-sm text-[var(--text-muted)]">{subvalue}</div>}
     </div>
   );
 }
 
 export function SummaryRow({ label, value }: { label: string; value: string }) {
   return (
-    <div className="flex items-start justify-between gap-4 rounded-lg bg-[var(--color-gray-100)] px-4 py-3">
-      <span className="text-sm text-[var(--color-gray-600)]">{label}</span>
-      <span className="max-w-[60%] text-right text-sm font-semibold text-[var(--color-primary)]">{value}</span>
+    <div className="flex items-start justify-between gap-4 rounded-[var(--radius-md)] bg-[var(--bg-surface-soft)] px-4 py-3 ring-1 ring-[var(--border-subtle)]">
+      <span className="text-sm text-[var(--text-muted)]">{label}</span>
+      <span className="max-w-[60%] text-right text-sm font-semibold text-[var(--text-main)]">{value}</span>
     </div>
   );
 }
@@ -153,7 +157,7 @@ export function TextField({
 }
 
 export function FieldLabel({ children }: { children: ReactNode }) {
-  return <div className="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-[var(--color-gray-500)]">{children}</div>;
+  return <div className="mb-2 text-[11px] font-bold uppercase tracking-[0.13em] text-[var(--text-soft)]">{children}</div>;
 }
 
 export function EmptyState({
@@ -166,12 +170,12 @@ export function EmptyState({
   action?: ReactNode;
 }) {
   return (
-    <div className="rounded-xl border border-dashed border-[var(--color-gray-300)] bg-white px-6 py-10 text-center">
-      <div className="mx-auto grid h-12 w-12 place-items-center rounded-lg bg-[var(--color-gray-100)] text-[var(--color-accent)]">
+    <div className="rounded-[var(--radius-lg)] border border-dashed border-[var(--border-soft)] bg-white px-6 py-12 text-center shadow-[var(--shadow-card)]">
+      <div className="mx-auto grid h-12 w-12 place-items-center rounded-[var(--radius-md)] bg-[var(--brand-soft)] text-[var(--brand)]">
         <Activity className="h-5 w-5" />
       </div>
-      <div className="mt-4 font-display text-xl font-semibold tracking-[-0.025em] text-[var(--color-primary)]">{title}</div>
-      <div className="mx-auto mt-2 max-w-xl text-sm leading-6 text-[var(--color-gray-600)]">{description}</div>
+      <div className="mt-4 font-display text-xl font-semibold tracking-[-0.025em] text-[var(--text-main)]">{title}</div>
+      <div className="mx-auto mt-2 max-w-xl text-sm leading-6 text-[var(--text-muted)]">{description}</div>
       {action && <div className="mt-6">{action}</div>}
     </div>
   );
@@ -209,15 +213,15 @@ export function driverStatusTone(status: DriverStatus) {
 export function bookingStatusColor(status: BookingStatus) {
   switch (status) {
     case "Completed":
-      return "#22C55E";
+      return "#18b46b";
     case "Active":
-      return "#1A7FD4";
+      return "#1677d2";
     case "Approved":
-      return "#0A1628";
+      return "#071d33";
     case "Pending":
-      return "#F59E0B";
+      return "#f59e0b";
     default:
-      return "#CBD5E1";
+      return "#cbd5e1";
   }
 }
 
@@ -282,13 +286,13 @@ export function offsetDate(days: number) {
 }
 
 export const inputClassName =
-  "h-12 w-full rounded-2xl border border-[var(--color-gray-200)] bg-[var(--color-gray-100)] px-4 text-sm outline-none transition focus:border-[var(--color-accent)]";
+  "h-12 w-full rounded-[var(--radius-md)] border border-[var(--border-soft)] bg-[var(--bg-surface-soft)] px-4 text-sm text-[var(--text-main)] outline-none transition-all duration-200 placeholder:text-[var(--text-soft)] hover:border-[#cfd9e6] focus:border-[var(--brand)] focus:bg-white focus:ring-4 focus:ring-[rgba(22,119,210,0.12)] disabled:cursor-not-allowed disabled:opacity-60";
 
 export const textareaClassName =
-  "min-h-[120px] w-full rounded-lg border border-[var(--color-gray-200)] bg-[var(--color-gray-100)] px-4 py-3 text-sm outline-none transition focus:border-[var(--color-accent)]";
+  "min-h-[120px] w-full rounded-[var(--radius-md)] border border-[var(--border-soft)] bg-[var(--bg-surface-soft)] px-4 py-3 text-sm text-[var(--text-main)] outline-none transition-all duration-200 placeholder:text-[var(--text-soft)] hover:border-[#cfd9e6] focus:border-[var(--brand)] focus:bg-white focus:ring-4 focus:ring-[rgba(22,119,210,0.12)] disabled:cursor-not-allowed disabled:opacity-60";
 
 export const chipClassName =
-  "rounded-md border border-[var(--color-gray-200)] bg-white px-4 py-2 text-sm font-medium text-[var(--color-gray-600)] transition hover:border-[var(--color-gray-300)]";
+  "rounded-full border border-[var(--border-soft)] bg-white px-4 py-2 text-sm font-semibold text-[var(--text-muted)] transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--brand)] hover:bg-[var(--brand-soft)] hover:text-[var(--brand-dark)]";
 
 export const activeChipClassName =
-  "border-[var(--color-accent)] bg-[rgba(26,127,212,0.08)] text-[var(--color-accent)]";
+  "border-[var(--brand)] bg-[var(--brand-soft)] text-[var(--brand-dark)] shadow-[0_8px_18px_rgba(22,119,210,0.10)]";

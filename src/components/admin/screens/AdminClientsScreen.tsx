@@ -46,27 +46,29 @@ export function AdminClientsScreen() {
         {filteredClients.map((client) => {
           const clientBookings = bookings.filter((booking) => booking.clientId === client.id);
           return (
-            <div key={client.id} className="rounded-xl border border-[var(--color-gray-200)] bg-white p-5 shadow-sm">
+            <article key={client.id} className="rounded-[var(--radius-xl)] border border-[var(--border-subtle)] bg-white p-5 shadow-[var(--shadow-card)] transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--brand)] hover:shadow-[var(--shadow-card-hover)]">
               <div className="flex items-start justify-between gap-4">
-                <div>
-                  <div className="font-semibold text-[var(--color-primary)]">{client.firstName} {client.lastName}</div>
-                  <div className="text-sm text-[var(--color-gray-600)]">{client.accountType} · {client.tier}</div>
+                <div className="min-w-0">
+                  <div className="font-display text-xl font-semibold tracking-[-0.035em] text-[var(--text-main)]">{client.firstName} {client.lastName}</div>
+                  <div className="mt-1 text-sm text-[var(--text-muted)]">{client.accountType} · {client.tier}</div>
                 </div>
                 {client.outstandingBalance ? <StatusPill label="Balance due" tone="amber" /> : <StatusPill label="Clear" tone="green" />}
               </div>
-              <div className="mt-5 space-y-3 text-sm text-[var(--color-gray-600)]">
-                <div>{client.email}</div>
-                <div>{client.phone}</div>
-                {client.companyName && <div>Company: {client.companyName}</div>}
-                <div>Total spend: {formatCurrency(client.totalSpend)}</div>
-                <div>Bookings: {clientBookings.length}</div>
+              <div className="mt-5 rounded-[var(--radius-lg)] bg-[var(--bg-surface-soft)] p-4 ring-1 ring-[var(--border-subtle)]">
+                <div className="grid gap-3 text-sm text-[var(--text-muted)]">
+                  <div className="truncate">{client.email}</div>
+                  <div>{client.phone}</div>
+                  {client.companyName && <div>Company: <strong className="text-[var(--text-main)]">{client.companyName}</strong></div>}
+                  <div className="flex justify-between gap-3"><span>Total spend</span><strong className="font-mono text-[var(--text-main)]">{formatCurrency(client.totalSpend)}</strong></div>
+                  <div className="flex justify-between gap-3"><span>Bookings</span><strong className="text-[var(--text-main)]">{clientBookings.length}</strong></div>
+                </div>
               </div>
               <div className="mt-6 flex flex-wrap gap-2">
-                <Button asChild size="sm" variant="secondary" className="rounded-md"><a href={`mailto:${client.email}`}><Mail className="mr-2 h-4 w-4" />Email</a></Button>
-                <Button asChild size="sm" variant="secondary" className="rounded-md"><a href={toPhoneHref(client.phone)}><Phone className="mr-2 h-4 w-4" />Call</a></Button>
-                <Button asChild size="sm" className="rounded-md"><a href={toWhatsAppHref(client.phone)} target="_blank" rel="noreferrer">WhatsApp</a></Button>
+                <Button asChild size="sm" variant="secondary"><a href={`mailto:${client.email}`}><Mail className="mr-2 h-4 w-4" />Email</a></Button>
+                <Button asChild size="sm" variant="secondary"><a href={toPhoneHref(client.phone)}><Phone className="mr-2 h-4 w-4" />Call</a></Button>
+                <Button asChild size="sm"><a href={toWhatsAppHref(client.phone)} target="_blank" rel="noreferrer">WhatsApp</a></Button>
               </div>
-            </div>
+            </article>
           );
         })}
       </div>

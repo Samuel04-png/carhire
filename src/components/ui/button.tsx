@@ -5,15 +5,15 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-semibold transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]/35 disabled:pointer-events-none disabled:bg-[var(--color-gray-300)] disabled:text-[var(--color-gray-600)] disabled:shadow-none",
+  "inline-flex items-center justify-center whitespace-nowrap rounded-[var(--radius-md)] text-sm font-semibold transition-all duration-200 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[rgba(22,119,210,0.14)] disabled:pointer-events-none disabled:bg-[var(--color-gray-300)] disabled:text-[var(--color-gray-600)] disabled:shadow-none",
   {
     variants: {
       variant: {
-        default: "bg-[var(--color-accent)] text-white shadow-sm hover:bg-[var(--color-accent-hover)]",
-        dark: "bg-[var(--color-primary)] text-white shadow-sm hover:bg-[#102d48]",
-        secondary: "border border-[var(--color-gray-300)] bg-white text-[var(--color-primary)] shadow-sm hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]",
-        ghost: "border border-white/25 bg-transparent text-white hover:bg-white/10",
-        danger: "bg-[var(--color-error)] text-white shadow-sm hover:bg-[#dc2626]",
+        default: "bg-[var(--brand)] text-white shadow-[var(--shadow-button)] hover:-translate-y-0.5 hover:bg-[var(--brand-dark)] hover:shadow-[0_12px_24px_rgba(22,119,210,0.28)]",
+        dark: "bg-[var(--bg-sidebar)] text-white shadow-sm hover:-translate-y-0.5 hover:bg-[#102d48]",
+        secondary: "border border-[var(--border-soft)] bg-white text-[var(--text-main)] shadow-sm hover:-translate-y-0.5 hover:border-[var(--brand)] hover:bg-[var(--brand-soft)] hover:text-[var(--brand-dark)]",
+        ghost: "border border-white/20 bg-transparent text-white hover:bg-white/10",
+        danger: "bg-[var(--danger-ui)] text-white shadow-sm hover:-translate-y-0.5 hover:bg-[#dc2626]",
       },
       size: {
         default: "h-11 px-5 py-2",
