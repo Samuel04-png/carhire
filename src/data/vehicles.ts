@@ -45,8 +45,8 @@ export const vehicles: Vehicle[] = [
     gallery: [
       dotsAsset("user-img-01.jpg"),
       dotsAsset("user-img-02.jpg"),
-      dotsAsset("dots-source-17.jpg"),
-      dotsAsset("dots-source-12.jpg"),
+      dotsAsset("user-img-11.jpg"),
+      dotsAsset("user-img-12.jpg"),
     ],
     description:
       "A refined mid-size SUV ideal for airport runs, executive movement, and family travel with a strong balance of comfort, image, and fuel efficiency.",
@@ -102,8 +102,8 @@ export const vehicles: Vehicle[] = [
     gallery: [
       dotsAsset("user-img-03.jpg"),
       dotsAsset("user-img-04.jpg"),
-      dotsAsset("dots-source-15.jpg"),
-      dotsAsset("dots-source-02.jpg"),
+      dotsAsset("user-img-13.jpg"),
+      dotsAsset("user-img-14.jpg"),
     ],
     description:
       "A dependable pickup built for project movement, regional travel, and mixed-road conditions with strong driver confidence and serious presence.",
@@ -159,8 +159,8 @@ export const vehicles: Vehicle[] = [
     gallery: [
       dotsAsset("user-img-05.jpg"),
       dotsAsset("user-img-06.jpg"),
-      dotsAsset("dots-source-08.jpg"),
-      dotsAsset("dots-source-09.jpg"),
+      dotsAsset("user-img-15.jpg"),
+      dotsAsset("user-img-16.jpg"),
     ],
     description:
       "A premium executive sedan for weddings, VIP transfers, and leadership travel where image, comfort, and silence matter.",
@@ -216,8 +216,8 @@ export const vehicles: Vehicle[] = [
     gallery: [
       dotsAsset("user-img-07.jpg"),
       dotsAsset("user-img-08.jpg"),
-      dotsAsset("dots-source-14.jpg"),
-      dotsAsset("dots-source-12.jpg"),
+      dotsAsset("user-img-17.jpg"),
+      dotsAsset("user-img-18.jpg"),
     ],
     description:
       "A practical, cost-efficient choice for city movement, business errands, and everyday self-drive use without sacrificing presentation.",
@@ -273,8 +273,8 @@ export const vehicles: Vehicle[] = [
     gallery: [
       dotsAsset("user-img-09.jpg"),
       dotsAsset("user-img-10.jpg"),
-      dotsAsset("dots-source-11.jpg"),
-      dotsAsset("dots-source-10.jpg"),
+      dotsAsset("user-img-19.jpg"),
+      dotsAsset("user-img-20.jpg"),
     ],
     description:
       "A high-confidence SUV for leadership travel, family comfort, and regional movement where road conditions can change quickly.",
