@@ -130,10 +130,10 @@ export default function HomePage() {
             style={{
               backgroundImage: `url('/brand/dots/${
                 [
-                  "hero-d23de043d3ea",
-                  "hero-20e1afe17472", 
-                  "hero-261b4629a9e3",
-                  "hero-8ed9cd128f11",
+                  "user-img-01",
+                  "user-img-09", 
+                  "user-img-05",
+                  "user-img-03",
                 ][index]
               }.jpg')`,
               opacity: activeHero === index ? 1 : 0,
