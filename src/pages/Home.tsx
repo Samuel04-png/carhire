@@ -56,11 +56,19 @@ export default function HomePage() {
   const [vehicleModel, setVehicleModel] = useState("");
   const [withDriver, setWithDriver] = useState(bookingDraft.withDriver);
   const [activeTestimonial, setActiveTestimonial] = useState(0);
+  const [activeHero, setActiveHero] = useState(0);
 
   useEffect(() => {
     const timer = window.setInterval(() => {
       setActiveTestimonial((current) => (current + 1) % testimonials.length);
     }, 5000);
+    return () => window.clearInterval(timer);
+  }, []);
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setActiveHero((current) => (current + 1) % 4);
+    }, 6000);
     return () => window.clearInterval(timer);
   }, []);
 
@@ -114,11 +122,24 @@ export default function HomePage() {
     <div className="bg-[var(--color-gray-100)]">
       {/* HERO — Search-first */}
       <section className="relative overflow-hidden bg-[#071827] text-white">
-        {/* Background image */}
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: "url('/brand/dots/dots-hero-cover.jpg')" }}
-        />
+        {/* Background image slideshow */}
+        {[0, 1, 2, 3].map((index) => (
+          <div
+            key={index}
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-[2000ms] ease-in-out"
+            style={{
+              backgroundImage: `url('/brand/dots/${
+                [
+                  "hero-d23de043d3ea",
+                  "hero-20e1afe17472", 
+                  "hero-261b4629a9e3",
+                  "hero-8ed9cd128f11",
+                ][index]
+              }.jpg')`,
+              opacity: activeHero === index ? 1 : 0,
+            }}
+          />
+        ))}
         {/* Dark overlay for readability */}
         <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(8,31,53,0.88),rgba(11,49,87,0.78),rgba(26,127,212,0.58))]" />
         <div className="absolute inset-x-0 bottom-0 h-32 bg-[linear-gradient(180deg,transparent,rgba(248,250,252,0.16))]" />
