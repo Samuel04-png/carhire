@@ -41,12 +41,12 @@ export const vehicles: Vehicle[] = [
     currentCity: "Lusaka",
     nextBookingDate: "2026-03-19",
     mainImage:
-      dotsAsset("dots-source-17.jpg"),
+      dotsAsset("user-img-01.jpg"),
     gallery: [
+      dotsAsset("user-img-01.jpg"),
+      dotsAsset("user-img-02.jpg"),
       dotsAsset("dots-source-17.jpg"),
-      "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1200&q=80",
       dotsAsset("dots-source-12.jpg"),
-      "https://images.unsplash.com/photo-1553440569-bcc63803a83d?auto=format&fit=crop&w=1200&q=80",
     ],
     description:
       "A refined mid-size SUV ideal for airport runs, executive movement, and family travel with a strong balance of comfort, image, and fuel efficiency.",
@@ -98,12 +98,12 @@ export const vehicles: Vehicle[] = [
     currentCity: "Ndola",
     nextBookingDate: "2026-03-15",
     mainImage:
-      dotsAsset("dots-source-15.jpg"),
+      dotsAsset("user-img-03.jpg"),
     gallery: [
+      dotsAsset("user-img-03.jpg"),
+      dotsAsset("user-img-04.jpg"),
       dotsAsset("dots-source-15.jpg"),
-      "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1514316454349-750a7fd3da3a?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1485291571150-772bcfc10da5?auto=format&fit=crop&w=1200&q=80",
+      dotsAsset("dots-source-02.jpg"),
     ],
     description:
       "A dependable pickup built for project movement, regional travel, and mixed-road conditions with strong driver confidence and serious presence.",
@@ -155,12 +155,12 @@ export const vehicles: Vehicle[] = [
     currentCity: "Lusaka",
     nextBookingDate: "2026-03-20",
     mainImage:
-      dotsAsset("dots-source-08.jpg"),
+      dotsAsset("user-img-05.jpg"),
     gallery: [
+      dotsAsset("user-img-05.jpg"),
+      dotsAsset("user-img-06.jpg"),
       dotsAsset("dots-source-08.jpg"),
-      "https://images.unsplash.com/photo-1549924231-f129b911e442?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1553440569-bcc63803a83d?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1200&q=80",
+      dotsAsset("dots-source-09.jpg"),
     ],
     description:
       "A premium executive sedan for weddings, VIP transfers, and leadership travel where image, comfort, and silence matter.",
@@ -212,12 +212,12 @@ export const vehicles: Vehicle[] = [
     currentCity: "Ndola",
     nextBookingDate: "2026-03-18",
     mainImage:
-      dotsAsset("dots-source-14.jpg"),
+      dotsAsset("user-img-07.jpg"),
     gallery: [
+      dotsAsset("user-img-07.jpg"),
+      dotsAsset("user-img-08.jpg"),
       dotsAsset("dots-source-14.jpg"),
-      "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=1200&q=80",
       dotsAsset("dots-source-12.jpg"),
-      "https://images.unsplash.com/photo-1542282088-fe8426682b8f?auto=format&fit=crop&w=1200&q=80",
     ],
     description:
       "A practical, cost-efficient choice for city movement, business errands, and everyday self-drive use without sacrificing presentation.",
@@ -269,11 +269,11 @@ export const vehicles: Vehicle[] = [
     currentCity: "Lusaka",
     nextBookingDate: "2026-03-16",
     mainImage:
-      dotsAsset("dots-source-11.jpg"),
+      dotsAsset("user-img-09.jpg"),
     gallery: [
+      dotsAsset("user-img-09.jpg"),
+      dotsAsset("user-img-10.jpg"),
       dotsAsset("dots-source-11.jpg"),
-      "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80",
       dotsAsset("dots-source-10.jpg"),
     ],
     description:
@@ -329,7 +329,6 @@ export const vehicles: Vehicle[] = [
       dotsAsset("dots-source-16.jpg"),
     gallery: [
       dotsAsset("dots-source-16.jpg"),
-      "https://images.unsplash.com/photo-1493238792000-8113da705763?auto=format&fit=crop&w=1200&q=80",
       dotsAsset("dots-source-17.jpg"),
       dotsAsset("dots-source-10.jpg"),
     ],
@@ -386,9 +385,8 @@ export const vehicles: Vehicle[] = [
       dotsAsset("dots-source-10.jpg"),
     gallery: [
       dotsAsset("dots-source-10.jpg"),
-      "https://images.unsplash.com/photo-1549924231-f129b911e442?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1200&q=80",
+      dotsAsset("dots-source-09.jpg"),
+      dotsAsset("dots-source-08.jpg"),
     ],
     description:
       "A sharper luxury choice for executive self-drive or chauffeured city movement with a more contemporary visual profile.",
@@ -443,9 +441,8 @@ export const vehicles: Vehicle[] = [
       dotsAsset("dots-source-12.jpg"),
     gallery: [
       dotsAsset("dots-source-12.jpg"),
-      "https://images.unsplash.com/photo-1542282088-fe8426682b8f?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1553440569-bcc63803a83d?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80",
+      dotsAsset("dots-source-14.jpg"),
+      dotsAsset("dots-source-11.jpg"),
     ],
     description:
       "A durable saloon that works well for business travel, staff mobility, and cost-conscious bookings that still need a professional finish.",
