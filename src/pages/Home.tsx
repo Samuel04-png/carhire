@@ -130,10 +130,10 @@ export default function HomePage() {
             style={{
               backgroundImage: `url('/brand/dots/${
                 [
-                  "user-img-01",
-                  "user-img-09", 
-                  "user-img-05",
-                  "user-img-03",
+                  "fleet/toyota-prado-executive/01",
+                  "fleet/toyota-hilux-adventure/01", 
+                  "fleet/toyota-quantum-shuttle/01",
+                  "fleet/toyota-corolla-quest/01",
                 ][index]
               }.jpg')`,
               opacity: activeHero === index ? 1 : 0,

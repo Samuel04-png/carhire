@@ -2,6 +2,8 @@ import { withBase } from "@/lib/utils";
 import type { Vehicle } from "@/types";
 
 const dotsAsset = (file: string) => withBase(`/brand/dots/${file}`);
+const fleetAsset = (vehicleSlug: string, file: string) => dotsAsset(`fleet/${vehicleSlug}/${file}`);
+const vehiclePlaceholder = dotsAsset("fleet/placeholder/vehicle-placeholder.svg");
 
 export const vehicles: Vehicle[] = [
   {
@@ -40,16 +42,8 @@ export const vehicles: Vehicle[] = [
     status: "Available",
     currentCity: "Lusaka",
     nextBookingDate: "2026-03-19",
-    mainImage:
-      dotsAsset("user-img-01.jpg"),
-    gallery: [
-      dotsAsset("user-img-01.jpg"),
-      dotsAsset("user-img-02.jpg"),
-      dotsAsset("user-img-11.jpg"),
-      dotsAsset("user-img-12.jpg"),
-      dotsAsset("user-img-29.jpg"),
-      dotsAsset("user-img-30.jpg"),
-    ],
+    mainImage: vehiclePlaceholder,
+    gallery: [vehiclePlaceholder],
     description:
       "A refined mid-size SUV ideal for airport runs, executive movement, and family travel with a strong balance of comfort, image, and fuel efficiency.",
     features: [
@@ -100,13 +94,10 @@ export const vehicles: Vehicle[] = [
     currentCity: "Ndola",
     nextBookingDate: "2026-03-15",
     mainImage:
-      dotsAsset("user-img-03.jpg"),
+      fleetAsset("toyota-hilux-adventure", "01.jpg"),
     gallery: [
-      dotsAsset("user-img-03.jpg"),
-      dotsAsset("user-img-04.jpg"),
-      dotsAsset("user-img-13.jpg"),
-      dotsAsset("user-img-14.jpg"),
-      dotsAsset("user-img-31.jpg"),
+      fleetAsset("toyota-hilux-adventure", "01.jpg"),
+      fleetAsset("toyota-hilux-adventure", "02.jpg"),
     ],
     description:
       "A dependable pickup built for project movement, regional travel, and mixed-road conditions with strong driver confidence and serious presence.",
@@ -157,16 +148,8 @@ export const vehicles: Vehicle[] = [
     status: "Available",
     currentCity: "Lusaka",
     nextBookingDate: "2026-03-20",
-    mainImage:
-      dotsAsset("user-img-05.jpg"),
-    gallery: [
-      dotsAsset("user-img-05.jpg"),
-      dotsAsset("user-img-06.jpg"),
-      dotsAsset("user-img-15.jpg"),
-      dotsAsset("user-img-16.jpg"),
-      dotsAsset("user-img-32.jpg"),
-      dotsAsset("user-img-33.jpg"),
-    ],
+    mainImage: vehiclePlaceholder,
+    gallery: [vehiclePlaceholder],
     description:
       "A premium executive sedan for weddings, VIP transfers, and leadership travel where image, comfort, and silence matter.",
     features: [
@@ -217,13 +200,14 @@ export const vehicles: Vehicle[] = [
     currentCity: "Lusaka",
     nextBookingDate: "2026-03-16",
     mainImage:
-      dotsAsset("user-img-09.jpg"),
+      fleetAsset("toyota-prado-executive", "01.jpg"),
     gallery: [
-      dotsAsset("user-img-09.jpg"),
-      dotsAsset("user-img-10.jpg"),
-      dotsAsset("user-img-19.jpg"),
-      dotsAsset("user-img-20.jpg"),
-      dotsAsset("user-img-34.jpg"),
+      fleetAsset("toyota-prado-executive", "01.jpg"),
+      fleetAsset("toyota-prado-executive", "02.jpg"),
+      fleetAsset("toyota-prado-executive", "03.jpg"),
+      fleetAsset("toyota-prado-executive", "04.jpg"),
+      fleetAsset("toyota-prado-executive", "05.jpg"),
+      fleetAsset("toyota-prado-executive", "06.jpg"),
     ],
     description:
       "A high-confidence SUV for leadership travel, family comfort, and regional movement where road conditions can change quickly.",
@@ -275,12 +259,11 @@ export const vehicles: Vehicle[] = [
     currentCity: "Ndola",
     nextBookingDate: "2026-03-22",
     mainImage:
-      dotsAsset("user-img-22.jpg"),
+      fleetAsset("toyota-quantum-shuttle", "01.jpg"),
     gallery: [
-      dotsAsset("user-img-22.jpg"),
-      dotsAsset("user-img-23.jpg"),
-      dotsAsset("user-img-21.jpg"),
-      dotsAsset("user-img-24.jpg"),
+      fleetAsset("toyota-quantum-shuttle", "01.jpg"),
+      fleetAsset("toyota-quantum-shuttle", "02.jpg"),
+      fleetAsset("toyota-quantum-shuttle", "03.jpg"),
     ],
     description:
       "A dependable group transport option for events, teams, airport shuttles, and corporate movement with enough room for luggage and schedules.",
@@ -331,14 +314,8 @@ export const vehicles: Vehicle[] = [
     status: "On Request",
     currentCity: "Lusaka",
     nextBookingDate: "2026-03-24",
-    mainImage:
-      dotsAsset("user-img-07.jpg"),
-    gallery: [
-      dotsAsset("user-img-07.jpg"),
-      dotsAsset("user-img-08.jpg"),
-      dotsAsset("user-img-25.jpg"),
-      dotsAsset("user-img-26.jpg"),
-    ],
+    mainImage: vehiclePlaceholder,
+    gallery: [vehiclePlaceholder],
     description:
       "A sharper luxury choice for executive self-drive or chauffeured city movement with a more contemporary visual profile.",
     features: [
@@ -389,12 +366,10 @@ export const vehicles: Vehicle[] = [
     currentCity: "Ndola",
     nextBookingDate: "2026-03-28",
     mainImage:
-      dotsAsset("user-img-17.jpg"),
+      fleetAsset("toyota-corolla-quest", "01.jpg"),
     gallery: [
-      dotsAsset("user-img-17.jpg"),
-      dotsAsset("user-img-18.jpg"),
-      dotsAsset("user-img-27.jpg"),
-      dotsAsset("user-img-28.jpg"),
+      fleetAsset("toyota-corolla-quest", "01.jpg"),
+      fleetAsset("toyota-corolla-quest", "02.jpg"),
     ],
     description:
       "A durable saloon that works well for business travel, staff mobility, and cost-conscious bookings that still need a professional finish.",

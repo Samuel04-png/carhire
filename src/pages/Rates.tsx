@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { PageHero } from "@/components/shared/PageHero";
+import { SafeVehicleImage } from "@/components/fleet/SafeVehicleImage";
 import { SectionHeader } from "@/components/shared/SectionHeader";
 import { Button } from "@/components/ui/button";
 import { company, services, vehicles } from "@/data/mock";
@@ -97,7 +98,7 @@ export default function RatesPage() {
           { label: "Home", href: "/" },
           { label: "Rates" },
         ]}
-        image="https://images.unsplash.com/photo-1617531653332-bd46c24f2068?auto=format&fit=crop&w=1600&q=80"
+        image="/brand/dots/fleet/toyota-corolla-quest/01.jpg"
       />
 
       <section className="relative z-10 mx-auto -mt-10 max-w-7xl px-4">
@@ -195,11 +196,10 @@ export default function RatesPage() {
             >
               <div className="grid gap-0 lg:grid-cols-[0.82fr_1.18fr]">
                 <div className="relative min-h-[280px] overflow-hidden">
-                  <img
+                  <SafeVehicleImage
                     src={card.leadVehicle.mainImage}
                     alt={card.leadVehicle.name}
                     className="h-full w-full object-cover"
-                    referrerPolicy="no-referrer"
                   />
                   <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,22,40,0.08),rgba(10,22,40,0.86))]" />
                   <div className="absolute inset-x-0 bottom-0 p-6 text-white">

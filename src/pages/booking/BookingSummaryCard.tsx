@@ -1,4 +1,5 @@
 import { CarFront, MapPin } from "lucide-react";
+import { SafeVehicleImage } from "@/components/fleet/SafeVehicleImage";
 import { getVehicleById } from "@/lib/booking";
 import { formatCurrency } from "@/lib/format";
 import { useAppStore } from "@/store/use-app-store";
@@ -14,11 +15,10 @@ export function BookingSummaryCard() {
   return (
     <div className="rounded-lg border border-[var(--color-gray-200)] bg-[var(--color-gray-100)] p-5">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
-        <img
+        <SafeVehicleImage
           src={vehicle.mainImage}
           alt={vehicle.name}
           className="h-24 w-full rounded-2xl object-cover sm:w-36"
-          referrerPolicy="no-referrer"
         />
         <div className="flex-1">
           <div className="text-xs uppercase tracking-[0.24em] text-[var(--color-gray-500)]">

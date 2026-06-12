@@ -3,6 +3,7 @@ import toast from "react-hot-toast";
 import { CarFront, CheckCircle2, ExternalLink, Plus, Search, Settings2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { AdminShell } from "@/components/admin/AdminShell";
+import { SafeVehicleImage, vehicleImageFallback } from "@/components/fleet/SafeVehicleImage";
 import { transmissionOptions, vehicleCategoryOptions, vehicleStatusOptions } from "@/components/admin/admin-constants";
 import { MetricCard, StatusPill, SurfaceCard, TextField, inputClassName, vehicleStatusTone } from "@/components/admin/AdminUi";
 import { Button } from "@/components/ui/button";
@@ -10,6 +11,35 @@ import { cities } from "@/data/site";
 import { formatCurrency, formatDateOnly } from "@/lib/format";
 import { useAppStore } from "@/store/use-app-store";
 import type { AdminVehicleInput, City, Transmission, VehicleCategory, VehicleStatus } from "@/types";
+
+const supportedImagePattern = /\.(jpe?g|png|webp|svg)(\?.*)?$/i;
+const unsupportedImagePattern = /\.(gif|bmp|tiff?|heic|heif|pdf|txt|docx?|xlsx?|mp4|mov)(\?.*)?$/i;
+
+function validateVehicleImageDraft(src: string, make: string, model: string, name: string) {
+  const trimmed = src.trim();
+  if (!trimmed) {
+    return { src: vehicleImageFallback, error: "No image selected. The public site will use the clean vehicle placeholder.", warning: "" };
+  }
+
+  if (unsupportedImagePattern.test(trimmed) || !supportedImagePattern.test(trimmed.split("#")[0])) {
+    return { src: trimmed, error: "Unsupported image type. Use JPG, PNG, WEBP, or SVG only.", warning: "" };
+  }
+
+  const haystack = trimmed.toLowerCase();
+  const expectedTokens = [make, model, name]
+    .flatMap((value) => value.toLowerCase().split(/[^a-z0-9]+/))
+    .filter((token) => token.length >= 4 && !["toyota", "mercedes", "benz"].includes(token));
+
+  const hasMatch = expectedTokens.length === 0 || expectedTokens.some((token) => haystack.includes(token));
+
+  return {
+    src: trimmed,
+    error: "",
+    warning: hasMatch
+      ? ""
+      : "Image URL/name does not obviously match this vehicle. Confirm the photo before saving.",
+  };
+}
 
 export function AdminFleetScreen() {
   const vehicles = useAppStore((state) => state.vehicles);
@@ -57,9 +87,20 @@ export function AdminFleetScreen() {
     return true;
   });
 
+  const imageValidation = validateVehicleImageDraft(
+    vehicleDraft.mainImage,
+    vehicleDraft.make,
+    vehicleDraft.model,
+    vehicleDraft.name,
+  );
+
   const submitVehicle = () => {
-    if (!vehicleDraft.name.trim() || !vehicleDraft.make.trim() || !vehicleDraft.model.trim() || !vehicleDraft.regPlate.trim() || !vehicleDraft.mainImage.trim()) {
+    if (!vehicleDraft.name.trim() || !vehicleDraft.make.trim() || !vehicleDraft.model.trim() || !vehicleDraft.regPlate.trim()) {
       toast.error("Complete the vehicle profile before saving.");
+      return;
+    }
+    if (imageValidation.error && vehicleDraft.mainImage.trim()) {
+      toast.error(imageValidation.error);
       return;
     }
     if (vehicleDraft.cities.length === 0) {
@@ -86,7 +127,7 @@ export function AdminFleetScreen() {
       currentCity: vehicleDraft.currentCity,
       cities: vehicleDraft.cities,
       status: vehicleDraft.status,
-      mainImage: vehicleDraft.mainImage,
+      mainImage: imageValidation.src,
       description: vehicleDraft.description,
       withDriverAvailable: vehicleDraft.withDriverAvailable,
       mileagePolicy: vehicleDraft.mileagePolicy,
@@ -130,7 +171,28 @@ export function AdminFleetScreen() {
             <TextField label="Chauffeur rate" type="number" value={String(vehicleDraft.chauffeurRate)} onChange={(value) => setVehicleDraft((current) => ({ ...current, chauffeurRate: Number(value) }))} />
             <label><div className="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-[var(--text-soft)]">Current city</div><select className={inputClassName} value={vehicleDraft.currentCity} onChange={(event) => setVehicleDraft((current) => ({ ...current, currentCity: event.target.value as City }))}>{cities.map((city) => <option key={city}>{city}</option>)}</select></label>
             <label><div className="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-[var(--text-soft)]">Status</div><select className={inputClassName} value={vehicleDraft.status} onChange={(event) => setVehicleDraft((current) => ({ ...current, status: event.target.value as VehicleStatus }))}>{vehicleStatusOptions.map((option) => <option key={option}>{option}</option>)}</select></label>
-            <TextField label="Main image URL" value={vehicleDraft.mainImage} onChange={(value) => setVehicleDraft((current) => ({ ...current, mainImage: value }))} />
+            <div className="xl:col-span-3">
+              <TextField label="Main image URL" value={vehicleDraft.mainImage} onChange={(value) => setVehicleDraft((current) => ({ ...current, mainImage: value }))} />
+              <div className="mt-3 grid gap-4 rounded-[var(--radius-lg)] border border-[var(--border-subtle)] bg-[var(--bg-surface-soft)] p-4 md:grid-cols-[220px_1fr]">
+                <div className="overflow-hidden rounded-[var(--radius-md)] bg-white ring-1 ring-[var(--border-subtle)]">
+                  <SafeVehicleImage
+                    src={imageValidation.src}
+                    alt="Vehicle image preview"
+                    className="aspect-[16/9] w-full object-cover"
+                  />
+                </div>
+                <div className="text-sm leading-6 text-[var(--text-muted)]">
+                  <div className="font-semibold text-[var(--text-main)]">Image validation</div>
+                  <ul className="mt-2 list-disc space-y-1 pl-5">
+                    <li>Accepted: JPG, PNG, WEBP, SVG.</li>
+                    <li>Recommended minimum: 800px wide, 16:9 or 4:3 crop, clear full vehicle view.</li>
+                    <li>Do not use posters, money graphics, gift images, screenshots, or promotional banners.</li>
+                  </ul>
+                  {imageValidation.error && <div className="mt-3 rounded-md bg-red-50 px-3 py-2 font-medium text-red-700">{imageValidation.error}</div>}
+                  {imageValidation.warning && <div className="mt-3 rounded-md bg-amber-50 px-3 py-2 font-medium text-amber-700">{imageValidation.warning}</div>}
+                </div>
+              </div>
+            </div>
             <TextField label="Mileage policy" value={vehicleDraft.mileagePolicy} onChange={(value) => setVehicleDraft((current) => ({ ...current, mileagePolicy: value }))} />
             <TextField label="Insurance" value={vehicleDraft.insuranceIncluded} onChange={(value) => setVehicleDraft((current) => ({ ...current, insuranceIncluded: value }))} />
             <label className="xl:col-span-3">
@@ -157,7 +219,7 @@ export function AdminFleetScreen() {
         {filteredVehicles.map((vehicle) => (
           <article key={vehicle.id} className="group overflow-hidden rounded-[var(--radius-xl)] border border-[var(--border-subtle)] bg-white shadow-[var(--shadow-card)] transition-all duration-200 hover:-translate-y-1 hover:border-[var(--brand)] hover:shadow-[var(--shadow-card-hover)]">
             <div className="relative aspect-[16/9] overflow-hidden bg-[var(--bg-surface-soft)]">
-              <img src={vehicle.mainImage} alt={vehicle.name} className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]" referrerPolicy="no-referrer" />
+              <SafeVehicleImage src={vehicle.mainImage} alt={vehicle.name} className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]" />
               <div className="absolute right-4 top-4"><StatusPill label={vehicle.status} tone={vehicleStatusTone(vehicle.status)} /></div>
             </div>
             <div className="p-5">

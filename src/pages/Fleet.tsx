@@ -176,7 +176,7 @@ export default function FleetPage() {
           { label: "Home", href: "/" },
           { label: "Fleet" },
         ]}
-        image="https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?auto=format&fit=crop&w=1600&q=80"
+        image="/brand/dots/fleet/toyota-prado-executive/01.jpg"
       />
 
       <div className="mx-auto mt-10 flex max-w-7xl gap-8 px-4">

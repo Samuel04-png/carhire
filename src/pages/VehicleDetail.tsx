@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
 import { VehicleCard } from "@/components/fleet/VehicleCard";
+import { SafeVehicleImage } from "@/components/fleet/SafeVehicleImage";
 import { StatusBadge } from "@/components/shared/StatusBadge";
 import { Button } from "@/components/ui/button";
 import { vehicles } from "@/data/mock";
@@ -101,11 +102,10 @@ export default function VehicleDetailPage() {
                 onClick={() => setIsLightboxOpen(true)}
                 className="block h-[260px] w-full overflow-hidden sm:h-[360px] lg:h-[430px]"
               >
-                <img
+                <SafeVehicleImage
                   src={mainImage}
                   alt={vehicle.name}
                   className="h-full w-full object-cover"
-                  referrerPolicy="no-referrer"
                 />
               </button>
               <div className="grid grid-cols-4 gap-2 p-3 sm:gap-3 sm:p-4">
@@ -119,11 +119,10 @@ export default function VehicleDetailPage() {
                         : "border-transparent"
                     }`}
                   >
-                    <img
+                    <SafeVehicleImage
                       src={image}
-                      alt=""
+                      alt={`${vehicle.name} gallery image`}
                       className="h-16 w-full object-cover sm:h-24"
-                      referrerPolicy="no-referrer"
                     />
                   </button>
                 ))}
@@ -378,7 +377,7 @@ export default function VehicleDetailPage() {
           onClick={() => setIsLightboxOpen(false)}
         >
           <div className="max-h-[90vh] max-w-5xl overflow-hidden rounded-xl border border-white/10">
-            <img src={mainImage} alt={vehicle.name} className="max-h-[90vh] w-full object-cover" />
+            <SafeVehicleImage src={mainImage} alt={vehicle.name} className="max-h-[90vh] w-full object-cover" />
           </div>
         </div>
       )}

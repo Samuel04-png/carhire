@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight, Settings2, Snowflake, Star, Users2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { StatusBadge } from "@/components/shared/StatusBadge";
+import { SafeVehicleImage } from "@/components/fleet/SafeVehicleImage";
 import { formatCurrency } from "@/lib/format";
 import type { Vehicle } from "@/types";
 
@@ -22,11 +23,10 @@ export function VehicleCard({ vehicle }: Props) {
   return (
     <article className="group overflow-hidden rounded-xl border border-[var(--color-gray-200)] bg-white shadow-sm transition-shadow duration-200 hover:shadow-md">
       <div className="relative h-56 overflow-hidden bg-[var(--color-gray-100)]">
-        <img
+        <SafeVehicleImage
           src={vehicle.mainImage}
           alt={vehicle.name}
           className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
-          referrerPolicy="no-referrer"
         />
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,31,53,0.02),rgba(8,31,53,0.68))]" />
         <div className="absolute left-4 right-4 top-4 flex items-center justify-between gap-3">
