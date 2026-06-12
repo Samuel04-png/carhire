@@ -1,10 +1,7 @@
 import { bookingExtras } from "@/data/operations";
 import { services } from "@/data/services";
 import { vehicles } from "@/data/vehicles";
-import { withBase } from "@/lib/utils";
 import type { City, VehicleCategory } from "@/types";
-
-const dotsAsset = (file: string) => withBase(`/brand/dots/${file}`);
 
 export type PublicGalleryCollection =
   | "Fleet"
@@ -339,50 +336,6 @@ export const publicGalleryAssets: GalleryAsset[] = [
     city: "Ndola",
     href: "/services/long-term",
     ctaLabel: "See service",
-    size: "standard",
-  },
-  {
-    id: "gal-fleet-polo-vivo",
-    title: "Agile city runner",
-    caption: "VW Polo Vivo ready for self-drive city errands, business trips, and daily commuting in Lusaka.",
-    image: dotsAsset("user-img-17.jpg"),
-    collection: "Fleet",
-    city: "Lusaka",
-    href: `/fleet/vw-polo-vivo-city`,
-    ctaLabel: "View vehicle",
-    size: "standard",
-  },
-  {
-    id: "gal-airport-corolla",
-    title: "Ready for airport runs",
-    caption: "Toyota Corolla Cross positioned at the terminal for executive arrival and departure transfers.",
-    image: dotsAsset("user-img-11.jpg"),
-    collection: "Airport",
-    city: "Lusaka",
-    href: `/fleet/toyota-corolla-cross`,
-    ctaLabel: "View vehicle",
-    size: "wide",
-  },
-  {
-    id: "gal-wedding-eclass",
-    title: "Ceremony entrance vehicle",
-    caption: "Mercedes-Benz E-Class prepared for wedding arrivals, formal events, and VIP ground transport.",
-    image: dotsAsset("user-img-15.jpg"),
-    collection: "Weddings",
-    city: "Lusaka",
-    href: `/fleet/mercedes-e-class-signature`,
-    ctaLabel: "View vehicle",
-    size: "tall",
-  },
-  {
-    id: "gal-events-hilux",
-    title: "Project site deployment",
-    caption: "Toyota Hilux Adventure assigned for site access, equipment movement, and intercity project support.",
-    image: dotsAsset("user-img-13.jpg"),
-    collection: "Events",
-    city: "Ndola",
-    href: `/fleet/toyota-hilux-adventure`,
-    ctaLabel: "View vehicle",
     size: "standard",
   },
 ] as const;
